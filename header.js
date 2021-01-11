@@ -21,22 +21,23 @@ const HeadHeder = () => {
     const navigation = useNavigation();
   return (
     <View style={{flex:1}}>
-        <View style={{borderWidth:1,position:'absolute',width:chartWidth+15,left:-2,bottom:(chartHeight/1.08),height:60,flexDirection: 'row',backgroundColor:'white'}}>
+        <View style={{borderWidth:1,position:'absolute',width:chartWidth+15,left:-2,bottom:(chartHeight/1.08),height:80,marginTop:20,flexDirection: 'row',backgroundColor:'white'}}>
+            
             <TouchableOpacity activeOpacity={0.5} onPress={() => {navigation.dispatch(DrawerActions.openDrawer());}} style={{top:10,left:10}}>
                 <Image
                   source={logo2}
-                  style={{width:40,height:35}}
+                  style={{width:40,height:35,marginTop:20}}
                 />
             </TouchableOpacity>
             <View style={{left:chartWidth/3,height:30,width:40}}>
             <TouchableOpacity onPress={() => navigation.navigate('홈')}>
-              <Image source={testlogo} style={{width:40,height:34,marginTop:10,}}>
+              <Image source={testlogo} style={{width:40,height:34,marginTop:35,}}>
               </Image>
             </TouchableOpacity>
             </View>
             
             <TouchableOpacity onPress={() => navigation.navigate('로그인')}>
-            <View style={{left:chartWidth/1.8,top:10,width:75,height:35,backgroundColor:'#b84dff',
+            <View style={{left:chartWidth/1.8,top:35,width:75,height:35,backgroundColor:'#b84dff',
                   borderTopLeftRadius: 17,
                   borderTopRightRadius: 17,
                   borderBottomLeftRadius:17,
