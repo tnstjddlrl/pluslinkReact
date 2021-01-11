@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
   View,
   Text,
@@ -20,7 +20,6 @@ import { useNavigation } from '@react-navigation/native';
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";
 import { ScrollView } from 'react-native-gesture-handler';
-import { useState } from 'react/cjs/react.development';
 
 const CurrentTable =({route}) =>{
     const navigation = useNavigation();
@@ -53,6 +52,32 @@ const CurrentTable =({route}) =>{
                     </View>
 
 
+                    <View style={{marginLeft:10,marginBottom:100}}>
+                        <View style={{width:chartWidth-20,borderWidth:1,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
+                        <View style={{flexDirection:'row',width:chartWidth-30,height:40}}>
+                            <Text style={{position:'absolute',right:330,width:30,fontWeight:'bold'}}>상태</Text>
+                            <Text style={{position:'absolute',right:270,width:30,fontWeight:'bold'}}>카테고리</Text>
+                            <Text style={{position:'absolute',right:190,fontWeight:'bold'}}>세부항목</Text>
+                            <Text style={{position:'absolute',right:100,fontWeight:'bold'}}>내용</Text>
+                            <Text style={{position:'absolute',right:5,fontWeight:'bold'}}>관리</Text>
+                        </View>
+                        <View style={{width:chartWidth-20,borderWidth:1,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
+
+                        
+                        <TableItem></TableItem>
+                        <TableItem></TableItem>
+                        <TableItem></TableItem>
+                        <TableItem></TableItem>
+                        <TableItem></TableItem>
+                        <TableItem></TableItem>
+                        <TableItem></TableItem>
+                        <TableItem></TableItem>
+
+                        
+                    </View>
+
+                  
+
                     
 
 
@@ -60,7 +85,7 @@ const CurrentTable =({route}) =>{
                 </ScrollView>
 
                 <Modal  transparent={true} visible={select}>
-                    <View style={{width:100, height:180,position:'absolute',backgroundColor:'white',borderWidth:0.5,left:10,top:150}}>
+                    <View style={{width:100, position:'absolute',backgroundColor:'white',borderWidth:0.5,left:10,top:150}}>
                         <TouchableOpacity onPress={()=>{SetlistCate('전체'),setSelect(false)}}>
                         <Text style={{left:5,marginTop:5}}>전체</Text>
                         </TouchableOpacity>
@@ -96,6 +121,29 @@ const CurrentTable =({route}) =>{
             
 
         </View>
+    )
+}
+
+const TableItem = () => {
+    const navigation = useNavigation();
+    return(
+                        <View>
+                        <View style={{flex:1,flexDirection:'row'}}>
+                            <View style={{alignItems:'center',left:10}}>
+                                <Text>12.16</Text>
+                                <Text>견적취소</Text>
+                            </View>
+                            <Text style={{width:35,marginLeft:30}}>전기&조명</Text>
+                            <Text style={{width:40,marginLeft:40}}>동파</Text>
+                            <Text style={{width:100,marginLeft:40}}>테스트테스트테스트테스트테스트테스트</Text>
+                            <TouchableOpacity onPress={()=>navigation.navigate('견적자세히보기')}>
+                            <View style={{width:45,height:30,backgroundColor:'gray',marginLeft:15,alignItems:'center'}}>
+                                <Text style={{color:'white',marginTop:7}}>보기</Text>
+                            </View>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{width:chartWidth-20,borderWidth:1,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
+                        </View>
     )
 }
 

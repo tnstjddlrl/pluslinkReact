@@ -44,6 +44,7 @@ import EEvent from './eevent.js'
 import NaviMenu from "./NavigateD.js";
 import Mypage from "./mypage"
 import CurrentTable from "./currentTable.js";
+import CurrentPlus from "./currentPlus";
 
 
 
@@ -183,6 +184,8 @@ const DrawerNavigator = () => {
           <Drawer.Screen name="이벤트자세히보기"  component = {EventToPage} options={{drawerLabel:''}} />
           <Drawer.Screen name="마이페이지"   component={Mypage} options={{drawerLabel:''}} />
           <Drawer.Screen name="견적테이블"   component={CurrentTable} options={{drawerLabel:''}} />
+          <Drawer.Screen name="견적자세히보기"   component={CurrentPlus} options={{drawerLabel:''}} />
+          
           {/* <Drawer.Screen name="푸터" component = {FootTer} />
           <Drawer.Screen name="헤더" component = {HeadHeder} /> */}
       </Drawer.Navigator>
