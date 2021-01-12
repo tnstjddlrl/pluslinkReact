@@ -24,6 +24,7 @@ const user = require('./img/user.png')
 const clock = require('./img/clock.png')
 
 const OneonOne = () => {
+    const navigation = useNavigation();
     return(
         <View>
       <View style={{height:chartHeight,width:chartWidth}}>
@@ -49,7 +50,7 @@ const OneonOne = () => {
                 <OneList></OneList>
                 <OneList></OneList>
                 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate('1대1문의쓰기')}>
                     <View style={{width:70,height:30,backgroundColor:'#db4dff',marginTop:15}}>
                         <Text style={{color:'white',margin:5,marginLeft:15,fontWeight:'900'}}>글쓰기</Text>
                     </View>

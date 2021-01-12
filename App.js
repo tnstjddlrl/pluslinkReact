@@ -47,6 +47,7 @@ import CurrentTable from "./currentTable.js";
 import CurrentPlus from "./currentPlus";
 import EventList from "./eventList.js";
 import OneonOne from "./oneOnOne.js";
+import OneWrite from "./oneWirte.js";
 
 
 
@@ -184,6 +185,7 @@ const DrawerNavigator = () => {
           {/* <Drawer.Screen name="화사테스트" component = {Company} /> */}
           <Drawer.Screen name="이벤트목록"   component={EventList} options={{drawerLabel:'이벤트목록'}} />
           <Drawer.Screen name="1대1문의"   component={OneonOne} options={{drawerLabel:'1대1문의'}} />
+          <Drawer.Screen name="1대1문의쓰기"   component={OneWrite} options={{drawerLabel:''}} />
           <Drawer.Screen name="회사자세히보기" component = {ComLook} options={{drawerLabel:''}} />
           <Drawer.Screen name="이벤트자세히보기"  component = {EventToPage} options={{drawerLabel:''}} />
           <Drawer.Screen name="마이페이지"   component={Mypage} options={{drawerLabel:''}} />
