@@ -26,6 +26,8 @@ const OneWrite = () => {
   const [select,setSelect] = useState(false)
   const [listCate,SetlistCate] = useState("선택하세요")
   const [value, onChangeText] = React.useState('');//textinput용
+
+  const navigation = useNavigation();
   return(
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
@@ -77,9 +79,23 @@ const OneWrite = () => {
                 style={{ height: 150,width:chartWidth-30,marginTop:10, borderColor: 'gray', borderWidth: 0.5 }}
                 onChangeText={text => onChangeText(text)}
                 value={value}
+                placeholder="내용을 입력해주세요."
                 multiline={true}
               />
 
+              <View style={{flexDirection:'row'}}>
+                <TouchableOpacity onPress={()=>navigation.navigate('1대1문의')}>
+                    <View style={{width:70,height:30,backgroundColor:'#db4dff',marginTop:15}}>
+                        <Text style={{color:'white',margin:5,marginLeft:10,fontWeight:'900'}}>작성완료</Text>
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>navigation.navigate('1대1문의')}>
+                    <View style={{width:40,height:30,backgroundColor:'black',marginTop:15,marginLeft:10}}>
+                        <Text style={{color:'white',margin:5,marginLeft:8,fontWeight:'900'}}>목록</Text>
+                    </View>
+                </TouchableOpacity>
+              </View>
 
 
             </View>

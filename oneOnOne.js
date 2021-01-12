@@ -74,9 +74,10 @@ const OneonOne = () => {
 }
 
 const OneList = () =>{
+    const navigation = useNavigation();
     return(
         <View>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>navigation.navigate('1대1문의보기')}>
                     <View style={{flexDirection:'row',alignContent:'center'}}>
                         <Text style={{margin:15}}>완료</Text>
                         <View style={{left:chartWidth/5,position:'absolute',marginTop:5}}>
