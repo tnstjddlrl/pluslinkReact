@@ -49,6 +49,8 @@ import EventList from "./eventList.js";
 import OneonOne from "./oneOnOne.js";
 import OneWrite from "./oneWirte.js";
 import OneView from "./oneView";
+import CompanyList from "./companyList";
+import PasswordCheck from "./passwordCheck";
 
 
 
@@ -186,6 +188,8 @@ const DrawerNavigator = () => {
           {/* <Drawer.Screen name="화사테스트" component = {Company} /> */}
           <Drawer.Screen name="이벤트목록"   component={EventList} options={{drawerLabel:'이벤트목록'}} />
           <Drawer.Screen name="1대1문의"   component={OneonOne} options={{drawerLabel:'1대1문의'}} />
+          <Drawer.Screen name="업체목록"   component={CompanyList} options={{drawerLabel:'업체목록'}} />
+
           <Drawer.Screen name="1대1문의보기"   component={OneView} options={{drawerLabel:''}} />
           <Drawer.Screen name="1대1문의쓰기"   component={OneWrite} options={{drawerLabel:''}} />
           <Drawer.Screen name="회사자세히보기" component = {ComLook} options={{drawerLabel:''}} />
@@ -193,6 +197,8 @@ const DrawerNavigator = () => {
           <Drawer.Screen name="마이페이지"   component={Mypage} options={{drawerLabel:''}} />
           <Drawer.Screen name="견적테이블"   component={CurrentTable} options={{drawerLabel:''}} />
           <Drawer.Screen name="견적자세히보기"   component={CurrentPlus} options={{drawerLabel:''}} />
+          <Drawer.Screen name="비밀번호확인"   component={PasswordCheck} options={{drawerLabel:''}} />
+          
           
           {/* <Drawer.Screen name="푸터" component = {FootTer} />
           <Drawer.Screen name="헤더" component = {HeadHeder} /> */}

@@ -41,7 +41,9 @@ const Mypage = () => {
                         <View style={{width:chartWidth-40,borderWidth:0.5,marginBottom:5,marginTop:10}}></View>
                         <View style={{flexDirection:"row",alignItems:"center",}}>
                             <View style={{flexDirection:"row",width:chartWidth}}>
+                                <TouchableOpacity onPress={()=>navigation.navigate('비밀번호확인')}>
                                 <Text style={{left:'200%'}}>정보변경</Text>
+                                </TouchableOpacity>
                                 <Text style={{left:'500%'}}>취약계층인증</Text>
                                 <Text style={{left:'800%'}}>로그아웃</Text>
                             </View>
