@@ -43,6 +43,7 @@ const OneView = () => {
 
             <View style={{marginLeft:10,marginTop:10}}>
               <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
+              <View style={{width:chartWidth-100,borderWidth:0.4,borderColor:'gray'}}></View>
                 <View style={{flexDirection:'row',alignItems:'center',margin:10}}>
                   <Image source={user} style={{width:10,height:10,}}></Image>
                   <Text style={{fontSize:13}}>test</Text>
@@ -53,9 +54,10 @@ const OneView = () => {
                   <Image source={clock} style={{width:10,height:10 ,marginLeft:10}}></Image>
                   <Text style={{fontSize:13}}>2020.11.10 20:48</Text>
                 </View>
-              
-            </View>
               <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
+                
+            </View>
+              
           </View>
         </ScrollView>
       </View>
