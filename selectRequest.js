@@ -120,7 +120,7 @@ const SelectRequest = () => {
                 </TouchableOpacity>
                 <Text style={{color:'red'}}>#방문날짜 이전에 낙찰이 되지않으면 견적이 자동취소 됩니다.</Text>
 
-                <Text style={{fontWeight:'bold',marginTop:10}}>세부항목</Text>
+                <Text style={{fontWeight:'bold',marginTop:10}}>상세설명</Text>
                 <TextInput      
                 style={{ height: 150,width:chartWidth-30,marginTop:10, borderColor: 'gray', borderWidth: 0.5 }}
                 onChangeText={text => onChangeText(text)}

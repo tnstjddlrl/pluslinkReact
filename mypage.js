@@ -41,11 +41,21 @@ const Mypage = () => {
                         <View style={{width:chartWidth-40,borderWidth:0.5,marginBottom:5,marginTop:10}}></View>
                         <View style={{flexDirection:"row",alignItems:"center",}}>
                             <View style={{flexDirection:"row",width:chartWidth}}>
-                                <TouchableOpacity onPress={()=>navigation.navigate('비밀번호확인')}>
-                                <Text style={{left:'200%'}}>정보변경</Text>
+                                <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
+                                    <View style={{left:chartWidth/15,position:'absolute'}}>
+                                        <Text>정보변경</Text>
+                                    </View>
                                 </TouchableOpacity>
-                                <Text style={{left:'500%'}}>취약계층인증</Text>
-                                <Text style={{left:'800%'}}>로그아웃</Text>
+                                <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
+                                    <View style={{left:chartWidth/3,position:'absolute'}}>
+                                        <Text>취약계층인증</Text>
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
+                                    <View style={{left:chartWidth/1.5}}>
+                                        <Text>로그아웃</Text>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
                         </View>
                         <View style={{width:chartWidth-40,borderWidth:0.5,marginBottom:5,marginTop:10}}></View>
