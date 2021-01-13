@@ -53,6 +53,7 @@ import CompanyList from "./companyList";
 import PasswordCheck from "./passwordCheck";
 import InfoChange from "./infoChange.js";
 import SelectRequest from "./selectRequest.js";
+import InjuryPath from "./injuryPath.js";
 
 
 
@@ -202,6 +203,7 @@ const DrawerNavigator = () => {
           <Drawer.Screen name="견적테이블"   component={CurrentTable} options={{drawerLabel:''}} />
           <Drawer.Screen name="견적자세히보기"   component={CurrentPlus} options={{drawerLabel:''}} />
           <Drawer.Screen name="정보변경2"   component={InfoChange} options={{drawerLabel:''}} />
+          <Drawer.Screen name="취약계층인증"   component={InjuryPath} options={{drawerLabel:''}} />
           
           
           

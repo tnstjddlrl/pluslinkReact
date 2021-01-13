@@ -5,6 +5,7 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
+  Platform
 } from "react-native";
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
@@ -19,17 +20,29 @@ const testlogo = require('./img/logo.png')
 
 const HeadHeder = () => {
     const navigation = useNavigation();
+    let os = Platform.OS
+    console.log(os)
+    let nowheight;
+      if(os == 'ios'){
+       nowheight = 1.11;
+      }else{
+        nowheight = 1.08;
+      }
+
+      console.log(nowheight)
+      
+    
   return (
     <View style={{flex:1}}>
-        <View style={{borderWidth:1,position:'absolute',width:chartWidth+15,left:-2,bottom:(chartHeight/1.08),height:80,marginTop:20,flexDirection: 'row',backgroundColor:'white'}}>
+        <View style={{borderWidth:1,position:'absolute',width:chartWidth+15,left:-2,bottom:(chartHeight/nowheight),height:100,marginTop:100,flexDirection: 'row',backgroundColor:'white'}}>
             
-            <TouchableOpacity activeOpacity={0.5} onPress={() => {navigation.dispatch(DrawerActions.openDrawer());}} style={{top:10,left:10}}>
+            <TouchableOpacity activeOpacity={0.5} onPress={() => {navigation.dispatch(DrawerActions.openDrawer());}} style={{top:30,left:10}}>
                 <Image
                   source={logo2}
                   style={{width:40,height:35,marginTop:20}}
                 />
             </TouchableOpacity>
-            <View style={{left:chartWidth/3,height:30,width:40}}>
+            <View style={{left:chartWidth/3,height:30,width:40,top:20}}>
             <TouchableOpacity onPress={() => navigation.navigate('홈')}>
               <Image source={testlogo} style={{width:40,height:34,marginTop:35,}}>
               </Image>
@@ -37,7 +50,7 @@ const HeadHeder = () => {
             </View>
             
             <TouchableOpacity onPress={() => navigation.navigate('로그인')}>
-            <View style={{left:chartWidth/1.8,top:35,width:75,height:35,backgroundColor:'#b84dff',
+            <View style={{left:chartWidth/1.8,top:50,width:75,height:35,backgroundColor:'#b84dff',
                   borderTopLeftRadius: 17,
                   borderTopRightRadius: 17,
                   borderBottomLeftRadius:17,
