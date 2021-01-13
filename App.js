@@ -14,6 +14,7 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
+  AsyncStorage
 } from "react-native";
 import { useIsDrawerOpen } from '@react-navigation/drawer';
 
@@ -70,6 +71,30 @@ function isshwon(params) {
 
 
 const App =({  }) =>{
+  
+
+  async () => {
+    try {
+      await AsyncStorage.setItem(
+        '@super:id',
+        'superno'
+      );
+    } catch (error) {
+      console.log('setitem :' , error)
+    }
+  };
+
+  async () => {
+    try {
+      const value = await AsyncStorage.getItem('@super:id');
+      if (value !== null) {
+        console.log(value);
+      }
+    } catch (error) {
+      console.log('getitem :' , error)
+    }
+  };
+
   const logo = { uri: "https://pluslink.kr/img/pluslink/logo.png" };
   const logo2 = { uri: "https://pluslink.kr/img/menu.png" };
   const navigation = useNavigation();

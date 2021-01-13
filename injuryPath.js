@@ -17,6 +17,8 @@ import {
   Modal
 } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
 
@@ -31,6 +33,8 @@ const InjuryPath = () => {
 
     const [select, setSelect] = useState(false)
     const [listCate,SetlistCate] = useState('선택')
+
+    const [response, setResponse] = React.useState(null);
 
     let os = Platform.OS
     console.log(os)
@@ -98,9 +102,35 @@ const InjuryPath = () => {
                             </TouchableOpacity>
                             <View style={{flexDirection:'row',marginTop:50}}>
                                 <Text>인증이미지첨부</Text>
-                                <Text style={{position:'absolute',left:chartWidth/4}}>미신청</Text>
                             </View>
 
+                            <TouchableOpacity onPress={() =>
+                                    launchImageLibrary(
+                                    {
+                                        mediaType: 'photo',
+                                        includeBase64: false,
+                                        maxHeight: 200,
+                                        maxWidth: 200,
+                                    },
+                                    (response) => {
+                                        setResponse(response);
+                                        console.log(JSON.stringify(response))
+                                    },
+                                    )
+                                }>
+                                <View style={{marginTop:15,marginBottom:15,borderWidth:0.5,width:80,height:30,alignItems:'center'}}>
+                                    <Text style={{marginTop:5}}>사진선택</Text>
+                                </View>
+                            </TouchableOpacity>
+
+                            {response && (
+                                <View>
+                                    <Image
+                                    style={{width: 200, height: 200}}
+                                    source={{uri: response.uri}}
+                                    />
+                                </View>
+                                )}
                             
                             
 

@@ -5,6 +5,7 @@ import {
   Dimensions,
   Button,
   TextInput,
+  AsyncStorage
 } from "react-native";
 import CheckBox from '@react-native-community/checkbox';
 
@@ -12,6 +13,7 @@ import FootTer from './footer.js'
 import HeadHeder from "./header.js";
 import { useNavigation } from '@react-navigation/native';
 import Axios from 'axios'
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const logo = { uri: "https://pluslink.kr/img/pluslink/logo.png" };
 const logo2 = { uri: "https://pluslink.kr/img/menu.png" };
@@ -31,7 +33,11 @@ function logindata(id,pss){
     console.log('리스폰스 ',response);
     if(response.request._response=='suc'){
     alert('로그인 되었습니다.')
-    setLogin(true); //로그인 처리가 안됨. 이부분 수정해야함.
+    AsyncStorage.setItem(
+      '@super:id',
+      'superno'
+    );
+    console.log (AsyncStorage.getItem('@super:id'));
     }
     else{
       alert('아이디 또는 비밀번호를 확인해주세요')
@@ -69,23 +75,30 @@ const Login=()=>{
           />
   
           <View style={{flex:1,flexDirection:'row',position:'absolute',top:230,left:10}}>
-          <CheckBox
-            disabled={false}
-            value={toggleCheckBox}
-            onValueChange={(newValue) => setToggleCheckBox(newValue)}
-          />
-          <Text style={{textAlignVertical:'center'}}>자동로그인</Text>
-          <Text style={{textAlign:'right',textAlignVertical:'center',marginLeft:90}}>아이디/비밀번호 찾기</Text>
+          
           
           </View>
           <View style={{position:'absolute', top:270,left:15,width:315}}>
-          <Button title={'로그인'} color="#d24dff" onPress={()=>logindata(id,pss)}></Button>
+
+          <TouchableOpacity oonPress={()=>logindata(id,pss)}>
+            <View style={{width:chartWidth-90,height:40,backgroundColor:'#d24dff',alignItems:'center'}}>
+                <Text style={{color:'white',marginTop:10,fontWeight:'800'}}>로그인</Text>
+            </View>
+            </TouchableOpacity>
+
+
+
           </View>
           <View style={{position:'absolute',borderWidth:1,borderColor:"#d9d9d9",width:350,top:440}}></View>
-          <View style={{position:'absolute',left:15,flex:1,flexDirection:'row',top:455,height:30}}>
+          <View style={{position:'absolute',left:15,flex:1,flexDirection:'row',top:455,height:30,alignItems:'center'}}>
             <Text style={{textAlignVertical:'center',marginRight:10}}>처음이신가요??</Text>
-            
-            <Button title={'회원가입'} color={'#404040'} onPress={()=>navigation.navigate('회원가입')}></Button>
+
+            <TouchableOpacity onPress={()=>navigation.navigate('회원가입')}>
+            <View style={{width:65,height:30,backgroundColor:'black',alignItems:'center'}}>
+                <Text style={{color:'white',marginTop:5,fontWeight:'800'}}>회원가입</Text>
+            </View>
+            </TouchableOpacity>
+
           </View>
   
         </View>
