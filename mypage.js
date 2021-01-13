@@ -50,21 +50,26 @@ const Mypage = () => {
                         <View style={{width:chartWidth-40,borderWidth:0.5,marginBottom:5,marginTop:10}}></View>
                         <View style={{flexDirection:"row",alignItems:"center",}}>
                             <View style={{flexDirection:"row",width:chartWidth}}>
-                                <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
                                     <View style={{left:chartWidth/15}}>
+                                    <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
                                         <Text>정보변경</Text>
+                                    </TouchableOpacity>
                                     </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
+                                
+                                
                                     <View style={{left:chartWidth/4}}>
+                                    <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
                                         <Text>취약계층인증</Text>
+                                        </TouchableOpacity>
                                     </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
+                                
+                                
                                     <View style={{left:chartWidth/2.5}}>
+                                    <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
                                         <Text>로그아웃</Text>
+                                        </TouchableOpacity>
                                     </View>
-                                </TouchableOpacity>
+                                
                             </View>
                         </View>
                         <View style={{width:chartWidth-40,borderWidth:0.5,marginBottom:5,marginTop:10}}></View>
