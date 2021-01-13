@@ -14,6 +14,7 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
+  Modal
 } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 const chartHeight = Dimensions.get('window').height;
@@ -27,6 +28,9 @@ const arrow = require('./img/arrow02.png')
 
 const InjuryPath = () => {
     const navigation = useNavigation();
+
+    const [select, setSelect] = useState(false)
+    const [listCate,SetlistCate] = useState('선택')
 
     let os = Platform.OS
     console.log(os)
@@ -50,83 +54,54 @@ const InjuryPath = () => {
                         <View style={{width:chartWidth-40,borderWidth:0.5,marginBottom:5,marginTop:10}}></View>
                         <View style={{flexDirection:"row",alignItems:"center",}}>
                             <View style={{flexDirection:"row",width:chartWidth}}>
-                                <TouchableOpacity onPress={()=>navigation.navigate('정보변경')} >
-                                    <View style={{marginLeft:chartWidth/15}}>
+                                    <View style={{left:chartWidth/15}}>
+                                    <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
                                         <Text>정보변경</Text>
+                                    </TouchableOpacity>
                                     </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
+                                
+                                
                                     <View style={{left:chartWidth/4}}>
+                                    <TouchableOpacity onPress={()=>navigation.navigate('취약계층인증')}>
                                         <Text>취약계층인증</Text>
+                                        </TouchableOpacity>
                                     </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
+                                
+                                
                                     <View style={{left:chartWidth/2.5}}>
+                                    <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
                                         <Text>로그아웃</Text>
+                                        </TouchableOpacity>
                                     </View>
-                                </TouchableOpacity>
+                                
                             </View>
                         </View>
                         <View style={{width:chartWidth-40,borderWidth:0.5,marginBottom:5,marginTop:10}}></View>
 
 
                         <View style={{marginTop:20}}>
-                            <TouchableOpacity onPress={()=>navigation.navigate('견적현황')}>
-                            <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
-                                <Text style={{fontSize:20}}>견적현황</Text>
-                                <Image source={arrow} style={{position:'absolute',right:20}}></Image>
+                            <View style={{flexDirection:'row'}}>
+                                <Text>신청현황</Text>
+                                <Text style={{position:'absolute',left:chartWidth/4}}>미신청</Text>
                             </View>
-                            <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
-                            </TouchableOpacity>
 
-                            <TouchableOpacity>
-                            <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
-                                <Text style={{fontSize:20}}>결제관리</Text>
-                                <Image source={arrow} style={{position:'absolute',right:20}}></Image>
+                            <TouchableOpacity onPress={()=>setSelect(true)}>
+                            <View style={{flexDirection:'row',marginTop:25,alignItems:'center'}}>
+                                <Text>취약계층구분</Text>
+                                
+                                    <View style={{width:100,height:30,borderWidth:0.7,position:'absolute',left:chartWidth/4,top:-10,alignItems:"center",flexDirection:"row"}}>
+                                        <Text style={{left:2}}>{listCate}</Text>
+                                        <Image source={arrow} style={{width:8,height:14,right:5,position:'absolute'}}></Image>
+                                    </View>
+                                
                             </View>
-                            <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
                             </TouchableOpacity>
-
-                            <TouchableOpacity>
-                            <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
-                                <Text style={{fontSize:20}}>리뷰관리</Text>
-                                <Image source={arrow} style={{position:'absolute',right:20}}></Image>
+                            <View style={{flexDirection:'row',marginTop:50}}>
+                                <Text>인증이미지첨부</Text>
+                                <Text style={{position:'absolute',left:chartWidth/4}}>미신청</Text>
                             </View>
-                            <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
-                            </TouchableOpacity>
 
-
-                            <TouchableOpacity>
-                            <View style={{marginLeft:10,marginTop:30,flexDirection:"row",alignItems:"center"}}>
-                                <Text style={{fontSize:20}}>공지사항</Text>
-                                <Image source={arrow} style={{position:'absolute',right:20}}></Image>
-                            </View>
-                            <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity>
-                            <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
-                                <Text style={{fontSize:20}}>이벤트</Text>
-                                <Image source={arrow} style={{position:'absolute',right:20}}></Image>
-                            </View>
-                            <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity>
-                            <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
-                                <Text style={{fontSize:20}}>1:1문의</Text>
-                                <Image source={arrow} style={{position:'absolute',right:20}}></Image>
-                            </View>
-                            <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity>
-                            <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
-                                <Text style={{fontSize:20}}>자주묻는질문</Text>
-                                <Image source={arrow} style={{position:'absolute',right:20}}></Image>
-                            </View>
-                            <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
-                            </TouchableOpacity>
+                            
                             
 
                         </View>
@@ -139,6 +114,19 @@ const InjuryPath = () => {
             </View>
                 <HeadHeder></HeadHeder>
                 <FootTer></FootTer>
+
+
+
+                <Modal  transparent={true} visible={select}>
+                    <View style={{width:100, position:'absolute',backgroundColor:'white',borderWidth:0.5,left:chartWidth/3.4,top:chartHeight/3}}>
+                        <TouchableOpacity onPress={()=>{SetlistCate('선택'),setSelect(false)}}>
+                        <Text style={{left:5,marginTop:5}}>선택</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{SetlistCate('장애인'),setSelect(false)}}>
+                        <Text style={{left:5,marginTop:5}}>장애인</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
         </View>
     )
 }

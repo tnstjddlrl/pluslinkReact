@@ -58,7 +58,7 @@ const Mypage = () => {
                                 
                                 
                                     <View style={{left:chartWidth/4}}>
-                                    <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
+                                    <TouchableOpacity onPress={()=>navigation.navigate('취약계층인증')}>
                                         <Text>취약계층인증</Text>
                                         </TouchableOpacity>
                                     </View>
