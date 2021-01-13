@@ -70,30 +70,24 @@ function isshwon(params) {
 }
 
 
+
 const App =({  }) =>{
   
-
-  async () => {
-    try {
-      await AsyncStorage.setItem(
-        '@super:id',
-        'superno'
-      );
-    } catch (error) {
-      console.log('setitem :' , error)
+  AsyncStorage.setItem(
+    '@super:id',
+    'superno'
+  );
+  
+  useState(()=>{
+    async()=>{
+      const value =  AsyncStorage.getItem('@super:id');
+      console.log(value);
     }
-  };
+  },[])
+  
 
-  async () => {
-    try {
-      const value = await AsyncStorage.getItem('@super:id');
-      if (value !== null) {
-        console.log(value);
-      }
-    } catch (error) {
-      console.log('getitem :' , error)
-    }
-  };
+  
+
 
   const logo = { uri: "https://pluslink.kr/img/pluslink/logo.png" };
   const logo2 = { uri: "https://pluslink.kr/img/menu.png" };
