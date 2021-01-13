@@ -5,7 +5,8 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
-  Platform
+  Platform,
+  Modal
 } from "react-native";
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
@@ -20,6 +21,10 @@ const testlogo = require('./img/logo.png')
 
 const HeadHeder = () => {
     const navigation = useNavigation();
+
+    const [viewmenu,setViewmenu] = useState(false)
+
+
     let os = Platform.OS
     console.log(os)
     let nowheight;
@@ -33,6 +38,7 @@ const HeadHeder = () => {
       
     
   return (
+    <View>
     <View style={{flex:1}}>
         <View style={{borderWidth:1,position:'absolute',width:chartWidth+15,left:-2,bottom:(chartHeight/nowheight),height:100,marginTop:100,flexDirection: 'row',backgroundColor:'white'}}>
             
@@ -61,7 +67,19 @@ const HeadHeder = () => {
             </View>
             </TouchableOpacity>
         </View>
+    </View>
+    
+    <Modal transparent={true} visible={viewmenu}>
+      <View style={{width:chartWidth/1.45,height:chartHeight,position:'absolute',backgroundColor:'gray'}}>
+
+
+
       </View>
+
+    </Modal>
+
+
+    </View>
    
   );
 };
