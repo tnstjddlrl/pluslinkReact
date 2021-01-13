@@ -75,18 +75,25 @@ const HeadHeder = () => {
       <View style={{width:chartWidth/1.45,height:chartHeight,position:'absolute',backgroundColor:'gray'}}>
         <View style={{width:chartWidth/1.45,height:200}}>
           <ImageBackground source={graBox} style={{width:chartWidth/1.45,height:200}}>
+            <TouchableOpacity onPress={()=>setViewmenu(false)}>
             <View style={{width:50,height:50,backgroundColor:'white',borderRadius:27,left:chartWidth/1.85,}}>
               <Text style={{fontWeight:'bold',fontSize:25,margin:10,marginLeft:15}}>X</Text>
             </View>
+            </TouchableOpacity>
 
+            
             <View style={{flexDirection:'row',marginTop:10,marginLeft:10}}>
+              <TouchableOpacity onPress={()=>{navigation.navigate('로그인'),setViewmenu(false)}}>
               <View style={{backgroundColor:'white',width:chartWidth/3.5,height:40,borderRadius:5}}>
                 <Text style={{alignSelf:'center',marginTop:10,fontSize:15}}>로그인</Text>
               </View>
+              </TouchableOpacity>
 
+              <TouchableOpacity onPress={()=>{navigation.navigate('회원가입'),setViewmenu(false)}}>
               <View style={{backgroundColor:'white',width:chartWidth/3.5,height:40,borderRadius:5,marginLeft:10}}>
                 <Text style={{alignSelf:'center',marginTop:10,fontSize:15}}>회원가입</Text>
               </View>
+              </TouchableOpacity>
 
             </View>
 
