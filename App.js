@@ -14,9 +14,10 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
-  AsyncStorage
 } from "react-native";
 import { useIsDrawerOpen } from '@react-navigation/drawer';
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -72,17 +73,27 @@ function isshwon(params) {
 
 
 const App =({  }) =>{
-  
-  AsyncStorage.setItem(
-    '@super:id',
-    'superno'
-  );
+
+  const fetchUser = async()=>{
+    AsyncStorage.setItem(
+      '@super:id',
+      'superno'
+    );
+  }
+
+  async function isFavorite() {
+    try {
+      return await AsyncStorage.getItem("@super:id");
+    } catch (error) {
+      return false;
+    }
+  }
   
   useState(()=>{
-    async()=>{
-      const value =  AsyncStorage.getItem('@super:id');
-      console.log(value);
-    }
+    fetchUser()
+    const result = isFavorite().then((company_id) => {
+      console.log('새 : ',company_id);
+    });
   },[])
   
 
@@ -223,11 +234,7 @@ const DrawerNavigator = () => {
           <Drawer.Screen name="견적자세히보기"   component={CurrentPlus} options={{drawerLabel:''}} />
           <Drawer.Screen name="정보변경2"   component={InfoChange} options={{drawerLabel:''}} />
           <Drawer.Screen name="취약계층인증"   component={InjuryPath} options={{drawerLabel:''}} />
-          
-          
-          
-          {/* <Drawer.Screen name="푸터" component = {FootTer} />
-          <Drawer.Screen name="헤더" component = {HeadHeder} /> */}
+
       </Drawer.Navigator>
       </NavigationContainer>
   );
