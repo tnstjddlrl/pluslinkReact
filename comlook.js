@@ -69,6 +69,7 @@ const ComLook=({route})=>{
           "alignItems": "flex-start"
         }
       } >
+      <TouchableOpacity onPress={()=>navigation.navigate('지정의뢰')}>
       <View style = {
         {
           "alignItems": "flex-start",
@@ -87,6 +88,7 @@ const ComLook=({route})=>{
         }
       } > 견적의뢰하기 </Text>
       </View>
+      </TouchableOpacity>
       </View>
       </View>
             

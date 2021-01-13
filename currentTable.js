@@ -129,15 +129,15 @@ const TableItem = () => {
     return(
                         <View>
                         <View style={{flex:1,flexDirection:'row'}}>
-                            <View style={{alignItems:'center',left:10}}>
+                            <View style={{alignItems:'center',left:'35%'}}>
                                 <Text>12.16</Text>
                                 <Text>견적취소</Text>
                             </View>
-                            <Text style={{width:35,marginLeft:30}}>전기&조명</Text>
-                            <Text style={{width:40,marginLeft:40}}>동파</Text>
-                            <Text style={{width:100,marginLeft:40}}>테스트테스트테스트테스트테스트테스트</Text>
+                            <Text style={{width:35,marginLeft:'7%'}}>전기&조명</Text>
+                            <Text style={{width:40,marginLeft:'10%'}}>동파</Text>
+                            <Text style={{width:120,marginLeft:'5%'}}>테스트테스트테스트테스트테스트테스트</Text>
                             <TouchableOpacity onPress={()=>navigation.navigate('견적자세히보기')}>
-                            <View style={{width:45,height:30,backgroundColor:'gray',marginLeft:15,alignItems:'center'}}>
+                            <View style={{width:45,height:30,backgroundColor:'gray',marginLeft:'10%',alignItems:'center'}}>
                                 <Text style={{color:'white',marginTop:7}}>보기</Text>
                             </View>
                             </TouchableOpacity>

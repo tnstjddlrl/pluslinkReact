@@ -51,6 +51,8 @@ import OneWrite from "./oneWirte.js";
 import OneView from "./oneView";
 import CompanyList from "./companyList";
 import PasswordCheck from "./passwordCheck";
+import InfoChange from "./infoChange.js";
+import SelectRequest from "./selectRequest.js";
 
 
 
@@ -183,14 +185,15 @@ const DrawerNavigator = () => {
             islogin ? <Drawer.Screen name="마이페이지" name='   ' component={Mypage} /> : <Drawer.Screen name="회원가입" component = {Register} />
           }
              
-
+          <Drawer.Screen name="정보변경" component = {PasswordCheck} />
           <Drawer.Screen name="견적의뢰" component = {REquset} />
           <Drawer.Screen name="견적현황" component = {CurGyeon} />
           {/* <Drawer.Screen name="화사테스트" component = {Company} /> */}
           <Drawer.Screen name="이벤트목록"   component={EventList} options={{drawerLabel:'이벤트목록'}} />
           <Drawer.Screen name="1대1문의"   component={OneonOne} options={{drawerLabel:'1대1문의'}} />
           <Drawer.Screen name="업체목록"   component={CompanyList} options={{drawerLabel:'업체목록'}} />
-
+          
+          <Drawer.Screen name="지정의뢰"   component={SelectRequest} options={{drawerLabel:''}} />
           <Drawer.Screen name="1대1문의보기"   component={OneView} options={{drawerLabel:''}} />
           <Drawer.Screen name="1대1문의쓰기"   component={OneWrite} options={{drawerLabel:''}} />
           <Drawer.Screen name="회사자세히보기" component = {ComLook} options={{drawerLabel:''}} />
@@ -198,7 +201,8 @@ const DrawerNavigator = () => {
           <Drawer.Screen name="마이페이지"   component={Mypage} options={{drawerLabel:''}} />
           <Drawer.Screen name="견적테이블"   component={CurrentTable} options={{drawerLabel:''}} />
           <Drawer.Screen name="견적자세히보기"   component={CurrentPlus} options={{drawerLabel:''}} />
-          <Drawer.Screen name="비밀번호확인"   component={PasswordCheck} options={{drawerLabel:''}} />
+          <Drawer.Screen name="정보변경2"   component={InfoChange} options={{drawerLabel:''}} />
+          
           
           
           {/* <Drawer.Screen name="푸터" component = {FootTer} />

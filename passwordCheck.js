@@ -23,6 +23,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const PasswordCheck = () => {
   const [value, onChangeText] = React.useState('');//textinput용
+  const navigation = useNavigation();
   return(
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
@@ -45,7 +46,7 @@ const PasswordCheck = () => {
                 onChangeText={text => onChangeText(text)}
                 value={value}
               />
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=>navigation.navigate('정보변경2')}>
               <View style={{margin:15,width:chartWidth-50,backgroundColor:'#d11aff'}}>
                 <Text style={{color:"white",margin:15,alignSelf:'center',fontWeight:'bold'}}>확인하기</Text>
               </View>
