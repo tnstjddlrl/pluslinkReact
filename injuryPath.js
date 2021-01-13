@@ -28,10 +28,19 @@ const arrow = require('./img/arrow02.png')
 const InjuryPath = () => {
     const navigation = useNavigation();
 
+    let os = Platform.OS
+    console.log(os)
+    let nowheight;
+      if(os == 'ios'){
+       nowheight = 100;
+      }else{
+        nowheight = 60;
+      }
+
     return (
         <View>
             <View style={{height:chartHeight,width:chartWidth}}>
-                <View style={{top:60,backgroundColor:'white'}}>
+                <View style={{top:nowheight,backgroundColor:'white'}}>
                     <View style={{marginLeft:20,marginRight:20,marginTop:10,backgroundColor:'white',height:chartHeight}}>
                         <View style={{flexDirection:"row",alignItems:"center"}}>
                             <View style={{borderWidth:1,height:60,width:60,borderRadius:27,backgroundColor:30}}></View>
@@ -41,18 +50,18 @@ const InjuryPath = () => {
                         <View style={{width:chartWidth-40,borderWidth:0.5,marginBottom:5,marginTop:10}}></View>
                         <View style={{flexDirection:"row",alignItems:"center",}}>
                             <View style={{flexDirection:"row",width:chartWidth}}>
-                                <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
-                                    <View style={{left:chartWidth/15,position:'absolute'}}>
+                                <TouchableOpacity onPress={()=>navigation.navigate('정보변경')} >
+                                    <View style={{marginLeft:chartWidth/15}}>
                                         <Text>정보변경</Text>
                                     </View>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
-                                    <View style={{left:chartWidth/3,position:'absolute'}}>
+                                    <View style={{left:chartWidth/4}}>
                                         <Text>취약계층인증</Text>
                                     </View>
                                 </TouchableOpacity>
                                 <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
-                                    <View style={{left:chartWidth/1.5}}>
+                                    <View style={{left:chartWidth/2.5}}>
                                         <Text>로그아웃</Text>
                                     </View>
                                 </TouchableOpacity>
