@@ -6,7 +6,8 @@ import {
   Image,
   TouchableOpacity,
   Platform,
-  Modal
+  Modal,
+  ImageBackground
 } from "react-native";
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
@@ -18,6 +19,7 @@ import { DrawerActions } from '@react-navigation/native';
 const logo = { uri: "https://pluslink.kr/img/pluslink/logo.png" };
 const logo2 = { uri: "https://pluslink.kr/img/menu.png" };
 const testlogo = require('./img/logo.png')
+const graBox = require('./img/gradation.jpg')
 
 const HeadHeder = () => {
     const navigation = useNavigation();
@@ -42,7 +44,7 @@ const HeadHeder = () => {
     <View style={{flex:1}}>
         <View style={{borderWidth:1,position:'absolute',width:chartWidth+15,left:-2,bottom:(chartHeight/nowheight),height:100,marginTop:100,flexDirection: 'row',backgroundColor:'white'}}>
             
-            <TouchableOpacity activeOpacity={0.5} onPress={() => {navigation.dispatch(DrawerActions.openDrawer());}} style={{top:30,left:10}}>
+            <TouchableOpacity activeOpacity={0.5} onPress={() => {setViewmenu(true)}} style={{top:30,left:10}}>
                 <Image
                   source={logo2}
                   style={{width:40,height:35,marginTop:20}}
@@ -71,7 +73,27 @@ const HeadHeder = () => {
     
     <Modal transparent={true} visible={viewmenu}>
       <View style={{width:chartWidth/1.45,height:chartHeight,position:'absolute',backgroundColor:'gray'}}>
+        <View style={{width:chartWidth/1.45,height:200}}>
+          <ImageBackground source={graBox} style={{width:chartWidth/1.45,height:200}}>
+            <View style={{width:50,height:50,backgroundColor:'white',borderRadius:27,left:chartWidth/1.85,}}>
+              <Text style={{fontWeight:'bold',fontSize:25,margin:10,marginLeft:15}}>X</Text>
+            </View>
 
+            <View style={{flexDirection:'row',marginTop:10,marginLeft:10}}>
+              <View style={{backgroundColor:'white',width:chartWidth/3.5,height:40,borderRadius:5}}>
+                <Text style={{alignSelf:'center',marginTop:10,fontSize:15}}>로그인</Text>
+              </View>
+
+              <View style={{backgroundColor:'white',width:chartWidth/3.5,height:40,borderRadius:5,marginLeft:10}}>
+                <Text style={{alignSelf:'center',marginTop:10,fontSize:15}}>회원가입</Text>
+              </View>
+
+            </View>
+
+          </ImageBackground>
+        </View>
+
+        
 
 
       </View>
