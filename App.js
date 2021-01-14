@@ -77,7 +77,7 @@ const App =({  }) =>{
   const fetchUser = async()=>{
     AsyncStorage.setItem(
       '@super:id',
-      'superno'
+      '로그인해주세요'
     );
   }
 
@@ -89,7 +89,7 @@ const App =({  }) =>{
     }
   }
   
-  useState(()=>{
+  useEffect(()=>{
     fetchUser()
     const result = isFavorite().then((company_id) => {
       console.log('새 : ',company_id);

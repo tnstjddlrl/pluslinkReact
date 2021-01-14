@@ -19,6 +19,8 @@ import { useNavigation } from '@react-navigation/native';
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
 
+import AsyncStorage from '@react-native-community/async-storage';
+
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";
 
@@ -27,6 +29,13 @@ const arrow = require('./img/arrow02.png')
 
 const Mypage = () => {
     const navigation = useNavigation();
+
+    const fetchUser = async()=>{
+        AsyncStorage.setItem(
+          '@super:id',
+          '로그인해주세요'
+        );
+      }
 
     let os = Platform.OS
     console.log(os)
@@ -65,7 +74,7 @@ const Mypage = () => {
                                 
                                 
                                     <View style={{left:chartWidth/2.5}}>
-                                    <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
+                                    <TouchableOpacity onPress={()=>{navigation.navigate('홈'),fetchUser('로그인해주세요')}}>
                                         <Text>로그아웃</Text>
                                         </TouchableOpacity>
                                     </View>

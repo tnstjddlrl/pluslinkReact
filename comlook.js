@@ -37,64 +37,66 @@ const ffimg4 =require('./img/b04.png')
 const ComLook=({route})=>{
     const navigation = useNavigation();
     return(
+      <View>
       <View style={{height:chartHeight}}>
-        <ScrollView style={{height:chartHeight-80,marginTop:60,}}>
-          <View style={{margin:20,}}>
-            <TestCom comname={route.params.name}></TestCom>
-            <View style={{marginTop:10}}>
-            <View style = {
-              {
-                "backgroundColor": "rgba(222, 218, 218, 255)",
-                "width": 412,
-                "height": 1
-                
-              }
-              }
-            />
-            </View>
-                
-          </View>
-          <ScrollView
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            scrollEventThrottle={200}
-            decelerationRate="fast"
-            height={340}
-          >
-            <ComSigong></ComSigong><ComSigong></ComSigong><ComSigong></ComSigong><ComSigong></ComSigong>
-          </ScrollView>
-          <View style={{marginBottom:100, alignItems:'center'}}>
+            <ScrollView style={{height:chartHeight-80,marginTop:60,}}>
+              <View style={{margin:20,}}>
+                <TestCom comname={route.params.name}></TestCom>
+                <View style={{marginTop:10}}>
+                <View style = {
+                  {
+                    "backgroundColor": "rgba(222, 218, 218, 255)",
+                    "width": 412,
+                    "height": 1
+                    
+                  }
+                  }
+                />
+                </View>
+                    
+              </View>
+              <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                scrollEventThrottle={200}
+                decelerationRate="fast"
+                height={340}
+              >
+                <ComSigong></ComSigong><ComSigong></ComSigong><ComSigong></ComSigong><ComSigong></ComSigong>
+              </ScrollView>
+              <View style={{marginBottom:100, alignItems:'center'}}>
+              <View style = {
+            {
+              "alignItems": "flex-start"
+            }
+          } >
+          <TouchableOpacity onPress={()=>navigation.navigate('지정의뢰')}>
           <View style = {
-        {
-          "alignItems": "flex-start"
-        }
-      } >
-      <TouchableOpacity onPress={()=>navigation.navigate('지정의뢰')}>
-      <View style = {
-        {
-          "alignItems": "flex-start",
-          "paddingStart": 114,
-          "paddingTop": 9,
-          "width": 350,
-          "height": 46,
-          "borderRadius": 11,
-          "backgroundColor": "rgba(71, 67, 55, 255)"
-        }
-      } >
-      <Text style = {
-        {
-          "fontSize": 20,
-          "color": "rgba(255, 255, 255, 255)"
-        }
-      } > 견적의뢰하기 </Text>
-      </View>
-      </TouchableOpacity>
-      </View>
-      </View>
-            
-  
-          
-      </ScrollView>
+            {
+              "alignItems": "flex-start",
+              "paddingStart": 114,
+              "paddingTop": 9,
+              "width": 350,
+              "height": 46,
+              "borderRadius": 11,
+              "backgroundColor": "rgba(71, 67, 55, 255)"
+            }
+          } >
+          <Text style = {
+            {
+              "fontSize": 20,
+              "color": "rgba(255, 255, 255, 255)"
+            }
+          } > 견적의뢰하기 </Text>
+          </View>
+          </TouchableOpacity>
+          </View>
+          </View>
+                
+      
+              
+          </ScrollView>
+        </View>
   
   
         <HeadHeder></HeadHeder>

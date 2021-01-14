@@ -21,6 +21,9 @@ import styles from './styles.js'
 
 
 const Mmenu = () =>{
+  const [whoclicked,setWhoclicked] = useState('1');
+  const puple = "rgba(164, 108, 209, 255)"
+  const gray = "rgba(234, 234, 234, 255)"
     return(
       <ScrollView
                   horizontal={true}
@@ -29,6 +32,7 @@ const Mmenu = () =>{
                       () => {console.log('Scrolling is End')}
                   }
               >
+                  <TouchableOpacity onPress={()=>setWhoclicked('1')}>
                   <View style = {
                     {
                       "alignItems": "flex-start"
@@ -57,7 +61,9 @@ const Mmenu = () =>{
                 </View>
                 </View>
                 </View>
+                </TouchableOpacity>
   
+                <TouchableOpacity onPress={()=>setWhoclicked('2')}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -86,8 +92,11 @@ const Mmenu = () =>{
                 </View>
                 </View>
                 </View>
+
+                </TouchableOpacity>
   
-  
+                
+                <TouchableOpacity onPress={()=>setWhoclicked('3')}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -116,8 +125,10 @@ const Mmenu = () =>{
                 </View>
                 </View>
                 </View>
-  
-  
+                </TouchableOpacity>
+                
+
+                <TouchableOpacity onPress={()=>setWhoclicked('4')}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -146,7 +157,9 @@ const Mmenu = () =>{
                 </View>
                 </View>
                 </View>
-  
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>setWhoclicked('5')}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -175,7 +188,10 @@ const Mmenu = () =>{
                 </View>
                 </View>
                 </View>
+                </TouchableOpacity>
   
+
+                <TouchableOpacity onPress={()=>setWhoclicked('6')}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -204,7 +220,10 @@ const Mmenu = () =>{
                 </View>
                 </View>
                 </View>
+                </TouchableOpacity>
   
+
+                <TouchableOpacity onPress={()=>setWhoclicked('7')}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -233,7 +252,10 @@ const Mmenu = () =>{
                 </View>
                 </View>
                 </View>
+                </TouchableOpacity>
   
+
+                <TouchableOpacity onPress={()=>setWhoclicked('8')}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -262,6 +284,7 @@ const Mmenu = () =>{
                 </View>
                 </View>
                 </View>
+                </TouchableOpacity>
                  
                   
               </ScrollView>

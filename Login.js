@@ -5,7 +5,7 @@ import {
   Dimensions,
   Button,
   TextInput,
-  AsyncStorage
+  TouchableOpacity
 } from "react-native";
 import CheckBox from '@react-native-community/checkbox';
 
@@ -13,7 +13,8 @@ import FootTer from './footer.js'
 import HeadHeder from "./header.js";
 import { useNavigation } from '@react-navigation/native';
 import Axios from 'axios'
-import { TouchableOpacity } from "react-native-gesture-handler";
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 const logo = { uri: "https://pluslink.kr/img/pluslink/logo.png" };
 const logo2 = { uri: "https://pluslink.kr/img/menu.png" };
@@ -24,32 +25,49 @@ const chartWidth = Dimensions.get('window').width;
 
 //로그인 연동 해야함...
 //================================로그인===============================
-function logindata(id,pss){
-  Axios.post('http://ip0131.cafe24.com/pluslink/json/memberJson.php', JSON.stringify({
-    id : id,
-    password : pss
-  }))
-  .then(function (response) {
-    console.log('리스폰스 ',response);
-    if(response.request._response=='suc'){
-    alert('로그인 되었습니다.')
-    AsyncStorage.setItem(
-      '@super:id',
-      'superno'
-    );
-    console.log (AsyncStorage.getItem('@super:id'));
-    }
-    else{
-      alert('아이디 또는 비밀번호를 확인해주세요')
-    }
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+
+
+
+const fetchUser = async(id)=>{
+  AsyncStorage.setItem(
+    '@super:id',
+    id
+  );
+}
+
+async function isFavorite() {
+  try {
+    return await AsyncStorage.getItem("@super:id");
+  } catch (error) {
+    return false;
+  }
 }
 
 
 const Login=()=>{
+
+  function logindata(id,pss){
+    Axios.post('http://ip0131.cafe24.com/pluslink/json/memberJson.php', JSON.stringify({
+      id : id,
+      password : pss
+    }))
+    .then(function (response) {
+      console.log('리스폰스 ',response);
+      if(response.request._response=='suc'){
+      alert('로그인 되었습니다.')
+      fetchUser(id)
+      console.log (isFavorite());
+      navigation.navigate('홈');
+      }
+      else{
+        alert('아이디 또는 비밀번호를 확인해주세요')
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
     const [id, onChangeId] = React.useState('');//textinput용
     const [pss, onChangePSS] = React.useState('');//textinput용
     const [toggleCheckBox, setToggleCheckBox] = useState(false)//체크박스용
@@ -80,7 +98,7 @@ const Login=()=>{
           </View>
           <View style={{position:'absolute', top:270,left:15,width:315}}>
 
-          <TouchableOpacity oonPress={()=>logindata(id,pss)}>
+          <TouchableOpacity onPress={()=>{logindata(id,pss),console.log('버튼 눌러짐')}}>
             <View style={{width:chartWidth-90,height:40,backgroundColor:'#d24dff',alignItems:'center'}}>
                 <Text style={{color:'white',marginTop:10,fontWeight:'800'}}>로그인</Text>
             </View>
