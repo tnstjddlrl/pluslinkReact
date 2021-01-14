@@ -56,6 +56,7 @@ import PasswordCheck from "./passwordCheck";
 import InfoChange from "./infoChange.js";
 import SelectRequest from "./selectRequest.js";
 import InjuryPath from "./injuryPath.js";
+import BestView from "./bestView.js"
 
 
 
@@ -221,6 +222,8 @@ function App2() {
           name="정보변경2"   component={InfoChange} />
           <Stack.Screen 
           name="취약계층인증"   component={InjuryPath} />
+          <Stack.Screen 
+          name="베스트보기"   component={BestView} />
       </Stack.Navigator>
     </NavigationContainer>
   );
