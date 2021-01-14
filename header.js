@@ -104,7 +104,7 @@ const HeadHeder = () => {
           <ImageBackground source={graBox} style={{width:chartWidth/1.45,height:250}}>
             <View style={{marginTop:mata}}>
                 <TouchableOpacity onPress={()=>setViewmenu(false)} style={{width:50,height:50,backgroundColor:'white',borderRadius:27,right:10,top:0,position:'absolute'}}>
-                  <View>
+                  <View style={{width:50,height:200}}>
                     <Text style={{fontWeight:'bold',fontSize:25,alignSelf:'center',marginTop:10}}>X</Text>
                   </View>
                   </TouchableOpacity>
@@ -114,6 +114,7 @@ const HeadHeder = () => {
                     <View style={{backgroundColor:'white',width:50,height:50,borderRadius:28}}></View>
                     <Text style={{fontWeight:'bold',marginLeft:10}}>{newid}</Text>
                   </View>
+
 
               
 
@@ -166,14 +167,10 @@ const HeadHeder = () => {
             </TouchableOpacity>
 
         </View>
-            
-
-
           </ImageBackground>
+
+
         </View>
-
-        
-
 
       </View>
 
