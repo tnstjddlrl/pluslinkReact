@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
   View,
   Text,
@@ -20,8 +20,25 @@ import FootTer from './footer.js'
 import HeadHeder from "./header.js";
 
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const PasswordCheck = () => {
+
+  const [newid,setNewid] = useState('');
+  
+    async function isFavorite() {
+      try {
+        return await AsyncStorage.getItem("@super:id");
+      } catch (error) {
+        return false;
+      }
+    }
+    
+      const result = isFavorite().then((company_id) => {
+        setNewid(company_id)
+        console.log(company_id)
+      });
+
   const [value, onChangeText] = React.useState('');//textinput용
   const navigation = useNavigation();
   return(
@@ -40,7 +57,7 @@ const PasswordCheck = () => {
               <Text style={{fontSize:14,marginTop:15,marginLeft:15}}>비밀번호를 한번 더 입력해주세요.</Text>
               <Text style={{fontSize:12,marginLeft:15,marginTop:5}}>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 한번더 확인합니다.</Text>
 
-              <Text style={{fontSize:14,marginTop:15,marginLeft:15}}>회원아이디 : (로그인한아이디)</Text>
+            <Text style={{fontSize:14,marginTop:15,marginLeft:15}}>회원아이디 : {newid}</Text>
               <TextInput      
                 style={{ height: 40,width:chartWidth-50,marginLeft:15,marginTop:10,marginBottom:20, borderColor: 'gray', borderWidth: 0.5 }}
                 onChangeText={text => onChangeText(text)}

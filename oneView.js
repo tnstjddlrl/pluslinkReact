@@ -38,12 +38,11 @@ const OneView = () => {
 
             <View style={{flexDirection:'row',alignItems:'center',marginTop:25,marginLeft:20}}>
               <View style={{backgroundColor:'gray',borderRadius:28,width:60,height:60}}></View>
-              <Text style={{marginLeft:5,fontSize:18,fontWeight:'bold'}}>테스트 내용입니다.</Text>
+                <Text style={{marginLeft:5,fontSize:18,fontWeight:'bold'}}>테스트 내용입니다.</Text>
             </View>
 
             <View style={{marginLeft:10,marginTop:10}}>
               <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
-              <View style={{width:chartWidth-100,borderWidth:0.4,borderColor:'gray'}}></View>
                 <View style={{flexDirection:'row',alignItems:'center',margin:10}}>
                   <Image source={user} style={{width:10,height:10,}}></Image>
                   <Text style={{fontSize:13}}>test</Text>

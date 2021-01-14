@@ -37,6 +37,20 @@ const Mypage = () => {
         );
       }
 
+    const [newid,setNewid] = useState('');
+  
+    async function isFavorite() {
+      try {
+        return await AsyncStorage.getItem("@super:id");
+      } catch (error) {
+        return false;
+      }
+    }
+    
+      const result = isFavorite().then((company_id) => {
+        setNewid(company_id)
+      });
+
     let os = Platform.OS
     console.log(os)
     let nowheight;
@@ -53,7 +67,7 @@ const Mypage = () => {
                     <View style={{marginLeft:20,marginRight:20,marginTop:10,backgroundColor:'white',height:chartHeight}}>
                         <View style={{flexDirection:"row",alignItems:"center"}}>
                             <View style={{borderWidth:1,height:60,width:60,borderRadius:27,backgroundColor:30}}></View>
-                            <Text style={{fontSize:20,marginLeft:10}}>테스트</Text>
+                            <Text style={{fontSize:20,marginLeft:10}}>{newid}</Text>
                         </View>
 
                         <View style={{width:chartWidth-40,borderWidth:0.5,marginBottom:5,marginTop:10}}></View>
@@ -126,7 +140,7 @@ const Mypage = () => {
                             <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
                             </TouchableOpacity>
 
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={()=>navigation.navigate('1대1문의')}>
                             <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
                                 <Text style={{fontSize:20}}>1:1문의</Text>
                                 <Image source={arrow} style={{position:'absolute',right:20}}></Image>

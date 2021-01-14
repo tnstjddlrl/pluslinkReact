@@ -15,6 +15,7 @@ import styles from './styles.js'
 import { useNavigation } from '@react-navigation/native';
 import { DrawerActions } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
+import Axios from 'axios'
 
 
 const logo = { uri: "https://pluslink.kr/img/pluslink/logo.png" };
@@ -48,11 +49,27 @@ const HeadHeder = () => {
         setNewid(company_id)
       });
 
-      console.log('헤더 콘솔 체크: ',newid)
+      const fetchUser = async(id)=>{
+        AsyncStorage.setItem(
+          '@super:id',
+          id
+        );
+      }
+
+      function logCheck(prop){
+        if(newid == '로그인해주세요'){
+          alert('로그인을 먼저 해주세요.')
+          navigation.navigate('로그인')
+        }else{
+          navigation.navigate(prop)
+        }
+      }
+
+      
       
       
     let os = Platform.OS
-    console.log(os)
+    
     let nowheight;
     let mata;
       if(os == 'ios'){
@@ -62,8 +79,13 @@ const HeadHeder = () => {
         nowheight = 1.08;
         mata=0;
       }
+      useEffect(()=>{
+        console.log(os)
+        console.log(nowheight)
+        console.log('헤더 콘솔 체크: ',newid)
+      })
+      
 
-      console.log(nowheight)
       
     
   return (
@@ -98,10 +120,13 @@ const HeadHeder = () => {
         </View>
     </View>
     
+
+
+
     <Modal transparent={true} visible={viewmenu}>
       <View style={{width:chartWidth/1.45,height:chartHeight,position:'absolute',backgroundColor:'gray'}}>
         <View>
-          <ImageBackground source={graBox} style={{width:chartWidth/1.45,height:250}}>
+          <ImageBackground source={graBox} style={{width:chartWidth/1.45,height:220}}>
             <View style={{marginTop:mata}}>
                 <TouchableOpacity onPress={()=>setViewmenu(false)} style={{width:50,height:50,backgroundColor:'white',borderRadius:27,right:10,top:0,position:'absolute'}}>
                   <View style={{width:50,height:200}}>
@@ -116,14 +141,8 @@ const HeadHeder = () => {
                   </View>
 
 
-              
 
-
-              
-
-                
-
-            {newid == '로그인해주세요' ? <View style={{flexDirection:'row',marginTop:10,marginLeft:10}}>
+            {newid == '로그인해주세요' ? <View style={{flexDirection:'row',marginTop:25,marginLeft:10}}>
               <TouchableOpacity onPress={()=>{navigation.navigate('로그인'),setViewmenu(false)}}>
               <View style={{backgroundColor:'white',width:chartWidth/3.5,height:40,borderRadius:5}}>
                 <Text style={{alignSelf:'center',marginTop:10,fontSize:15}}>로그인</Text>
@@ -135,31 +154,43 @@ const HeadHeder = () => {
                 <Text style={{alignSelf:'center',marginTop:10,fontSize:15}}>회원가입</Text>
               </View>
               </TouchableOpacity>
-            </View> : <View></View>
-            
+            </View> : <View style={{flexDirection:'row',marginTop:10,marginLeft:10}}>
+              <TouchableOpacity onPress={()=>{navigation.navigate('정보변경'),setViewmenu(false)}}>
+              <View style={{backgroundColor:'white',width:chartWidth/3.5,height:40,borderRadius:5}}>
+                <Text style={{alignSelf:'center',marginTop:10,fontSize:15}}>정보변경</Text>
+              </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={()=>{fetchUser('로그인해주세요'),setViewmenu(false),navigation.navigate('홈')}}>
+              <View style={{backgroundColor:'white',width:chartWidth/3.5,height:40,borderRadius:5,marginLeft:10}}>
+                <Text style={{alignSelf:'center',marginTop:10,fontSize:15}}>로그아웃</Text>
+              </View>
+              </TouchableOpacity>
+            </View>
             }
+
             </View>
 
         <View style={{position:'absolute',bottom:0,flexDirection: 'row',}}>
-            <TouchableOpacity onPress={() => {navigation.navigate('홈'),setViewmenu(false)}}>
+            <TouchableOpacity onPress={() => {logCheck('홈'),setViewmenu(false)}}>
             <View>
               <ImageBackground source={ffimg} style={{width:65,height:65,}}>
               </ImageBackground>
             </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {navigation.navigate('견적의뢰'),setViewmenu(false)}}>
+            <TouchableOpacity onPress={() => {logCheck('견적의뢰'),setViewmenu(false)}}>
             <View>
               <ImageBackground source={ffimg2} style={{width:65,height:65}}>
               </ImageBackground>
             </View>
             </TouchableOpacity >
-            <TouchableOpacity onPress={() => {navigation.navigate('견적현황'),setViewmenu(false)}}>
+            <TouchableOpacity onPress={() => {logCheck('견적현황'),setViewmenu(false)}}>
             <View>
               <ImageBackground source={ffimg3} style={{width:65,height:65}}>
               </ImageBackground>
             </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {navigation.navigate('마이페이지'),setViewmenu(false)}}>
+            <TouchableOpacity onPress={() => {logCheck('마이페이지'),setViewmenu(false)}}>
             <View>
               <ImageBackground source={ffimg4} style={{width:65,height:65}}>
               </ImageBackground>

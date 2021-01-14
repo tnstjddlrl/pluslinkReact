@@ -95,6 +95,8 @@ const App =({  }) =>{
       console.log('새 : ',company_id);
     });
   },[])
+
+  
   
 
   
@@ -157,92 +159,114 @@ const Eimg3 =require('./img/e_banner03.jpg')
 
 
 //------------------------------------------------------------
-// function App2() {
+function App2() {
   
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator headerMode={"none"} mode='modal'>
-//         <Stack.Screen 
-//           name="홈"
-//           component={App}
-//            />
-//         <Stack.Screen 
-//           name="로그인"
-//           component={Login}
-//            />
-//            <Stack.Screen 
-//           name="회원가입"
-//           component={Register}
-//            />
-//         <Stack.Screen 
-//           name="회사자세히보기"
-//           component={ComLook} />
-//         <Stack.Screen 
-//           name="회사테스트"
-//           component={Company} />
-//         <Stack.Screen 
-//           name="이벤트자세히보기"
-//           component={EventToPage} />
-//         <Stack.Screen 
-//           name="견적의뢰"
-//           component={REquset} />
-//         <Stack.Screen 
-//           name="견적현황"
-//           component={CurGyeon} />
-//         <Stack.Screen 
-//           name="푸터"
-//           component={FootTer} />
-//           <Stack.Screen 
-//           name="헤더"
-//           component={HeadHeder} />
-//           <Stack.Screen name="네비" component={DrawerNavigator}></Stack.Screen>
-          
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// }
-
-const DrawerNavigator = () => {
-  const [islogin,setLogin] = useState(false);
-
   return (
     <NavigationContainer>
-      <Drawer.Navigator>
-          <Drawer.Screen name="홈" component={App} />
-          {
-            islogin ? <Drawer.Screen name="마이페이지" component={Mypage} /> : <Drawer.Screen name="로그인" component={Login} />
-          }
-          {
-            islogin ? <Drawer.Screen name="마이페이지" name='   ' component={Mypage} /> : <Drawer.Screen name="회원가입" component = {Register} />
-          }
-             
-          <Drawer.Screen name="정보변경" component = {PasswordCheck} />
-          <Drawer.Screen name="견적의뢰" component = {REquset} />
-          <Drawer.Screen name="견적현황" component = {CurGyeon} />
-          {/* <Drawer.Screen name="화사테스트" component = {Company} /> */}
-          <Drawer.Screen name="이벤트목록"   component={EventList} options={{drawerLabel:'이벤트목록'}} />
-          <Drawer.Screen name="1대1문의"   component={OneonOne} options={{drawerLabel:'1대1문의'}} />
-          <Drawer.Screen name="업체목록"   component={CompanyList} options={{drawerLabel:'업체목록'}} />
-          
-          <Drawer.Screen name="지정의뢰"   component={SelectRequest} options={{drawerLabel:''}} />
-          <Drawer.Screen name="1대1문의보기"   component={OneView} options={{drawerLabel:''}} />
-          <Drawer.Screen name="1대1문의쓰기"   component={OneWrite} options={{drawerLabel:''}} />
-          <Drawer.Screen name="회사자세히보기" component = {ComLook} options={{drawerLabel:''}} />
-          <Drawer.Screen name="이벤트자세히보기"  component = {EventToPage} options={{drawerLabel:''}} />
-          <Drawer.Screen name="마이페이지"   component={Mypage} options={{drawerLabel:''}} />
-          <Drawer.Screen name="견적테이블"   component={CurrentTable} options={{drawerLabel:''}} />
-          <Drawer.Screen name="견적자세히보기"   component={CurrentPlus} options={{drawerLabel:''}} />
-          <Drawer.Screen name="정보변경2"   component={InfoChange} options={{drawerLabel:''}} />
-          <Drawer.Screen name="취약계층인증"   component={InjuryPath} options={{drawerLabel:''}} />
-
-      </Drawer.Navigator>
-      </NavigationContainer>
+      <Stack.Navigator headerMode={"none"} mode='modal'>
+        <Stack.Screen 
+          name="홈"
+          component={App}
+           />
+        <Stack.Screen 
+          name="로그인"
+          component={Login}
+           />
+           <Stack.Screen 
+          name="회원가입"
+          component={Register}
+           />
+        <Stack.Screen 
+          name="회사자세히보기"
+          component={ComLook} />
+        <Stack.Screen 
+          name="회사테스트"
+          component={Company} />
+        <Stack.Screen 
+          name="이벤트자세히보기"
+          component={EventToPage} />
+        <Stack.Screen 
+          name="견적의뢰"
+          component={REquset} />
+        <Stack.Screen 
+          name="견적현황"
+          component={CurGyeon} />
+        <Stack.Screen 
+          name="푸터"
+          component={FootTer} />
+          <Stack.Screen 
+          name="헤더"
+          component={HeadHeder} />
+          <Stack.Screen 
+          name="정보변경" component = {PasswordCheck} />
+          <Stack.Screen 
+          name="이벤트목록"   component={EventList} />
+          <Stack.Screen 
+          name="1대1문의"   component={OneonOne} />
+          <Stack.Screen 
+          name="업체목록"   component={CompanyList} />
+          <Stack.Screen 
+          name="지정의뢰"   component={SelectRequest} />
+          <Stack.Screen 
+          name="1대1문의보기"   component={OneView} />
+          <Stack.Screen 
+          name="1대1문의쓰기"   component={OneWrite} />
+          <Stack.Screen 
+          name="마이페이지"   component={Mypage} />
+          <Stack.Screen 
+          name="견적테이블"   component={CurrentTable} />
+          <Stack.Screen 
+          name="견적자세히보기"   component={CurrentPlus} />
+          <Stack.Screen 
+          name="정보변경2"   component={InfoChange} />
+          <Stack.Screen 
+          name="취약계층인증"   component={InjuryPath} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
+}
+
+// const DrawerNavigator = () => {
+//   const [islogin,setLogin] = useState(false);
+
+//   return (
+//     <NavigationContainer>
+//       <Drawer.Navigator>
+//           <Drawer.Screen name="홈" component={App} />
+//           {
+//             islogin ? <Drawer.Screen name="마이페이지" component={Mypage} /> : <Drawer.Screen name="로그인" component={Login} />
+//           }
+//           {
+//             islogin ? <Drawer.Screen name="마이페이지" name='   ' component={Mypage} /> : <Drawer.Screen name="회원가입" component = {Register} />
+//           }
+             
+//           <Drawer.Screen name="정보변경" component = {PasswordCheck} />
+//           <Drawer.Screen name="견적의뢰" component = {REquset} />
+//           <Drawer.Screen name="견적현황" component = {CurGyeon} />
+//           {/* <Drawer.Screen name="화사테스트" component = {Company} /> */}
+//           <Drawer.Screen name="이벤트목록"   component={EventList} options={{drawerLabel:'이벤트목록'}} />
+//           <Drawer.Screen name="1대1문의"   component={OneonOne} options={{drawerLabel:'1대1문의'}} />
+//           <Drawer.Screen name="업체목록"   component={CompanyList} options={{drawerLabel:'업체목록'}} />
+          
+//           <Drawer.Screen name="지정의뢰"   component={SelectRequest} options={{drawerLabel:''}} />
+//           <Drawer.Screen name="1대1문의보기"   component={OneView} options={{drawerLabel:''}} />
+//           <Drawer.Screen name="1대1문의쓰기"   component={OneWrite} options={{drawerLabel:''}} />
+//           <Drawer.Screen name="회사자세히보기" component = {ComLook} options={{drawerLabel:''}} />
+//           <Drawer.Screen name="이벤트자세히보기"  component = {EventToPage} options={{drawerLabel:''}} />
+//           <Drawer.Screen name="마이페이지"   component={Mypage} options={{drawerLabel:''}} />
+//           <Drawer.Screen name="견적테이블"   component={CurrentTable} options={{drawerLabel:''}} />
+//           <Drawer.Screen name="견적자세히보기"   component={CurrentPlus} options={{drawerLabel:''}} />
+//           <Drawer.Screen name="정보변경2"   component={InfoChange} options={{drawerLabel:''}} />
+//           <Drawer.Screen name="취약계층인증"   component={InjuryPath} options={{drawerLabel:''}} />
+
+//       </Drawer.Navigator>
+//       </NavigationContainer>
+//   );
+// };
 
 
 //----------------------------------------------------------
 
 
 
-export default DrawerNavigator;//App2
+export default App2;//App2
