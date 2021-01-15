@@ -26,7 +26,7 @@ const Banimg3 =require('./img/banner3.png')
 
 const Banner = ()=>{
   return(
-    <Swiper style={styles.wrapper} showsButtons={true}>
+    <Swiper style={styles.wrapper} showsButtons={true} autoplay={true}>
         <View style={styles.slide1}>
         <ImageBackground source={Banimg} style={styles.bannerimg}>
         </ImageBackground>
