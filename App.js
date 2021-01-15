@@ -114,7 +114,7 @@ const App =({  }) =>{
         <BestTwo></BestTwo>
         </View>
 
-        {/* 맨 아래 리뷰보기 */}
+        {/* 메인 하단의 리뷰보기 */}
         <REview></REview>
 
         </ScrollView>

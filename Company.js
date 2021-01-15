@@ -24,6 +24,9 @@ const comImg = require('./img/14.png')
 const comImg2 =require('./img/123.png')
 const maker = require('./img/main_marker.png')
 
+//prop(아무 변수이름)으로 App에서 Company를 생성할때 넣어준 값을 받아올 수 있다.
+//네비게이터로 화면을 넘겨올때 값을 받을 때는 route를 사용해야한다.
+
 const Company=(prop)=>{
     return(
       <View style={{marginLeft:15,marginTop:15}}>
