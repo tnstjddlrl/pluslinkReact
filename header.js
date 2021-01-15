@@ -106,7 +106,7 @@ const HeadHeder = () => {
             </TouchableOpacity>
             </View>
             
-            <TouchableOpacity onPress={() => navigation.navigate('로그인')}>
+            <TouchableOpacity>
             <View style={{left:chartWidth/1.8,top:50,width:75,height:35,backgroundColor:'#b84dff',
                   borderTopLeftRadius: 17,
                   borderTopRightRadius: 17,
