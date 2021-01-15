@@ -1,21 +1,10 @@
 import React,{useState,Component,useEffect} from "react";
 import {
-  SafeAreaView,
   ScrollView,
-  Text,
-  StyleSheet,
   View,
-  ImageBackground,
-  Animated,
-  useWindowDimensions,
-  AppRegistry,
   Dimensions,
-  Image,
   TouchableOpacity,
-  Button,
-  TextInput,
 } from "react-native";
-import { useIsDrawerOpen } from '@react-navigation/drawer';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -23,19 +12,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native';
-import CheckBox from '@react-native-community/checkbox';
 
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";
-
-import SigongBest from './Component2.js'
 import REquset from './Requset.js'
 import CurGyeon from './CurrentGyeon.js'
 import Login from './Login.js'
 
 import EventToPage from './Eventtopage.js'
 import Banner from './Banner.js'
-import styles from './styles.js'
 import Mmenu from './Mmenu.js'
 import REview from './Review.js'
 import Register from './register.js'
@@ -43,7 +28,6 @@ import Register from './register.js'
 import ComLook from './comlook.js'
 import Company from './Company.js'
 import EEvent from './eevent.js'
-import NaviMenu from "./NavigateD.js";
 import Mypage from "./mypage"
 import CurrentTable from "./currentTable.js";
 import CurrentPlus from "./currentPlus";
@@ -158,9 +142,6 @@ const testlogo = require('./img/logo.png')
 const Eimg =require('./img/e_banner01.jpg')
 const Eimg2 =require('./img/e_banner02.jpg')
 const Eimg3 =require('./img/e_banner03.jpg')
-
-
-
 
 //------------------------------------------------------------
 function App2() {
