@@ -24,7 +24,32 @@ const Mmenu = () =>{
   const [whoclicked,setWhoclicked] = useState('1');
   const puple = "rgba(164, 108, 209, 255)"
   const gray = "rgba(234, 234, 234, 255)"
+
+  const [color1,setColor1] = useState(puple)
+  const [color2,setColor2] = useState(gray)
+  const [color3,setColor3] = useState(gray)
+  const [color4,setColor4] = useState(gray)
+  const [color5,setColor5] = useState(gray)
+  const [color6,setColor6] = useState(gray)
+  const [color7,setColor7] = useState(gray)
+  const [color8,setColor8] = useState(gray)
+
+
+  function listTouch(){
+    setColor1(gray)
+    setColor2(gray)
+    setColor3(gray)
+    setColor4(gray)
+    setColor5(gray)
+    setColor6(gray)
+    setColor7(gray)
+    setColor8(gray)
+  }
+
+
     return(
+      <View>
+        <TouchableOpacity>
       <ScrollView
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
@@ -32,7 +57,7 @@ const Mmenu = () =>{
                       () => {console.log('Scrolling is End')}
                   }
               >
-                  <TouchableOpacity onPress={()=>setWhoclicked('1')}>
+                  <TouchableOpacity onPress={()=>{listTouch(),setColor1(puple)}}>
                   <View style = {
                     {
                       "alignItems": "flex-start"
@@ -48,7 +73,7 @@ const Mmenu = () =>{
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
-                    "borderColor": "rgba(164, 108, 209, 255)"
+                    "borderColor": color1
                   }
                 } >
                 <Text style = {
@@ -63,7 +88,7 @@ const Mmenu = () =>{
                 </View>
                 </TouchableOpacity>
   
-                <TouchableOpacity onPress={()=>setWhoclicked('2')}>
+                <TouchableOpacity onPress={()=>{listTouch(),setColor2(puple)}}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -79,7 +104,7 @@ const Mmenu = () =>{
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
-                    "borderColor": "rgba(234, 234, 234, 255)"
+                    "borderColor": color2
                   }
                 } >
                 <Text style = {
@@ -96,7 +121,7 @@ const Mmenu = () =>{
                 </TouchableOpacity>
   
                 
-                <TouchableOpacity onPress={()=>setWhoclicked('3')}>
+                <TouchableOpacity onPress={()=>{listTouch(),setColor3(puple)}}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -112,7 +137,7 @@ const Mmenu = () =>{
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
-                    "borderColor": "rgba(234, 234, 234, 255)"
+                    "borderColor": color3
                   }
                 } >
                 <Text style = {
@@ -128,7 +153,7 @@ const Mmenu = () =>{
                 </TouchableOpacity>
                 
 
-                <TouchableOpacity onPress={()=>setWhoclicked('4')}>
+                <TouchableOpacity onPress={()=>{listTouch(),setColor4(puple)}}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -144,7 +169,7 @@ const Mmenu = () =>{
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
-                    "borderColor": "rgba(234, 234, 234, 255)"
+                    "borderColor": color4
                   }
                 } >
                 <Text style = {
@@ -159,7 +184,7 @@ const Mmenu = () =>{
                 </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={()=>setWhoclicked('5')}>
+                <TouchableOpacity onPress={()=>{listTouch(),setColor5(puple)}}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -175,7 +200,7 @@ const Mmenu = () =>{
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
-                    "borderColor": "rgba(234, 234, 234, 255)"
+                    "borderColor": color5
                   }
                 } >
                 <Text style = {
@@ -191,7 +216,7 @@ const Mmenu = () =>{
                 </TouchableOpacity>
   
 
-                <TouchableOpacity onPress={()=>setWhoclicked('6')}>
+                <TouchableOpacity onPress={()=>{listTouch(),setColor6(puple)}}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -207,7 +232,7 @@ const Mmenu = () =>{
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
-                    "borderColor": "rgba(234, 234, 234, 255)"
+                    "borderColor": color6
                   }
                 } >
                 <Text style = {
@@ -223,7 +248,7 @@ const Mmenu = () =>{
                 </TouchableOpacity>
   
 
-                <TouchableOpacity onPress={()=>setWhoclicked('7')}>
+                <TouchableOpacity onPress={()=>{listTouch(),setColor7(puple)}}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -239,7 +264,7 @@ const Mmenu = () =>{
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
-                    "borderColor": "rgba(234, 234, 234, 255)"
+                    "borderColor": color7
                   }
                 } >
                 <Text style = {
@@ -255,7 +280,7 @@ const Mmenu = () =>{
                 </TouchableOpacity>
   
 
-                <TouchableOpacity onPress={()=>setWhoclicked('8')}>
+                <TouchableOpacity onPress={()=>{listTouch(),setColor8(puple)}}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -271,7 +296,7 @@ const Mmenu = () =>{
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
-                    "borderColor": "rgba(234, 234, 234, 255)"
+                    "borderColor": color8
                   }
                 } >
                 <Text style = {
@@ -288,6 +313,8 @@ const Mmenu = () =>{
                  
                   
               </ScrollView>
+              </TouchableOpacity>
+          </View>
     )
   }
   
