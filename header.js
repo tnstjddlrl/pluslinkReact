@@ -27,7 +27,7 @@ const ffimg =require('./img/b01.png')
 const ffimg2 =require('./img/b02.png')
 const ffimg3 =require('./img/b03.png')
 const ffimg4 =require('./img/b04.png')
-
+const arrow = require('./img/arrow02.png')
 
 const HeadHeder = () => {
     const navigation = useNavigation();
@@ -200,9 +200,12 @@ const HeadHeder = () => {
         </View>
           </ImageBackground>
 
-          <View style={{width:chartWidth, height:50,backgroundColor:'white'}}>
+           <TouchableOpacity onPress={()=>{navigation.navigate('업체목록'),setViewmenu(false)}}>
+          <View style={{width:chartWidth/1.45, height:50,backgroundColor:'white',flexDirection:'row',alignItems:'center'}}>
             <Text style={{margin:15,fontWeight:'bold',fontSize:15}}>업체목록</Text>
+            <Image source={arrow} style={{position:'absolute', right:10,}}></Image>
           </View>
+          </TouchableOpacity> 
 
 
         </View>

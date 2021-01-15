@@ -28,9 +28,9 @@ import { TextInput } from 'react-native-gesture-handler';
 const REquset = () => {
 
   const [select,setSelect] = useState(false)
-  const [subSelect,setSubselect] = useState(false)
+  
   const [listCate,SetlistCate] = useState("전기&조명") //카테고리
-  const [listPlus,setListPlus] = useState('전기') //세부카테고리
+  
   const [text, setText] = useState("기본주소");//주소용
 
   const [show, setShow] = React.useState(false);//modal용
@@ -39,6 +39,8 @@ const REquset = () => {
 
   const [value, onChangeText] = React.useState('');//상세내용
 
+  const [subSelect,setSubselect] = useState(false)
+  const [listPlus,setListPlus] = useState('전기') //세부카테고리
   const Subcate = ()=>{
     if(listCate=='전기&조명'){
       return(

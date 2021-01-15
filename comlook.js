@@ -36,6 +36,9 @@ const ffimg4 =require('./img/b04.png')
 //=========================업체 자세히보기=============================
 const ComLook=({route})=>{
     const navigation = useNavigation();
+
+    
+
     return(
       <View>
       <View style={{height:chartHeight}}>
