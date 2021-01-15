@@ -200,6 +200,10 @@ const HeadHeder = () => {
         </View>
           </ImageBackground>
 
+          <View style={{width:chartWidth, height:50,backgroundColor:'white'}}>
+            <Text style={{margin:15,fontWeight:'bold',fontSize:15}}>업체목록</Text>
+          </View>
+
 
         </View>
 
