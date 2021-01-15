@@ -172,7 +172,7 @@ const HeadHeder = () => {
             </View>
 
         <View style={{position:'absolute',bottom:0,flexDirection: 'row',}}>
-            <TouchableOpacity onPress={() => {logCheck('홈'),setViewmenu(false)}}>
+            <TouchableOpacity onPress={() => {navigation.navigate('홈'),setViewmenu(false)}}>
             <View>
               <ImageBackground source={ffimg} style={{width:65,height:65,}}>
               </ImageBackground>

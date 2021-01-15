@@ -57,6 +57,7 @@ import InfoChange from "./infoChange.js";
 import SelectRequest from "./selectRequest.js";
 import InjuryPath from "./injuryPath.js";
 import BestView from "./bestView.js"
+import BestTwo from "./bestTwo";
 
 
 
@@ -123,7 +124,7 @@ const App =({  }) =>{
        
         <EEvent></EEvent>
         <View>
-        <SigongBest></SigongBest>
+        <BestTwo></BestTwo>
         </View>
         <REview></REview>
 

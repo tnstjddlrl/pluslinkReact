@@ -4,7 +4,8 @@ import {
   Text,
   Image,
   ImageBackground,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from 'react-native';
 
 const chartHeight = Dimensions.get('window').height;
@@ -58,6 +59,9 @@ const SigongBest = () => {
       } > 우수시공사례 </Text>
       </View>
       </ImageBackground></View >
+
+
+      
       <View style = {
         {
           "alignItems": "flex-start",
@@ -129,6 +133,8 @@ const SigongBest = () => {
         }
       } > 울산 제2장애인 체육관 조명시공 </Text>
       </View>
+     
+
       <View style = {
         {
           "alignItems": "flex-start",

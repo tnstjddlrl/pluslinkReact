@@ -46,7 +46,7 @@ const FootTer = () => {
    
     <View style={{flex:1}}>
         <View style={{borderWidth:1,position:'absolute',bottom:0,flexDirection: 'row',}}>
-        <TouchableOpacity onPress={() => logCheck('홈')}>
+        <TouchableOpacity onPress={() => navigation.navigate('홈')}>
         <View style={{backgroundColor:'white'}}>
           <ImageBackground source={ffimg} style={{width:65,height:65,marginLeft:30}}>
           </ImageBackground>
