@@ -58,6 +58,8 @@ import SelectRequest from "./selectRequest.js";
 import InjuryPath from "./injuryPath.js";
 import BestView from "./bestView.js"
 import BestTwo from "./bestTwo";
+import PayManage from "./payManage.js";
+import ReviewManage from "./reviewManage.js";
 
 
 
@@ -225,6 +227,10 @@ function App2() {
           name="취약계층인증"   component={InjuryPath} />
           <Stack.Screen 
           name="베스트보기"   component={BestView} />
+          <Stack.Screen 
+          name="결제관리"   component={PayManage} />
+          <Stack.Screen 
+          name="리뷰관리"   component={ReviewManage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
