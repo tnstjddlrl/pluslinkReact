@@ -6,12 +6,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage'; //로그인한 아이디값 저장하기 위한 앱 내부 저장소
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native'; //네비게이션을 위한 도구들
 
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";
@@ -43,20 +43,15 @@ import InjuryPath from "./injuryPath.js";
 import BestView from "./bestView.js"
 import BestTwo from "./bestTwo";
 import PayManage from "./payManage.js";
-import ReviewManage from "./reviewManage.js";
+import ReviewManage from "./reviewManage.js"; //컴포넌트화 시킨 객체들
 
 
 
-const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator(); // 스택 네비게이터를 위한 변수
 
 const chartHeight = Dimensions.get('window').height;
-const chartWidth = Dimensions.get('window').width;
+const chartWidth = Dimensions.get('window').width; //현재 디바이스의 가로 세로 값을 가져온다.
 
-function isshwon(params) {
-  const [shown,setShown] = useState(false);
-  setShown(params)
-}
 
 
 
@@ -67,7 +62,7 @@ const App =({  }) =>{
       '@super:id',
       '로그인해주세요'
     );
-  }
+  } //초기 아이디 설정
 
   async function isFavorite() {
     try {
@@ -75,14 +70,14 @@ const App =({  }) =>{
     } catch (error) {
       return false;
     }
-  }
+  } //아이디값 가져오기
   
   useEffect(()=>{
     fetchUser()
     const result = isFavorite().then((company_id) => {
       console.log('새 : ',company_id);
     });
-  },[])
+  },[]) //위의 두 함수를 앱이 빌드될때 한번만 실행하게끔 useEffect를 걸어줬다. [] 안에 변수를 넣으면 변수의 값이 변경될때마다 useEffect가 리빌드된다.
 
   
   
@@ -97,9 +92,13 @@ const App =({  }) =>{
     <View>
       <View>
       <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor:'white'}}>
+        {/* 메인 맨 위 배너 */}
         <Banner></Banner>
+
+        {/* 중단 카테고리 메뉴 */}
         <Mmenu></Mmenu>
 
+        {/* 메인 업체 뷰 */}
         <TouchableOpacity onPress={()=>navigation.navigate('회사자세히보기',{name:'김업체'})}>
         <Company img={comImg} star='3.1' color='red' text='주방 수도, 인테리어 전문 업체입니다. 원하시는 디자인으로 깔끔하게 시공해드립니다.' addr='부산 남구'></Company>
         </TouchableOpacity>
@@ -107,11 +106,15 @@ const App =({  }) =>{
         <Company img={comImg2} star='3.8' color='blue' text='수도전문 동진설비입니다. 새로운 수도 설치 전문입니다!' addr='부산 사하구'></Company>
         </TouchableOpacity>
 
-       
+       {/* 이벤트 뷰 */}
         <EEvent></EEvent>
+
+        {/* 우수시공사례 */}
         <View>
         <BestTwo></BestTwo>
         </View>
+
+        {/* 맨 아래 리뷰보기 */}
         <REview></REview>
 
         </ScrollView>
@@ -143,10 +146,11 @@ const Eimg =require('./img/e_banner01.jpg')
 const Eimg2 =require('./img/e_banner02.jpg')
 const Eimg3 =require('./img/e_banner03.jpg')
 
-//------------------------------------------------------------
+//-------------------------스택 네비게이터를 위한 함수---------------------
 function App2() {
   
   return (
+    //실제론 앱이 빌드될때 전체 정보가 다 빌드된다. 하지만 맨 앞엔 홈이 자리잡고있기때문에 홈만 로딩된것 처럼 보인다.
     <NavigationContainer>
       <Stack.Navigator headerMode={"none"} mode='modal'>
         <Stack.Screen 
