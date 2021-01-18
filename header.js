@@ -207,6 +207,13 @@ const HeadHeder = () => {
           </View>
           </TouchableOpacity> 
 
+          <TouchableOpacity onPress={()=>{navigation.navigate('테스트'),setViewmenu(false)}}>
+          <View style={{width:chartWidth/1.45, height:50,backgroundColor:'white',flexDirection:'row',alignItems:'center'}}>
+            <Text style={{margin:15,fontWeight:'bold',fontSize:15}}>테스트</Text>
+            <Image source={arrow} style={{position:'absolute', right:10,}}></Image>
+          </View>
+          </TouchableOpacity>
+
 
         </View>
 
