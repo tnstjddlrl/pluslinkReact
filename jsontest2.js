@@ -18,32 +18,21 @@ const arrow = require('./img/arrow02.png')
 
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";
-import axios from "axios";
 
 import { useNavigation } from '@react-navigation/native';
 
-import arraydata from './json/g5_write_estimate'
+import axios from "axios";
 
-const JsonTest = () => {
-  const [list,setList]=useState([]);
-  const [testlist,setTestlist]=useState([]);
+const JsonTest2 = () => {
+  const [list,setList] = useState([]);
 
- 
-    // axios.get('http://ip0131.cafe24.com/pluslink/test.json').then((res)=>{
-      //setList(res.data);
-      // console.log('길이 : ',list.length)
-      // console.log(list[3].category)
-    // })
-     
- 
+  // for(var i = 0;i<100;i++){
+  // axios.get('http://ip0131.cafe24.com/pluslink/test.json').then((res)=>{
+  //   setList(res.data);
+  //   console.log(list)
+  // })}
 
-  GetJson().then((res) => {
-    if(res != false){
-    setList(res.data);
-    console.log(list)
-    }
-  });
-  DataTest
+
 
   async function GetJson() {
     try {
@@ -54,14 +43,24 @@ const JsonTest = () => {
     }
   } 
 
-
-  var output=[];
-  const DataTest = ()=>{
-    for(let i = 0; i <=list.length;i++){
-      output.push(<ListItem id={list[i].no} category={list[i].category} subcategory={list[i].subcategory}></ListItem>)
+  useEffect(()=>{
+    if(list.length==0){
+      GetJson().then((res)=>{
+      setList(res.data)
+      console.log(list)
+      })
     }
-    console.log(output)
-    return output
+  })
+  
+
+  var List = []
+
+  const Test = ()=>{
+    for(let i = 0;i<list.length;i++){
+      List.push(<ListItem id={list[i].no} category={list[i].category} subcategory={list[i].subcategory}></ListItem>)
+    }
+    
+    return List
   }
 
   const ListItem = (prop) =>{
@@ -74,6 +73,7 @@ const JsonTest = () => {
     )
   }
 
+
   return(
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
@@ -82,15 +82,9 @@ const JsonTest = () => {
                       <View style={{width:chartWidth,marginTop:50}}>
                         <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
                         </ImageBackground>
-                        <Text style={{position:'absolute',color:"white",fontSize:20,fontWeight:'bold',top:40,left:10}}>테스트</Text>
+                        <Text style={{position:'absolute',color:"white",fontSize:20,fontWeight:'bold',top:40,left:10}}>1대1문의</Text>
                       </View>
-
-            {/* <Text key={list.no}>{list.category} : {list.subcategory}</Text> */}
-            {/* <DataTest></DataTest> */}
-            {/* <ListItem id={list[3].no} category={list[3].category} subcategory={list[3].subcategory}></ListItem> */}
-            
-            {/* <Text>{list[53].no}</Text> */}
-           
+              {list.length == 0 ? <View></View> : <Test></Test>}
 
           </View>
         </ScrollView>
@@ -103,11 +97,4 @@ const JsonTest = () => {
   )
 }
 
-
-
-
-
-
-
-
-export default JsonTest;
+export default JsonTest2;
