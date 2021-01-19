@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {
   View,
   Text,
@@ -20,11 +20,67 @@ import { useNavigation } from '@react-navigation/native';
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";
 import { ScrollView } from 'react-native-gesture-handler';
+import axios from 'axios'
+
+const ItemPush = () =>{
+    var List = []
+    var middle = []
+    const [list,setList]=useState([])
+
+    async function GetJson() {
+        try {
+          return await axios.get('http://ip0131.cafe24.com/pluslink/g5_estimate_write.json');
+        } catch (error) {
+          console.log('에러 : ',error)
+          return false;
+        }
+      } 
+      
+      useEffect(()=>{
+            if(list.length==0){
+                GetJson().then((res)=>{
+                setList(res.data)
+                console.log('리스트값',list)
+                
+                })
+          }
+      
+      })
+
+    if(list.length != 0){
+        console.log(list.length)
+        for(let i = 0; i <list.length;i++){
+              // if(list[i].mb_id=='test'){
+              //     var nDate = list[i].wr_datetime
+              //     nDate = nDate.substring(5,9)
+              //     console.log(nDate)
+              //     date={nDate}
+              // }
+
+            List.push(<TableItem cate={list[i].wr_1} subcate={list[i].wr_2} content={list[i].wr_content} state={list[i].wr_8} button={list[i].wr_name}></TableItem>)
+          }
+        //return <Text>{list[0].wr_3}</Text>
+    }
+    return List
+    
+}
+
+
 
 const CurrentTable =({route}) =>{
+    
     const navigation = useNavigation();
     const [select, setSelect] = useState(false)
     const [listCate,SetlistCate] = useState(route.params.name)
+
+    
+      
+
+
+   
+
+
+
 
     return(
         <View>
@@ -64,14 +120,8 @@ const CurrentTable =({route}) =>{
                         <View style={{width:chartWidth-20,borderWidth:1,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
 
                         
-                        <TableItem></TableItem>
-                        <TableItem></TableItem>
-                        <TableItem></TableItem>
-                        <TableItem></TableItem>
-                        <TableItem></TableItem>
-                        <TableItem></TableItem>
-                        <TableItem></TableItem>
-                        <TableItem></TableItem>
+
+                        <ItemPush></ItemPush>
 
                         
                     </View>
@@ -124,7 +174,7 @@ const CurrentTable =({route}) =>{
     )
 }
 
-const TableItem = () => {
+const TableItem = (prop) => {
     const navigation = useNavigation();
     return(
                         <View>
@@ -146,5 +196,9 @@ const TableItem = () => {
                         </View>
     )
 }
+
+
+
+
 
 export default CurrentTable;
