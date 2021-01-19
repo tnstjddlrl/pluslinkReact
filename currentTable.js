@@ -50,16 +50,17 @@ const ItemPush = () =>{
     if(list.length != 0){
         console.log(list.length)
         for(let i = 0; i <list.length;i++){
-              // if(list[i].mb_id=='test'){
-              //     var nDate = list[i].wr_datetime
-              //     nDate = nDate.substring(5,9)
-              //     console.log(nDate)
-              //     date={nDate}
-              // }
+              if(list[i].mb_id=='test'){
+                  var nDate = list[i].wr_datetime
+                  nDate = nDate.substring(5,10)
+                  console.log(nDate)
+                  
+                  List.push(<TableItem date={nDate} cate={list[i].wr_1} subcate={list[i].wr_2} content={list[i].wr_content} state={list[i].wr_8} button={list[i].wr_name}></TableItem>)
+              }
 
-            List.push(<TableItem cate={list[i].wr_1} subcate={list[i].wr_2} content={list[i].wr_content} state={list[i].wr_8} button={list[i].wr_name}></TableItem>)
+            
           }
-        //return <Text>{list[0].wr_3}</Text>
+        
     }
     return List
     
@@ -180,12 +181,12 @@ const TableItem = (prop) => {
                         <View>
                         <View style={{flex:1,flexDirection:'row'}}>
                             <View style={{alignItems:'center',left:'35%'}}>
-                                <Text>12.16</Text>
+                                <Text>{prop.date}</Text>
                                 <Text>{prop.state}</Text>
                             </View>
                             <Text style={{width:35,marginLeft:'7%'}}>{prop.cate}</Text>
                             <Text style={{width:40,marginLeft:'10%'}}>{prop.subcate}</Text>
-                            <Text style={{width:120,marginLeft:'5%'}}>{prop.content}</Text>
+                            <Text style={{width:120,marginLeft:'5%'}} numberOfLines={2}>{prop.content}</Text>
                             <TouchableOpacity onPress={()=>navigation.navigate('견적자세히보기')}>
                             <View style={{width:45,height:30,backgroundColor:'gray',marginLeft:'10%',alignItems:'center'}}>
                                 <Text style={{color:'white',marginTop:7}}>보기</Text>
