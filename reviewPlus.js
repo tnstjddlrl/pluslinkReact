@@ -53,7 +53,7 @@ const ReviewPlus = ({route}) =>{
       }
     }
     if(list.length!=0){
-    List.push(<TotalView num={list[Number(aim)].wr_id} subj={list[Number(aim)].wr_8} cate={list[Number(aim)].wr_1} subcate={list[Number(aim)].wr_2} date={list[Number(aim)].wr_datetime} addr={list[Number(aim)].wr_4+ ' ' +list[Number(aim)].wr_5}></TotalView>)
+    List.push(<TotalView num={list[Number(aim)].wr_id} subj={list[Number(aim)].wr_8} cate={list[Number(aim)].wr_1} subcate={list[Number(aim)].wr_2} date={list[Number(aim)].wr_datetime} addr={list[Number(aim)].wr_4+ ' ' +list[Number(aim)].wr_5} content={list[Number(aim)].wr_content}></TotalView>)
     }
     return(
       List
@@ -102,7 +102,7 @@ const TotalView = (prop) => {
                 <View style={{marginTop:15,marginLeft:15}}>
                   <Text style={{fontSize:16}}>상세내용</Text>
                   <View style={{borderWidth:0.5,borderColor:'gray',marginTop:15,marginBottom:15,marginRight:15}}>
-                    <Text style={{margin:10}}></Text>
+                    <Text style={{margin:10}}>{prop.content}</Text>
                   </View>
                 </View>
 

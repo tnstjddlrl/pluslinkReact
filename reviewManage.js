@@ -83,7 +83,7 @@ const ReviewManage = () => {
       if(list[i].mb_id=newid.toLowerCase()){
         for(var j =0;j<memberList.length;j++){
           if(list[i].wr_2==memberList[j].mb_id){
-            List.push(<ListItem date={list[i].wr_datetime} content={list[i].wr_content} id={memberList[j].mb_name} detail={list[i].wr_1}></ListItem>)
+            List.push(<ListItem date={list[i].wr_datetime} content={list[i].wr_content} id={memberList[j].mb_name} detail={list[i].wr_id}></ListItem>)
           }
         }
        
