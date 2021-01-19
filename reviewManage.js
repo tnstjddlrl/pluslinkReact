@@ -83,7 +83,7 @@ const ReviewManage = () => {
       if(list[i].mb_id=newid.toLowerCase()){
         for(var j =0;j<memberList.length;j++){
           if(list[i].wr_2==memberList[j].mb_id){
-            List.push(<ListItem date={list[i].wr_datetime} content={list[i].wr_content} id={memberList[j].mb_name}></ListItem>)
+            List.push(<ListItem date={list[i].wr_datetime} content={list[i].wr_content} id={memberList[j].mb_name} detail={list[i].wr_1}></ListItem>)
           }
         }
        
@@ -94,6 +94,9 @@ const ReviewManage = () => {
   }
 
   const ListItem = (prop) =>{
+    const navigation = useNavigation();
+
+    
     return(
       <View style={{borderWidth:0.6,borderColor:'gray',borderRadius:17,marginTop:10}}>
                   <View style={{flexDirection:'row',alignItems:'center',width:chartWidth/1.15,margin:15}}>
@@ -108,7 +111,7 @@ const ReviewManage = () => {
                   </View>
                     <Text style={{marginLeft:10,marginRight:10}} numberOfLines={3}>{prop.content}</Text>
                   <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={()=>navigation.navigate('견적자세히보기', {parant : prop.detail})}>
                     <View style={{height:25,backgroundColor:'black',margin:10,borderRadius:5}}>
                       <Text style={{color:'white',alignSelf:'center',margin:3}}>견적서보기</Text>
                     </View>
