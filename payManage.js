@@ -22,6 +22,9 @@ import HeadHeder from "./header.js";
 import { useNavigation } from '@react-navigation/native';
 
 const PayManage = () => {
+  
+
+
   return(
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>

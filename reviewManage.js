@@ -40,11 +40,20 @@ const ReviewManage = () => {
 
 
   const [list,setList] = useState([]);
-  
+  const [memberList,setMemberList] = useState([]);
 
   async function GetJson() {
     try {
       return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_write_review.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
+  } 
+
+  async function GetMember() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_member.json');
     } catch (error) {
       console.log('에러 : ',error)
       return false;
@@ -58,7 +67,13 @@ const ReviewManage = () => {
       console.log(list)
       })
     }
-    
+    if(memberList.length==0){
+      GetMember().then((res)=>{
+        setMemberList(res.data)
+        console.log(memberList)
+        })
+    }
+
   })
 
   var List = []
@@ -66,7 +81,12 @@ const ReviewManage = () => {
   const ItemPush = ()=>{
     for(let i = 0;i<list.length;i++){
       if(list[i].mb_id=newid.toLowerCase()){
-        List.push(<ListItem date={list[i].wr_datetime} content={list[i].wr_content} id={list[i].wr_2}></ListItem>)
+        for(var j =0;j<memberList.length;j++){
+          if(list[i].wr_2==memberList[j].mb_id){
+            List.push(<ListItem date={list[i].wr_datetime} content={list[i].wr_content} id={memberList[j].mb_name}></ListItem>)
+          }
+        }
+       
       }
     }
     
@@ -88,9 +108,11 @@ const ReviewManage = () => {
                   </View>
                     <Text style={{marginLeft:10,marginRight:10}} numberOfLines={3}>{prop.content}</Text>
                   <View style={{flexDirection:'row',alignItems:'center'}}>
+                    <TouchableOpacity>
                     <View style={{height:25,backgroundColor:'black',margin:10,borderRadius:5}}>
                       <Text style={{color:'white',alignSelf:'center',margin:3}}>견적서보기</Text>
                     </View>
+                    </TouchableOpacity>
                     <Text style={{position:'absolute', right:15}}>{prop.date}</Text>
                   </View>
                 </View>

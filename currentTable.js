@@ -41,8 +41,8 @@ const ItemPush = () =>{
 
 
     var List = []
-    var middle = []
     const [list,setList]=useState([])
+    
 
     async function GetJson() {
         try {
@@ -51,31 +51,60 @@ const ItemPush = () =>{
           console.log('에러 : ',error)
           return false;
         }
-      } 
-      
+      }
+
+      async function GetMember() {
+        try {
+            console.log('겟멤버 작동됨')
+          return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_member.json');
+        } catch (error) {
+          console.log('에러 : ',error)
+          return false;
+        }
+      }
+
+      const [memberList,setMemberList] = useState([]);
       useEffect(()=>{
-            if(list.length==0){
-                GetJson().then((res)=>{
-                setList(res.data)
-                console.log('리스트값',list)
-                
-                })
+        if(memberList.length==0){
+            console.log('작동테스트')
+          GetMember().then((res)=>{
+            setMemberList(res.data)
+            })
+        }
+        if(list.length==0){
+            GetJson().then((res)=>{
+            setList(res.data)
+            console.log(list)
+            })
           }
-      
       })
 
-    if(list.length != 0){
+      
+
+    if(list.length != 0 && memberList.length != 0){
         console.log(list.length)
+        console.log(memberList[0].wr_id)
+        console.log(memberList.length)
         for(let i = 0; i <list.length;i++){
               if(list[i].mb_id==newid.toLowerCase()){
                   var nDate = list[i].wr_datetime
                   var fDate = nDate.substring(0,10)
                   nDate = nDate.substring(5,10)
-                  console.log(nDate)
                   var addr = list[i].wr_4 +' '+ list[i].wr_5
-
+                  if(list[i].wr_subject == '지정견적'){
+                      
+                    for(var j=0;j<memberList.length;j++){
+                        console.log('업체아이디 : ' , list[i].wr_9,'   ', memberList[j].mb_id)
+                        if(list[i].wr_9==memberList[j].mb_id){
+                            console.log('지정견적')
+                            var comname = memberList[j].mb_name
+                            console.log('업체이름',comname)
+                        }
+                    }
+                }
+                    
                   
-                  List.push(<TableItem num={list[i].wr_id} date={nDate} fdate={fDate} cate={list[i].wr_1} subcate={list[i].wr_2} content={list[i].wr_content} state={list[i].wr_8} addr={addr} subj={list[i].wr_subject} com={list[i].wr_9}></TableItem>)
+                  List.push(<TableItem num={list[i].wr_id} date={nDate} fdate={fDate} cate={list[i].wr_1} subcate={list[i].wr_2} content={list[i].wr_content} state={list[i].wr_8} addr={addr} subj={list[i].wr_subject} com={comname}></TableItem>)
               }
 
             
