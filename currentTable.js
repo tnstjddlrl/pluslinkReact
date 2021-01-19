@@ -52,10 +52,13 @@ const ItemPush = () =>{
         for(let i = 0; i <list.length;i++){
               if(list[i].mb_id=='test'){
                   var nDate = list[i].wr_datetime
+                  var fDate = nDate.substring(0,10)
                   nDate = nDate.substring(5,10)
                   console.log(nDate)
+                  var addr = list[i].wr_4 +' '+ list[i].wr_5
+
                   
-                  List.push(<TableItem date={nDate} cate={list[i].wr_1} subcate={list[i].wr_2} content={list[i].wr_content} state={list[i].wr_8} button={list[i].wr_name}></TableItem>)
+                  List.push(<TableItem num={list[i].wr_id} date={nDate} fdate={fDate} cate={list[i].wr_1} subcate={list[i].wr_2} content={list[i].wr_content} state={list[i].wr_8} addr={addr} subj={list[i].wr_subject} com={list[i].wr_name}></TableItem>)
               }
 
             
@@ -67,20 +70,36 @@ const ItemPush = () =>{
 }
 
 
+const TableItem = (prop) => {
+    const navigation = useNavigation();
+    return(
+                        <View>
+                        <View style={{flex:1,flexDirection:'row'}}>
+                            <View style={{alignItems:'center',left:'35%'}}>
+                                <Text>{prop.date}</Text>
+                                <Text>{prop.state}</Text>
+                            </View>
+                            <Text style={{width:35,marginLeft:'7%'}}>{prop.cate}</Text>
+                            <Text style={{width:40,marginLeft:'10%'}}>{prop.subcate}</Text>
+                            <Text style={{width:120,marginLeft:'5%'}} numberOfLines={2}>{prop.content}</Text>
+                            <TouchableOpacity onPress={()=>navigation.navigate('견적자세히보기',{num:prop.num, date:prop.date, fdate:prop.fdate, cate:prop.cate, subcate:prop.subcate, content:prop.content, state:prop.state, addr:prop.addr, subj:prop.subj,com:prop.com})}>
+                            <View style={{width:45,height:30,backgroundColor:'gray',marginLeft:'10%',alignItems:'center'}}>
+                                <Text style={{color:'white',marginTop:7}}>보기</Text>
+                            </View>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{width:chartWidth-20,borderWidth:1,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
+                        </View>
+    )
+}
+
+
 
 const CurrentTable =({route}) =>{
     
     const navigation = useNavigation();
     const [select, setSelect] = useState(false)
     const [listCate,SetlistCate] = useState(route.params.name)
-
-    
-      
-
-
-   
-
-
 
 
     return(
@@ -175,28 +194,7 @@ const CurrentTable =({route}) =>{
     )
 }
 
-const TableItem = (prop) => {
-    const navigation = useNavigation();
-    return(
-                        <View>
-                        <View style={{flex:1,flexDirection:'row'}}>
-                            <View style={{alignItems:'center',left:'35%'}}>
-                                <Text>{prop.date}</Text>
-                                <Text>{prop.state}</Text>
-                            </View>
-                            <Text style={{width:35,marginLeft:'7%'}}>{prop.cate}</Text>
-                            <Text style={{width:40,marginLeft:'10%'}}>{prop.subcate}</Text>
-                            <Text style={{width:120,marginLeft:'5%'}} numberOfLines={2}>{prop.content}</Text>
-                            <TouchableOpacity onPress={()=>navigation.navigate('견적자세히보기')}>
-                            <View style={{width:45,height:30,backgroundColor:'gray',marginLeft:'10%',alignItems:'center'}}>
-                                <Text style={{color:'white',marginTop:7}}>보기</Text>
-                            </View>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{width:chartWidth-20,borderWidth:1,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
-                        </View>
-    )
-}
+
 
 
 

@@ -23,7 +23,7 @@ import HeadHeder from "./header.js";
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 
 
-const CurrentPlus = () =>{
+const CurrentPlus = ({route}) =>{
   return(
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
@@ -46,18 +46,19 @@ const CurrentPlus = () =>{
             <View style={{width:chartWidth-30,height:300,backgroundColor:'#e6e6e6',}}>
               <View style={{backgroundColor:'white', width:chartWidth-60,marginLeft:15,marginTop:15}}>
                 
-                <PlusItem name='견적번호' num='57'></PlusItem>
-                <PlusItem name='상태' num='견적취소'></PlusItem>
-                <PlusItem name='카테고리' num='수도'></PlusItem>
-                <PlusItem name='세부항목' num='동파'></PlusItem>
-                <PlusItem name='요청날짜' num='2020-12-15'></PlusItem>
-                <PlusItem name='시공주소' num='테스트 주소입니다10-1'></PlusItem>
+                <PlusItem name='견적번호' num={route.params.num}></PlusItem>
+                <PlusItem name='상태' num={route.params.state}></PlusItem>
+                {route.params.subj == '지정견적' ? <PlusItem name='지정업체' num={route.params.com}></PlusItem> : <View></View>}
+                <PlusItem name='카테고리' num={route.params.cate}></PlusItem>
+                <PlusItem name='세부항목' num={route.params.subcate}></PlusItem>
+                <PlusItem name='요청날짜' num={route.params.fdate}></PlusItem>
+                <PlusItem name='시공주소' num={route.params.addr}></PlusItem>
 
 
                 <View style={{marginTop:15,marginLeft:15}}>
                   <Text style={{fontSize:16}}>상세내용</Text>
-                  <View style={{borderWidth:0.5,borderColor:'gray',marginTop:15,marginBottom:15}}>
-                    <Text style={{margin:10}}>상세 내용 테스트입니다.</Text>
+                  <View style={{borderWidth:0.5,borderColor:'gray',marginTop:15,marginBottom:15,marginRight:15}}>
+                    <Text style={{margin:10}}>{route.params.content}</Text>
                   </View>
                 </View>
 
@@ -87,8 +88,8 @@ const PlusItem = (prop) =>{
   return(
     <View>
                <View style={{flexDirection:'row',marginTop:15,marginLeft:15}}>
-                  <Text style={{fontSize:16}}>{prop.name}</Text>
-                  <Text style={{position:'absolute', left:150}}>{prop.num}</Text>
+                  <Text style={{fontSize:16,width:80 }}>{prop.name}</Text>
+                  <Text style={{ left:50,width:170}}>{prop.num}</Text>
                 </View>
                 <View style={{width:chartWidth-60,borderWidth:0.5,borderColor:'#b3b3b3',marginTop:10}}></View>
     </View>
