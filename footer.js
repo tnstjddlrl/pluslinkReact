@@ -28,9 +28,12 @@ const FootTer = () => {
       }
     }
     
+    useEffect(()=>{
       const result = isFavorite().then((company_id) => {
         setNewid(company_id)
       });
+    })
+      
 
 
   function logCheck(prop){

@@ -21,8 +21,25 @@ import FootTer from './footer.js'
 import HeadHeder from "./header.js";
 import { ScrollView } from 'react-native-gesture-handler';
 import axios from 'axios'
+import AsyncStorage from '@react-native-community/async-storage';
 
 const ItemPush = () =>{
+
+    const [newid,setNewid] = useState('');
+  
+    async function isFavorite() {
+      try {
+        return await AsyncStorage.getItem("@super:id");
+      } catch (error) {
+        return false;
+      }
+    }
+    
+      const result = isFavorite().then((company_id) => {
+        setNewid(company_id)
+      });
+
+
     var List = []
     var middle = []
     const [list,setList]=useState([])
@@ -50,7 +67,7 @@ const ItemPush = () =>{
     if(list.length != 0){
         console.log(list.length)
         for(let i = 0; i <list.length;i++){
-              if(list[i].mb_id=='test'){
+              if(list[i].mb_id==newid.toLowerCase()){
                   var nDate = list[i].wr_datetime
                   var fDate = nDate.substring(0,10)
                   nDate = nDate.substring(5,10)
@@ -58,7 +75,7 @@ const ItemPush = () =>{
                   var addr = list[i].wr_4 +' '+ list[i].wr_5
 
                   
-                  List.push(<TableItem num={list[i].wr_id} date={nDate} fdate={fDate} cate={list[i].wr_1} subcate={list[i].wr_2} content={list[i].wr_content} state={list[i].wr_8} addr={addr} subj={list[i].wr_subject} com={list[i].wr_name}></TableItem>)
+                  List.push(<TableItem num={list[i].wr_id} date={nDate} fdate={fDate} cate={list[i].wr_1} subcate={list[i].wr_2} content={list[i].wr_content} state={list[i].wr_8} addr={addr} subj={list[i].wr_subject} com={list[i].wr_9}></TableItem>)
               }
 
             
