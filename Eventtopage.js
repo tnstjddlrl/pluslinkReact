@@ -1,91 +1,98 @@
-import React,{useState,Component,useEffect} from "react";
+//베이스 코드들 모음. 새로운 페이지 생성시 복사하여 사용하는 코드. 아무런 기능 없이 헤더와 푸터 상단 이미지뷰만 있다.
+
+import React, { useState,useEffect } from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  StyleSheet,
   View,
+  Text,
   ImageBackground,
-  Animated,
-  useWindowDimensions,
-  AppRegistry,
   Dimensions,
-  Image,
   TouchableOpacity,
-  Button,
-  TextInput,
-} from "react-native";
+  Image,
+  ScrollView
+} from 'react-native';
+
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
 
-//========================이벤트 자세히보기==============================
-const gif = require('./img/eventBg.jpg')
-const event_1 = require('./img/event_1.jpg')
-const EventToPage= ({navigation}) => {
-  return (
-    <View style = {
-      {
-        "alignItems": "flex-start"
-      }
-    } >
-    <ImageBackground style = {
-      {
-        "width": 412,
-        "height": 125
-      }
-    }
-    source = {gif
-    } >
-    <View style = {
-      {
-        "alignItems": "flex-start",
-        "paddingStart": 15,
-        "paddingTop": 48,
-        "flex": 1
-      }
-    } >
-    <Text style = {
-      {
-        "fontWeight": "bold",
-        "fontSize": 18,
-        "color": "rgba(255, 255, 255, 255)"
-      }
-    } > 이벤트 </Text>
-    <View style = {
-      {
-        "marginStart": 0.5,
-        "marginTop": 5.5,
-        "backgroundColor": "rgba(255, 255, 255, 255)",
-        "width": 54,
-        "height": 2
-      }
-    }
-    />
-    </View>
-    </ImageBackground><Text style={{"fontWeight":"bold","fontSize":18,"color":"rgba(0, 0, 0, 255)","marginStart":15,"marginTop":12}}>[테스트]인테리어 이벤트 테스트!</Text >
-    <Image style = {
-      {
-        "marginStart": 46,
-        "marginTop": 17,
-        "width": 320,
-        "height": 209
-      }
-    }
-    source = {event_1
-    }
-    />
-    <Text style = {
-      {
-        "fontWeight": "300",
-        "fontSize": 15,
-        "color": "rgba(0, 0, 0, 255)",
-        "marginStart": 15,
-        "marginTop": 20
-      }
-    } > 내용입니다. </Text>
-    </View>
+const event = require('./img/eventBg.jpg')
+const arrow = require('./img/arrow02.png')
 
-  );
-};
+import FootTer from './footer.js'
+import HeadHeder from "./header.js";
+
+import { useNavigation } from '@react-navigation/native';
+import axios from "axios";
+
+const EventToPage = ({route}) => {
+  const [Elist,setElist] = useState([])
+  const [target,setTarget] = useState(0)
+  async function GetJson() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_write_event.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
+  }
+
+  useEffect(()=>{
+    if(Elist.length==0){
+      GetJson().then((res)=>{
+        setElist(res.data)
+      })
+    }
+  })
+
+  var List = []
+  const PushItem = () =>{
+    if(Elist.length!=0){
+      for(var i = 0; i<Elist.length; i++){
+        if(Elist[i].wr_id==route.params.id){
+          setTarget(i)
+        }
+      }
+      List.push(<Item subj={Elist[target].wr_subject} content={Elist[target].wr_content} img={Elist[target].as_thumb}></Item>)
+  }
+    return List
+  }
+
+
+
+  return(
+    <View>
+      <View style={{height:chartHeight,width:chartWidth}}>
+        <ScrollView>
+          <View style={{marginBottom:500}}>
+                      <View style={{width:chartWidth,marginTop:50}}>
+                        <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
+                        </ImageBackground>
+                        <Text style={{position:'absolute',color:"white",fontSize:20,fontWeight:'bold',top:40,left:10}}>이벤트</Text>
+                      </View>
+                
+              <PushItem></PushItem>
+
+          </View>
+        </ScrollView>
+      </View>
+
+      <HeadHeder></HeadHeder>
+      <FootTer></FootTer>
+
+    </View>
+  )
+}
+
+const Item = (prop) =>{
+  const image = {uri: prop.img}
+  return(
+    <View>
+      <Text style={{fontSize:21,fontWeight:'bold',marginTop:35,marginLeft:15}}>{prop.subj}</Text>
+        <View style={{width:chartWidth-50,height:200,backgroundColor:'gray',marginLeft:25,marginTop:20}}>
+          <Image source={image} style={{width:chartWidth-50,height:200}}></Image>
+        </View>
+       <Text style={{marginTop:15,marginLeft:15}}>{prop.content}</Text>
+    </View>
+  )
+}
 
 export default EventToPage;

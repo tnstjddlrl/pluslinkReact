@@ -26,6 +26,7 @@ import axios from "axios";
 const ReviewPlus = ({route}) =>{
   const [list,setList] = useState([]);
   const [aim,setAim] = useState('');
+  
   async function GetJson() {
     try {
       return await axios.get('http://ip0131.cafe24.com/pluslink/g5_estimate_write.json');

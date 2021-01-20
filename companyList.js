@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -20,6 +20,8 @@ import FootTer from './footer.js'
 import HeadHeder from "./header.js";
 
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
+import axios from "axios";
 
 const heart = require('./img/handhart.png')
 const starimg =require('./img/review.png')
@@ -29,12 +31,15 @@ const CompanyList = () => {
   const [listCate,SetlistCate] = useState("전기&조명")
 
   const [subSelect,setSubselect] = useState(false)
-  const [listPlus,setListPlus] = useState('전기') //세부카테고리
+  const [listPlus,setListPlus] = useState('전체') //세부카테고리
   const Subcate = ()=>{
     if(listCate=='전기&조명'){
       return(
         <Modal  transparent={true} visible={subSelect}>
                     <View style={{width:chartWidth-30, position:'absolute',backgroundColor:'white',borderWidth:0.5,left:15,top:300}}>
+                        <TouchableOpacity onPress={()=>{setListPlus('전체'),setSubselect(false)}}>
+                        <Text style={{left:5,marginTop:5}}>전체</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={()=>{setListPlus('전기'),setSubselect(false)}}>
                         <Text style={{left:5,marginTop:5}}>전기</Text>
                         </TouchableOpacity>
@@ -67,6 +72,9 @@ const CompanyList = () => {
       return(
         <Modal  transparent={true} visible={subSelect}>
                     <View style={{width:chartWidth-30, position:'absolute',backgroundColor:'white',borderWidth:0.5,left:15,top:300}}>
+                    <TouchableOpacity onPress={()=>{setListPlus('전체'),setSubselect(false)}}>
+                        <Text style={{left:5,marginTop:5}}>전체</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={()=>{setListPlus('상하수도'),setSubselect(false)}}>
                         <Text style={{left:5,marginTop:5}}>상하수도</Text>
                         </TouchableOpacity>
@@ -96,6 +104,9 @@ const CompanyList = () => {
       return(
         <Modal  transparent={true} visible={subSelect}>
                     <View style={{width:chartWidth-30, position:'absolute',backgroundColor:'white',borderWidth:0.5,left:15,top:300}}>
+                    <TouchableOpacity onPress={()=>{setListPlus('전체'),setSubselect(false)}}>
+                        <Text style={{left:5,marginTop:5}}>전체</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={()=>{setListPlus('도배'),setSubselect(false)}}>
                         <Text style={{left:5,marginTop:5}}>도배</Text>
                         </TouchableOpacity>
@@ -122,6 +133,9 @@ const CompanyList = () => {
       return(
         <Modal  transparent={true} visible={subSelect}>
                     <View style={{width:chartWidth-30, position:'absolute',backgroundColor:'white',borderWidth:0.5,left:15,top:300}}>
+                    <TouchableOpacity onPress={()=>{setListPlus('전체'),setSubselect(false)}}>
+                        <Text style={{left:5,marginTop:5}}>전체</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={()=>{setListPlus('화장실 리모델링'),setSubselect(false)}}>
                         <Text style={{left:5,marginTop:5}}>화장실 리모델링</Text>
                         </TouchableOpacity>
@@ -138,6 +152,9 @@ const CompanyList = () => {
       return(
         <Modal  transparent={true} visible={subSelect}>
                     <View style={{width:chartWidth-30, position:'absolute',backgroundColor:'white',borderWidth:0.5,left:15,top:300}}>
+                    <TouchableOpacity onPress={()=>{setListPlus('전체'),setSubselect(false)}}>
+                        <Text style={{left:5,marginTop:5}}>전체</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={()=>{setListPlus('샷시'),setSubselect(false)}}>
                         <Text style={{left:5,marginTop:5}}>샷시</Text>
                         </TouchableOpacity>
@@ -151,6 +168,9 @@ const CompanyList = () => {
       return(
         <Modal  transparent={true} visible={subSelect}>
                     <View style={{width:chartWidth-30, position:'absolute',backgroundColor:'white',borderWidth:0.5,left:15,top:300}}>
+                    <TouchableOpacity onPress={()=>{setListPlus('전체'),setSubselect(false)}}>
+                        <Text style={{left:5,marginTop:5}}>전체</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={()=>{setListPlus('입주청소'),setSubselect(false)}}>
                         <Text style={{left:5,marginTop:5}}>입주청소</Text>
                         </TouchableOpacity>
@@ -183,6 +203,9 @@ const CompanyList = () => {
       return(
         <Modal  transparent={true} visible={subSelect}>
                     <View style={{width:chartWidth-30, position:'absolute',backgroundColor:'white',borderWidth:0.5,left:15,top:300}}>
+                    <TouchableOpacity onPress={()=>{setListPlus('전체'),setSubselect(false)}}>
+                        <Text style={{left:5,marginTop:5}}>전체</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={()=>{setListPlus('보일러'),setSubselect(false)}}>
                         <Text style={{left:5,marginTop:5}}>보일러</Text>
                         </TouchableOpacity>
@@ -196,6 +219,9 @@ const CompanyList = () => {
       return(
         <Modal  transparent={true} visible={subSelect}>
                     <View style={{width:chartWidth-30, position:'absolute',backgroundColor:'white',borderWidth:0.5,left:15,top:300}}>
+                    <TouchableOpacity onPress={()=>{setListPlus('전체'),setSubselect(false)}}>
+                        <Text style={{left:5,marginTop:5}}>전체</Text>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={()=>{setListPlus('외벽크랙'),setSubselect(false)}}>
                         <Text style={{left:5,marginTop:5}}>외벽크랙</Text>
                         </TouchableOpacity>
@@ -226,6 +252,48 @@ const CompanyList = () => {
       )
     }
   }
+  
+  async function GetExpertise() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/expertise.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
+  }
+  async function GetPatners() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/partners.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
+  } 
+
+  const [patners,setPatners]=useState([])
+  const [expertise,setExpertise]=useState([])
+  useEffect(()=>{
+    if(expertise.length==0){
+      GetExpertise().then((res)=>{
+      setPatners(res.data)
+      })
+    }
+    if(patners.length==0){
+      GetPatners().then((res)=>{
+      setExpertise(res.data)
+      })
+    }
+  })
+  var List = []
+  const PushItem = () =>{
+    
+
+    return List
+  }
+
+
+
+
 
   return(
     <View>
@@ -312,7 +380,7 @@ const CompanyList = () => {
   )
 }
 
-const ListItem = () => {
+const ListItem = (prop) => {
   return(
     <View style={{margin:20}}>
             <TouchableOpacity>
