@@ -104,7 +104,7 @@ const PayManage = () => {
             for(let x = 0;x<memberList.length;x++){
               if(Blist[j].mb_id==memberList[x].mb_id){
                 console.log('작동테스트4')
-                List.push(<ListItem subj={Wlist[i].wr_subject} state={Wlist[i].wr_8} Bstate={Blist[j].state} content={Wlist[i].wr_content} date={Wlist[i].wr_datetime} comname={memberList[x].mb_name}></ListItem>)
+                List.push(<ListItem subj={Wlist[i].wr_subject} detail={Wlist[i].wr_id} state={Wlist[i].wr_8} Bstate={Blist[j].state} content={Wlist[i].wr_content} date={Wlist[i].wr_datetime} comname={memberList[x].mb_name}></ListItem>)
               }
             }
             
@@ -152,6 +152,7 @@ const PayManage = () => {
 }
 
 const ListItem = (prop) =>{
+  const navigation = useNavigation()
   return(
     <View style={{borderWidth:0.6,borderColor:'gray',borderRadius:17,marginTop:10}}>
                 <View style={{flexDirection:'row',alignItems:'center',width:chartWidth/1.15,margin:15}}>
@@ -162,9 +163,11 @@ const ListItem = (prop) =>{
                 </View>
                 <Text style={{marginLeft:10,marginRight:10}} numberOfLines={3}>{prop.content}</Text>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
+                <TouchableOpacity onPress={()=>navigation.navigate('리뷰용견적요청서', {parant : prop.detail})}>
                   <View style={{height:25,backgroundColor:'black',margin:10,borderRadius:5}}>
                     <Text style={{color:'white',alignSelf:'center',margin:3}}>견적서보기</Text>
                   </View>
+                  </TouchableOpacity>
                   <Text style={{position:'absolute', right:15}}>{prop.date}</Text>
                 </View>
               </View>
