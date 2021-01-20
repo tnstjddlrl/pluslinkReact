@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState ,useEffect} from 'react';
 import {
   View,
   Text,
@@ -19,12 +19,73 @@ import FootTer from './footer.js'
 import HeadHeder from "./header.js";
 
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
+import axios from "axios";
 
 const user = require('./img/user.png')
 const clock = require('./img/clock.png')
 
 const OneonOne = () => {
     const navigation = useNavigation();
+
+    const [newid,setNewid] = useState('');
+  
+    async function isFavorite() {
+      try {
+        return await AsyncStorage.getItem("@super:id");
+      } catch (error) {
+        console.log('에러 : ',error)
+        return false;
+      }
+    }
+    
+      const result = isFavorite().then((company_id) => {
+        setNewid(company_id)
+      });
+
+    const [OneList,setOneList] = useState([]);
+
+    async function GetJson() {
+      try {
+        return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_qa_content.json');
+      } catch (error) {
+        console.log('에러 : ',error)
+        return false;
+      }
+    }
+
+    useEffect(()=>{
+      if(OneList.length==0){
+        GetJson().then((res)=>{
+          setOneList(res.data)
+        })
+      }
+    })
+
+    var pushlist = []
+    const ItemPush = () => {
+      if(OneList.length !=0){
+        for(let i = 0;i<OneList.length;i++){
+          if(OneList[i].mb_id==newid.toLowerCase()){
+            var date = OneList[i].qa_datetime
+            date = date.substring(0,10)
+            if(OneList[i].qa_status=='1'){
+              var status = '완료'
+              pushlist.push(<ListItem title={OneList[i].qa_subject} id={OneList[i].qa_id} name={OneList[i].mb_id} cate={OneList[i].qa_category} status={status} date={date}></ListItem>)
+            }else{
+              var status = '대기'
+              pushlist.push(<ListItem title={OneList[i].qa_subject} id={OneList[i].qa_id} name={OneList[i].mb_id} cate={OneList[i].qa_category} status={status} date={date}></ListItem>)
+            }
+            
+          }
+        }
+      }
+
+      return pushlist
+    }
+
+
+
     return(
         <View>
       <View style={{height:chartHeight,width:chartWidth}}>
@@ -46,9 +107,7 @@ const OneonOne = () => {
                 <View style={{width:chartWidth-30,borderWidth:0.4}}></View>
 
 
-                <OneList></OneList>
-                <OneList></OneList>
-                <OneList></OneList>
+                <ItemPush></ItemPush>
                 
                 <TouchableOpacity onPress={()=>navigation.navigate('1대1문의쓰기')}>
                     <View style={{width:70,height:30,backgroundColor:'#db4dff',marginTop:15}}>
@@ -73,20 +132,20 @@ const OneonOne = () => {
     )
 }
 
-const OneList = () =>{
+const ListItem = (prop) =>{
     const navigation = useNavigation();
     return(
         <View>
-                    <TouchableOpacity onPress={()=>navigation.navigate('1대1문의보기')}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('1대1문의보기',{id:prop.id})}>
                     <View style={{flexDirection:'row',alignContent:'center'}}>
-                        <Text style={{margin:15}}>완료</Text>
+                        <Text style={{margin:15}}>{prop.status}</Text>
                         <View style={{left:chartWidth/5,position:'absolute',marginTop:5}}>
-                            <Text>[회원] 테스트 문의입니다.</Text>
+                            <Text>[{prop.cate}] {prop.title}</Text>
                             <View style={{flexDirection:'row', marginTop:5,alignItems:'center'}}>
                                 <Image source={user} style={{width:10,height:10}}></Image>
-                                <Text>test</Text>
+                                <Text>{prop.name}</Text>
                                 <Image source={clock} style={{width:10,height:10,marginLeft:20}}></Image>
-                                <Text>2020.11.10</Text>
+                                <Text>{prop.date}</Text>
                             </View>
                         </View>
                     </View>

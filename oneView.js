@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {
   View,
   Text,
@@ -23,8 +23,52 @@ import { useNavigation } from '@react-navigation/native';
 const user = require('./img/user.png')
 const clock = require('./img/clock.png')
 
-const OneView = () => {
+import AsyncStorage from '@react-native-community/async-storage';
+import axios from "axios";
+
+const OneView = ({route}) => {
   const navigation = useNavigation();
+
+  const [OneList,setOneList] = useState([]);
+
+    async function GetJson() {
+      try {
+        return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_qa_content.json');
+      } catch (error) {
+        console.log('에러 : ',error)
+        return false;
+      }
+    }
+
+    useEffect(()=>{
+      if(OneList.length==0){
+        GetJson().then((res)=>{
+          setOneList(res.data)
+        })
+      }
+    })
+
+    var pushlist = []
+
+    const ItemPush = () =>{
+      if(OneList.length != 0){
+        for(var i =0;i<OneList.length;i++){
+          if(OneList[i].qa_id==route.params.id){
+            var date = OneList[i].qa_datetime
+            date = date.substring(0,16)
+            date = date.replace(/-/gi,'.')
+            pushlist.push(<Content title={OneList[i].qa_subject} content={OneList[i].qa_content} name={OneList[i].mb_id} hp={OneList[i].qa_hp} email={OneList[i].qa_email} date={date}></Content>)
+          }
+        }
+      }
+
+
+
+      return pushlist
+
+
+    }
+
   return(
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
@@ -36,26 +80,7 @@ const OneView = () => {
                         <Text style={{position:'absolute',color:"white",fontSize:20,fontWeight:'bold',top:40,left:10}}>1대1문의</Text>
                       </View>
 
-            <View style={{flexDirection:'row',alignItems:'center',marginTop:25,marginLeft:20}}>
-              <View style={{backgroundColor:'gray',borderRadius:28,width:60,height:60}}></View>
-                <Text style={{marginLeft:5,fontSize:18,fontWeight:'bold'}}>테스트 내용입니다.</Text>
-            </View>
-
-            <View style={{marginLeft:10,marginTop:10}}>
-              <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
-                <View style={{flexDirection:'row',alignItems:'center',margin:10}}>
-                  <Image source={user} style={{width:10,height:10,}}></Image>
-                  <Text style={{fontSize:13}}>test</Text>
-                  <Image source={user} style={{width:10,height:10,marginLeft:10}}></Image>
-                  <Text style={{fontSize:13}}>01026002569</Text>
-                  <Image source={user} style={{width:10,height:10,marginLeft:10}}></Image>
-                  <Text style={{fontSize:13}}>test@test.com</Text>
-                  <Image source={clock} style={{width:10,height:10 ,marginLeft:10}}></Image>
-                  <Text style={{fontSize:13}}>2020.11.10 20:48</Text>
-                </View>
-              <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
-                
-            </View>
+            <ItemPush></ItemPush>
               
           </View>
         </ScrollView>
@@ -65,6 +90,35 @@ const OneView = () => {
       <FootTer></FootTer>
 
     </View>
+  )
+}
+
+const Content = (prop) => {
+  return(
+    <View>
+    <View style={{flexDirection:'row',alignItems:'center',marginTop:30,marginLeft:20}}>
+              {/* <View style={{backgroundColor:'gray',borderRadius:28,width:60,height:60}}></View> */}
+                <Text style={{marginLeft:5,fontSize:20,fontWeight:'bold',marginBottom:20}}>{prop.title}</Text>
+            </View>
+
+            <View style={{marginLeft:10,marginTop:10}}>
+              <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
+              <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
+                <View style={{flexDirection:'row',alignItems:'center',margin:10}}>
+                  <Image source={user} style={{width:10,height:10,}}></Image>
+                  <Text style={{fontSize:13}}>{prop.name}</Text>
+                  <Image source={user} style={{width:10,height:10,marginLeft:10}}></Image>
+                  <Text style={{fontSize:13}}>{prop.hp}</Text>
+                  <Image source={user} style={{width:10,height:10,marginLeft:10}}></Image>
+                  <Text style={{fontSize:13}}>{prop.email}</Text>
+                  <Image source={clock} style={{width:10,height:10 ,marginLeft:10}}></Image>
+                  <Text style={{fontSize:13}}>{prop.date}</Text>
+                </View>
+                <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
+              <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
+                <Text style={{margin:15}}>{prop.content}</Text>
+      </View>
+      </View>
   )
 }
 
