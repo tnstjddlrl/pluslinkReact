@@ -61,12 +61,7 @@ const OneView = ({route}) => {
           }
         }
       }
-
-
-
       return pushlist
-
-
     }
 
   return(
