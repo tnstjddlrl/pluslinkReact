@@ -144,7 +144,8 @@ const Content = (prop) => {
 
                 <Text style={{margin:15,fontSize:15}}>{prop.content}</Text>
 
-                {prop.ans == 'yes' ? <Ans ansTitle={prop.anstitle} anscontent={prop.anscontent} date={prop.ansdate}></Ans> : <NoAns></NoAns>}
+                {prop.ans == 'yes' && <Ans ansTitle={prop.anstitle} anscontent={prop.anscontent} date={prop.ansdate}></Ans>}
+                {prop.ans == 'no' && <NoAns></NoAns> }
       </View>
       </View>
   )
@@ -158,10 +159,10 @@ const Ans = (prop) => {
         <Text style={{backgroundColor:'white'}}>{prop.ansTitle}</Text>
         <View style={{marginLeft:5,height:7,width:chartWidth/1.13,backgroundColor:'#e6e6e6'}}></View>
       </View>
-      <Text style={{margin:20}}>테스트입니다.</Text>
+      <Text style={{margin:20}}>{prop.anscontent}</Text>
       <View style={{flexDirection:'row',alignItems:'center',justifyContent: 'flex-end',flex:1,marginRight:10}}>
         <Image source={clock} style={{width:15,height:15}}></Image>
-        <Text>202</Text>
+        <Text>{prop.date}</Text>
       </View>
     </View>
   )
