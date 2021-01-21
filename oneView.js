@@ -49,6 +49,7 @@ const OneView = ({route}) => {
     })
 
     var pushlist = []
+    var anslist = []
 
     const ItemPush = () =>{
       if(OneList.length != 0){
@@ -57,7 +58,33 @@ const OneView = ({route}) => {
             var date = OneList[i].qa_datetime
             date = date.substring(0,16)
             date = date.replace(/-/gi,'.')
-            pushlist.push(<Content title={OneList[i].qa_subject} content={OneList[i].qa_content} name={OneList[i].mb_id} hp={OneList[i].qa_hp} email={OneList[i].qa_email} date={date}></Content>)
+            if(OneList[i].qa_file1 !=""){
+              var file1 = OneList[i].qa_file1
+            }else{
+              var file1 = 'null'
+            }
+            if(OneList[i].qa_file2 !=""){
+              var file2 = OneList[i].qa_file2
+            }else{
+              var file2 = 'null'
+            }
+
+            for(var j = 0; j<OneList.length; j++){
+              if(OneList[i].qa_id==OneList[j].qa_parent&&OneList[j].qa_type==1){
+                var ans = 'yes'
+                var qadate = OneList[j].qa_datetime
+                qadate = qadate.substring(0,16)
+                qadate = qadate.replace(/-/gi,'.')
+                pushlist.push(<Content ans={ans} anstitle={OneList[j].qa_subject} anscontent={OneList[j].qa_content} ansdate={qadate} title={OneList[i].qa_subject} content={OneList[i].qa_content} name={OneList[i].mb_id} hp={OneList[i].qa_hp} email={OneList[i].qa_email} date={date} file1={file1} file2={file2}></Content>)
+                break
+              }else{
+                var ans = 'no'
+                pushlist.push(<Content ans={ans} title={OneList[i].qa_subject} content={OneList[i].qa_content} name={OneList[i].mb_id} hp={OneList[i].qa_hp} email={OneList[i].qa_email} date={date} file1={file1} file2={file2}></Content>)
+                break
+              }
+            }
+
+            
           }
         }
       }
@@ -67,7 +94,7 @@ const OneView = ({route}) => {
   return(
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
-        <ScrollView>
+        <ScrollView style={{backgroundColor:'white'}}>
           <View style={{marginBottom:500}}>
                       <View style={{width:chartWidth,marginTop:50}}>
                         <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
@@ -97,8 +124,8 @@ const Content = (prop) => {
             </View>
 
             <View style={{marginLeft:10,marginTop:10}}>
-              <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
-              <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
+              <View style={{width:chartWidth-20,borderWidth:0.4,borderColor:'gray'}}></View>
+              <View style={{width:chartWidth-20,borderWidth:0.4,borderColor:'gray'}}></View>
                 <View style={{flexDirection:'row',alignItems:'center',margin:10}}>
                   <Image source={user} style={{width:10,height:10,}}></Image>
                   <Text style={{fontSize:13}}>{prop.name}</Text>
@@ -109,12 +136,50 @@ const Content = (prop) => {
                   <Image source={clock} style={{width:10,height:10 ,marginLeft:10}}></Image>
                   <Text style={{fontSize:13}}>{prop.date}</Text>
                 </View>
-                <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
-              <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
-                <Text style={{margin:15}}>{prop.content}</Text>
+                <View style={{width:chartWidth-20,borderWidth:0.4,borderColor:'gray'}}></View>
+              <View style={{width:chartWidth-20,borderWidth:0.4,borderColor:'gray'}}></View>
+
+              {prop.file1 != 'null' && <Image source={{uri:'https://pluslink.kr/data/qa/'+prop.file1}} style={{width:400,height:400,marginTop:15}}></Image>}
+              {prop.file2 != 'null' && <Image source={{uri:'https://pluslink.kr/data/qa/'+prop.file1}} style={{width:400,height:400,marginTop:15}}></Image>}
+
+                <Text style={{margin:15,fontSize:15}}>{prop.content}</Text>
+
+                {prop.ans == 'yes' ? <Ans ansTitle={prop.anstitle} anscontent={prop.anscontent} date={prop.ansdate}></Ans> : <NoAns></NoAns>}
       </View>
       </View>
   )
 }
+
+const Ans = (prop) => {
+  return(
+    <View>
+      <View style={{flexDirection:'row',alignItems:'center',marginTop:30}}>
+        <Image source={user} style={{width:20,height:20}}></Image>
+        <Text style={{backgroundColor:'white'}}>{prop.ansTitle}</Text>
+        <View style={{marginLeft:5,height:7,width:chartWidth/1.13,backgroundColor:'#e6e6e6'}}></View>
+      </View>
+      <Text style={{margin:20}}>테스트입니다.</Text>
+      <View style={{flexDirection:'row',alignItems:'center',justifyContent: 'flex-end',flex:1,marginRight:10}}>
+        <Image source={clock} style={{width:15,height:15}}></Image>
+        <Text>202</Text>
+      </View>
+    </View>
+  )
+}
+
+const NoAns = () =>{
+  return(
+    <View>
+      <View style={{flexDirection:'row',alignItems:'center',marginTop:30}}>
+        <Image source={user} style={{width:20,height:20}}></Image>
+        <Text style={{backgroundColor:'white'}}>문의에 대한 답변을 준비중입니다.</Text>
+        <View style={{marginLeft:5,height:7,width:chartWidth/1.13,backgroundColor:'#e6e6e6'}}></View>
+      </View>
+      <Text style={{margin:20}}>답변이 등록될 때까지 잠시 기다려주시기 바랍니다.</Text>
+      
+    </View>
+  )
+}
+
 
 export default OneView;
