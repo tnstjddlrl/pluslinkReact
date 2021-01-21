@@ -78,11 +78,15 @@ const Company=(prop)=>{
   })
 
   var List = []
+  for(var i =0;i < expertise.length;i++){
 
-  
+  }
+    List.push(<NoItem></NoItem>)
+
     return List
      
   }
+
 
   const Item = (prop)=>{
     return(
@@ -101,5 +105,15 @@ const Company=(prop)=>{
      </View>
     )
   }
+
+  const NoItem = (prop) =>{
+    return(
+    <View style={{alignItems:'center',marginTop:30,marginBottom:30}}>
+      <Text>주변 업체가 없습니다.</Text>
+    </View>
+    )
+  }
+
+  
 
   export default Company;
