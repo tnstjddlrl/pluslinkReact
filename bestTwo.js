@@ -1,6 +1,6 @@
 //우수시공사례
 
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {
   View,
   Text,
@@ -11,7 +11,7 @@ import {
   ScrollView
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; //네비게이션 프롭을 다른 페이지에서 받지않고도 이 페이지에서 단독으로 네비게이션을 사용할 수 있는 도구
-
+import axios from "axios";
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width; //현재 디바이스의 창크기를 얻어오는 함수들
 
@@ -24,6 +24,42 @@ const best4 = require('./img/best4.jpg')
 const bongwoo = require('./img/bongwoo.png') //각종 이미지 소스
 
 const BestTwo = () =>{
+
+  const [OneList,setOneList] = useState([]);
+
+    async function GetJson() {
+      try {
+        return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_write_example.json');
+      } catch (error) {
+        console.log('에러 : ',error)
+        return false;
+      }
+    }
+
+    useEffect(()=>{
+      if(OneList.length==0){
+        GetJson().then((res)=>{
+        setOneList(res.data)
+        console.log(list)
+        })
+      }
+    })
+
+    var List = [];
+
+    const PushItem = () =>{
+      if(OneList.length !=0){
+        for(var i = 0 ; i < OneList.length; i++){
+          if(OneList[i].wr_10=='메인'){
+            console.log(OneList[i].mb_id)
+            List.push(<ListItem id={OneList[i].wr_id} title={OneList[i].wr_subject} name={OneList[i].wr_name} thumb={OneList[i].as_thumb} content={OneList[i].wr_1} wrid={OneList[i].mb_id}></ListItem>)
+          }
+        }
+      }
+      return List
+    }
+
+
   return(
     <View style={{marginTop:30,marginBottom:250}}>
       <View>
@@ -40,10 +76,7 @@ const BestTwo = () =>{
                 style={{position:'absolute',top:200}}
             >
               {/* 스크롤뷰 안에 들어가는 아이템들은 컴포넌트화 시켜서 넣어줬다. */}
-              <ListItem></ListItem>
-              <ListItem></ListItem>
-              <ListItem></ListItem>
-              <ListItem></ListItem>
+              <PushItem></PushItem>
 
 
         </ScrollView> 
@@ -55,18 +88,18 @@ const BestTwo = () =>{
   )
 }
 
-const ListItem = () =>{
+const ListItem = (prop) =>{
   const navigation = useNavigation()
   return(
-    <TouchableOpacity onPress={()=>navigation.navigate('베스트보기')}>
+    <TouchableOpacity onPress={()=>navigation.navigate('베스트보기',{id:prop.id})}>
           <View style={{width:chartWidth/2.3,height:268,borderWidth:0.6,marginLeft:18,borderColor:'gray',marginBottom:20,}}>
-            <Image source={best1} style={{width:chartWidth/2.3,height:150}}></Image>
-            <Text style={{width:chartWidth/2.5,margin:10,fontWeight:'bold'}} numberOfLines={1}>울산 제2장애인 체육관 조명 시공</Text>
+            <Image source={{uri : prop.thumb}} style={{width:chartWidth/2.3,height:150}}></Image>
+            <Text style={{width:chartWidth/2.5,margin:10,fontWeight:'bold'}} numberOfLines={1}>{prop.title}</Text>
             <View style={{flexDirection:'row',alignItems:'center'}}>
-              <Image source={bongwoo} style={{width:30,height:30,borderRadius:28,marginLeft:10}}></Image>
-              <Text style={{marginLeft:10,fontWeight:'200'}}>이봉우</Text>
+              <Image source={{uri:'https://pluslink.kr/data/member_image/'+prop.wrid.substring(0,2) +'/'+prop.wrid+'.gif'}} style={{width:30,height:30,borderRadius:28,marginLeft:10}}></Image>
+              <Text style={{marginLeft:10,fontWeight:'200'}}>{prop.name}</Text>
             </View>
-            <Text numberOfLines={2} style={{margin:5,fontWeight:'100',color:'gray'}}>울산 제2장애인 체육관 조명 시공</Text>
+            <Text numberOfLines={2} style={{margin:5,fontWeight:'100',color:'gray'}}>{prop.content}</Text>
           </View>
       </TouchableOpacity>
   )
