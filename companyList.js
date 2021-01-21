@@ -268,25 +268,51 @@ const CompanyList = () => {
       console.log('에러 : ',error)
       return false;
     }
+  }
+  async function GetMember() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_member.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
   } 
 
   const [patners,setPatners]=useState([])
   const [expertise,setExpertise]=useState([])
+  const [memberList,setMemberList] = useState([])
   useEffect(()=>{
     if(expertise.length==0){
       GetExpertise().then((res)=>{
-      setPatners(res.data)
+      setExpertise(res.data)
       })
     }
     if(patners.length==0){
       GetPatners().then((res)=>{
-      setExpertise(res.data)
+        setPatners(res.data)
+      })
+    }
+    if(memberList.length==0){
+      GetMember().then((res)=>{
+      setMemberList(res.data)
       })
     }
   })
   var List = []
   const PushItem = () =>{
-    
+    if(expertise.length !=0&&patners.length !=0&&memberList.length !=0){
+      console.log(patners)
+      for(var i = 0; i<patners.length;i++){
+        console.log('동작테스트',patners[i].pt_state)
+        if(patners[i].pt_state=='승인'){
+          for(var j = 0; j<memberList.length;j++){
+            if(patners[i].mb_id==memberList[j].mb_id){
+              List.push(<ListItem id={patners[i].mb_id} comname={patners[i].pt_name} score={patners[i].pt_score} content={memberList[j].mb_profile}></ListItem>)
+            }
+          }
+        }
+      }
+    }
 
     return List
   }
@@ -327,8 +353,7 @@ const CompanyList = () => {
 
               <View style={{backgroundColor:'#e6e6e6', width:chartWidth-20,borderRadius:17,borderWidth:0.5,marginTop:30}}>
                 
-                <ListItem></ListItem>
-                <ListItem></ListItem>
+                <PushItem></PushItem>
 
 
               </View>
@@ -381,24 +406,27 @@ const CompanyList = () => {
 }
 
 const ListItem = (prop) => {
+  const navigation = useNavigation()
   return(
     <View style={{margin:20}}>
-            <TouchableOpacity>
-                  <View style={{height:180,width:chartWidth-60,borderRadius:10,backgroundColor:'gray'}}></View>
+            <TouchableOpacity onPress={()=>navigation.navigate('회사자세히보기',{id:prop.id})}>
+                  <View style={{height:180,width:chartWidth-60,borderRadius:10,backgroundColor:'gray'}}>
+                    <Image source={{uri:'https://pluslink.kr/data/member_image/'+prop.id.substring(0,2) +'/'+prop.id+'.gif'}} style={{height:180,width:chartWidth-60,borderRadius:10}}></Image>
+                  </View>
 
                   <View style={{flexDirection:'row',marginTop:10,alignItems:'center'}}>
                     <Image source={heart} style={{width:30,height:30}}></Image>
-                    <Text style={{fontSize:18,marginLeft:15}}>김업체</Text>
+                    <Text style={{fontSize:18,marginLeft:15}}>{prop.comname}</Text>
                   </View>
 
                   <View style={{flexDirection:'row',marginTop:5,alignItems:'center'}}>
                     <Image source={starimg} style={{width:20,height:20}}></Image>
-                    <Text style={{fontSize:18,marginLeft:15}}>3.7</Text>
+                    <Text style={{fontSize:18,marginLeft:15}}>{prop.score}</Text>
                   </View>
 
                   <Text style={{marginTop:10}}>업체소개</Text>
                   <View style={{width:50,borderWidth:0.5,marginTop:3}}></View>
-                  <Text numberOfLines={1} style={{marginTop:10}}>반갑습니다 수도전문업체는 15년 경력을가지고있습니다. 많은 이용바랍니다.</Text>
+                  <Text numberOfLines={1} style={{marginTop:10}}>{prop.content}</Text>
 
                   <View style={{width:chartWidth-60,borderWidth:0.8,marginTop:10,borderColor:'#a6a6a6'}}></View>
             </TouchableOpacity>
