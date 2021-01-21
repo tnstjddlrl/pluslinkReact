@@ -102,12 +102,14 @@ const App =({  }) =>{
         <Mmenu></Mmenu>
 
         {/* 메인 업체 뷰 */}
-        <TouchableOpacity onPress={()=>navigation.navigate('회사자세히보기',{name:'김업체'})}>
+        {/* <TouchableOpacity onPress={()=>navigation.navigate('회사자세히보기',{name:'김업체'})}>
         <Company img={comImg} star='3.1' color='red' text='주방 수도, 인테리어 전문 업체입니다. 원하시는 디자인으로 깔끔하게 시공해드립니다.' addr='부산 남구'></Company>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>navigation.navigate('회사자세히보기',{name:'박업체'})}>
         <Company img={comImg2} star='3.8' color='blue' text='수도전문 동진설비입니다. 새로운 수도 설치 전문입니다!' addr='부산 사하구'></Company>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        
+
 
        {/* 이벤트 뷰 */}
         <EEvent></EEvent>

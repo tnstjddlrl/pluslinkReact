@@ -18,10 +18,10 @@ import {
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
 import styles from './styles.js'
-
+import Company from "./Company";
 
 const Mmenu = () =>{
-  const [whoclicked,setWhoclicked] = useState('1');
+  const [whoclicked,setWhoclicked] = useState('전기&조명');
   const puple = "rgba(164, 108, 209, 255)"
   const gray = "rgba(234, 234, 234, 255)"
 
@@ -57,7 +57,7 @@ const Mmenu = () =>{
                       () => {console.log('Scrolling is End')}
                   }
               >
-                  <TouchableOpacity onPress={()=>{listTouch(),setColor1(puple)}}>
+                  <TouchableOpacity onPress={()=>{listTouch(),setColor1(puple),setWhoclicked('전기&조명')}}>
                   <View style = {
                     {
                       "alignItems": "flex-start"
@@ -88,7 +88,7 @@ const Mmenu = () =>{
                 </View>
                 </TouchableOpacity>
   
-                <TouchableOpacity onPress={()=>{listTouch(),setColor2(puple)}}>
+                <TouchableOpacity onPress={()=>{listTouch(),setColor2(puple),setWhoclicked('수도')}}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -121,7 +121,7 @@ const Mmenu = () =>{
                 </TouchableOpacity>
   
                 
-                <TouchableOpacity onPress={()=>{listTouch(),setColor3(puple)}}>
+                <TouchableOpacity onPress={()=>{listTouch(),setColor3(puple),setWhoclicked('도배&장판')}}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -153,7 +153,7 @@ const Mmenu = () =>{
                 </TouchableOpacity>
                 
 
-                <TouchableOpacity onPress={()=>{listTouch(),setColor4(puple)}}>
+                <TouchableOpacity onPress={()=>{listTouch(),setColor4(puple),setWhoclicked('인테리어')}}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -184,7 +184,7 @@ const Mmenu = () =>{
                 </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={()=>{listTouch(),setColor5(puple)}}>
+                <TouchableOpacity onPress={()=>{listTouch(),setColor5(puple),setWhoclicked('샷시&창호')}}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -216,7 +216,7 @@ const Mmenu = () =>{
                 </TouchableOpacity>
   
 
-                <TouchableOpacity onPress={()=>{listTouch(),setColor6(puple)}}>
+                <TouchableOpacity onPress={()=>{listTouch(),setColor6(puple),setWhoclicked('청소&철거')}}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -248,7 +248,7 @@ const Mmenu = () =>{
                 </TouchableOpacity>
   
 
-                <TouchableOpacity onPress={()=>{listTouch(),setColor7(puple)}}>
+                <TouchableOpacity onPress={()=>{listTouch(),setColor7(puple),setWhoclicked('보일러&배관')}}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -280,7 +280,7 @@ const Mmenu = () =>{
                 </TouchableOpacity>
   
 
-                <TouchableOpacity onPress={()=>{listTouch(),setColor8(puple)}}>
+                <TouchableOpacity onPress={()=>{listTouch(),setColor8(puple),setWhoclicked('건물외부')}}>
                 <View style = {
                     {
                       "alignItems": "flex-start"
@@ -314,6 +314,10 @@ const Mmenu = () =>{
                   
               </ScrollView>
               </TouchableOpacity>
+
+              <Company menu={whoclicked}></Company>
+
+
           </View>
     )
   }
