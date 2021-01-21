@@ -52,6 +52,8 @@ const OneView = ({route}) => {
     var anslist = []
 
     const ItemPush = () =>{
+      var ans = 'no'
+      var qadate = '';
       if(OneList.length != 0){
         for(var i =0;i<OneList.length;i++){
           if(OneList[i].qa_id==route.params.id){
@@ -70,21 +72,24 @@ const OneView = ({route}) => {
             }
 
             for(var j = 0; j<OneList.length; j++){
-              if(OneList[i].qa_id==OneList[j].qa_parent&&OneList[j].qa_type==1){
-                var ans = 'yes'
-                var qadate = OneList[j].qa_datetime
-                qadate = qadate.substring(0,16)
-                qadate = qadate.replace(/-/gi,'.')
-                pushlist.push(<Content ans={ans} anstitle={OneList[j].qa_subject} anscontent={OneList[j].qa_content} ansdate={qadate} title={OneList[i].qa_subject} content={OneList[i].qa_content} name={OneList[i].mb_id} hp={OneList[i].qa_hp} email={OneList[i].qa_email} date={date} file1={file1} file2={file2}></Content>)
-                break
-              }else{
-                var ans = 'no'
-                pushlist.push(<Content ans={ans} title={OneList[i].qa_subject} content={OneList[i].qa_content} name={OneList[i].mb_id} hp={OneList[i].qa_hp} email={OneList[i].qa_email} date={date} file1={file1} file2={file2}></Content>)
-                break
+              if(OneList[i].qa_id==OneList[j].qa_parent){
+                if(OneList[j].qa_type==1){
+                  console.log('작동테스트')
+                  ans = 'yes'
+                  var qadate = OneList[j].qa_datetime
+                  qadate = qadate.substring(0,16)
+                  qadate = qadate.replace(/-/gi,'.')
+                  pushlist.push(<Content ans={ans} anstitle={OneList[j].qa_subject} anscontent={OneList[j].qa_content} ansdate={qadate} title={OneList[i].qa_subject} content={OneList[i].qa_content} name={OneList[i].mb_id} hp={OneList[i].qa_hp} email={OneList[i].qa_email} date={date} file1={file1} file2={file2}></Content>)
+                  break
+                }
+                else{
+                  var ans = 'no'
+                }
               }
             }
-
-            
+            if(ans=='no'){
+              pushlist.push(<Content ans={ans} title={OneList[i].qa_subject} content={OneList[i].qa_content} name={OneList[i].mb_id} hp={OneList[i].qa_hp} email={OneList[i].qa_email} date={date} file1={file1} file2={file2}></Content>)
+            }
           }
         }
       }
