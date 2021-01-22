@@ -84,7 +84,6 @@ const Company=(prop)=>{
     List.push(<NoItem></NoItem>)
 
     return List
-     
   }
 
 
