@@ -84,10 +84,8 @@ const HeadHeder = () => {
         console.log(nowheight)
         console.log('헤더 콘솔 체크: ',newid)
       },[])
-      
-
-      
     
+      
   return (
     <View>
     <View style={{flex:1}}>

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {
   View,
   Text,
@@ -24,14 +24,31 @@ import Postcode from 'react-native-daum-postcode';
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import {LocaleConfig} from 'react-native-calendars';
 import { TextInput } from 'react-native-gesture-handler';
+import axios from 'axios'
+import AsyncStorage from '@react-native-community/async-storage';
 
 const REquset = () => {
+
+  const [newid,setNewid] = useState('');
+  
+    async function isFavorite() {
+      try {
+        return await AsyncStorage.getItem("@super:id");
+      } catch (error) {
+        return false;
+      }
+    }
+    
+      const result = isFavorite().then((company_id) => {
+        setNewid(company_id)
+      });
 
   const [select,setSelect] = useState(false)
   
   const [listCate,SetlistCate] = useState("전기&조명") //카테고리
   
   const [text, setText] = useState("기본주소");//주소용
+  const [chanAddr,setChanAddr] = useState('');//상세주소
 
   const [show, setShow] = React.useState(false);//modal용
   const [calShow,setCalShow] = useState(false);
@@ -41,6 +58,12 @@ const REquset = () => {
 
   const [subSelect,setSubselect] = useState(false)
   const [listPlus,setListPlus] = useState('전기') //세부카테고리
+
+  const [pwss,setPwss] =useState('') //비밀번호
+  const [name,setName] =useState('') //이름
+
+
+
   const Subcate = ()=>{
     if(listCate=='전기&조명'){
       return(
@@ -238,6 +261,68 @@ const REquset = () => {
     }
   }
 
+  async function GetMember() {
+    try {
+        console.log('겟멤버 작동됨')
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_member.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
+  }
+
+  const [memberList,setMemberList] = useState([]);
+    useEffect(()=>{
+      if(memberList.length==0){
+          console.log('작동테스트')
+        GetMember().then((res)=>{
+          setMemberList(res.data)
+          })
+      }
+    })
+
+    if(memberList.length!=0){
+      for(var i = 0;i<memberList;i++){
+        if(memberList[i].mb_id==newid){
+        setPwss(memberList[i].mb_password)
+        setName(memberList[i].mb_name)
+      }
+      }
+    }
+
+  function insert(){
+
+    
+
+    axios.post('http://ip0131.cafe24.com/pluslink/json/insertTest.php', JSON.stringify({
+      wr_1 : listCate, //카테고리
+      wr_2 : listPlus, //세부항목
+      wr_content : value, //상세설명
+      wr_4: text,//시공주소
+      wr_5: chanAddr,//상세주소
+      wr_10: date,//방문날짜
+      mb_id: newid,//아이디
+      wr_password:pwss,//비번
+      wr_name:name,//이름
+      bo_table:'estimate'
+    }))
+    .then(function (response) {
+      console.log('리스폰스 ',response.request._response);
+      if(response.request._response=='succ'){
+      alert('로그인 되었습니다.')
+      fetchUser(id)
+      console.log (isFavorite());
+      navigation.navigate('홈');
+      }
+      else{
+        alert(response.request._response)
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
   return(
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
@@ -290,7 +375,9 @@ const REquset = () => {
                 }
                 ><Text>{text}</Text></View>
                 </TouchableOpacity>
-                <TextInput placeholder='상세주소' style={{marginTop:8,width:325,height:37,borderWidth:1,borderColor:'gray',}}></TextInput>
+                <TextInput placeholder='상세주소' style={{marginTop:8,width:325,height:37,borderWidth:1,borderColor:'gray',}}
+                onChangeText={text => setChanAddr(text)}
+                value={chanAddr}></TextInput>
 
                 <Text style = {
                   {
@@ -327,9 +414,11 @@ const REquset = () => {
               />
 
               <View style={{flexDirection:'row',alignSelf:'center',marginTop:20}}>
+                <TouchableOpacity onPress={()=>insert()}>
                 <View style={{backgroundColor:"#d24dff",width:70,height:35,}}>
                   <Text style={{color:'white',alignSelf:'center',marginTop:10}}>작성하기</Text>
                 </View>
+                </TouchableOpacity>
                 <View style={{backgroundColor:"#404040",width:50,height:35,}}>
                   <Text style={{color:'white',alignSelf:'center',marginTop:10}}>취소</Text>
                 </View>

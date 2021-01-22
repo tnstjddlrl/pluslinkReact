@@ -61,7 +61,7 @@ const BestTwo = () =>{
 
 
   return(
-    <View style={{marginTop:30,marginBottom:250}}>
+    <View style={{marginTop:0,marginBottom:250}}>
       <View>
         <ImageBackground source={bg_1} style={{width:chartWidth,height:250,}}>
           <Text style={{alignSelf:'center',top:160,fontSize:20,fontWeight:'bold'}}>우수시공사례</Text>
