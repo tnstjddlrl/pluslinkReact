@@ -1,6 +1,6 @@
 //우수시공사례 자세히보기
 
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {
   View,
   Text,
@@ -21,16 +21,57 @@ import FootTer from './footer.js'
 import HeadHeder from "./header.js"; //푸터 헤더
 
 import { useNavigation } from '@react-navigation/native';
+import axios from "axios";
+import WebView from 'react-native-webview';
 
 const user = require('./img/user.png')
 const clock = require('./img/clock.png')
 
-const BestView = () => {
+const BestView = ({route}) => {
   const navigation = useNavigation();
+
+  const [OneList,setOneList] = useState([]);
+
+    async function GetJson() {
+      try {
+        return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_write_example.json');
+      } catch (error) {
+        console.log('에러 : ',error)
+        return false;
+      }
+    }
+
+    useEffect(()=>{
+      if(OneList.length==0){
+        GetJson().then((res)=>{
+        setOneList(res.data)
+        console.log(list)
+        })
+      }
+    })
+
+    var title = []
+    const PushTitle = ()=>{
+      if(OneList.length!=0){
+        for(var i =0;i<OneList.length;i++){
+          if(OneList[i].wr_id==route.params.id){
+            var date = OneList[i].wr_datetime
+            date = date.substring(0,10)
+            title.push(<TitleItem title={OneList[i].wr_subject} name={OneList[i].wr_name} date={date} img={OneList[i].as_thumb} main={OneList[i].wr_content}></TitleItem>)
+          }
+        }
+      }
+      return title
+    }
+
+
+
+
+
   return(
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
-        <ScrollView>
+        <ScrollView style={{backgroundColor:'white'}}>
           {/* 상단 이미지 */}
           <View style={{marginBottom:500}}>
                       <View style={{width:chartWidth,marginTop:50}}>
@@ -38,28 +79,8 @@ const BestView = () => {
                         </ImageBackground>
                         <Text style={{position:'absolute',color:"white",fontSize:20,fontWeight:'bold',top:40,left:10}}>시공사례</Text>
                       </View>
-
-            {/* 제목부분 */}
-            <View style={{flexDirection:'row',alignItems:'center',marginTop:25,marginLeft:20}}>
-              <View style={{backgroundColor:'gray',borderRadius:28,width:60,height:60}}></View>
-                <Text style={{marginLeft:5,fontSize:18,fontWeight:'bold'}}>테스트 내용입니다.</Text>
-            </View>
-
-            {/* 작성자 전화번호 이메일 일시 */}
-            <View style={{marginLeft:10,marginTop:10}}>
-              <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
-                <View style={{flexDirection:'row',alignItems:'center',margin:10}}>
-                  <Image source={user} style={{width:10,height:10,}}></Image>
-                  <Text style={{fontSize:13}}>test</Text>
-                  <Image source={user} style={{width:10,height:10,marginLeft:10}}></Image>
-                  <Text style={{fontSize:13}}>01026002569</Text>
-                  <Image source={user} style={{width:10,height:10,marginLeft:10}}></Image>
-                  <Text style={{fontSize:13}}>test@test.com</Text>
-                  <Image source={clock} style={{width:10,height:10 ,marginLeft:10}}></Image>
-                  <Text style={{fontSize:13}}>2020.11.10 20:48</Text>
-                </View>
-              <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
-            </View>
+            <PushTitle></PushTitle>
+            
               
           </View>
         </ScrollView>
@@ -70,6 +91,42 @@ const BestView = () => {
       <HeadHeder></HeadHeder>
       <FootTer></FootTer>
 
+    </View>
+  )
+}
+
+const TitleItem =(prop) =>{
+  return(
+    <View>
+    <View style={{flexDirection:'row',alignItems:'center',marginTop:25,marginLeft:20}}>
+    <Image source={{uri:prop.img}} style={{backgroundColor:'gray',borderRadius:28,width:60,height:60}}></Image>
+      <Text style={{marginLeft:5,fontSize:18,fontWeight:'bold',width:chartWidth/1.3}} numberOfLines={1}>{prop.title}</Text>
+  </View>
+
+  {/* 작성자 전화번호 이메일 일시 */}
+  <View style={{marginLeft:10,marginTop:10}}>
+    <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
+      <View style={{flexDirection:'row',alignItems:'center',margin:10}}>
+        <Image source={user} style={{width:10,height:10,marginLeft:10}}></Image>
+        <Text style={{fontSize:13}}>{prop.name}</Text>
+        <Image source={clock} style={{width:10,height:10 ,marginLeft:20}}></Image>
+        <Text style={{fontSize:13}}>{prop.date}</Text>
+      </View>
+    <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
+    <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
+  </View>
+
+  <View>
+      <WebView style={{width:chartWidth,height:500,marginTop:20}} source={{html: prop.main}}></WebView>
+    </View>
+  </View>
+  )
+}
+
+const MainItem = () =>{
+  return(
+    <View>
+      <WebView></WebView>
     </View>
   )
 }
