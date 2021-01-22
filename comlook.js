@@ -14,6 +14,7 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
+  Platform
 } from "react-native";
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
@@ -91,14 +92,45 @@ const ComLook=({route})=>{
                 List.push(<Content name={patners[i].pt_name} star={patners[i].pt_score} content={memberList[j].mb_profile} img={patners[i].mb_id}></Content>)
               }
             }
-            
           }
         }
       }
       
       return List
     }
-    
+
+    var scrollList = []
+    const PushList=()=>{
+      const [OneList,setOneList] = useState([]);
+
+    async function GetJson() {
+      try {
+        return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_write_example.json');
+      } catch (error) {
+        console.log('에러 : ',error)
+        return false;
+      }
+    }
+
+    useEffect(()=>{
+      if(OneList.length==0){
+        GetJson().then((res)=>{
+        setOneList(res.data)
+        console.log(list)
+        })
+      }
+    })
+
+    for(var i = 0;i<OneList.length;i++){
+      if(route.params.id==OneList[i].mb_id){
+        scrollList.push(<ListItem id={OneList[i].wr_id} img={OneList[i].as_thumb} title={OneList[i].wr_subject} content={OneList[i].wr_1}></ListItem>)
+      }
+    }
+
+      return scrollList
+    }
+
+  
 
     return(
       <View>
@@ -107,6 +139,14 @@ const ComLook=({route})=>{
           <View style={{marginBottom:500}}>
                       
             <PushItem></PushItem>
+
+            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+              <PushList></PushList>
+            </ScrollView>
+
+            <View style={{marginLeft:10,marginRight:10,width:chartWidth-20,height:50,justifyContent:'center',alignItems:'center',backgroundColor:'black',borderRadius:10,marginTop:20}}>
+              <Text style={{color:'white',fontWeight:'bold',fontSize:18}}>견적의뢰하기</Text>
+            </View>
 
           </View>
         </ScrollView>
@@ -119,9 +159,35 @@ const ComLook=({route})=>{
     )
   }
 
-  const Content = (prop) => {
+  const ListItem=(prop)=>{
+    const navigation=useNavigation()
     return(
-      <View style={{marginTop:100,marginLeft:20}}>
+      <View style={{marginTop:20}}>
+        <TouchableOpacity onPress={()=>navigation.navigate('베스트보기',{id:prop.id})}>
+          <View style={{width:chartWidth/2.5,marginLeft:10}}>
+            <Image source={{uri:prop.img}} style={{width:chartWidth/2.5,height:120,backgroundColor:'gray',borderRadius:10}}></Image>
+            <Text numberOfLines={2} style={{fontWeight:'bold'}}>{prop.title}</Text>
+            <Text numberOfLines={3} style={{marginTop:10,fontWeight:'100'}}>{prop.content}</Text>
+            <View style={{width:chartWidth/2.5,borderWidth:0.5,borderColor:'gray',marginTop:5}}></View>
+          </View>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+  const Content = (prop) => {
+    let os = Platform.OS
+    
+    let nowmargin;
+      if(os == 'ios'){
+       nowmargin = 95;
+      }else{
+        nowmargin = 60;
+      }
+      useEffect(()=>{
+      },[])
+    return(
+      <View style={{marginTop:nowmargin,marginLeft:20}}>
         <Image source={{uri:'https://pluslink.kr/data/member_image/'+prop.img.substring(0,2) +'/'+prop.img+'.gif'}} style={{width:chartWidth-40, height:200, borderRadius:15,backgroundColor:'gray'}}></Image>
         <View style={{flexDirection:'row' , alignItems:'center'}}>
           <Image source={heart} style={{width:50,height:50,borderRadius:28}}></Image>
