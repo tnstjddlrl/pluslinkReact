@@ -276,7 +276,7 @@ const CompanyList = () => {
       console.log('에러 : ',error)
       return false;
     }
-  } 
+  }
 
   const [patners,setPatners]=useState([])
   const [expertise,setExpertise]=useState([])
@@ -300,19 +300,67 @@ const CompanyList = () => {
   })
   var List = []
   const PushItem = () =>{
+    // if(expertise.length !=0&&patners.length !=0&&memberList.length !=0){
+    //   for(var i = 0; i<patners.length;i++){
+    //     if(patners[i].pt_state=='승인'){
+    //       for(var j = 0; j<memberList.length;j++){
+    //         if(patners[i].mb_id==memberList[j].mb_id){
+    //           List.push(<ListItem id={patners[i].mb_id} comname={patners[i].pt_name} score={patners[i].pt_score} content={memberList[j].mb_profile}></ListItem>)
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+
+    var cate = []
+
     if(expertise.length !=0&&patners.length !=0&&memberList.length !=0){
-      console.log(patners)
-      for(var i = 0; i<patners.length;i++){
-        console.log('동작테스트',patners[i].pt_state)
-        if(patners[i].pt_state=='승인'){
-          for(var j = 0; j<memberList.length;j++){
-            if(patners[i].mb_id==memberList[j].mb_id){
-              List.push(<ListItem id={patners[i].mb_id} comname={patners[i].pt_name} score={patners[i].pt_score} content={memberList[j].mb_profile}></ListItem>)
+      if(listPlus=='전체'){
+        for(var i =0;i<expertise.length;i++){
+          if(expertise[i].category==listCate){
+            cate.push(expertise[i].mb_id)
+          }
+        }
+        const set = new Set(cate);
+        cate = [...set];
+      }else{
+        for(var i =0;i<expertise.length;i++){
+          if(expertise[i].subcategory==listPlus){
+            for(var j=0;j<memberList;j++){
+              if(expertise[i].mb_id==memberList[j].mb_id){
+                for(var x =0;x<patners.length;x++){
+                  if(expertise[i].mb_id==patners[x].mb_id){
+                    List.Push(<ListItem id={expertise[i].mb_id} comname={patners[x].pt_name} score={patners[x].pt_score} content={memberList[j].mb_profile}></ListItem>)
+                  }
+                }
+                
+              }
             }
           }
         }
+        return List
       }
-    }
+
+      if(cate.length!=0){
+        for(var i =0;i<cate.length;i++){
+          for(var j=0;j<memberList.length;j++){
+            if(cate[i] == memberList[j].mb_id){
+              for(var x = 0;x<patners.length;x++){
+                if(cate[i]==patners[x].mb_id){
+                  List.push(<ListItem id={cate[i]} comname={patners[x].pt_name} score={patners[x].pt_score} content={memberList[j].mb_profile}></ListItem>)
+                }
+              }
+            }
+          }
+        }
+        return List
+      }else{
+        return(<Text>업체가 없습니다.</Text>)
+      }
+
+
+    }  
+
 
     return List
   }
