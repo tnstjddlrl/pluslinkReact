@@ -91,7 +91,7 @@ const Company=(prop)=>{
 
   if(expertise.length !=0 && patners.length!=0 && memberList.length!=0){
     for(var i =0;i < expertise.length;i++){
-      if(expertise[i].category==menu){
+      if(expertise[i].category==menu &&expertise[i].state=='정상'){
         cate.push(expertise[i].mb_id)
       }
     }
@@ -100,26 +100,27 @@ const Company=(prop)=>{
     cate = [...set];
 
     console.log('중복체크  ',cate)
+
+    for(var i = 0;i<3;i++){
+      for(var j =0;j<memberList.length;j++){
+                 if(cate[i]==memberList[j].mb_id){
+                  for(var x=0;x<patners.length;x++){
+                    if(cate[i]==patners[x].mb_id &&count<3){
+                      List.push(<Item id={cate[i]} name={patners[x].pt_name} content={memberList[j].mb_profile.replace(/\r\n/g, '')} star={patners[x].pt_score}></Item>)
+                      count += 1
+                      console.log('작동체크')
+                  }
+                }
+              }
+      }
+    }
+ 
+
+
   }
 
 
-    // for(var i = 0;i<3;i++){
-    //   for(var j =0;j<memberList.length;i++){
-       
-    //              if(cate[i]==memberList[j].mb_id){
-    //               for(var x=0;x<patners.length;x++){
-    //                 if(cate[i]==patners[x].mb_id &&count<3){
-    //                   List.push(<Item name={patners[x].pt_name} content={memberList[j].mb_profile} star={patners[x].pt_score}></Item>)
-    //                   count += 1
-    //                   console.log('작동체크')
-    //               }
-    //             }
-    //           }
-        
- 
-    //   }
-    // }
- 
+    
   
   
   
@@ -131,19 +132,22 @@ const Company=(prop)=>{
 
 
   const Item = (prop)=>{
+    const navigation = useNavigation()
     return(
       <View>
-       <View style={{width:chartWidth-40,height:200,backgroundColor:'#f2f2f2',borderRadius:10,marginLeft:20,marginRight:20,marginTop:10}}>
-          <View style={{flexDirection:'row'}}>
-            <Image style={{width:30,height:30,backgroundColor:'red'}}></Image>
-            <Text>{prop.name}</Text>
+        <TouchableOpacity onPress={()=>navigation.navigate('회사자세히보기',{id:prop.id})}>
+       <View style={{width:chartWidth-40,backgroundColor:'#f2f2f2',borderRadius:10,marginLeft:20,marginRight:20,marginTop:10}}>
+          <View style={{flexDirection:'row', alignItems:'center'}}>
+            <Image source={{uri:'https://pluslink.kr/data/member_image/'+prop.id.substring(0,2) +'/'+prop.id+'.gif'}} style={{marginLeft:15,marginTop:15,borderRadius:28,width:55,height:55,backgroundColor:'red'}}></Image>
+            <Text style={{fontWeight:'500',fontSize:15,marginLeft:15,marginTop:15}}>{prop.name}</Text>
           </View>
-          <Text>{prop.content}</Text>
-          <View style={{flexDirection:'row'}}>
+          <Text style={{margin:15,fontWeight:'200'}} numberOfLines={3}>{prop.content}</Text>
+          <View style={{flexDirection:'row',justifyContent:'flex-end',margin:15}}>
             <Image source={starimg} style={{width:20,height:20}}></Image>
             <Text>{prop.star}</Text>
           </View>
        </View>
+       </TouchableOpacity>
      </View>
     )
   }
