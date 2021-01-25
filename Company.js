@@ -78,11 +78,54 @@ const Company=(prop)=>{
   })
 
   var List = []
-  for(var i =0;i < expertise.length;i++){
-
+  var cate= []
+  var count = 0;
+  const[menu,setMenu] = useState('전기&조명')
+  
+  if(menu != prop.menu){
+    cate = [];
+    setMenu(prop.menu)
+    count = 0
+    console.log(menu)
   }
-    List.push(<NoItem></NoItem>)
 
+  if(expertise.length !=0 && patners.length!=0 && memberList.length!=0){
+    for(var i =0;i < expertise.length;i++){
+      if(expertise[i].category==menu){
+        cate.push(expertise[i].mb_id)
+      }
+    }
+
+    const set = new Set(cate);
+    cate = [...set];
+
+    console.log('중복체크  ',cate)
+  }
+
+
+    // for(var i = 0;i<3;i++){
+    //   for(var j =0;j<memberList.length;i++){
+       
+    //              if(cate[i]==memberList[j].mb_id){
+    //               for(var x=0;x<patners.length;x++){
+    //                 if(cate[i]==patners[x].mb_id &&count<3){
+    //                   List.push(<Item name={patners[x].pt_name} content={memberList[j].mb_profile} star={patners[x].pt_score}></Item>)
+    //                   count += 1
+    //                   console.log('작동체크')
+    //               }
+    //             }
+    //           }
+        
+ 
+    //   }
+    // }
+ 
+  
+  
+  
+  if(count == 0){
+    List.push(<NoItem></NoItem>)
+  }
     return List
   }
 

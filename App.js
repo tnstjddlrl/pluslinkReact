@@ -127,7 +127,7 @@ const App =({  }) =>{
       
       <HeadHeder></HeadHeder>
      
-      <FootTer></FootTer>
+      
         
     </View>
   )

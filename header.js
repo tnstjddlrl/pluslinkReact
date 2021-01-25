@@ -188,7 +188,7 @@ const HeadHeder = () => {
               </ImageBackground>
             </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => {logCheck('마이페이지'),navigation.navigate('마이페이지'),setViewmenu(false)}}>
+            <TouchableOpacity onPress={() => {logCheck('마이페이지'),setViewmenu(false)}}>
             <View>
               <ImageBackground source={ffimg4} style={{width:65,height:65}}>
               </ImageBackground>
