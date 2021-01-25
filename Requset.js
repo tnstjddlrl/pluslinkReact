@@ -300,7 +300,7 @@ const REquset = () => {
       wr_content : value, //상세설명
       wr_4: text,//시공주소
       wr_5: chanAddr,//상세주소
-      wr_10: date,//방문날짜
+      wr_7: date,//방문날짜
       mb_id: newid,//아이디
       wr_password:pwss,//비번
       wr_name:name,//이름

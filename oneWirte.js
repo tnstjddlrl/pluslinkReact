@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {
   View,
   Text,
@@ -19,13 +19,90 @@ const arrow = require('./img/arrow02.png')
 
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";
-
+import axios from 'axios'
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const OneWrite = () => {
   const [select,setSelect] = useState(false)
   const [listCate,SetlistCate] = useState("선택하세요")
-  const [value, onChangeText] = React.useState('');//textinput용
+
+  const [email,setEmail] =useState('');
+  const [hp,setHp] = useState('');
+  const [title,setTitle] = useState('')
+  const [content,setContent] =useState('')
+  const [newid,setNewid] = useState('');
+  const [nick,setNick] = useState('')
+
+  async function GetMember() {
+    try {
+        console.log('겟멤버 작동됨')
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_member.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
+  }
+
+  const [memberList,setMemberList] = useState([]);
+  useEffect(()=>{
+    if(memberList.length==0){
+        console.log('작동테스트')
+      GetMember().then((res)=>{
+        setMemberList(res.data)
+        })
+    }
+    if(memberList.length != 0 ){
+      for(var i = 0;i<memberList.length;i++){
+        if(memberList[i].mb_id == newid.toLowerCase()){
+          setEmail(memberList[i].mb_email)
+          setHp(memberList[i].mb_hp)
+          setNick(memberList[i].mb_nick)
+        }
+      }
+    }
+  })
+
+  async function isFavorite() {
+    try {
+      return await AsyncStorage.getItem("@super:id");
+    } catch (error) {
+      return false;
+    }
+  }
+  
+    const result = isFavorite().then((company_id) => {
+      setNewid(company_id)
+    });
+
+
+  function insert(){
+
+    axios.post('http://ip0131.cafe24.com/pluslink/json/qaInsert.php', JSON.stringify({
+      mb_id : newid.toLowerCase(),
+      qa_name:nick,
+      qa_email:email,
+      qa_hp:hp,
+      qa_category:listCate,
+      qa_subject:title,
+      qa_content:content,
+    }))
+    .then(function (response) {
+      console.log('리스폰스 ',response.request._response);
+      if(response.request._response=='succ'){
+      alert('로그인 되었습니다.')
+      fetchUser(id)
+      console.log (isFavorite());
+      navigation.navigate('홈');
+      }
+      else{
+        alert(response.request._response)
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   const navigation = useNavigation();
   return(
@@ -54,37 +131,37 @@ const OneWrite = () => {
               <Text style={{marginTop:20}}>E-mail</Text>
               <TextInput
                 style={{ height: 40,width:chartWidth-30,marginTop:10, borderColor: 'gray', borderWidth: 0.5}}
-                onChangeText={text => onChangeText(text)}
+                onChangeText={text => setEmail(text)}
                 placeholder='test@test.com'
-                value={value}
+                value={email}
               />
 
               <Text style={{marginTop:20}}>휴대폰</Text>
               <TextInput      
                 style={{ height: 40,width:chartWidth-30,marginTop:10, borderColor: 'gray', borderWidth: 0.5 }}
-                onChangeText={text => onChangeText(text)}
+                onChangeText={text => setHp(text)}
                 placeholder='010-1234-1234'
                 keyboardType='number-pad'
-                value={value}
+                value={hp}
               />
 
               <Text style={{marginTop:20}}>제목</Text>
               <TextInput      
                 style={{ height: 40,width:chartWidth-30,marginTop:10, borderColor: 'gray', borderWidth: 0.5 }}
-                onChangeText={text => onChangeText(text)}
-                value={value}
+                onChangeText={text => setTitle(text)}
+                value={title}
               />
 
               <TextInput      
                 style={{ height: 150,width:chartWidth-30,marginTop:10, borderColor: 'gray', borderWidth: 0.5 }}
-                onChangeText={text => onChangeText(text)}
-                value={value}
+                onChangeText={text => setContent(text)}
+                value={content}
                 placeholder="내용을 입력해주세요."
                 multiline={true}
               />
 
               <View style={{flexDirection:'row'}}>
-                <TouchableOpacity onPress={()=>navigation.navigate('1대1문의')}>
+                <TouchableOpacity onPress={()=>{insert(),navigation.navigate('1대1문의')}}>
                     <View style={{width:70,height:30,backgroundColor:'#db4dff',marginTop:15}}>
                         <Text style={{color:'white',margin:5,marginLeft:10,fontWeight:'900'}}>작성완료</Text>
                     </View>

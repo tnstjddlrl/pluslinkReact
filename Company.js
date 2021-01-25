@@ -92,7 +92,7 @@ const Company=(prop)=>{
       <View>
        <View style={{width:chartWidth-40,height:200,backgroundColor:'#f2f2f2',borderRadius:10,marginLeft:20,marginRight:20,marginTop:10}}>
           <View style={{flexDirection:'row'}}>
-            <Image></Image>
+            <Image style={{width:30,height:30,backgroundColor:'red'}}></Image>
             <Text>{prop.name}</Text>
           </View>
           <Text>{prop.content}</Text>

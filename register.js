@@ -1,142 +1,123 @@
-import React,{useState,Component,useEffect} from "react";
+import React, { useState } from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  StyleSheet,
   View,
+  Text,
   ImageBackground,
-  Animated,
-  useWindowDimensions,
-  AppRegistry,
   Dimensions,
-  Image,
   TouchableOpacity,
-  Button,
+  Image,
+  ScrollView,
   TextInput,
-} from "react-native";
+  Button
+} from 'react-native';
+
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
-import styles from './styles.js'
 
-const image = { uri: "https://pluslink.kr/img/review_bg.jpg" };
+const event = require('./img/eventBg.jpg')
+const arrow = require('./img/arrow02.png')
 
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";
 
-//================================회원가입===============================
+import { useNavigation } from '@react-navigation/native';
+import axios from "axios";
+const Register = () => {
+  const [id,setId] = useState('')
+  const [pwd,setPwd] =useState('')
+  const [repwd,setRepwd] = useState('')
+  const [email,setEmail]=useState('')
+  const [name,setName] = useState('')
+  const[hp,setHp] = useState('')
 
-const Register=({navigation})=>{
-    const [value, onChangeText] = React.useState('');//textinput용
-    
-    return(
-      <View>
-        <View>
-          <ScrollView style={{marginTop:56}}>
-            <View style={{height:chartHeight*1.7}}>
-            <View style={{width:chartWidth,height:150}}>
-              <ImageBackground source={image} style={{flex: 1,resizeMode: "cover",justifyContent: "center"}}>
-              <Text style={{position:'absolute',textAlignVertical:'center',top:30,left:15,color:'white',fontSize:20,fontWeight:'bold'}}>회원가입</Text>
-              <View style={{position:'absolute',borderWidth:1,borderColor:"#d9d9d9",width:75,top:60,left:15}}></View>
-              </ImageBackground>
-            </View>
-            <View style={{position:'absolute',backgroundColor:'#d9d9d9',borderWidth: 1,borderColor:"#a6a6a6",margin:20 , width:350,height:400, top:150}}>
-            <Text style={{position:'absolute',textAlignVertical:'center',top:10,left:15,color:'black',fontSize:15,}}>이용정보 입력</Text>
-            </View>
-            <View style={{position:'absolute',backgroundColor:'white',borderWidth: 1,borderColor:"#a6a6a6",margin:20 , width:350,height:410, top:190}}>
-            </View>
-  
-            <View style={{position:'absolute',top:220,left:35,width:320,height:70}}>
-            <Text>아이디</Text>
-            <TextInput
-            style={{position:'absolute', height: 30,width:315,top:25, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => onChangeText(text)}
-            value={value}
-           />
-           <Text style={{position:'absolute',fontSize:13,bottom:0}}>영문자, 숫자, _ 만 입력 가능. 최소 3자이상 입력하세요.</Text></View>
-  
-           <View style={{position:'absolute',top:310,left:35,width:320,height:70}}>
-            <Text>비밀번호</Text>
-            <TextInput
-            style={{position:'absolute', height: 30,width:315,top:25, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => onChangeText(text)}
-            value={value}
-           />
-           </View>
-           <View style={{position:'absolute',top:380,left:35,width:320,height:70}}>
-            <Text>비밀번호 확인</Text>
-            <TextInput
-            style={{position:'absolute', height: 30,width:315,top:25, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => onChangeText(text)}
-            value={value}
-           /></View>
-           <View style={{position:'absolute',top:450,left:35,width:320,height:70}}>
-            <Text>E-mail</Text>
-            <TextInput
-            style={{position:'absolute', height: 30,width:315,top:25, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => onChangeText(text)}
-            value={value}
-           /></View>
-           <View style={{position:'absolute',top:520,left:35,width:320,height:70}}>
-            <Text>추천업체코드</Text>
-            <TextInput
-            style={{position:'absolute', height: 30,width:315,top:25, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => onChangeText(text)}
-            value={value}
-           />
-           <Text style={{position:'absolute',fontSize:13,bottom:0}}>추천업체코드 입력시 PL쇼핑몰 할인 쿠폰 지급</Text>
-           </View>
-  
-  
-           <View style={{position:'absolute',backgroundColor:'#d9d9d9',borderWidth: 1,borderColor:"#a6a6a6",margin:20 , width:350,height:200, top:640}}>
-            <Text style={{position:'absolute',textAlignVertical:'center',top:10,left:15,color:'black',fontSize:15,}}>본인확인</Text>
-            </View>
-            <View style={{position:'absolute',backgroundColor:'white',borderWidth: 1,borderColor:"#a6a6a6",margin:20 , width:350,height:160, top:680}}>
-            <View style={{position:'absolute',top:10,left:15,width:320,height:70}}>
-            <Text>이름</Text>
-            <TextInput
-            style={{position:'absolute', height: 30,width:315,top:25, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => onChangeText(text)}
-            value={value}
-           /></View>
-  
-           <View style={{position:'absolute',top:80,left:15,width:320,height:70}}>
-            <Text>휴대폰번호</Text>
-            <TextInput
-            style={{position:'absolute', height: 30,width:315,top:25, borderColor: 'gray', borderWidth: 1 }}
-            onChangeText={text => onChangeText(text)}
-            value={value}
-           />
-           </View>
-            </View>
-          
-            <View style={{position:'absolute',backgroundColor:'#d9d9d9',borderWidth: 1,borderColor:"#a6a6a6",margin:20 , width:350,height:100, top:880}}>
-            <Text style={{position:'absolute',textAlignVertical:'center',top:10,left:15,color:'black',fontSize:15,}}>이미지등록</Text>
-            </View>
-            <View style={{position:'absolute',backgroundColor:'white',borderWidth: 1,borderColor:"#a6a6a6",margin:20 , width:350,height:120, top:920}}>
-            <View style={{position:'absolute',top:10,left:15,width:320,height:70}}>
-            <Text>대표이미지</Text>
-            </View>
-  
-            </View>
-            </View>
-            <View style={{position:'absolute', top:1100,left:chartWidth/2.7,width:315,flex:1,flexDirection:'row'}}>
-            <Button title={'회원가입'} color="#d24dff"></Button>
-            <Button title={'취소'} color={'#404040'}></Button>
-            </View>
-            
-          </ScrollView>
-        </View>
-  
-  
-  
-        <HeadHeder></HeadHeder>
-     
-        <FootTer></FootTer>
-        
-      </View>
-    )
+  function registerdata(){
+    axios.post('http://ip0131.cafe24.com/pluslink/json/registerInsert.php', JSON.stringify({
+      mb_id : id,
+      mb_password : pwd,
+      mb_name : name,
+      mb_email : email,
+      mb_hp : hp
+    }))
+    .then(function (response) {
+      console.log('리스폰스 ',response);
+      if(response.request._response=='suc'){
+      alert('회원가입 되었습니다.')
+      navigation.navigate('홈');
+      }
+      else{
+        alert('아이디 또는 비밀번호를 확인해주세요')
+        console.log(response)
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
-  
-  export default Register;
-  //=====================================================================
+
+  function checkpw(){
+    if(pwd==repwd){
+      registerdata()
+    }else{
+      alert('비밀번호 확인란을 다시 작성해주세요')
+    }
+  }
+
+
+
+  return(
+    <View>
+      <View style={{height:chartHeight,width:chartWidth}}>
+        <ScrollView>
+          <View style={{marginBottom:500}}>
+                      <View style={{width:chartWidth,marginTop:50}}>
+                        <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
+                        </ImageBackground>
+                        <Text style={{position:'absolute',color:"white",fontSize:20,fontWeight:'bold',top:40,left:10}}>회원가입</Text>
+                      </View>
+
+              <View style={{margin:15,borderWidth:1,width:chartWidth-30,borderColor:'#cccccc'}}>
+                <Text style={{margin:10,fontWeight:'bold'}}>이용정보입력</Text>
+                <View style={{borderColor:'#cccccc',borderWidth:1,width:chartWidth-30,borderColor:'#cccccc'}}></View>
+                <Text style={{marginLeft:10,marginTop:15,fontWeight:'bold'}}>아이디</Text>
+                <TextInput onChangeText={(text)=>setId(text)} value={id} style={{borderWidth:1,borderColor:'#cccccc',width:chartWidth-50,height:35,marginLeft:10,marginTop:5,}}></TextInput>
+                <Text style={{marginLeft:10,color:'gray'}}>영문자,숫자,_만 입력가능,최소 3자이상 입력하세요</Text>
+                <Text style={{marginLeft:10,marginTop:15,fontWeight:'bold'}}>비밀번호</Text>
+                <TextInput onChangeText={(text)=>setPwd(text)} value={pwd} style={{borderWidth:1,borderColor:'#cccccc',width:chartWidth-50,height:35,marginLeft:10,marginTop:5,}}></TextInput>
+                <Text style={{marginLeft:10,marginTop:15,fontWeight:'bold'}}>비밀번호 확인</Text>
+                <TextInput onChangeText={(text)=>setRepwd(text)} value={repwd} style={{borderWidth:1,borderColor:'#cccccc',width:chartWidth-50,height:35,marginLeft:10,marginTop:5,}}></TextInput>
+                <Text style={{marginLeft:10,marginTop:15,fontWeight:'bold'}}>E-mail</Text>
+                <TextInput onChangeText={(text)=>setEmail(text)} value={email} style={{borderWidth:1,borderColor:'#cccccc',width:chartWidth-50,height:35,marginLeft:10,marginTop:5,marginBottom:20}}></TextInput>
+                
+              </View>
+
+              <View style={{margin:15,borderWidth:1,width:chartWidth-30,borderColor:'#cccccc'}}>
+                <Text style={{margin:10,fontWeight:'bold'}}>본인확인</Text>
+                <View style={{borderColor:'#cccccc',borderWidth:1,width:chartWidth-30,borderColor:'#cccccc'}}></View>
+                <Text style={{marginLeft:10,marginTop:15,fontWeight:'bold'}}>이름</Text>
+                <TextInput onChangeText={(text)=>setName(text)} value={name} style={{borderWidth:1,borderColor:'#cccccc',width:chartWidth-50,height:35,marginLeft:10,marginTop:5,marginBottom:15}}></TextInput>
+                <Text style={{marginLeft:10,marginTop:5,fontWeight:'bold'}}>휴대폰번호</Text>
+                <TextInput onChangeText={(text)=>setHp(text)} value={hp} style={{borderWidth:1,borderColor:'#cccccc',width:chartWidth-50,height:35,marginLeft:10,marginTop:5,marginBottom:15}}></TextInput>
+                
+              </View>
+              <View style={{flexDirection:'row',alignSelf:'center'}}>
+                <TouchableOpacity onPress={()=>checkpw()}>
+                <View style={{backgroundColor:"#d24dff",width:70,height:35,}}>
+                  <Text style={{color:'white',alignSelf:'center',marginTop:10}}>회원가입</Text>
+                </View>
+                </TouchableOpacity>
+                <View style={{backgroundColor:"#404040",width:50,height:35,}}>
+                  <Text style={{color:'white',alignSelf:'center',marginTop:10}}>취소</Text>
+                </View>
+              </View>
+          </View>
+        </ScrollView>
+      </View>
+
+      <HeadHeder></HeadHeder>
+      <FootTer></FootTer>
+
+    </View>
+  )
+}
+
+export default Register;
