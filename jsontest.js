@@ -24,86 +24,40 @@ import { useNavigation } from '@react-navigation/native';
 
 import arraydata from './json/g5_write_estimate'
 
+
 const JsonTest = () => {
   const [list,setList]=useState([]);
   const [testlist,setTestlist]=useState([]);
 
- 
-    // axios.get('http://ip0131.cafe24.com/pluslink/test.json').then((res)=>{
-      //setList(res.data);
-      // console.log('길이 : ',list.length)
-      // console.log(list[3].category)
-    // })
-     
- 
+  
 
-  GetJson().then((res) => {
-    if(res != false){
-    setList(res.data);
-    console.log(list)
+    function refreshData(tableName){
+      axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+        id : tableName,
+      }))
+      .then(function (response) {
+        console.log('리스폰스 ',response);
+        if(response.request._response=='suc'){
+        alert('로그인 되었습니다.')
+        }
+        else{
+          alert(response.request._response)
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
-  });
-  DataTest
-
-  async function GetJson() {
-    try {
-      return await axios.get('http://ip0131.cafe24.com/pluslink/test.json');
-    } catch (error) {
-      console.log('에러 : ',error)
-      return false;
-    }
-  } 
 
 
-  var output=[];
-  const DataTest = ()=>{
-    for(let i = 0; i <=list.length;i++){
-      output.push(<ListItem id={list[i].no} category={list[i].category} subcategory={list[i].subcategory}></ListItem>)
-    }
-    console.log(output)
-    return output
-  }
-
-  const ListItem = (prop) =>{
-    return(
-      <View>
-        <Text>{prop.id}</Text>
-        <Text>{prop.category}</Text>
-        <Text>{prop.subcategory}</Text>
-      </View>
-    )
-  }
-
-  return(
-    <View>
-      <View style={{height:chartHeight,width:chartWidth}}>
-        <ScrollView>
-          <View style={{marginBottom:500}}>
-                      <View style={{width:chartWidth,marginTop:50}}>
-                        <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
-                        </ImageBackground>
-                        <Text style={{position:'absolute',color:"white",fontSize:20,fontWeight:'bold',top:40,left:10}}>테스트</Text>
-                      </View>
-
-            {/* <Text key={list.no}>{list.category} : {list.subcategory}</Text> */}
-            {/* <DataTest></DataTest> */}
-            {/* <ListItem id={list[3].no} category={list[3].category} subcategory={list[3].subcategory}></ListItem> */}
-            
-            {/* <Text>{list[53].no}</Text> */}
-           
-
-          </View>
-        </ScrollView>
-      </View>
-
-      <HeadHeder></HeadHeder>
-      <FootTer></FootTer>
-
-    </View>
-  )
+return(
+  <View style={{justifyContent:'center',alignContent:'center',height:chartHeight}}>
+    <TouchableOpacity onPress={()=>refreshData('bidding')}>
+     <Text>테스트</Text>
+    </TouchableOpacity>
+  </View>
+)
 }
-
-
 
 
 

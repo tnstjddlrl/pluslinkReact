@@ -26,6 +26,23 @@ const user = require('./img/user.png')
 const clock = require('./img/clock.png')
 
 const OneonOne = () => {
+
+  function refreshData(tableName){
+    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+      id : tableName,
+    }))
+    .then(function (response) {
+      console.log('리스폰스 ',response);
+      if(response.request._response=='suc'){
+      }
+      else{
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  refreshData('g5_qa_content')
     const navigation = useNavigation();
 
     const [newid,setNewid] = useState('');
@@ -65,6 +82,7 @@ const OneonOne = () => {
     var pushlist = []
     const ItemPush = () => {
       if(OneList.length !=0){
+        console.log('1대1문의 숫자 : ',OneList.length)
         for(let i = 0;i<OneList.length;i++){
           if(OneList[i].mb_id==newid.toLowerCase()){
             var date = OneList[i].qa_datetime

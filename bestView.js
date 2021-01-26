@@ -28,6 +28,8 @@ const user = require('./img/user.png')
 const clock = require('./img/clock.png')
 
 const BestView = ({route}) => {
+
+
   const navigation = useNavigation();
 
   const [OneList,setOneList] = useState([]);

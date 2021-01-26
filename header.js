@@ -65,9 +65,6 @@ const HeadHeder = () => {
         }
       }
 
-      
-      
-      
     let os = Platform.OS
     
     let nowheight;

@@ -23,9 +23,27 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
-
+import axios from "axios";
 const CurGyeon = () => {
   const navigation = useNavigation();
+  function refreshData(tableName){
+    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+      id : tableName,
+    }))
+    .then(function (response) {
+      console.log('리스폰스 ',response);
+      if(response.request._response=='suc'){
+      alert('로그인 되었습니다.')
+      }
+      else{
+        alert(response.request._response)
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  refreshData('g5_write_estimate')
     return (
         <View>
           <ScrollView style={{width:chartWidth,height:chartHeight}}>

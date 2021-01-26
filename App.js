@@ -12,6 +12,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native'; //네비게이션을 위한 도구들
+import axios from "axios";
 
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";
@@ -50,6 +51,7 @@ import ReviewPlus from "./reviewPlus.js";
 
 
 
+
 const Stack = createStackNavigator(); // 스택 네비게이터를 위한 변수
 
 const chartHeight = Dimensions.get('window').height;
@@ -59,6 +61,31 @@ const chartWidth = Dimensions.get('window').width; //현재 디바이스의 가�
 
 
 const App =({  }) =>{
+
+  function refreshData(tableName){
+    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+      id : tableName,
+    }))
+    .then(function (response) {
+      console.log('리스폰스 ',response);
+      if(response.request._response=='suc'){
+      }
+      else{
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  refreshData('bidding')
+  refreshData('expertise')
+  refreshData('g5_member')
+  refreshData('g5_qa_content')
+  refreshData('g5_write_estimate')
+  refreshData('g5_write_event')
+  refreshData('g5_write_example')
+  refreshData('g5_write_review')
+  refreshData('partners')
 
   const fetchUser = async()=>{
     AsyncStorage.setItem(

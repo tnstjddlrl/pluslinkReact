@@ -333,7 +333,6 @@ const CompanyList = () => {
                     List.Push(<ListItem id={expertise[i].mb_id} comname={patners[x].pt_name} score={patners[x].pt_score} content={memberList[j].mb_profile}></ListItem>)
                   }
                 }
-                
               }
             }
           }
@@ -419,29 +418,29 @@ const CompanyList = () => {
 
       <Modal  transparent={true} visible={select}>
                     <View style={{width:chartWidth-30, position:'absolute',backgroundColor:'white',borderWidth:0.5,left:15,top:150}}>
-                        <TouchableOpacity onPress={()=>{SetlistCate('전기&조명'),setSelect(false),setListPlus('전기')}}>
+                        <TouchableOpacity onPress={()=>{SetlistCate('전기&조명'),setSelect(false),setListPlus('전체')}}>
                         <Text style={{left:5,marginTop:5}}>전기&조명</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{SetlistCate('수도'),setSelect(false),setListPlus('상하수도')}}>
+                        <TouchableOpacity onPress={()=>{SetlistCate('수도'),setSelect(false),setListPlus('전체')}}>
                         <Text style={{left:5,marginTop:5}}>수도</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{SetlistCate('도배&장판'),setSelect(false),setListPlus('도배')}}>
+                        <TouchableOpacity onPress={()=>{SetlistCate('도배&장판'),setSelect(false),setListPlus('전체')}}>
                         <Text style={{left:5,marginTop:5}}>도배&장판</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=>{SetlistCate('인테리어'),setSelect(false),setListPlus('화장실 리모델링')}}>
+                        <TouchableOpacity onPress={()=>{SetlistCate('인테리어'),setSelect(false),setListPlus('전체')}}>
                         <Text style={{left:5,marginTop:5}}>인테리어</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{SetlistCate('샷시&창호'),setSelect(false),setListPlus('샷시')}}>
+                        <TouchableOpacity onPress={()=>{SetlistCate('샷시&창호'),setSelect(false),setListPlus('전체')}}>
                         <Text style={{left:5,marginTop:5}}>샷시&창호</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{SetlistCate('청소&철거'),setSelect(false),setListPlus('입주청소')}}>
+                        <TouchableOpacity onPress={()=>{SetlistCate('청소&철거'),setSelect(false),setListPlus('전체')}}>
                         <Text style={{left:5,marginTop:5}}>청소&철거</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{SetlistCate('보일러&배관'),setSelect(false),setListPlus('보일러')}}>
+                        <TouchableOpacity onPress={()=>{SetlistCate('보일러&배관'),setSelect(false),setListPlus('전체')}}>
                         <Text style={{left:5,marginTop:5}}>보일러&배관</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{SetlistCate('건물외부'),setSelect(false),setListPlus('외벽크랙')}}>
+                        <TouchableOpacity onPress={()=>{SetlistCate('건물외부'),setSelect(false),setListPlus('전체')}}>
                         <Text style={{left:5,marginTop:5}}>건물외부</Text>
                         </TouchableOpacity>
                     </View>

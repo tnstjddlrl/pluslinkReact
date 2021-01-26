@@ -40,7 +40,7 @@ const REquset = () => {
     }
     
       const result = isFavorite().then((company_id) => {
-        setNewid(company_id)
+        setNewid(company_id.toLowerCase())
       });
 
   const [select,setSelect] = useState(false)
@@ -294,8 +294,6 @@ const REquset = () => {
 
 
   function insert(){
-
-    
 
     axios.post('http://ip0131.cafe24.com/pluslink/json/insertTest.php', JSON.stringify({
       wr_1 : listCate, //카테고리

@@ -22,6 +22,27 @@ import axios from "axios";
 //네비게이터로 화면을 넘겨올때 값을 받을 때는 route를 사용해야한다.
 
 const Company=(prop)=>{
+
+  function refreshData(tableName){
+    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+      id : tableName,
+    }))
+    .then(function (response) {
+      console.log('리스폰스 ',response);
+      if(response.request._response=='suc'){
+      }
+      else{
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  refreshData('g5_member')
+  refreshData('partners')
+  refreshData('g5_member')
+
   async function GetExpertise() {
     try {
       return await axios.get('http://ip0131.cafe24.com/pluslink/json/expertise.json');
@@ -91,6 +112,7 @@ const Company=(prop)=>{
     cate = [...set];
 
     console.log('중복체크  ',cate)
+    console.log('이상체크 : ',memberList[5])
 
     for(var i = 0;i<3;i++){
       for(var j =0;j<memberList.length;j++){

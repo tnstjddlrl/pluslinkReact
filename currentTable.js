@@ -46,7 +46,7 @@ const ItemPush = () =>{
 
     async function GetJson() {
         try {
-          return await axios.get('http://ip0131.cafe24.com/pluslink/g5_estimate_write.json');
+          return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_write_estimate.json');
         } catch (error) {
           console.log('에러 : ',error)
           return false;
