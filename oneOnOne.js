@@ -84,7 +84,7 @@ const OneonOne = () => {
       if(OneList.length !=0){
         console.log('1대1문의 숫자 : ',OneList.length)
         for(let i = 0;i<OneList.length;i++){
-          if(OneList[i].mb_id==newid.toLowerCase()){
+          if(OneList[i].mb_id.toLowerCase()==newid.toLowerCase()){
             var date = OneList[i].qa_datetime
             date = date.substring(0,10)
             if(OneList[i].qa_status=='1'){
@@ -94,7 +94,6 @@ const OneonOne = () => {
               var status = '대기'
               pushlist.push(<ListItem title={OneList[i].qa_subject} id={OneList[i].qa_id} name={OneList[i].mb_id} cate={OneList[i].qa_category} status={status} date={date}></ListItem>)
             }
-            
           }
         }
       }
