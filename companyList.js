@@ -317,7 +317,7 @@ const CompanyList = () => {
     if(expertise.length !=0&&patners.length !=0&&memberList.length !=0){
       if(listPlus=='전체'){
         for(var i =0;i<expertise.length;i++){
-          if(expertise[i].category==listCate){
+          if(expertise[i].category==listCate && expertise[i].state == '정상'){
             cate.push(expertise[i].mb_id)
           }
         }
@@ -326,11 +326,13 @@ const CompanyList = () => {
       }else{
         for(var i =0;i<expertise.length;i++){
           if(expertise[i].subcategory==listPlus){
-            for(var j=0;j<memberList;j++){
+            
+            for(var j=0;j<memberList.length;j++){
+              console.log('동작테스트 : ' , listPlus)
               if(expertise[i].mb_id==memberList[j].mb_id){
                 for(var x =0;x<patners.length;x++){
                   if(expertise[i].mb_id==patners[x].mb_id){
-                    List.Push(<ListItem id={expertise[i].mb_id} comname={patners[x].pt_name} score={patners[x].pt_score} content={memberList[j].mb_profile}></ListItem>)
+                    List.push(<ListItem id={expertise[i].mb_id} comname={patners[x].pt_name} score={patners[x].pt_score} content={memberList[j].mb_profile}></ListItem>)
                   }
                 }
               }

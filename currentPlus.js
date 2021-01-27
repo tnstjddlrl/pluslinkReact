@@ -43,7 +43,7 @@ const CurrentPlus = ({route}) =>{
             </View>
             <View style={{width:chartWidth-30,borderWidth:0.5,borderColor:'gray',marginTop:10}}></View>
             
-            <View style={{width:chartWidth-30,height:300,backgroundColor:'#e6e6e6',}}>
+            <View style={{width:chartWidth-30,backgroundColor:'#e6e6e6',}}>
               <View style={{backgroundColor:'white', width:chartWidth-60,marginLeft:15,marginTop:15}}>
                 
                 <PlusItem name='견적번호' num={route.params.num}></PlusItem>
@@ -63,9 +63,14 @@ const CurrentPlus = ({route}) =>{
                 </View>
 
                 <Text style={{marginTop:60,fontSize:18}}>댓글</Text>
-                <View style={{width:40,borderWidth:0.5,marginTop:5}}></View>
+                <View style={{width:40,borderWidth:0.5,marginTop:5,marginBottom:10}}></View>
 
-                <View></View>
+                <View>
+                  <View style={{width:chartWidth-60,height:50,borderWidth:0.5, borderRadius:10}}></View>
+                </View>
+
+                <Text style={{marginTop:60,fontSize:18}}>입찰현황</Text>
+                <View style={{width:40,borderWidth:0.5,marginTop:5,marginBottom:10}}></View>
 
               </View>
             </View>

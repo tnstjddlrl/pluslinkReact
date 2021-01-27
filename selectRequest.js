@@ -278,8 +278,8 @@ const SelectRequest = ({route}) => {
       }
     })
 
-    if(memberList.length!=0){
-      for(var i = 0;i<memberList;i++){
+    if(memberList.length!=0 && pwss == ''){
+      for(var i = 0;i<memberList.length;i++){
         if(memberList[i].mb_id==newid){
         setPwss(memberList[i].mb_password)
         setName(memberList[i].mb_name)

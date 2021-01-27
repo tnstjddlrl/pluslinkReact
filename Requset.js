@@ -281,9 +281,9 @@ const REquset = () => {
       }
     })
 
-    if(memberList.length!=0){
-      for(var i = 0;i<memberList;i++){
-        if(memberList[i].mb_id==newid){
+    if(memberList.length!=0&&pwss == ''){
+      for(var i = 0;i<memberList.length;i++){
+        if(memberList[i].mb_id==newid.toLowerCase()){
         setPwss(memberList[i].mb_password)
         setName(memberList[i].mb_name)
       }
@@ -294,6 +294,8 @@ const REquset = () => {
 
 
   function insert(){
+    console.log('비밀번호 테스트 : ',pwss)
+    console.log('이름테스트 : ',name)
 
     axios.post('http://ip0131.cafe24.com/pluslink/json/insertTest.php', JSON.stringify({
       wr_1 : listCate, //카테고리
