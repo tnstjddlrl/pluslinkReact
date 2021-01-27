@@ -372,7 +372,7 @@ const CompanyList = () => {
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
         <ScrollView>
-          <View style={{marginBottom:500}}>
+          <View style={{marginBottom:100}}>
                       <View style={{width:chartWidth,marginTop:50}}>
                         <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
                         </ImageBackground>

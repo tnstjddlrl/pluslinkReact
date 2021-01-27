@@ -22,9 +22,9 @@ import HeadHeder from "./header.js";
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
-var count = 0
+var count = 0 //무한렌더링 방지
 const InfoChange = () => {
-
+  const navigation = useNavigation()
   const [newid,setNewid] = useState('');
   
   async function isFavorite() {
@@ -80,6 +80,34 @@ const InfoChange = () => {
       }
     }
 
+    function changeData(){
+      axios.post('http://ip0131.cafe24.com/pluslink/json/updateMember.php', JSON.stringify({
+        id : newid,
+        password : pwd,
+        email:email,
+        hp:hp
+      }))
+      .then(function (response) {
+        console.log('리스폰스 ',response);
+        if(response.request._response=='suc'){
+        alert('로그인 되었습니다.')
+        fetchUser(id)
+        console.log (isFavorite());
+        navigation.navigate('홈');
+        }
+        else{
+          alert('변경되었습니다.')
+          navigation.navigate('홈');
+          count = 0
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+
+    }
+
 
 
   return(
@@ -120,9 +148,11 @@ const InfoChange = () => {
                 
               </View>
               <View style={{flexDirection:'row',alignSelf:'center'}}>
+                <TouchableOpacity onPress={()=>changeData()}>
                 <View style={{backgroundColor:"#d24dff",width:70,height:35,}}>
                   <Text style={{color:'white',alignSelf:'center',marginTop:10}}>정보수정</Text>
                 </View>
+                </TouchableOpacity>
                 <View style={{backgroundColor:"#404040",width:50,height:35,}}>
                   <Text style={{color:'white',alignSelf:'center',marginTop:10}}>취소</Text>
                 </View>
