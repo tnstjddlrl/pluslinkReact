@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {
   View,
   Text,
@@ -21,9 +21,43 @@ import { useNavigation } from '@react-navigation/native';
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-community/async-storage';
+import axios from "axios";
 
 
 const CurrentPlus = ({route}) =>{
+
+  async function GetJson() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/bidding.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
+  }
+
+  const [list,setlist] = useState([]);
+      useEffect(()=>{
+        if(list.length==0){
+            GetJson().then((res)=>{
+            setlist(res.data)
+            console.log(list)
+            })
+          }
+      })
+      var pay = []
+  const Payment = () =>{
+    if(list.length != 0){
+      for(var i = 0; i < list.length; i++){
+        if(list[i].wr_id == route.params.num){
+
+        }
+      }
+    }
+    return pay
+  }
+  
+
   return(
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
