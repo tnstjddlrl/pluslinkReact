@@ -110,7 +110,7 @@ const ReviewManage = () => {
                   </View>
                     <Text style={{marginLeft:10,marginRight:10}} numberOfLines={3}>{prop.content}</Text>
                   <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <TouchableOpacity onPress={()=>navigation.navigate('리뷰용견적요청서', {parant : prop.detail})}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('견적자세히보기', {num : prop.detail})}>
                     <View style={{height:25,backgroundColor:'black',margin:10,borderRadius:5}}>
                       <Text style={{color:'white',alignSelf:'center',margin:3}}>견적서보기</Text>
                     </View>

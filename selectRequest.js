@@ -60,6 +60,7 @@ const SelectRequest = ({route}) => {
 
   const [pwss,setPwss] =useState('') //비밀번호
   const [name,setName] =useState('') //이름
+  const [comno,setComno] =useState('') //시공업체의 파트너 번호
 
   const Subcate = ()=>{
     if(listCate=='전기&조명'){
@@ -267,7 +268,15 @@ const SelectRequest = ({route}) => {
       return false;
     }
   }
-
+  async function GetPatners() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/partners.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
+  }
+  const [patners,setPatners]=useState([])
   const [memberList,setMemberList] = useState([]);
     useEffect(()=>{
       if(memberList.length==0){
@@ -275,6 +284,11 @@ const SelectRequest = ({route}) => {
         GetMember().then((res)=>{
           setMemberList(res.data)
           })
+      }
+      if(patners.length==0){
+        GetPatners().then((res)=>{
+          setPatners(res.data)
+        })
       }
     })
 
@@ -284,6 +298,14 @@ const SelectRequest = ({route}) => {
         setPwss(memberList[i].mb_password)
         setName(memberList[i].mb_name)
       }
+      }
+    }
+
+    if(patners.length != 0 && comno == ''){
+      for(var i = 0; i<patners.length;i++){
+        if(patners[i].mb_id == route.params.comid){
+          setComno(patners[i].no)
+        }
       }
     }
 
@@ -297,6 +319,7 @@ const SelectRequest = ({route}) => {
         wr_5: chanAddr,//상세주소
         wr_7: date,//방문날짜
         wr_10: route.params.comid,
+        comno: comno,
         mb_id: newid,//아이디
         wr_password:pwss,//비번
         wr_name:name,//이름

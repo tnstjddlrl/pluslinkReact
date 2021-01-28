@@ -14,7 +14,8 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
-  Platform
+  Platform,
+  Alert
 } from "react-native";
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
@@ -25,7 +26,7 @@ import TestCom from './Component0.js';
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";
 
-
+import AsyncStorage from '@react-native-community/async-storage';
 import axios from "axios";
 
 const starimg =require('./img/review.png')
@@ -200,7 +201,30 @@ const ComLook=({route})=>{
       return scrollList
     }
 
+    const [newid,setNewid] = useState('');
+  
+    async function isFavorite() {
+      try {
+        return await AsyncStorage.getItem("@super:id");
+      } catch (error) {
+        return false;
+      }
+    }
     
+      const result = isFavorite().then((company_id) => {
+        setNewid(company_id)
+      });
+
+    function logtest(){
+      if(newid=='로그인해주세요'){
+        Alert.alert('로그인 후 이용해주세요.')
+        console.log('아이디 체크',newid)
+        navigation.navigate('로그인')
+      }else{
+        console.log('아이디 체크',newid)
+        navigation.navigate('지정의뢰',{comid:route.params.id})
+      }
+    }
 
     return(
       <View>
@@ -217,7 +241,7 @@ const ComLook=({route})=>{
               </View>}
 
             
-            <TouchableOpacity onPress={()=>navigation.navigate('지정의뢰',{comid:route.params.id})}>
+            <TouchableOpacity onPress={()=>logtest()}>
               <View style={{marginLeft:10,marginRight:10,width:chartWidth-20,height:50,justifyContent:'center',alignItems:'center',backgroundColor:'black',borderRadius:10,marginTop:20}}>
                 <Text style={{color:'white',fontWeight:'bold',fontSize:18}}>견적의뢰하기</Text>
               </View>
