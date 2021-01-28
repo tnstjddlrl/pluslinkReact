@@ -39,7 +39,7 @@ const CurrentPlus = ({route}) =>{
     }
     
       const result = isFavorite().then((company_id) => {
-        setNewid(company_id)
+        setNewid(company_id.toLowerCase())
       });
 
   async function GetJson() {
@@ -121,6 +121,7 @@ const CurrentPlus = ({route}) =>{
     function refreshData(id){
       axios.post('http://ip0131.cafe24.com/pluslink/json/cancelEstimate.php', JSON.stringify({
         id : id,
+        add_id:newid
       }))
       .then(function (response) {
         console.log('리스폰스 ',response);
@@ -132,7 +133,6 @@ const CurrentPlus = ({route}) =>{
       .catch(function (error) {
         console.log(error);
       });
-
       Alert.alert('취소가 완료되었습니다.')
       navigation.navigate('홈')
     }
@@ -152,11 +152,20 @@ const CurrentPlus = ({route}) =>{
                     <Text style={{margin:10}}>{prop.content}</Text>
                   </View>
                 </View>
-                <TouchableOpacity onPress={()=>refreshData(prop.num)}>
+
+                {(prop.state == '입찰대기' ) &&
+                  <TouchableOpacity onPress={()=>{refreshData(prop.num)}}>
                 <View style={{marginTop:15,marginLeft:15,width:chartWidth-90,height:50,backgroundColor:'#cc33ff',justifyContent:"center",alignItems:"center"}}>
                   <Text style={{color:'white',fontSize:18,fontWeight:'bold'}}>견적취소</Text>
                 </View>
-                </TouchableOpacity>
+                </TouchableOpacity>}
+
+                {(prop.state == '입찰진행중') &&
+                  <TouchableOpacity onPress={()=>{refreshData(prop.num)}}>
+                <View style={{marginTop:15,marginLeft:15,width:chartWidth-90,height:50,backgroundColor:'#cc33ff',justifyContent:"center",alignItems:"center"}}>
+                  <Text style={{color:'white',fontSize:18,fontWeight:'bold'}}>견적취소</Text>
+                </View>
+                </TouchableOpacity>}
       </View>
     )
   }
@@ -166,7 +175,7 @@ const CurrentPlus = ({route}) =>{
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
         <ScrollView>
-          <View style={{marginBottom:500}}>
+          <View style={{marginBottom:100}}>
                       <View style={{width:chartWidth,marginTop:50}}>
                         <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
                         </ImageBackground>
@@ -182,7 +191,7 @@ const CurrentPlus = ({route}) =>{
             <View style={{width:chartWidth-30,borderWidth:0.5,borderColor:'gray',marginTop:10}}></View>
             
             <View style={{width:chartWidth-30,backgroundColor:'#e6e6e6',}}>
-              <View style={{backgroundColor:'white', width:chartWidth-60,marginLeft:15,marginTop:15}}>
+              <View style={{backgroundColor:'white', width:chartWidth-60,marginLeft:15,marginTop:15,marginBottom:20}}>
                 <MainPush></MainPush>
 
                 
@@ -196,6 +205,8 @@ const CurrentPlus = ({route}) =>{
 
                 <Text style={{marginTop:60,fontSize:18}}>입찰현황</Text>
                 <View style={{width:40,borderWidth:0.5,marginTop:5,marginBottom:10}}></View>
+
+                <View style={{width:chartWidth-60,height:100,borderRadius:10,borderWidth:0.5}}></View>
 
               </View>
             </View>
