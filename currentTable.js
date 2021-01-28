@@ -116,7 +116,7 @@ const CurrentTable =({route}) =>{
         console.log(memberList[0].wr_id)
         console.log(memberList.length)
         for(let i = 0; i <list.length;i++){
-              if(list[i].mb_id==newid.toLowerCase()){
+              if(list[i].mb_id==newid.toLowerCase()&&list[i].wr_is_comment == 0){
                   var nDate = list[i].wr_datetime
                   var fDate = nDate.substring(0,10)
                   nDate = nDate.substring(5,10)

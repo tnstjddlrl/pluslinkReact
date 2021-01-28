@@ -212,7 +212,7 @@ const ComLook=({route})=>{
     }
     
       const result = isFavorite().then((company_id) => {
-        setNewid(company_id)
+        setNewid(company_id.toLowerCase())
       });
 
     function logtest(){
