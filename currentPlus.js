@@ -115,6 +115,7 @@ const CurrentPlus = ({route}) =>{
     return main
   }
 
+  const heart = require('./img/handhart.png')
 
   const MainContent = (prop) =>{
     const navigation = useNavigation()
@@ -196,17 +197,43 @@ const CurrentPlus = ({route}) =>{
 
                 
 
-                <Text style={{marginTop:60,fontSize:18}}>댓글</Text>
+                {/* <Text style={{marginTop:60,fontSize:18}}>댓글</Text>
                 <View style={{width:40,borderWidth:0.5,marginTop:5,marginBottom:10}}></View>
 
                 <View>
-                  <View style={{width:chartWidth-60,height:50,borderWidth:0.5, borderRadius:10}}></View>
-                </View>
+                  <View style={{width:chartWidth-60,height:50,borderWidth:0.5, borderRadius:10,borderColor:'gray'}}></View>
+                </View> */}
 
                 <Text style={{marginTop:60,fontSize:18}}>입찰현황</Text>
-                <View style={{width:40,borderWidth:0.5,marginTop:5,marginBottom:10}}></View>
+                <View style={{width:65,borderWidth:0.5,marginTop:5,marginBottom:10}}></View>
 
-                <View style={{width:chartWidth-60,height:100,borderRadius:10,borderWidth:0.5}}></View>
+                <View style={{width:chartWidth-60,borderRadius:10,borderWidth:0.5,borderColor:'gray',marginBottom:10}}>
+                  <View style={{alignItems:"center",flexDirection:"row",justifyContent:'space-between'}}>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                      <Image source={heart} style={{width:30,height:30,borderRadius:28,marginLeft:10,marginTop:10}}></Image>
+                      <Text style={{fontSize:17,marginLeft:5}}>업체이름</Text>
+                      <Text style={{fontSize:17,marginLeft:15}}>1000원</Text>
+                    </View>
+                    <View>
+                      <View style={{borderRadius:5,borderWidth:0.5,marginRight:10}}>
+                        <Text style={{margin:5,fontSize:17}}>업체정보</Text>
+                      </View>
+                    </View>
+                  </View>
+
+                  <View style={{width:chartWidth-80,borderWidth:0.5,marginLeft:10,marginTop:10}}></View>
+                  <Text style={{marginTop:10,marginLeft:10,marginRight:10}} numberOfLines={3}>본문</Text>
+
+                  <View style={{flexDirection:'row'}}>
+                    <View style={{borderRadius:5,width:chartWidth/2.6,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
+                      <Text style={{margin:10}}>입찰정보</Text>
+                    </View>
+
+                    <View style={{borderRadius:5,width:chartWidth/2.6,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
+                      <Text style={{margin:10}}>결제하기</Text>
+                    </View>
+                  </View>
+                </View>
 
               </View>
             </View>
