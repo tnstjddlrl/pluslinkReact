@@ -28,23 +28,23 @@ import AsyncStorage from '@react-native-community/async-storage';
 const TableItem = (prop) => {
     const navigation = useNavigation();
     return(
-                        <View>
-                        <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',marginLeft:10,marginRight:10}}>
-                            <View style={{alignItems:'center'}}>
-                                <Text>{prop.date}</Text>
-                                <Text>{prop.state}</Text>
-                            </View>
-                            <Text style={{width:35,}}>{prop.cate}</Text>
-                            <Text style={{width:40,}}>{prop.subcate}</Text>
-                            <Text style={{width:120,}} numberOfLines={2}>{prop.content}</Text>
-                            <TouchableOpacity onPress={()=>navigation.navigate('견적자세히보기',{num:prop.num, date:prop.date, fdate:prop.fdate, cate:prop.cate, subcate:prop.subcate, content:prop.content, state:prop.state, addr:prop.addr, subj:prop.subj,com:prop.com})}>
-                            <View style={{width:45,height:30,backgroundColor:'gray',alignItems:'center'}}>
-                                <Text style={{color:'white',marginTop:7}}>보기</Text>
-                            </View>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{width:chartWidth-20,borderWidth:1,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
-                        </View>
+      <View>
+      <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',marginLeft:10,marginRight:10}}>
+          <View style={{alignItems:'center'}}>
+              <Text>{prop.date}</Text>
+              <Text>{prop.state}</Text>
+          </View>
+          <Text style={{width:35,}}>{prop.cate}</Text>
+          <Text style={{width:40,}}>{prop.subcate}</Text>
+          <Text style={{width:120,}} numberOfLines={2}>{prop.content}</Text>
+          <TouchableOpacity onPress={()=>navigation.navigate('견적자세히보기',{num:prop.num, date:prop.date, fdate:prop.fdate, cate:prop.cate, subcate:prop.subcate, content:prop.content, state:prop.state, addr:prop.addr, subj:prop.subj,com:prop.com})}>
+          <View style={{width:45,height:30,backgroundColor:'gray',alignItems:'center'}}>
+              <Text style={{color:'white',marginTop:7}}>보기</Text>
+          </View>
+          </TouchableOpacity>
+      </View>
+      <View style={{width:chartWidth-20,borderWidth:1,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
+      </View>
     )
 }
 
@@ -116,7 +116,7 @@ const CurrentTable =({route}) =>{
         console.log(memberList[0].wr_id)
         console.log(memberList.length)
         for(let i = 0; i <list.length;i++){
-              if(list[i].mb_id==newid.toLowerCase()){
+              if(list[i].mb_id==newid.toLowerCase() && list[i].wr_is_comment == 0){
                   var nDate = list[i].wr_datetime
                   var fDate = nDate.substring(0,10)
                   nDate = nDate.substring(5,10)
@@ -138,12 +138,8 @@ const CurrentTable =({route}) =>{
                   }else if(list[i].wr_8 == listCate && listCate != '전체'){
                     List.push(<TableItem num={list[i].wr_id} date={nDate} fdate={fDate} cate={list[i].wr_1} subcate={list[i].wr_2} content={list[i].wr_content} state={list[i].wr_8} addr={addr} subj={list[i].wr_subject} com={comname}></TableItem>)
                   }
-                  
               }
-
-            
           }
-        
     }
     return List
     

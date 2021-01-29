@@ -63,14 +63,14 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
        <View style={{flexDirection:"row",alignItems:"center",width:chartWidth/1.5,justifyContent:"space-between",marginLeft:10,marginTop:80}}>
           <Text>견적비용</Text>
           <View style={{backgroundColor:'#cccccc'}}>
-            <Text style={{margin:5,width:150,fontSize:18}}>{prop.pay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
+            <Text style={{margin:5,width:150,fontSize:18}}>{prop.pay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원</Text>
           </View>
        </View>
 
        <View style={{flexDirection:"row",alignItems:"center",width:chartWidth/1.5,justifyContent:"space-between",marginLeft:10,marginTop:20}}>
           <Text>취소수수료</Text>
           <View style={{backgroundColor:'#cccccc'}}>
-            <Text style={{margin:5,width:150,fontSize:18}}>{prop.cancel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Text>
+            <Text style={{margin:5,width:150,fontSize:18}}>{prop.cancel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원</Text>
           </View>
        </View>
 
