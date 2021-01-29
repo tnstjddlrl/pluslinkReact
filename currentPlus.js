@@ -15,6 +15,7 @@ const chartWidth = Dimensions.get('window').width;
 
 const event = require('./img/eventBg.jpg')
 const arrow = require('./img/arrow02.png')
+const heart = require('./img/handhart.png')
 
 
 import { useNavigation } from '@react-navigation/native';
@@ -67,10 +68,30 @@ const CurrentPlus = ({route}) =>{
       return false;
     }
   }
+  async function GetBidding() {
+    try {
+        console.log('겟멤버 작동됨')
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/bidding.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
+  }
+  async function GetPatners() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/partners.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
+  }
 
   const [memberList,setMemberList] = useState([]);
   const [list,setlist] = useState([]);
   const [estimate,setEstimate] = useState([]);
+  const [patners,setPatners]=useState([])
+  const [bidding,setBidding] = useState([])
+
       useEffect(()=>{
         if(list.length==0){
             GetJson().then((res)=>{
@@ -88,6 +109,16 @@ const CurrentPlus = ({route}) =>{
             GetEstimate().then((res)=>{
             setEstimate(res.data)
             console.log(list)
+            })
+          }
+          if(bidding.length==0){
+            GetBidding().then((res)=>{
+              setBidding(res.data)
+            })
+          }
+          if(patners.length==0){
+            GetPatners().then((res)=>{
+              setPatners(res.data)
             })
           }
       })
@@ -113,6 +144,21 @@ const CurrentPlus = ({route}) =>{
       }
     }
     return main
+  }
+
+  function Paypush(){
+    if(bidding.length != 0){
+      for(var i = 0;i<bidding.length;i++){
+        if(bidding[i].wr_id==route.params.num && bidding[i].state=='입찰'){
+          for(var j = 0;j<patners.length;j++){
+            if(patners[j].mb_id==bidding[i].mb_id){
+              return <PayInfo name={patners[j].pt_name} id={patners[j].mb_id} pay={bidding[i].pay} no={bidding[i].no} content={bidding[i].info}></PayInfo>
+            }
+          }
+        }
+      }
+    }
+    return <View></View>
   }
 
   const heart = require('./img/handhart.png')
@@ -194,6 +240,7 @@ const CurrentPlus = ({route}) =>{
             <View style={{width:chartWidth-30,backgroundColor:'#e6e6e6',}}>
               <View style={{backgroundColor:'white', width:chartWidth-60,marginLeft:15,marginTop:15,marginBottom:20}}>
                 <MainPush></MainPush>
+                <Paypush></Paypush>
 
                 
 
@@ -204,36 +251,7 @@ const CurrentPlus = ({route}) =>{
                   <View style={{width:chartWidth-60,height:50,borderWidth:0.5, borderRadius:10,borderColor:'gray'}}></View>
                 </View> */}
 
-                <Text style={{marginTop:60,fontSize:18}}>입찰현황</Text>
-                <View style={{width:65,borderWidth:0.5,marginTop:5,marginBottom:10}}></View>
-
-                <View style={{width:chartWidth-60,borderRadius:10,borderWidth:0.5,borderColor:'gray',marginBottom:10}}>
-                  <View style={{alignItems:"center",flexDirection:"row",justifyContent:'space-between'}}>
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
-                      <Image source={heart} style={{width:30,height:30,borderRadius:28,marginLeft:10,marginTop:10}}></Image>
-                      <Text style={{fontSize:17,marginLeft:5}}>업체이름</Text>
-                      <Text style={{fontSize:17,marginLeft:15}}>1000원</Text>
-                    </View>
-                    <View>
-                      <View style={{borderRadius:5,borderWidth:0.5,marginRight:10}}>
-                        <Text style={{margin:5,fontSize:17}}>업체정보</Text>
-                      </View>
-                    </View>
-                  </View>
-
-                  <View style={{width:chartWidth-80,borderWidth:0.5,marginLeft:10,marginTop:10}}></View>
-                  <Text style={{marginTop:10,marginLeft:10,marginRight:10}} numberOfLines={3}>본문</Text>
-
-                  <View style={{flexDirection:'row'}}>
-                    <View style={{borderRadius:5,width:chartWidth/2.6,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
-                      <Text style={{margin:10}}>입찰정보</Text>
-                    </View>
-
-                    <View style={{borderRadius:5,width:chartWidth/2.6,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
-                      <Text style={{margin:10}}>결제하기</Text>
-                    </View>
-                  </View>
-                </View>
+                
 
               </View>
             </View>
@@ -249,6 +267,50 @@ const CurrentPlus = ({route}) =>{
       <HeadHeder></HeadHeder>
       <FootTer></FootTer>
     </View>
+  )
+}
+
+const PayInfo=(prop)=>{
+  const navigation = useNavigation()
+  return(
+    <View>
+    <Text style={{marginTop:60,fontSize:18}}>입찰현황</Text>
+                <View style={{width:65,borderWidth:0.5,marginTop:5,marginBottom:10}}></View>
+
+                <View style={{width:chartWidth-60,borderRadius:10,borderWidth:0.5,borderColor:'gray',marginBottom:10}}>
+                  <View style={{alignItems:"center",flexDirection:"row",justifyContent:'space-between'}}>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                      <Image source={heart} style={{width:30,height:30,borderRadius:28,marginLeft:10,marginTop:10}}></Image>
+                      <Text style={{fontSize:17,marginLeft:5}}>{prop.name}</Text>
+                      <Text style={{fontSize:17,marginLeft:15}}>{prop.pay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Text>
+                    </View>
+                    <View>
+                    <TouchableOpacity onPress={()=>navigation.navigate('회사자세히보기',{id:prop.id})}>
+                      <View style={{borderRadius:5,borderWidth:0.5,marginRight:10}}>
+                        <Text style={{margin:5,fontSize:17}}>업체정보</Text>
+                      </View>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+
+                  <View style={{width:chartWidth-80,borderWidth:0.5,marginLeft:10,marginTop:10}}></View>
+                  <Text style={{marginTop:10,marginLeft:10,marginRight:10}} numberOfLines={3}>{prop.content}</Text>
+
+                  <View style={{flexDirection:'row'}}>
+
+                    <TouchableOpacity onPress={()=>navigation.navigate('입찰정보',{bid:prop.no})}>
+                    <View style={{borderRadius:5,width:chartWidth/2.6,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
+                      <Text style={{margin:10}}>입찰정보</Text>
+                    </View>
+                    </TouchableOpacity>
+
+                    
+                    <View style={{borderRadius:5,width:chartWidth/2.6,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
+                      <Text style={{margin:10}}>결제하기</Text>
+                    </View>
+                  </View>
+                </View>
+                </View>
   )
 }
 

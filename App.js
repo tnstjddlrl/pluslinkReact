@@ -48,6 +48,7 @@ import ReviewManage from "./reviewManage.js"; //컴포넌트화 시킨 객체들
 import JsonTest from "./jsontest.js";
 import JsonTest2 from "./jsontest2.js";
 import ReviewPlus from "./reviewPlus.js";
+import PayInfo from "./payinfo.js";
 
 
 
@@ -254,6 +255,8 @@ function App2() {
           name="테스트"   component={JsonTest} />
           <Stack.Screen 
           name="테스트2"   component={JsonTest2} />
+          <Stack.Screen 
+          name="입찰정보"   component={PayInfo} />
       </Stack.Navigator>
     </NavigationContainer>
   );
