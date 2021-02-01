@@ -87,6 +87,7 @@ const App =({  }) =>{
   refreshData('g5_write_example')
   refreshData('g5_write_review')
   refreshData('partners')
+  refreshData('estimate_pay')
 
   const fetchUser = async()=>{
     AsyncStorage.setItem(

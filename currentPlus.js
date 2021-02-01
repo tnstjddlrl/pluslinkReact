@@ -16,6 +16,7 @@ const chartWidth = Dimensions.get('window').width;
 const event = require('./img/eventBg.jpg')
 const arrow = require('./img/arrow02.png')
 const heart = require('./img/handhart.png')
+const clock = require('./img/clock.png')
 
 
 import { useNavigation } from '@react-navigation/native';
@@ -122,6 +123,27 @@ const CurrentPlus = ({route}) =>{
             })
           }
       })
+
+      var stp = []
+      const StPush = () =>{
+        if(estimate.length != 0){
+          for(var i = 0; i <estimate.length; i++){
+            if(estimate[i].wr_parent==route.params.num && estimate[i].wr_is_comment == 1){
+              for(var j = 0; j<memberList.length;j++){
+                if(estimate[i].mb_id == memberList[j].mb_id){
+                  stp.push(<SmallText name={memberList[j].mb_name} id={estimate[i].mb_id} date={estimate[i].wr_datetime.substr(5,14)} content={estimate[i].wr_content}></SmallText>)
+                }
+              }
+            }
+          }
+        }
+        if(stp.length==0){
+          return <View><Text>등록된 댓글이 없습니다.</Text></View>
+        }
+        return stp
+      }
+
+
       var pay = []
   const Payment = () =>{
     if(list.length != 0){
@@ -139,7 +161,7 @@ const CurrentPlus = ({route}) =>{
     if(estimate.length != 0){
       for(var i = 0; i<estimate.length; i++){
         if(estimate[i].wr_id==route.params.num){
-          main.push(<MainContent content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={estimate[i].wr_9} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_10} addr={estimate[i].wr_4+' '+estimate[i].wr_5}></MainContent>)
+          main.push(<MainContent content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={estimate[i].wr_9} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4+' '+estimate[i].wr_5}></MainContent>)
         }
       }
     }
@@ -240,18 +262,29 @@ const CurrentPlus = ({route}) =>{
             <View style={{width:chartWidth-30,backgroundColor:'#e6e6e6',}}>
               <View style={{backgroundColor:'white', width:chartWidth-60,marginLeft:15,marginTop:15,marginBottom:20}}>
                 <MainPush></MainPush>
+
+                <Text style={{marginTop:60,fontSize:18}}>댓글</Text>
+                <View style={{width:40,borderWidth:0.5,marginTop:5,marginBottom:10}}></View>
+
+                <ScrollView horizontal={true}>
+                  <StPush></StPush>
+                </ScrollView>
+
+
+
+
                 <Paypush></Paypush>
 
                 
 
-                {/* <Text style={{marginTop:60,fontSize:18}}>댓글</Text>
-                <View style={{width:40,borderWidth:0.5,marginTop:5,marginBottom:10}}></View>
+                
 
-                <View>
+
+
+                {/* <View>
                   <View style={{width:chartWidth-60,height:50,borderWidth:0.5, borderRadius:10,borderColor:'gray'}}></View>
                 </View> */}
 
-                
 
               </View>
             </View>
@@ -269,6 +302,26 @@ const CurrentPlus = ({route}) =>{
     </View>
   )
 }
+
+const SmallText = (prop) =>{
+  return(
+    <View style={{marginLeft:10,borderWidth:0.5,borderRadius:5,borderColor:'gray'}}>
+      <View style={{margin:5}}>
+      <View style={{flexDirection:'row'}}>
+        <Text style={{fontWeight:'bold'}}>{prop.name}</Text>
+        <Text style={{fontWeight:'100'}}>({prop.id})</Text>
+      </View>
+      <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}> 
+        <Image source={clock} style={{width:10,height:10}}></Image>
+        <Text style={{fontSize:9,color:'gray'}}>{prop.date}</Text>
+      </View>
+      
+      <Text style={{marginTop:10}}>{prop.content}</Text>
+      </View>
+    </View>
+  )
+}
+
 
 const PayInfo=(prop)=>{
   const navigation = useNavigation()

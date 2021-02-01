@@ -23,6 +23,7 @@ import HeadHeder from "./header.js";
 import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
 const Register = () => {
+  const navigation = useNavigation()
   const [id,setId] = useState('')
   const [pwd,setPwd] =useState('')
   const [repwd,setRepwd] = useState('')
@@ -42,10 +43,10 @@ const Register = () => {
       console.log('리스폰스 ',response);
       if(response.request._response=='suc'){
       alert('회원가입 되었습니다.')
-      navigation.navigate('홈');
       }
       else{
-        alert('아이디 또는 비밀번호를 확인해주세요')
+        alert('회원가입이 완료되었습니다.')
+        navigation.navigate('홈');
         console.log(response)
       }
     })
