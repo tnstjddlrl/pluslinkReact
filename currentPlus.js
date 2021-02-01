@@ -158,13 +158,24 @@ const CurrentPlus = ({route}) =>{
 
   var main = []
   const MainPush = () =>{
-    if(estimate.length != 0){
+    for(var j = 0; j <patners.length;j++){
       for(var i = 0; i<estimate.length; i++){
         if(estimate[i].wr_id==route.params.num){
-          main.push(<MainContent content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={estimate[i].wr_9} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4+' '+estimate[i].wr_5}></MainContent>)
+          if(estimate[i].wr_subject=='일반견적'){
+            main.push(<MainContent content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={estimate[i].wr_9} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4+' '+estimate[i].wr_5}></MainContent>)
+            return main
+          }else{
+            if(estimate[i].wr_3==patners[j].no){
+              main.push(<MainContent content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={patners[j].pt_name} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4+' '+estimate[i].wr_5}></MainContent>)
+              return main
+            }
+          }
+          
         }
       }
     }
+      
+    
     return main
   }
 
@@ -207,13 +218,13 @@ const CurrentPlus = ({route}) =>{
     }
     return(
       <View>
-                <PlusItem name='견적번호' num={prop.num}></PlusItem>
-                <PlusItem name='상태' num={prop.state}></PlusItem>
-                {prop.subj == '지정견적' ? <PlusItem name='지정업체' num={prop.com}></PlusItem> : <View></View>}
-                <PlusItem name='카테고리' num={prop.cate}></PlusItem>
-                <PlusItem name='세부항목' num={prop.subcate}></PlusItem>
-                <PlusItem name='요청날짜' num={prop.fdate}></PlusItem>
-                <PlusItem name='시공주소' num={prop.addr}></PlusItem>
+                <PlusItem key={1} name='견적번호' num={prop.num}></PlusItem>
+                <PlusItem key={2} name='상태' num={prop.state}></PlusItem>
+                {prop.subj == '지정견적' ? <PlusItem key={3} name='지정업체' num={prop.com}></PlusItem> : <View></View>}
+                <PlusItem key={4} name='카테고리' num={prop.cate}></PlusItem>
+                <PlusItem key={5} name='세부항목' num={prop.subcate}></PlusItem>
+                <PlusItem key={6} name='요청날짜' num={prop.fdate}></PlusItem>
+                <PlusItem key={7} name='시공주소' num={prop.addr}></PlusItem>
 
                 <View style={{marginTop:15,marginLeft:15}}>
                   <Text style={{fontSize:16}}>상세내용</Text>
