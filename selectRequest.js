@@ -495,7 +495,7 @@ const SelectRequest = ({route}) => {
         <View style={{width:300, height:500,position:'absolute',margin:30}}>
           <Postcode
               jsOptions={{ animated: true }}
-              onSelected={(data) => {setText(JSON.stringify(data.address)),setShow(false)}}
+              onSelected={(data) => {setText(JSON.stringify(data.address).replace( /"/gi, '')),setShow(false)}}
           />
         </View>
         </Modal>

@@ -29,7 +29,7 @@ import axios from "axios";
 
 
 const CurrentPlus = ({route}) =>{
-
+  const navigation = useNavigation()
   const [newid,setNewid] = useState('');
   
     async function isFavorite() {
@@ -86,12 +86,21 @@ const CurrentPlus = ({route}) =>{
       return false;
     }
   }
+  async function GetPay() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/estimate_pay.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
+  }
 
   const [memberList,setMemberList] = useState([]);
   const [list,setlist] = useState([]);
   const [estimate,setEstimate] = useState([]);
   const [patners,setPatners]=useState([])
   const [bidding,setBidding] = useState([])
+  const [paylist,setPaylist] = useState([])
 
       useEffect(()=>{
         if(list.length==0){
@@ -122,10 +131,16 @@ const CurrentPlus = ({route}) =>{
               setPatners(res.data)
             })
           }
+          if(paylist.length==0){
+            GetPay().then((res)=>{
+              setPaylist(res.data)
+            })
+          }
       })
 
-      var stp = []
+      
       const StPush = () =>{
+        var stp = []
         if(estimate.length != 0){
           for(var i = 0; i <estimate.length; i++){
             if(estimate[i].wr_parent==route.params.num && estimate[i].wr_is_comment == 1){
@@ -179,19 +194,31 @@ const CurrentPlus = ({route}) =>{
     return main
   }
 
+  const [ispaied,setIspaied] = useState(false)
+  function isPay(){
+    for(var j = 0;j<paylist.length;j++){
+      if(paylist[j].wr_id==route.params.num){
+        setIspaied(true)
+      }
+    }
+  }
+
   function Paypush(){
+    isPay()
     if(bidding.length != 0){
       for(var i = 0;i<bidding.length;i++){
         if(bidding[i].wr_id==route.params.num && bidding[i].state=='입찰'){
           for(var j = 0;j<patners.length;j++){
             if(patners[j].mb_id==bidding[i].mb_id){
-              return <PayInfo name={patners[j].pt_name} id={patners[j].mb_id} pay={bidding[i].pay} no={bidding[i].no} content={bidding[i].info}></PayInfo>
+              return <PayInfo ispay={ispaied} name={patners[j].pt_name} id={patners[j].mb_id} pay={bidding[i].pay} no={bidding[i].no} content={bidding[i].info}></PayInfo>
             }
           }
         }
       }
     }
-    return <View></View>
+    return (<View>
+      <Text>입찰에 참여한 업체가 없습니다.</Text>
+    </View>)
   }
 
   const heart = require('./img/handhart.png')
@@ -250,6 +277,71 @@ const CurrentPlus = ({route}) =>{
     )
   }
   
+  const [stText,setStText] =useState('') //댓글
+  const [stLoad,setStLoad] =useState(true)
+
+  const [pwss,setPwss] =useState('') //비밀번호
+  const [name,setName] =useState('') //이름
+
+  if(memberList.length!=0&&pwss == ''){
+    for(var i = 0;i<memberList.length;i++){
+      if(memberList[i].mb_id==newid.toLowerCase()){
+      setPwss(memberList[i].mb_password)
+      setName(memberList[i].mb_name)
+    }
+    }
+  }
+
+  function refreshData(tableName){
+    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+      id : tableName,
+    }))
+    .then(function (response) {
+      console.log('리스폰스 ',response);
+      if(response.request._response=='suc'){
+      }
+      else{
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  useEffect(()=>{
+    refreshData('g5_write_estimate')
+  })
+
+  function insertSmall(){
+    setStLoad(false)
+    axios.post('http://ip0131.cafe24.com/pluslink/json/insertConmment.php', JSON.stringify({
+      wr_content : stText, //상세설명
+      mb_id: newid,//아이디
+      wr_password:pwss,//비번
+      wr_name:name,//이름
+      parent:route.params.num,
+    }))
+    .then(function (response) {
+      console.log('리스폰스 ',response.request._response);
+      if(response.request._response=='succ'){
+      }
+      else{
+        console.log(response.request._response)
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+    refreshData('g5_write_estimate')
+
+    setStText('')
+    setStLoad(true)
+
+    Alert.alert('댓글이 등록되었습니다.(댓글 반영은 앱을 재시작하면 적용됩니다.')
+
+  }
+  
 
   return(
     <View>
@@ -278,27 +370,40 @@ const CurrentPlus = ({route}) =>{
                 <View style={{width:40,borderWidth:0.5,marginTop:5,marginBottom:10}}></View>
 
                 <ScrollView horizontal={true}>
-                  <StPush></StPush>
+                  {stLoad&&<StPush></StPush>}
                 </ScrollView>
 
+                <View style={{justifyContent:'center',alignItems:"center",marginTop:15}}>
+                  <View style={{borderWidth:0.5,borderColor:'gray',width:chartWidth-80,height:130,backgroundColor:'#e6e6e6',alignItems:"center"}}>
+                    <View style={{backgroundColor:'white',width:chartWidth-100,height:80,marginTop:10,borderWidth:0.5,borderColor:'gray'}}>
+                      <TextInput  multiline ={true} style={{width:chartWidth-100,height:80}} onChangeText={(text)=>setStText(text)} value={stText}></TextInput>
+                    </View>
+                    <TouchableOpacity onPress={()=>insertSmall()}>
+                      <View style={{width:80,height:30,borderWidth:0.5,borderColor:'gray',marginTop:5,backgroundColor:'white',justifyContent:"center",alignItems:"center"}}>
+                        <Text style={{fontWeight:'bold'}}>등록</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
+                </View>
 
-
+                {ispaied ? <View>
+                <Text style={{marginTop:60,fontSize:18}}>낙찰현황</Text>
+                <View style={{width:65,borderWidth:0.5,marginTop:5,marginBottom:10}}></View>
+                </View> : <View>
+                <Text style={{marginTop:60,fontSize:18}}>입찰현황</Text>
+                <View style={{width:65,borderWidth:0.5,marginTop:5,marginBottom:10}}></View>
+                </View>}
 
                 <Paypush></Paypush>
-
                 
-
-                
-
-
-
-                {/* <View>
-                  <View style={{width:chartWidth-60,height:50,borderWidth:0.5, borderRadius:10,borderColor:'gray'}}></View>
-                </View> */}
-
-
               </View>
             </View>
+
+            <TouchableOpacity onPress={()=>navigation.goBack()}>
+            <View style={{backgroundColor:'black',width:60,height:30,justifyContent:"center",alignItems:'center' }}>
+              <Text style={{color:'white',fontWeight:'bold'}}>목록</Text>
+            </View>
+            </TouchableOpacity>
 
 
 
@@ -327,7 +432,7 @@ const SmallText = (prop) =>{
         <Text style={{fontSize:9,color:'gray'}}>{prop.date}</Text>
       </View>
       
-      <Text style={{marginTop:10}}>{prop.content}</Text>
+      <Text style={{marginTop:10,width:chartWidth/1.75}}>{prop.content}</Text>
       </View>
     </View>
   )
@@ -338,9 +443,6 @@ const PayInfo=(prop)=>{
   const navigation = useNavigation()
   return(
     <View>
-    <Text style={{marginTop:60,fontSize:18}}>입찰현황</Text>
-                <View style={{width:65,borderWidth:0.5,marginTop:5,marginBottom:10}}></View>
-
                 <View style={{width:chartWidth-60,borderRadius:10,borderWidth:0.5,borderColor:'gray',marginBottom:10}}>
                   <View style={{alignItems:"center",flexDirection:"row",justifyContent:'space-between'}}>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
@@ -360,19 +462,30 @@ const PayInfo=(prop)=>{
                   <View style={{width:chartWidth-80,borderWidth:0.5,marginLeft:10,marginTop:10}}></View>
                   <Text style={{marginTop:10,marginLeft:10,marginRight:10}} numberOfLines={3}>{prop.content}</Text>
 
-                  <View style={{flexDirection:'row'}}>
+                  
 
+                    {prop.ispay ? <TouchableOpacity onPress={()=>navigation.navigate('입찰정보',{bid:prop.no})}>
+                    <View style={{borderRadius:5,width:chartWidth-80,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
+                      <Text style={{margin:10}}>낙찰정보</Text>
+                    </View>
+                    </TouchableOpacity>
+                    :
+                    <View style={{flexDirection:'row'}}>
                     <TouchableOpacity onPress={()=>navigation.navigate('입찰정보',{bid:prop.no})}>
                     <View style={{borderRadius:5,width:chartWidth/2.6,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
                       <Text style={{margin:10}}>입찰정보</Text>
                     </View>
                     </TouchableOpacity>
 
-                    
+                    <TouchableOpacity>
                     <View style={{borderRadius:5,width:chartWidth/2.6,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
                       <Text style={{margin:10}}>결제하기</Text>
                     </View>
+                    </TouchableOpacity>
+
                   </View>
+                  }
+                  
                 </View>
                 </View>
   )
