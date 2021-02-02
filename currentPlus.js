@@ -443,51 +443,50 @@ const PayInfo=(prop)=>{
   const navigation = useNavigation()
   return(
     <View>
-                <View style={{width:chartWidth-60,borderRadius:10,borderWidth:0.5,borderColor:'gray',marginBottom:10}}>
-                  <View style={{alignItems:"center",flexDirection:"row",justifyContent:'space-between'}}>
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
-                      <Image source={heart} style={{width:30,height:30,borderRadius:28,marginLeft:10,marginTop:10}}></Image>
-                      <Text style={{fontSize:17,marginLeft:5}}>{prop.name}</Text>
-                      <Text style={{fontSize:17,marginLeft:15}}>{prop.pay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Text>
-                    </View>
-                    <View>
-                    <TouchableOpacity onPress={()=>navigation.navigate('회사자세히보기',{id:prop.id})}>
-                      <View style={{borderRadius:5,borderWidth:0.5,marginRight:10}}>
-                        <Text style={{margin:5,fontSize:17}}>업체정보</Text>
-                      </View>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
+      <View style={{width:chartWidth-60,borderRadius:10,borderWidth:0.5,borderColor:'gray',marginBottom:10}}>
+        <View style={{alignItems:"center",flexDirection:"row",justifyContent:'space-between'}}>
+          <View style={{flexDirection:'row',alignItems:'center'}}>
+            <Image source={heart} style={{width:30,height:30,borderRadius:28,marginLeft:10,marginTop:10}}></Image>
+            <Text style={{fontSize:17,marginLeft:5}}>{prop.name}</Text>
+            <Text style={{fontSize:17,marginLeft:15}}>{prop.pay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}원</Text>
+          </View>
+          <View>
+          <TouchableOpacity onPress={()=>navigation.navigate('회사자세히보기',{id:prop.id})}>
+            <View style={{borderRadius:5,borderWidth:0.5,marginRight:10}}>
+              <Text style={{margin:5,fontSize:17}}>업체정보</Text>
+            </View>
+            </TouchableOpacity>
+          </View>
+        </View>
 
-                  <View style={{width:chartWidth-80,borderWidth:0.5,marginLeft:10,marginTop:10}}></View>
-                  <Text style={{marginTop:10,marginLeft:10,marginRight:10}} numberOfLines={3}>{prop.content}</Text>
+        <View style={{width:chartWidth-80,borderWidth:0.5,marginLeft:10,marginTop:10}}></View>
+        <Text style={{marginTop:10,marginLeft:10,marginRight:10}} numberOfLines={3}>{prop.content}</Text>
 
-                  
+        
 
-                    {prop.ispay ? <TouchableOpacity onPress={()=>navigation.navigate('입찰정보',{bid:prop.no})}>
-                    <View style={{borderRadius:5,width:chartWidth-80,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
-                      <Text style={{margin:10}}>낙찰정보</Text>
-                    </View>
-                    </TouchableOpacity>
-                    :
-                    <View style={{flexDirection:'row'}}>
-                    <TouchableOpacity onPress={()=>navigation.navigate('입찰정보',{bid:prop.no})}>
-                    <View style={{borderRadius:5,width:chartWidth/2.6,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
-                      <Text style={{margin:10}}>입찰정보</Text>
-                    </View>
-                    </TouchableOpacity>
+          {prop.ispay ? <TouchableOpacity onPress={()=>navigation.navigate('입찰정보',{bid:prop.no})}>
+          <View style={{borderRadius:5,width:chartWidth-80,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
+            <Text style={{margin:10}}>낙찰정보</Text>
+          </View>
+          </TouchableOpacity>
+          :
+          <View style={{flexDirection:'row'}}>
+          <TouchableOpacity onPress={()=>navigation.navigate('입찰정보',{bid:prop.no})}>
+          <View style={{borderRadius:5,width:chartWidth/2.6,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
+            <Text style={{margin:10}}>입찰정보</Text>
+          </View>
+          </TouchableOpacity>
 
-                    <TouchableOpacity>
-                    <View style={{borderRadius:5,width:chartWidth/2.6,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
-                      <Text style={{margin:10}}>결제하기</Text>
-                    </View>
-                    </TouchableOpacity>
-
-                  </View>
-                  }
-                  
-                </View>
-                </View>
+          <TouchableOpacity>
+          <View style={{borderRadius:5,width:chartWidth/2.6,backgroundColor:'#d9d9d9',justifyContent:'center',alignItems:'center',marginLeft:10,marginTop:10,marginBottom:10}}>
+            <Text style={{margin:10}}>결제하기</Text>
+          </View>
+          </TouchableOpacity>
+        </View>
+        }
+        
+      </View>
+      </View>
   )
 }
 
