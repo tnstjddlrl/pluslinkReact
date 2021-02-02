@@ -31,8 +31,7 @@ const JsonTest2 = () => {
 
   const bootpay = useRef(<BootpayWebView/>);
 
-  const onPress = () => {  
-
+  const onPress = () => {
     const payload = {
       pg: 'inicis',  //['kcp', 'danal', 'inicis', 'nicepay', 'lgup', 'toss', 'payapp', 'easypay', 'jtnet', 'tpay', 'mobilians', 'payletter', 'onestore', 'welcome'] 중 택 1
       name: '입찰금', //결제창에 보여질 상품명
@@ -59,7 +58,7 @@ const JsonTest2 = () => {
       id: 'user_id_1234', //개발사에서 관리하는 회원고유번호 
       username: '홍길동', //구매자명
       email: 'user1234@gmail.com', //구매자 이메일
-      gender: 0, //성별, 1:남자 , 0:여자
+      gender: 1, //성별, 1:남자 , 0:여자
       birth: '1986-10-14', //생년월일 yyyy-MM-dd
       phone: '01012345678', //전화번호, 페이앱 필수 
       area: '서울', // [서울,인천,대구,광주,부산,울산,경기,강원,충청북도,충북,충청남도,충남,전라북도,전북,전라남도,전남,경상북도,경북,경상남도,경남,제주,세종,대전] 중 택 1
@@ -115,7 +114,6 @@ const onDone = (data) => {
 const onClose = () => {
   console.log('창닫힘');
 }
-
 
   return(
     <View style={{width:chartWidth,height:chartHeight}}>
