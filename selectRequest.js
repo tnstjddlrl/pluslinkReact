@@ -373,7 +373,7 @@ const SelectRequest = ({route}) => {
 
               <Text style={{marginTop:15,fontWeight:'bold'}}>지정업체</Text>
                 <View style={{borderWidth:1,borderColor:'#cccccc',width:chartWidth-50,marginTop:5,backgroundColor:'#ffcccc'}}>
-                <Text style={{margin:10,fontWeight:'100'}}>{route.params.comid}</Text>
+                <Text style={{margin:10,fontWeight:'100'}}>{route.params.comname}</Text>
               </View>
 
               <Text style = {

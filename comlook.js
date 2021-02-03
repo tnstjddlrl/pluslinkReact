@@ -111,7 +111,7 @@ const ComLook=({route})=>{
       return reviewlist
     }
 
-
+    const [comname,setComname] = useState('')
     var List = []
     const PushItem=()=>{
       if(expertise.length!=0 &&patners.length!=0&&memberList!=0){
@@ -119,6 +119,7 @@ const ComLook=({route})=>{
           if(patners[i].mb_id==route.params.id){
             for(var j =0;j<memberList.length;j++){
               if(patners[i].mb_id==memberList[j].mb_id){
+                setComname(patners[i].pt_name)
                 List.push(<Content name={patners[i].pt_name} star={patners[i].pt_score} content={memberList[j].mb_profile} img={patners[i].mb_id}></Content>)
               }
             }
@@ -222,7 +223,7 @@ const ComLook=({route})=>{
         navigation.navigate('로그인')
       }else{
         console.log('아이디 체크',newid)
-        navigation.navigate('지정의뢰',{comid:route.params.id})
+        navigation.navigate('지정의뢰',{comid:route.params.id,comname:comname})
       }
     }
 

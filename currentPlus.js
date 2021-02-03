@@ -33,10 +33,10 @@ const CurrentPlus = ({ route }) => {
 
   const bootpay = useRef(<BootpayWebView />);
 
-  const onPress = (price,name) => {
+  const onPress = (price, name) => {
     const payload = {
       pg: 'inicis',  //['kcp', 'danal', 'inicis', 'nicepay', 'lgup', 'toss', 'payapp', 'easypay', 'jtnet', 'tpay', 'mobilians', 'payletter', 'onestore', 'welcome'] 중 택 1
-      name: '낙찰_'+name, //결제창에 보여질 상품명
+      name: '낙찰_' + name, //결제창에 보여질 상품명
       order_id: '1234_1234', //개발사에 관리하는 주문번호 
       method: 'card',
       price: price //결제금액 
@@ -45,11 +45,11 @@ const CurrentPlus = ({ route }) => {
     //결제되는 상품정보들로 통계에 사용되며, price의 합은 결제금액과 동일해야함 
     const items = [
       {
-        item_name: '낙찰_'+name, //통계에 반영될 상품명 
+        item_name: '낙찰_' + name, //통계에 반영될 상품명 
         qty: 1, //수량 
         unique: 'ITEM_CODE_KEYBOARD', //개발사에서 관리하는 상품고유번호 
         price: price, //상품단가 
-        cat1: '낙찰_'+name, //카테고리 상 , 자유롭게 기술
+        cat1: '낙찰_' + name, //카테고리 상 , 자유롭게 기술
         cat2: '', //카테고리 중, 자유롭게 기술 
         cat3: '', //카테고리 하, 자유롭게 기술
       }
@@ -108,19 +108,40 @@ const CurrentPlus = ({ route }) => {
 
   const onConfirm = (data) => {
     console.log('confirm', data);
-    Alert.alert('결제가 완료되었습니다.')
     if (bootpay != null && bootpay.current != null) bootpay.current.transactionConfirm(data);
   }
 
   const onDone = (data) => {
     console.log('done', data);
     Alert.alert('결제가 완료되었습니다.')
+    nowPay(data.order_id)
   }
 
   const onClose = () => {
     console.log('창닫힘');
-    Alert.alert('결제를 취소하셨습니다.')
   }
+
+  const [pt_id, setPt_id] = useState('');
+
+  function nowPay(order_id) {
+    axios.post('http://ip0131.cafe24.com/pluslink/json/payConstruct.php', JSON.stringify({
+      pt_id: pt_id,
+      mb_id: newid,
+      order_id: order_id,
+      wr_id: route.params.num,
+    }))
+      .then(function (response) {
+        console.log('리스폰스 ', response);
+        if (response.request._response == 'suc') {
+        }
+        else {
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
 
   const PayInfo = (prop) => {
     const navigation = useNavigation()
@@ -160,7 +181,7 @@ const CurrentPlus = ({ route }) => {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={()=>onPress(prop.pay,prop.name)}>
+              <TouchableOpacity onPress={() => { setPt_id(prop.id), onPress(prop.pay, prop.name) }}>
                 <View style={{ borderRadius: 5, width: chartWidth / 2.6, backgroundColor: '#d9d9d9', justifyContent: 'center', alignItems: 'center', marginLeft: 10, marginTop: 10, marginBottom: 10 }}>
                   <Text style={{ margin: 10 }}>결제하기</Text>
                 </View>
@@ -321,7 +342,7 @@ const CurrentPlus = ({ route }) => {
     return pay
   }
 
-  const [sigongState,setSigongstate] = useState('');
+  const [sigongState, setSigongstate] = useState('');
   var main = []
   const MainPush = () => {
     for (var j = 0; j < patners.length; j++) {
@@ -342,15 +363,13 @@ const CurrentPlus = ({ route }) => {
         }
       }
     }
-
-
     return main
   }
 
   const [ispaied, setIspaied] = useState(false)
   function isPay() {
-    for (var j = 0; j < paylist.length; j++) {
-      if (paylist[j].wr_id == route.params.num) {
+    for (var j = 0; j < estimate.length; j++) {
+      if (estimate[j].wr_id == route.params.num && estimate[j].wr_9 != '') {
         setIspaied(true)
       }
     }
@@ -365,17 +384,15 @@ const CurrentPlus = ({ route }) => {
           for (var j = 0; j < patners.length; j++) {
             if (patners[j].mb_id == bidding[i].mb_id) {
               ppaayy.push(<PayInfo ispay={ispaied} name={patners[j].pt_name} id={patners[j].mb_id} pay={bidding[i].pay} no={bidding[i].no} content={bidding[i].info}></PayInfo>)
-
             }
           }
         }
       }
-      if(sigongState=='견적취소'){
+      if (sigongState == '견적취소') {
         return <View><Text>취소된 견적은 입찰정보를 확인할 수 없습니다.</Text></View>
-      }else{
+      } else {
         return ppaayy
       }
-      
     }
     return (<View>
       <Text>입찰에 참여한 업체가 없습니다.</Text>
@@ -385,7 +402,10 @@ const CurrentPlus = ({ route }) => {
   const heart = require('./img/handhart.png')
 
   const MainContent = (prop) => {
+    const [cancelView, setCanceView] = useState(false)
     const navigation = useNavigation()
+    const [cancelText,setCancelText] = useState('')
+
     function refreshData(id) {
       axios.post('http://ip0131.cafe24.com/pluslink/json/cancelEstimate.php', JSON.stringify({
         id: id,
@@ -404,6 +424,81 @@ const CurrentPlus = ({ route }) => {
       Alert.alert('취소가 완료되었습니다.')
       navigation.navigate('홈')
     }
+    function CancelData(id) {
+      axios.post('http://ip0131.cafe24.com/pluslink/json/sigongCancel.php', JSON.stringify({
+        id: id,
+        add_id: newid,
+        content: cancelText
+      }))
+        .then(function (response) {
+          console.log('리스폰스 ', response);
+          if (response.request._response == 'suc') {
+          }
+          else {
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      Alert.alert('취소가 완료되었습니다.')
+      navigation.navigate('홈')
+    }
+
+    const CancelModal = (prop) => {
+      return(
+        <Modal visible={cancelView} transparent={true}>
+          <View style={{ width: chartWidth - 40, height: chartHeight - 100, top: 60, backgroundColor: 'white', marginLeft: 20, borderWidth:0.5 }}>
+            <View style={{ flexDirection: 'row', width: chartWidth - 40, justifyContent: 'flex-end' }}>
+              <TouchableOpacity onPress={() => setCanceView(false)}>
+                <Text style={{ marginTop: 10, marginRight: 15, fontSize: 25, fontWeight: 'bold' }}>X</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{ width: chartWidth - 100, marginLeft: 30, }}>
+              <Text style={{ fontWeight: 'bold', marginTop: 30, marginBottom: 15 }}>취소사유</Text>
+              <View style={{ borderWidth: 0.5, borderColor: 'gray' }}>
+                <TextInput style={{ width: chartWidth - 100, height: 200 }} multiline={true} onChangeText={(text)=>setCancelText(text)} value={cancelText}></TextInput>
+              </View>
+              <Text style={{ color: 'red', fontWeight: 'bold',marginTop:10 }}># 취소시 고객 또는 업체의 동의 후 취소 및 환불이 진행됩니다.</Text>
+              <View style={{ width: chartWidth - 100, backgroundColor: '#e6e6e6', marginTop: 20 }}>
+                <View style={{margin:10}}>
+                  <Text style={{fontWeight:'bold'}}>환불규정</Text>
+                  <Text style={{fontWeight:'200',marginTop:20,width: chartWidth - 100}}>현재 견적의 취소수수료 : {prop.price}원</Text>
+                  <Text style={{fontWeight:'200',marginTop:10,width: chartWidth - 100}}>현재 견적의 방문 요청일 : {prop.date}</Text>
+                  <Text style={{fontWeight:'200',marginTop:10,width: chartWidth - 100}}>낙찰 당일 취소 {">"} 취소수수료 없음(0원)</Text>
+                  <Text style={{fontWeight:'200',marginTop:10,width: chartWidth - 100}}>(업체 방문전) 2일 이상 {">"} 취소수수료 없음(0원)</Text>
+                  <Text style={{fontWeight:'200',marginTop:10,width: chartWidth - 100}}>(업체 방문전) 1일전 {">"} 취소수수료 50%({prop.price / 2}원)</Text>
+                  <Text style={{fontWeight:'200',marginTop:10,width: chartWidth - 100}}>(업체 방문전) 당일취소 {">"} 취소수수료 100%({prop.price}원)</Text>
+                  <Text style={{fontWeight:'200',marginTop:10,width: chartWidth - 100}}>(업체 방문후) 소비자과실 {">"} 취소수수료 100%({prop.price}원)</Text>
+                  <Text style={{fontWeight:'200',marginTop:10,width: chartWidth - 100}}>(업체 방문후) 업체과실 {">"} 취소수수료 없음(0원)</Text>
+                </View>
+              </View>
+              <TouchableOpacity onPress={()=>CancelData(route.params.num)}>
+                <View style={{width:chartWidth-100,justifyContent:'center',alignItems:'center',backgroundColor:'#df80ff',marginTop:20}}>
+                  <Text style={{color:'white',margin:15,fontWeight:'bold'}}>확인</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+          </View>
+        </Modal>
+      )
+    }
+
+    var Cmodal = []
+    function ModalPush () {
+      for(var i = 0;i<bidding.length;i++){
+        if(bidding[i].wr_id == route.params.num){
+          for(var j = 0;j<estimate.length;j++){
+            if(estimate[j].wr_id == route.params.num){
+              Cmodal.push(<CancelModal price={bidding[i].cancel} date={estimate[j].wr_7}></CancelModal>)
+            }
+          }
+        }
+      }
+      return Cmodal
+    }
+
+
     return (
       <View>
         <PlusItem key={1} name='견적번호' num={prop.num}></PlusItem>
@@ -434,6 +529,16 @@ const CurrentPlus = ({ route }) => {
               <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>견적취소</Text>
             </View>
           </TouchableOpacity>}
+
+        {(prop.state == '시공진행중') &&
+          <TouchableOpacity onPress={() => { setCanceView(true) }}>
+            <View style={{ marginTop: 15, marginLeft: 15, width: chartWidth - 90, height: 50, backgroundColor: '#cc33ff', justifyContent: "center", alignItems: "center" }}>
+              <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>시공취소</Text>
+            </View>
+          </TouchableOpacity>}
+
+        <ModalPush></ModalPush>
+
       </View>
     )
   }
@@ -530,7 +635,7 @@ const CurrentPlus = ({ route }) => {
                   <Text style={{ marginTop: 60, fontSize: 18 }}>댓글</Text>
                   <View style={{ width: 40, borderWidth: 0.5, marginTop: 5, marginBottom: 10 }}></View>
 
-                  <ScrollView horizontal={true}>
+                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {stLoad && <StPush></StPush>}
                   </ScrollView>
 
@@ -605,7 +710,7 @@ const SmallText = (prop) => {
           <Text style={{ fontSize: 9, color: 'gray' }}>{prop.date}</Text>
         </View>
 
-        <Text style={{ marginTop: 10, width: chartWidth / 1.75 }}>{prop.content}</Text>
+        <Text style={{ marginTop: 10, width: chartWidth / 2.0 }}>{prop.content}</Text>
       </View>
     </View>
   )
