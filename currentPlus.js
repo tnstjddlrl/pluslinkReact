@@ -367,10 +367,12 @@ const CurrentPlus = ({ route }) => {
   }
 
   const [ispaied, setIspaied] = useState(false)
+  const [wr_9,setWr_9] = useState('');
   function isPay() {
     for (var j = 0; j < estimate.length; j++) {
       if (estimate[j].wr_id == route.params.num && estimate[j].wr_9 != '') {
         setIspaied(true)
+        setWr_9(estimate[j].wr_9)
       }
     }
   }
@@ -382,8 +384,14 @@ const CurrentPlus = ({ route }) => {
       for (var i = 0; i < bidding.length; i++) {
         if (bidding[i].wr_id == route.params.num && bidding[i].state == '입찰') {
           for (var j = 0; j < patners.length; j++) {
-            if (patners[j].mb_id == bidding[i].mb_id) {
-              ppaayy.push(<PayInfo ispay={ispaied} name={patners[j].pt_name} id={patners[j].mb_id} pay={bidding[i].pay} no={bidding[i].no} content={bidding[i].info}></PayInfo>)
+            if(ispaied){
+              if (patners[j].mb_id == bidding[i].mb_id && bidding[i].mb_id==wr_9) {
+                ppaayy.push(<PayInfo ispay={ispaied} name={patners[j].pt_name} id={patners[j].mb_id} pay={bidding[i].pay} no={bidding[i].no} content={bidding[i].info}></PayInfo>)
+              }
+            }else{
+              if (patners[j].mb_id == bidding[i].mb_id) {
+                ppaayy.push(<PayInfo ispay={ispaied} name={patners[j].pt_name} id={patners[j].mb_id} pay={bidding[i].pay} no={bidding[i].no} content={bidding[i].info}></PayInfo>)
+              }
             }
           }
         }
@@ -425,7 +433,7 @@ const CurrentPlus = ({ route }) => {
       navigation.navigate('홈')
     }
     function CancelData(id) {
-      axios.post('http://ip0131.cafe24.com/pluslink/json/sigongCancel.php', JSON.stringify({
+      axios.post('http://ip0131.cafe24.com/pluslink/json/sigonCancel.php', JSON.stringify({
         id: id,
         add_id: newid,
         content: cancelText
