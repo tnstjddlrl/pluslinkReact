@@ -1,4 +1,4 @@
-import React,{useState,Component,useEffect} from "react";
+import React, { useState, Component, useEffect } from "react";
 import {
   ScrollView,
   View,
@@ -61,22 +61,22 @@ const chartWidth = Dimensions.get('window').width; //현재 디바이스의 가�
 
 
 
-const App =({  }) =>{
+const App = ({ }) => {
 
-  function refreshData(tableName){
+  function refreshData(tableName) {
     axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
-      id : tableName,
+      id: tableName,
     }))
-    .then(function (response) {
-      console.log('리스폰스 ',response);
-      if(response.request._response=='suc'){
-      }
-      else{
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      .then(function (response) {
+        console.log('리스폰스 ', response);
+        if (response.request._response == 'suc') {
+        }
+        else {
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
   refreshData('bidding')
   refreshData('expertise')
@@ -89,7 +89,7 @@ const App =({  }) =>{
   refreshData('partners')
   refreshData('estimate_pay')
 
-  const fetchUser = async()=>{
+  const fetchUser = async () => {
     AsyncStorage.setItem(
       '@super:id',
       '로그인해주세요'
@@ -103,161 +103,161 @@ const App =({  }) =>{
       return false;
     }
   } //아이디값 가져오기
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     fetchUser()
     const result = isFavorite().then((company_id) => {
-      console.log('새 : ',company_id);
+      console.log('새 : ', company_id);
     });
-  },[]) //위의 두 함수를 앱이 빌드될때 한번만 실행하게끔 useEffect를 걸어줬다. [] 안에 변수를 넣으면 변수의 값이 변경될때마다 useEffect가 리빌드된다.
+  }, []) //위의 두 함수를 앱이 빌드될때 한번만 실행하게끔 useEffect를 걸어줬다. [] 안에 변수를 넣으면 변수의 값이 변경될때마다 useEffect가 리빌드된다.
 
-  
-  
 
-  
+
+
+
 
 
   const logo = { uri: "https://pluslink.kr/img/pluslink/logo.png" };
   const logo2 = { uri: "https://pluslink.kr/img/menu.png" };
   const navigation = useNavigation();
-  return(
+  return (
     <View>
       <View>
-      <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor:'white'}}>
-        {/* 메인 맨 위 배너 */}
-        <Banner></Banner>
+        <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: 'white' }}>
+          {/* 메인 맨 위 배너 */}
+          <Banner></Banner>
 
-        {/* 중단 카테고리 메뉴 */}
-        <Mmenu></Mmenu>
+          {/* 중단 카테고리 메뉴 */}
+          <Mmenu></Mmenu>
 
-        {/* 메인 업체 뷰 */}
-        {/* <TouchableOpacity onPress={()=>navigation.navigate('회사자세히보기',{name:'김업체'})}>
+          {/* 메인 업체 뷰 */}
+          {/* <TouchableOpacity onPress={()=>navigation.navigate('회사자세히보기',{name:'김업체'})}>
         <Company img={comImg} star='3.1' color='red' text='주방 수도, 인테리어 전문 업체입니다. 원하시는 디자인으로 깔끔하게 시공해드립니다.' addr='부산 남구'></Company>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>navigation.navigate('회사자세히보기',{name:'박업체'})}>
         <Company img={comImg2} star='3.8' color='blue' text='수도전문 동진설비입니다. 새로운 수도 설치 전문입니다!' addr='부산 사하구'></Company>
         </TouchableOpacity> */}
-        
 
 
-       {/* 이벤트 뷰 */}
-        <EEvent></EEvent>
 
-        {/* 우수시공사례 */}
-        <View>
-        <BestTwo></BestTwo>
-        </View>
+          {/* 이벤트 뷰 */}
+          <EEvent></EEvent>
 
-        {/* 메인 하단의 리뷰보기 */}
-        <REview></REview>
+          {/* 우수시공사례 */}
+          <View>
+            <BestTwo></BestTwo>
+          </View>
+
+          {/* 메인 하단의 리뷰보기 */}
+          <REview></REview>
 
         </ScrollView>
       </View>
-      
+
       <HeadHeder></HeadHeder>
-     
-      
-        
+
+
+
     </View>
   )
 }
 
-const starimg =require('./img/review.png')
+const starimg = require('./img/review.png')
 const comImg = require('./img/14.png')
-const comImg2 =require('./img/123.png')
+const comImg2 = require('./img/123.png')
 const maker = require('./img/main_marker.png')
 
-const ffimg =require('./img/b01.png')
-const ffimg2 =require('./img/b02.png')
-const ffimg3 =require('./img/b03.png')
-const ffimg4 =require('./img/b04.png')
+const ffimg = require('./img/b01.png')
+const ffimg2 = require('./img/b02.png')
+const ffimg3 = require('./img/b03.png')
+const ffimg4 = require('./img/b04.png')
 
 const logo = { uri: "https://pluslink.kr/img/pluslink/logo.png" };
 const logo2 = { uri: "https://pluslink.kr/img/menu.png" };
 const testlogo = require('./img/logo.png')
 
-const Eimg =require('./img/e_banner01.jpg')
-const Eimg2 =require('./img/e_banner02.jpg')
-const Eimg3 =require('./img/e_banner03.jpg')
+const Eimg = require('./img/e_banner01.jpg')
+const Eimg2 = require('./img/e_banner02.jpg')
+const Eimg3 = require('./img/e_banner03.jpg')
 
 //-------------------------스택 네비게이터를 위한 함수---------------------
 function App2() {
-  
+
   return (
     //실제론 앱이 빌드될때 전체 정보가 다 빌드된다. 하지만 맨 앞엔 홈이 자리잡고있기때문에 홈만 로딩된것 처럼 보인다.
     <NavigationContainer>
       <Stack.Navigator headerMode={"none"} mode='modal'>
-        <Stack.Screen 
+        <Stack.Screen
           name="홈"
           component={App}
-           />
-        <Stack.Screen 
+        />
+        <Stack.Screen
           name="로그인"
           component={Login}
-           />
-           <Stack.Screen 
+        />
+        <Stack.Screen
           name="회원가입"
           component={Register}
-           />
-        <Stack.Screen 
+        />
+        <Stack.Screen
           name="회사자세히보기"
           component={ComLook} />
-        <Stack.Screen 
+        <Stack.Screen
           name="회사테스트"
           component={Company} />
-        <Stack.Screen 
+        <Stack.Screen
           name="이벤트자세히보기"
           component={EventToPage} />
-        <Stack.Screen 
+        <Stack.Screen
           name="견적의뢰"
           component={REquset} />
-        <Stack.Screen 
+        <Stack.Screen
           name="견적현황"
           component={CurGyeon} />
-        <Stack.Screen 
+        <Stack.Screen
           name="푸터"
           component={FootTer} />
-          <Stack.Screen 
+        <Stack.Screen
           name="헤더"
           component={HeadHeder} />
-          <Stack.Screen 
-          name="정보변경" component = {PasswordCheck} />
-          <Stack.Screen 
-          name="이벤트목록"   component={EventList} />
-          <Stack.Screen 
-          name="1대1문의"   component={OneonOne} />
-          <Stack.Screen 
-          name="업체목록"   component={CompanyList} />
-          <Stack.Screen 
-          name="지정의뢰"   component={SelectRequest} />
-          <Stack.Screen 
-          name="1대1문의보기"   component={OneView} />
-          <Stack.Screen 
-          name="1대1문의쓰기"   component={OneWrite} />
-          <Stack.Screen 
-          name="마이페이지"   component={Mypage} />
-          <Stack.Screen 
-          name="견적테이블"   component={CurrentTable} />
-          <Stack.Screen 
-          name="견적자세히보기"   component={CurrentPlus} />
-          <Stack.Screen 
-          name="정보변경2"   component={InfoChange} />
-          <Stack.Screen 
-          name="취약계층인증"   component={InjuryPath} />
-          <Stack.Screen 
-          name="베스트보기"   component={BestView} />
-          <Stack.Screen 
-          name="결제관리"   component={PayManage} />
-          <Stack.Screen 
-          name="리뷰관리"   component={ReviewManage} />
-          <Stack.Screen 
-          name="리뷰용견적요청서"   component={ReviewPlus} />
-          <Stack.Screen 
-          name="테스트"   component={JsonTest} />
-          <Stack.Screen 
-          name="테스트2"   component={JsonTest2} />
-          <Stack.Screen 
-          name="입찰정보"   component={PayInfo} />
+        <Stack.Screen
+          name="정보변경" component={PasswordCheck} />
+        <Stack.Screen
+          name="이벤트목록" component={EventList} />
+        <Stack.Screen
+          name="1대1문의" component={OneonOne} />
+        <Stack.Screen
+          name="업체목록" component={CompanyList} />
+        <Stack.Screen
+          name="지정의뢰" component={SelectRequest} />
+        <Stack.Screen
+          name="1대1문의보기" component={OneView} />
+        <Stack.Screen
+          name="1대1문의쓰기" component={OneWrite} />
+        <Stack.Screen
+          name="마이페이지" component={Mypage} />
+        <Stack.Screen
+          name="견적테이블" component={CurrentTable} />
+        <Stack.Screen
+          name="견적자세히보기" component={CurrentPlus} />
+        <Stack.Screen
+          name="정보변경2" component={InfoChange} />
+        <Stack.Screen
+          name="취약계층인증" component={InjuryPath} />
+        <Stack.Screen
+          name="베스트보기" component={BestView} />
+        <Stack.Screen
+          name="결제관리" component={PayManage} />
+        <Stack.Screen
+          name="리뷰관리" component={ReviewManage} />
+        <Stack.Screen
+          name="리뷰용견적요청서" component={ReviewPlus} />
+        <Stack.Screen
+          name="테스트" component={JsonTest} />
+        <Stack.Screen
+          name="테스트2" component={JsonTest2} />
+        <Stack.Screen
+          name="입찰정보" component={PayInfo} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -276,7 +276,7 @@ function App2() {
 //           {
 //             islogin ? <Drawer.Screen name="마이페이지" name='   ' component={Mypage} /> : <Drawer.Screen name="회원가입" component = {Register} />
 //           }
-             
+
 //           <Drawer.Screen name="정보변경" component = {PasswordCheck} />
 //           <Drawer.Screen name="견적의뢰" component = {REquset} />
 //           <Drawer.Screen name="견적현황" component = {CurGyeon} />
@@ -284,7 +284,7 @@ function App2() {
 //           <Drawer.Screen name="이벤트목록"   component={EventList} options={{drawerLabel:'이벤트목록'}} />
 //           <Drawer.Screen name="1대1문의"   component={OneonOne} options={{drawerLabel:'1대1문의'}} />
 //           <Drawer.Screen name="업체목록"   component={CompanyList} options={{drawerLabel:'업체목록'}} />
-          
+
 //           <Drawer.Screen name="지정의뢰"   component={SelectRequest} options={{drawerLabel:''}} />
 //           <Drawer.Screen name="1대1문의보기"   component={OneView} options={{drawerLabel:''}} />
 //           <Drawer.Screen name="1대1문의쓰기"   component={OneWrite} options={{drawerLabel:''}} />
