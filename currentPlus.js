@@ -33,23 +33,23 @@ const CurrentPlus = ({ route }) => {
 
   const bootpay = useRef(<BootpayWebView />);
 
-  const onPress = () => {
+  const onPress = (price,name) => {
     const payload = {
       pg: 'inicis',  //['kcp', 'danal', 'inicis', 'nicepay', 'lgup', 'toss', 'payapp', 'easypay', 'jtnet', 'tpay', 'mobilians', 'payletter', 'onestore', 'welcome'] 중 택 1
-      name: '낙찰_수영테크', //결제창에 보여질 상품명
+      name: '낙찰_'+name, //결제창에 보여질 상품명
       order_id: '1234_1234', //개발사에 관리하는 주문번호 
       method: 'card',
-      price: 1000 //결제금액 
+      price: price //결제금액 
     }
 
     //결제되는 상품정보들로 통계에 사용되며, price의 합은 결제금액과 동일해야함 
     const items = [
       {
-        item_name: '입찰금', //통계에 반영될 상품명 
+        item_name: '낙찰_'+name, //통계에 반영될 상품명 
         qty: 1, //수량 
         unique: 'ITEM_CODE_KEYBOARD', //개발사에서 관리하는 상품고유번호 
-        price: 1000, //상품단가 
-        cat1: '입찰금', //카테고리 상 , 자유롭게 기술
+        price: price, //상품단가 
+        cat1: '낙찰_'+name, //카테고리 상 , 자유롭게 기술
         cat2: '', //카테고리 중, 자유롭게 기술 
         cat3: '', //카테고리 하, 자유롭게 기술
       }
@@ -160,7 +160,7 @@ const CurrentPlus = ({ route }) => {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={onPress}>
+              <TouchableOpacity onPress={()=>onPress(prop.pay,prop.name)}>
                 <View style={{ borderRadius: 5, width: chartWidth / 2.6, backgroundColor: '#d9d9d9', justifyContent: 'center', alignItems: 'center', marginLeft: 10, marginTop: 10, marginBottom: 10 }}>
                   <Text style={{ margin: 10 }}>결제하기</Text>
                 </View>
@@ -321,6 +321,7 @@ const CurrentPlus = ({ route }) => {
     return pay
   }
 
+  const [sigongState,setSigongstate] = useState('');
   var main = []
   const MainPush = () => {
     for (var j = 0; j < patners.length; j++) {
@@ -328,10 +329,12 @@ const CurrentPlus = ({ route }) => {
         if (estimate[i].wr_id == route.params.num) {
           if (estimate[i].wr_subject == '일반견적') {
             main.push(<MainContent content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={estimate[i].wr_9} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4 + ' ' + estimate[i].wr_5}></MainContent>)
+            setSigongstate(estimate[i].wr_8)
             return main
           } else {
             if (estimate[i].wr_3 == patners[j].no) {
               main.push(<MainContent content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={patners[j].pt_name} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4 + ' ' + estimate[i].wr_5}></MainContent>)
+              setSigongstate(estimate[i].wr_8)
               return main
             }
           }
@@ -367,7 +370,12 @@ const CurrentPlus = ({ route }) => {
           }
         }
       }
-      return ppaayy
+      if(sigongState=='견적취소'){
+        return <View><Text>취소된 견적은 입찰정보를 확인할 수 없습니다.</Text></View>
+      }else{
+        return ppaayy
+      }
+      
     }
     return (<View>
       <Text>입찰에 참여한 업체가 없습니다.</Text>

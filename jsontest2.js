@@ -31,13 +31,13 @@ const JsonTest2 = () => {
 
   const bootpay = useRef(<BootpayWebView/>);
 
-  const onPress = () => {
+  function onPress(price){
     const payload = {
       pg: 'inicis',  //['kcp', 'danal', 'inicis', 'nicepay', 'lgup', 'toss', 'payapp', 'easypay', 'jtnet', 'tpay', 'mobilians', 'payletter', 'onestore', 'welcome'] 중 택 1
       name: '입찰금', //결제창에 보여질 상품명
       order_id: '1234_1234', //개발사에 관리하는 주문번호 
       method: 'card',
-      price: 1000 //결제금액 
+      price: price //결제금액 
     }
 
     //결제되는 상품정보들로 통계에 사용되며, price의 합은 결제금액과 동일해야함 
@@ -46,7 +46,7 @@ const JsonTest2 = () => {
         item_name: '입찰금', //통계에 반영될 상품명 
         qty: 1, //수량 
         unique: 'ITEM_CODE_KEYBOARD', //개발사에서 관리하는 상품고유번호 
-        price: 1000, //상품단가 
+        price: 3000, //상품단가 
         cat1: '입찰금', //카테고리 상 , 자유롭게 기술
         cat2: '', //카테고리 중, 자유롭게 기술 
         cat3: '', //카테고리 하, 자유롭게 기술
@@ -118,7 +118,7 @@ const onClose = () => {
   return(
     <View style={{width:chartWidth,height:chartHeight}}>
       <TouchableOpacity
-            onPress={onPress}
+            onPress={onPress(3000)}
           >
             <Text style={{marginTop:200}}>Press Here</Text>
           </TouchableOpacity> 
