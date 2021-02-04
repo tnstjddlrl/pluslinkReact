@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  Modal
+  Modal,
+  Alert
 } from 'react-native';
 
 const chartHeight = Dimensions.get('window').height;
@@ -334,6 +335,21 @@ const REquset = () => {
 
 
   function insert() {
+
+    if(text=='기본주소'){
+      Alert.alert('기본주소를 입력해주세요')
+      return
+    }else if(chanAddr==''){
+      Alert.alert('기본주소를 입력해주세요')
+      return
+    }else if(date=='날짜를 입력해주세요'){
+      Alert.alert('기본주소를 입력해주세요')
+      return
+    }else if(value==''){
+      Alert.alert('상세설명을 입력해주세요')
+      return
+    }
+
     console.log('비밀번호 테스트 : ', pwss)
     console.log('이름테스트 : ', name)
 

@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  Modal
+  Modal,
+  Alert
 } from 'react-native';
 
 const chartHeight = Dimensions.get('window').height;
@@ -318,6 +319,21 @@ const SelectRequest = ({ route }) => {
   }
 
   function insert() {
+
+    if(text=='기본주소'){
+      Alert.alert('기본주소를 입력해주세요')
+      return
+    }else if(chanAddr==''){
+      Alert.alert('기본주소를 입력해주세요')
+      return
+    }else if(date=='날짜를 입력해주세요'){
+      Alert.alert('기본주소를 입력해주세요')
+      return
+    }else if(value==''){
+      Alert.alert('상세설명을 입력해주세요')
+      return
+    }
+
 
     axios.post('http://ip0131.cafe24.com/pluslink/json/selectRequest.php', JSON.stringify({
       wr_1: listCate, //카테고리
