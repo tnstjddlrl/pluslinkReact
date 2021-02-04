@@ -486,7 +486,6 @@ const CurrentPlus = ({ route }) => {
                 </View>
               </TouchableOpacity>
             </View>
-
           </View>
         </Modal>
       )
