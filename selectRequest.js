@@ -61,6 +61,14 @@ const SelectRequest = ({ route }) => {
   const [pwss, setPwss] = useState('') //비밀번호
   const [name, setName] = useState('') //이름
   const [comno, setComno] = useState('') //시공업체의 파트너 번호
+  
+  const SubItem = (prop) => {
+    return (
+      <TouchableOpacity onPress={() => { setListPlus(prop.sub), setSubselect(false) }}>
+        <Text style={{ left: 5, marginTop: 5 }}>{prop.sub}</Text>
+      </TouchableOpacity>
+    )
+  }
 
   const Subcate = () => {
     if (listCate == '전기&조명') {
@@ -492,31 +500,39 @@ const SelectRequest = ({ route }) => {
       <Subcate></Subcate>
 
       <Modal transparent={true} visible={show}>
-        <View style={{ width: 300, height: 500, position: 'absolute', margin: 30 }}>
-          <Postcode
-            jsOptions={{ animated: true }}
-            onSelected={(data) => { setText(JSON.stringify(data.address).replace(/"/gi, '')), setShow(false) }}
-          />
-        </View>
+        <TouchableOpacity onPress={() => setShow(false)}>
+          <View style={{ width: chartWidth, height: chartHeight }}>
+            <View style={{ width: chartWidth - 60, height: chartHeight - 100, position: 'absolute', marginLeft: 30, marginTop: 50, borderWidth: 0.5 }}>
+              <Postcode
+                jsOptions={{ animated: true }}
+                onSelected={(data) => { setText(JSON.stringify(data.address).replace(/"/gi, '')), setShow(false) }}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
       </Modal>
 
       <Modal transparent={true} visible={calShow}>
-        <View style={{ height: chartHeight / 2, top: chartHeight / 2.5 }}>
-          <Calendar
-            onDayPress={(day) => { console.log('selected day', day), setCalShow(false), setDate(day.dateString) }}
-            onDayLongPress={(day) => { console.log('selected day', day) }}
-            monthFormat={'yyyy MM'}
-            onMonthChange={(month) => { console.log('month changed', month) }}
-            hideExtraDays={false}
-            disableMonthChange={true}
-            firstDay={1}
-            hideDayNames={false}
-            showWeekNumbers={false}
-            onPressArrowLeft={substractMonth => substractMonth()}
-            onPressArrowRight={addMonth => addMonth()}
-            disableAllTouchEventsForDisabledDays={true}
-          />
-        </View>
+        <TouchableOpacity onPress={() => setCalShow(false)}>
+          <View style={{ width: chartWidth, height: chartHeight }}>
+            <View style={{ height: chartHeight / 2, top: chartHeight / 2.5 }}>
+              <Calendar
+                onDayPress={(day) => { console.log('selected day', day), setCalShow(false), setDate(day.dateString) }}
+                onDayLongPress={(day) => { console.log('selected day', day) }}
+                monthFormat={'yyyy MM'}
+                onMonthChange={(month) => { console.log('month changed', month) }}
+                hideExtraDays={false}
+                disableMonthChange={true}
+                firstDay={1}
+                hideDayNames={false}
+                showWeekNumbers={false}
+                onPressArrowLeft={substractMonth => substractMonth()}
+                onPressArrowRight={addMonth => addMonth()}
+                disableAllTouchEventsForDisabledDays={true}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
       </Modal>
 
     </View>
