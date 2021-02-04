@@ -195,12 +195,59 @@ const HeadHeder = () => {
         </View>
           </ImageBackground>
 
-           <TouchableOpacity onPress={()=>{navigation.navigate('업체목록'),setViewmenu(false)}}>
+           <TouchableOpacity onPress={()=>{navigation.navigate('업체목록',{cate:'전기&조명'}),setViewmenu(false)}}>
           <View style={{width:chartWidth/1.45, height:50,backgroundColor:'white',flexDirection:'row',alignItems:'center'}}>
-            <Text style={{margin:15,fontWeight:'bold',fontSize:15}}>업체목록</Text>
+            <Text style={{margin:15,fontWeight:'bold',fontSize:15}}>전기&조명</Text>
             <Image source={arrow} style={{position:'absolute', right:10,}}></Image>
           </View>
           </TouchableOpacity> 
+          <TouchableOpacity onPress={()=>{navigation.navigate('업체목록',{cate:'수도'}),setViewmenu(false)}}>
+          <View style={{width:chartWidth/1.45, height:50,backgroundColor:'white',flexDirection:'row',alignItems:'center'}}>
+            <Text style={{margin:15,fontWeight:'bold',fontSize:15}}>수도</Text>
+            <Image source={arrow} style={{position:'absolute', right:10,}}></Image>
+          </View>
+          </TouchableOpacity> 
+
+          <TouchableOpacity onPress={()=>{navigation.navigate('업체목록',{cate:'도배&장판'}),setViewmenu(false)}}>
+          <View style={{width:chartWidth/1.45, height:50,backgroundColor:'white',flexDirection:'row',alignItems:'center'}}>
+            <Text style={{margin:15,fontWeight:'bold',fontSize:15}}>도배&장판</Text>
+            <Image source={arrow} style={{position:'absolute', right:10,}}></Image>
+          </View>
+          </TouchableOpacity> 
+
+          <TouchableOpacity onPress={()=>{navigation.navigate('업체목록',{cate:'인테리어'}),setViewmenu(false)}}>
+          <View style={{width:chartWidth/1.45, height:50,backgroundColor:'white',flexDirection:'row',alignItems:'center'}}>
+            <Text style={{margin:15,fontWeight:'bold',fontSize:15}}>인테리어</Text>
+            <Image source={arrow} style={{position:'absolute', right:10,}}></Image>
+          </View>
+          </TouchableOpacity> 
+
+          <TouchableOpacity onPress={()=>{navigation.navigate('업체목록',{cate:'샷시&창호'}),setViewmenu(false)}}>
+          <View style={{width:chartWidth/1.45, height:50,backgroundColor:'white',flexDirection:'row',alignItems:'center'}}>
+            <Text style={{margin:15,fontWeight:'bold',fontSize:15}}>샷시&창호</Text>
+            <Image source={arrow} style={{position:'absolute', right:10,}}></Image>
+          </View>
+          </TouchableOpacity> 
+
+          <TouchableOpacity onPress={()=>{navigation.navigate('업체목록',{cate:'청소&철거'}),setViewmenu(false)}}>
+          <View style={{width:chartWidth/1.45, height:50,backgroundColor:'white',flexDirection:'row',alignItems:'center'}}>
+            <Text style={{margin:15,fontWeight:'bold',fontSize:15}}>청소&철거</Text>
+            <Image source={arrow} style={{position:'absolute', right:10,}}></Image>
+          </View>
+          </TouchableOpacity> 
+          <TouchableOpacity onPress={()=>{navigation.navigate('업체목록',{cate:'보일러&배관'}),setViewmenu(false)}}>
+          <View style={{width:chartWidth/1.45, height:50,backgroundColor:'white',flexDirection:'row',alignItems:'center'}}>
+            <Text style={{margin:15,fontWeight:'bold',fontSize:15}}>보일러&배관</Text>
+            <Image source={arrow} style={{position:'absolute', right:10,}}></Image>
+          </View>
+          </TouchableOpacity> 
+          <TouchableOpacity onPress={()=>{navigation.navigate('업체목록',{cate:'건물외부'}),setViewmenu(false)}}>
+          <View style={{width:chartWidth/1.45, height:50,backgroundColor:'white',flexDirection:'row',alignItems:'center'}}>
+            <Text style={{margin:15,fontWeight:'bold',fontSize:15}}>건물외부</Text>
+            <Image source={arrow} style={{position:'absolute', right:10,}}></Image>
+          </View>
+          </TouchableOpacity> 
+
 
           <TouchableOpacity onPress={()=>{navigation.navigate('테스트'),setViewmenu(false)}}>
           <View style={{width:chartWidth/1.45, height:50,backgroundColor:'white',flexDirection:'row',alignItems:'center'}}>
