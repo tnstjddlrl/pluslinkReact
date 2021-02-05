@@ -75,7 +75,7 @@ const BestView = ({route}) => {
       <View style={{height:chartHeight,width:chartWidth}}>
         <ScrollView style={{backgroundColor:'white'}}>
           {/* 상단 이미지 */}
-          <View style={{marginBottom:500}}>
+          <View style={{marginBottom:50}}>
                       <View style={{width:chartWidth,marginTop:50}}>
                         <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
                         </ImageBackground>

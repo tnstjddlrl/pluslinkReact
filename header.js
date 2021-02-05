@@ -101,7 +101,7 @@ const HeadHeder = () => {
             </TouchableOpacity>
             </View>
             
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('쇼핑몰')}>
             <View style={{left:chartWidth/1.8,top:50,width:75,height:35,backgroundColor:'#b84dff',
                   borderTopLeftRadius: 17,
                   borderTopRightRadius: 17,

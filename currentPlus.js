@@ -47,18 +47,13 @@ const CurrentPlus = ({ route }) => {
       });
   }
 
-  useEffect(()=>{
-    refreshData('g5_write_estimate')
-    refreshData('bidding')
-  },[route])
-
   const bootpay = useRef(<BootpayWebView />);
 
   const onPress = (price, name) => {
     const payload = {
       pg: 'inicis',  //['kcp', 'danal', 'inicis', 'nicepay', 'lgup', 'toss', 'payapp', 'easypay', 'jtnet', 'tpay', 'mobilians', 'payletter', 'onestore', 'welcome'] 중 택 1
       name: '낙찰_' + name, //결제창에 보여질 상품명
-      order_id: '1234_1234', //개발사에 관리하는 주문번호 
+      order_id: new Date().toLocaleTimeString()+'_'+newid, //개발사에 관리하는 주문번호 
       method: 'card',
       price: price //결제금액 
     }
@@ -130,9 +125,11 @@ const CurrentPlus = ({ route }) => {
 
   const onConfirm = (data) => {
     console.log('confirm', data);
+    Alert.alert('결제가 완료되었습니다2.')
     nowPay(data.order_id)
     refreshData('g5_write_estimate')
     setIsLoading(true)
+    navigation.goBack()
     if (bootpay != null && bootpay.current != null) bootpay.current.transactionConfirm(data);
   }
 
@@ -374,17 +371,28 @@ const CurrentPlus = ({ route }) => {
 
   const [sigongState, setSigongstate] = useState('');
   var main = []
+  var lastPay = false
+  const [lapay,setLapay] = useState(false)
   const MainPush = () => {
+    
+
+    for(var i = 0;i<paylist.length;i++){
+      if(paylist[i].wr_id == route.params.num && paylist[i].pay_state == '시공완료확정'){
+        lastPay = true
+        setLapay(true)
+      }
+    }
+
     for (var j = 0; j < patners.length; j++) {
       for (var i = 0; i < estimate.length; i++) {
         if (estimate[i].wr_id == route.params.num) {
           if (estimate[i].wr_subject == '일반견적') {
-            main.push(<MainContent content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={estimate[i].wr_9} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4 + ' ' + estimate[i].wr_5}></MainContent>)
+            main.push(<MainContent lastpay={lastPay} content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={estimate[i].wr_9} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4 + ' ' + estimate[i].wr_5}></MainContent>)
             setSigongstate(estimate[i].wr_8)
             return main
           } else {
             if (estimate[i].wr_3 == patners[j].no) {
-              main.push(<MainContent content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={patners[j].pt_name} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4 + ' ' + estimate[i].wr_5}></MainContent>)
+              main.push(<MainContent lastpay={lastPay} content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={patners[j].pt_name} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4 + ' ' + estimate[i].wr_5}></MainContent>)
               setSigongstate(estimate[i].wr_8)
               return main
             }
@@ -432,6 +440,8 @@ const CurrentPlus = ({ route }) => {
         ppaayy.push(<View>
           <Text>입찰에 참여한 업체가 없습니다.</Text>
         </View>)
+        return ppaayy
+      } else{
         return ppaayy
       }
     }
@@ -485,6 +495,24 @@ const CurrentPlus = ({ route }) => {
         });
       Alert.alert('취소가 완료되었습니다.')
       navigation.navigate('홈')
+    }
+    function sigongok(id){
+      axios.post('http://ip0131.cafe24.com/pluslink/json/sigonOkay.php', JSON.stringify({
+        id: id,
+        add_id: newid,
+      }))
+        .then(function (response) {
+          console.log('리스폰스 ', response);
+          if (response.request._response == 'suc') {
+          }
+          else {
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      Alert.alert('시공완료가 확정되었습니다.')
+      navigation.goBack()
     }
 
     const CancelModal = (prop) => {
@@ -580,6 +608,16 @@ const CurrentPlus = ({ route }) => {
               <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>시공취소</Text>
             </View>
           </TouchableOpacity>}
+        
+          {(prop.state == '시공완료' && lapay == false) &&
+          <TouchableOpacity onPress={() => { sigongok(prop.num)}}>
+            <View style={{ marginTop: 15, marginLeft: 15, width: chartWidth - 90, height: 50, backgroundColor: 'black', justifyContent: "center", alignItems: "center" }}>
+              <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>시공완료확정</Text>
+            </View>
+          </TouchableOpacity>}
+
+          {(prop.state == '시공완료' && lapay == true) && <View><Text style={{marginLeft:20,marginTop:20,fontWeight:'bold',fontSize:18}}>!시공완료가 확정되었습니다!</Text></View>}
+
 
         <ModalPush></ModalPush>
 
@@ -620,10 +658,11 @@ const CurrentPlus = ({ route }) => {
 
   useEffect(() => {
     refreshData('g5_write_estimate')
+    refreshData('bidding')
+    refreshData('estimate_pay')
   },[route])
 
   function insertSmall() {
-    setStLoad(false)
     axios.post('http://ip0131.cafe24.com/pluslink/json/insertConmment.php', JSON.stringify({
       wr_content: stText, //상세설명
       mb_id: newid,//아이디
@@ -646,9 +685,8 @@ const CurrentPlus = ({ route }) => {
     refreshData('g5_write_estimate')
 
     setStText('')
-    setStLoad(true)
-
-    Alert.alert('댓글이 등록되었습니다.(댓글 반영은 앱을 재시작하면 적용됩니다.')
+      navigation.goBack()
+    Alert.alert('댓글이 등록되었습니다.')
 
   }
 

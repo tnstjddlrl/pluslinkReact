@@ -50,6 +50,7 @@ import JsonTest2 from "./jsontest2.js";
 import ReviewPlus from "./reviewPlus.js";
 import PayInfo from "./payinfo.js";
 import SigongCancel from "./sigonCancel.js";
+import PnlMall from "./PnlMall.js";
 
 
 
@@ -261,6 +262,8 @@ function App2() {
           name="입찰정보" component={PayInfo} />
           <Stack.Screen
           name="시공취소" component={SigongCancel} />
+          <Stack.Screen
+          name="쇼핑몰" component={PnlMall} />
       </Stack.Navigator>
     </NavigationContainer>
   );

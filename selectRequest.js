@@ -93,6 +93,8 @@ const SelectRequest = ({ route }) => {
   }
 
   const Subcate = () => {
+
+
     if (listCate == '전기&조명') {
       return (
         <Modal transparent={true} visible={subSelect}>
@@ -106,7 +108,6 @@ const SelectRequest = ({ route }) => {
             <TouchableOpacity onPress={() => { setListPlus('cctv'), setSubselect(false) }}>
               <Text style={{ left: 5, marginTop: 5 }}>cctv</Text>
             </TouchableOpacity>
-
             <TouchableOpacity onPress={() => { setListPlus('인터폰 및 도어폰'), setSubselect(false) }}>
               <Text style={{ left: 5, marginTop: 5 }}>인터폰 및 도어폰</Text>
             </TouchableOpacity>
@@ -306,6 +307,16 @@ const SelectRequest = ({ route }) => {
       return false;
     }
   }
+  async function GetExpertise() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/expertise.json');
+    } catch (error) {
+      console.log('에러 : ', error)
+      return false;
+    }
+  }
+
+  const [expertise, setExpertise] = useState([])
   const [patners, setPatners] = useState([])
   const [memberList, setMemberList] = useState([]);
   useEffect(() => {
@@ -318,6 +329,11 @@ const SelectRequest = ({ route }) => {
     if (patners.length == 0) {
       GetPatners().then((res) => {
         setPatners(res.data)
+      })
+    }
+    if (expertise.length == 0) {
+      GetExpertise().then((res) => {
+        setExpertise(res.data)
       })
     }
   })
