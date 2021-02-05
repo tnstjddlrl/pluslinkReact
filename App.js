@@ -49,6 +49,7 @@ import JsonTest from "./jsontest.js";
 import JsonTest2 from "./jsontest2.js";
 import ReviewPlus from "./reviewPlus.js";
 import PayInfo from "./payinfo.js";
+import SigongCancel from "./sigonCancel.js";
 
 
 
@@ -258,6 +259,8 @@ function App2() {
           name="테스트2" component={JsonTest2} />
         <Stack.Screen
           name="입찰정보" component={PayInfo} />
+          <Stack.Screen
+          name="시공취소" component={SigongCancel} />
       </Stack.Navigator>
     </NavigationContainer>
   );

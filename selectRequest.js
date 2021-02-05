@@ -28,6 +28,7 @@ import { TextInput } from 'react-native-gesture-handler';
 
 import axios from "axios";
 import AsyncStorage from '@react-native-community/async-storage';
+import { ceil } from 'react-native-reanimated';
 
 const SelectRequest = ({ route }) => {
 
@@ -516,16 +517,20 @@ const SelectRequest = ({ route }) => {
       <Subcate></Subcate>
 
       <Modal transparent={true} visible={show}>
+        <View>
         <TouchableOpacity onPress={() => setShow(false)}>
-          <View style={{ width: chartWidth, height: chartHeight }}>
-            <View style={{ width: chartWidth - 60, height: chartHeight - 100, position: 'absolute', marginLeft: 30, marginTop: 50, borderWidth: 0.5 }}>
+          <View style={{backgroundColor:'white',width:60,height:60,borderRadius:28,marginTop:40,justifyContent:"center",alignItems:'center',borderWidth:0.5}}>
+            <Text style={{fontWeight:'bold',fontSize:28}}>X</Text>
+          </View>
+        </TouchableOpacity>
+            <View style={{ width: chartWidth - 60, height: chartHeight - 150, position: 'absolute', marginLeft: 30, marginTop: 100, borderWidth: 0.5 }}>
               <Postcode
                 jsOptions={{ animated: true }}
                 onSelected={(data) => { setText(JSON.stringify(data.address).replace(/"/gi, '')), setShow(false) }}
               />
             </View>
-          </View>
-        </TouchableOpacity>
+            </View>
+        
       </Modal>
 
       <Modal transparent={true} visible={calShow}>

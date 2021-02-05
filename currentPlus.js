@@ -30,6 +30,22 @@ import { BootpayWebView } from 'react-native-bootpay';
 
 
 const CurrentPlus = ({ route }) => {
+  const [isLoading, setIsLoading] = useState(false)
+  function refreshData(tableName) {
+    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+      id: tableName,
+    }))
+      .then(function (response) {
+        console.log('리스폰스 ', response);
+        if (response.request._response == 'suc') {
+        }
+        else {
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   const bootpay = useRef(<BootpayWebView />);
 
@@ -95,6 +111,7 @@ const CurrentPlus = ({ route }) => {
   const onCancel = (data) => {
     console.log('cancel', data);
     Alert.alert('결제를 취소하셨습니다.')
+    
   }
 
   const onError = (data) => {
@@ -108,13 +125,21 @@ const CurrentPlus = ({ route }) => {
 
   const onConfirm = (data) => {
     console.log('confirm', data);
+    nowPay(data.order_id)
+    refreshData('g5_write_estimate')
+    setIsLoading(true)
     if (bootpay != null && bootpay.current != null) bootpay.current.transactionConfirm(data);
   }
 
   const onDone = (data) => {
+    
     console.log('done', data);
     Alert.alert('결제가 완료되었습니다.')
     nowPay(data.order_id)
+    refreshData('g5_write_estimate')
+    setIsLoading(true)
+    
+    
   }
 
   const onClose = () => {
@@ -181,7 +206,7 @@ const CurrentPlus = ({ route }) => {
                 </View>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => { setPt_id(prop.id), onPress(prop.pay, prop.name) }}>
+              <TouchableOpacity onPress={() => { setPt_id(prop.id), onPress(prop.pay, prop.name) ,setIsLoading(false) }}>
                 <View style={{ borderRadius: 5, width: chartWidth / 2.6, backgroundColor: '#d9d9d9', justifyContent: 'center', alignItems: 'center', marginLeft: 10, marginTop: 10, marginBottom: 10 }}>
                   <Text style={{ margin: 10 }}>결제하기</Text>
                 </View>
@@ -413,6 +438,8 @@ const CurrentPlus = ({ route }) => {
     const [cancelView, setCanceView] = useState(false)
     const navigation = useNavigation()
     const [cancelText,setCancelText] = useState('')
+    const [price,setprice] = useState('')
+    const [date,setDate] = useState('')
 
     function refreshData(id) {
       axios.post('http://ip0131.cafe24.com/pluslink/json/cancelEstimate.php', JSON.stringify({
@@ -498,6 +525,8 @@ const CurrentPlus = ({ route }) => {
           for(var j = 0;j<estimate.length;j++){
             if(estimate[j].wr_id == route.params.num){
               Cmodal.push(<CancelModal price={bidding[i].cancel} date={estimate[j].wr_7}></CancelModal>)
+              setprice(bidding[i].cancel)
+              setDate(estimate[j].wr_7)
             }
           }
         }
@@ -538,7 +567,7 @@ const CurrentPlus = ({ route }) => {
           </TouchableOpacity>}
 
         {(prop.state == '시공진행중') &&
-          <TouchableOpacity onPress={() => { setCanceView(true) }}>
+          <TouchableOpacity onPress={() => { navigation.navigate('시공취소',{newid:newid,id:route.params.num,price:price,date:date}) }}>
             <View style={{ marginTop: 15, marginLeft: 15, width: chartWidth - 90, height: 50, backgroundColor: '#cc33ff', justifyContent: "center", alignItems: "center" }}>
               <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>시공취소</Text>
             </View>
