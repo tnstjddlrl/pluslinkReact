@@ -47,6 +47,11 @@ const CurrentPlus = ({ route }) => {
       });
   }
 
+  useEffect(()=>{
+    refreshData('g5_write_estimate')
+    refreshData('bidding')
+  },[route])
+
   const bootpay = useRef(<BootpayWebView />);
 
   const onPress = (price, name) => {
@@ -423,7 +428,10 @@ const CurrentPlus = ({ route }) => {
       }
       if (sigongState == '견적취소') {
         return <View><Text>취소된 견적은 입찰정보를 확인할 수 없습니다.</Text></View>
-      } else {
+      } else if(ppaayy == []) {
+        ppaayy.push(<View>
+          <Text>입찰에 참여한 업체가 없습니다.</Text>
+        </View>)
         return ppaayy
       }
     }
@@ -612,7 +620,7 @@ const CurrentPlus = ({ route }) => {
 
   useEffect(() => {
     refreshData('g5_write_estimate')
-  })
+  },[route])
 
   function insertSmall() {
     setStLoad(false)

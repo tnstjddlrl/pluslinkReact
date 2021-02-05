@@ -31,6 +31,26 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { ceil } from 'react-native-reanimated';
 
 const SelectRequest = ({ route }) => {
+  const navigation = useNavigation()
+
+  function refreshData(tableName) {
+    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+      id: tableName,
+    }))
+      .then(function (response) {
+        console.log('리스폰스 ', response);
+        if (response.request._response == 'suc') {
+        }
+        else {
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+    
+  
 
   const [newid, setNewid] = useState('');
 
@@ -352,13 +372,15 @@ const SelectRequest = ({ route }) => {
       .then(function (response) {
         console.log('리스폰스 ', response.request._response);
         if (response.request._response == 'succ') {
-          alert('로그인 되었습니다.')
+          
           fetchUser(id)
           console.log(isFavorite());
-          navigation.navigate('홈');
+          
         }
         else {
-          alert(response.request._response)
+          alert('견적 등록이 완료되었습니다..')
+          refreshData('g5_write_estimate')
+          navigation.navigate('홈');
         }
       })
       .catch(function (error) {
