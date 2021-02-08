@@ -68,8 +68,8 @@ const SelectRequest = ({ route }) => {
 
   const [select, setSelect] = useState(false)
   const [subSelect, setSubselect] = useState(false)
-  const [listCate, SetlistCate] = useState("전기&조명") //카테고리
-  const [listPlus, setListPlus] = useState('전기') //세부카테고리
+  const [listCate, SetlistCate] = useState("카테고리를 선택해주세요") //카테고리
+  const [listPlus, setListPlus] = useState('카테고리를 먼저 선택해주세요') //세부카테고리
 
   const [text, setText] = useState("기본주소");//주소용
   const [chanAddr, setChanAddr] = useState('');//상세주소
@@ -87,207 +87,32 @@ const SelectRequest = ({ route }) => {
   const SubItem = (prop) => {
     return (
       <TouchableOpacity onPress={() => { setListPlus(prop.sub), setSubselect(false) }}>
-        <Text style={{ left: 5, marginTop: 5 }}>{prop.sub}</Text>
+        <Text style={{ left: 5, margin:10, fontSize:18 }}>{prop.sub}</Text>
       </TouchableOpacity>
     )
   }
 
+
   const Subcate = () => {
-
-
-    if (listCate == '전기&조명') {
-      return (
-        <Modal transparent={true} visible={subSelect}>
-          <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 150 }}>
-            <TouchableOpacity onPress={() => { setListPlus('전기'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>전기</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('조명'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>조명</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('cctv'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>cctv</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('인터폰 및 도어폰'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>인터폰 및 도어폰</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('에어컨'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>에어컨</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('통신설비'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>통신설비</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('계전'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>계전</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('음향'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>음향</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      )
-    } else if (listCate == '수도') {
-      return (
-        <Modal transparent={true} visible={subSelect}>
-          <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 150 }}>
-            <TouchableOpacity onPress={() => { setListPlus('상하수도'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>상하수도</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('동파'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>동파</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('누수'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>누수</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => { setListPlus('소모품 교체'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>소모품 교체</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('악취제거'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>악취제거</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('방수공사'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>방수공사</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('결로'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>결로</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      )
-    } else if (listCate == '도배&장판') {
-      return (
-        <Modal transparent={true} visible={subSelect}>
-          <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 150 }}>
-            <TouchableOpacity onPress={() => { setListPlus('도배'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>도배</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('장판'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>장판</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('몰딩'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>몰딩</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => { setListPlus('바닥재 및 타일'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>바닥재 및 타일</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('줄눈시공'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>줄눈시공</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('곰팡이제거'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>곰팡이제거</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      )
-    } else if (listCate == '인테리어') {
-      return (
-        <Modal transparent={true} visible={subSelect}>
-          <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 150 }}>
-            <TouchableOpacity onPress={() => { setListPlus('화장실 리모델링'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>화장실 리모델링</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('부엌 리모델링'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>부엌 리모델링</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('종합 인테리어'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>종합 인테리어</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      )
-    } else if (listCate == '샷시&창호') {
-      return (
-        <Modal transparent={true} visible={subSelect}>
-          <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 150 }}>
-            <TouchableOpacity onPress={() => { setListPlus('샷시'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>샷시</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('창호'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>창호</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      )
-    } else if (listCate == '청소&철거') {
-      return (
-        <Modal transparent={true} visible={subSelect}>
-          <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 150 }}>
-            <TouchableOpacity onPress={() => { setListPlus('입주청소'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>입주청소</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('건물청소'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>건물청소</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('에어컨청소'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>에어컨청소</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => { setListPlus('세탁기청소'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>세탁기청소</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('철거 및 처리'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>철거 및 처리</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('방역'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>방역</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('가사도우미'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>가사도우미</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('상가복구'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>상가복구</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      )
-    } else if (listCate == '보일러&배관') {
-      return (
-        <Modal transparent={true} visible={subSelect}>
-          <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 150 }}>
-            <TouchableOpacity onPress={() => { setListPlus('보일러'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>보일러</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('배관공사'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>배관공사</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      )
-    } else if (listCate == '건물외부') {
-      return (
-        <Modal transparent={true} visible={subSelect}>
-          <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 150 }}>
-            <TouchableOpacity onPress={() => { setListPlus('외벽크랙'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>외벽크랙</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('지붕 및 담장'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>지붕 및 담장</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('울타리 및 펜스'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>울타리 및 펜스</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => { setListPlus('미장'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>미장</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('석재'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>석재</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('어닝 및 천막'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>어닝 및 천막</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('간판'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>간판</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('빗물받이'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>상가복구</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
-      )
+    var subP = []
+    for(var i = 0; i<expertise.length;i++){
+      if(expertise[i].category == listCate && expertise[i].mb_id == route.params.comid && expertise[i].state == '정상'){
+        subP.push(<SubItem sub={expertise[i].subcategory}></SubItem>)
+      }
     }
+    const Push = () =>{
+      console.log(subP)
+      return subP
+    }
+      return (
+        <Modal transparent={true} visible={subSelect}>
+          <TouchableOpacity style={{width:chartWidth,height:chartHeight}} onPress={()=>setSubselect(false)}>
+          <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: chartHeight/3 }}>
+            <Push></Push>
+          </View>
+          </TouchableOpacity>
+        </Modal>
+      )
   }
 
   async function GetMember() {
@@ -404,6 +229,34 @@ const SelectRequest = ({ route }) => {
       });
   }
 
+const MainItem = (prop) => {
+  return(
+    <TouchableOpacity onPress={() => { SetlistCate(prop.tem), setSelect(false), setListPlus('세부항목을 선택해주세요') }}>
+            <Text style={{ left: 5, margin:10 ,fontSize:18}}>{prop.tem}</Text>
+          </TouchableOpacity>
+  )
+}
+
+function MainPush(){
+  var maincate = []
+  var mainP = []
+  for(var i = 0;i<expertise.length;i++){
+    if(expertise[i].mb_id==route.params.comid && expertise[i].state == '정상'){
+      maincate.push(expertise[i].category)
+    }
+  }
+
+  const set = new Set(maincate);
+  maincate = [...set];
+
+  for(var i = 0;i<maincate.length;i++){
+    mainP.push(<MainItem tem={maincate[i]}></MainItem>)
+  }
+
+  return mainP
+}
+
+
 
 
   return (
@@ -490,7 +343,7 @@ const SelectRequest = ({ route }) => {
 
               <Text style={{ fontWeight: 'bold', marginTop: 10 }}>상세설명</Text>
               <TextInput
-                style={{ height: 150, width: chartWidth - 30, marginTop: 10, borderColor: 'gray', borderWidth: 0.5 }}
+                style={{ height: 100, width: chartWidth - 30, marginTop: 10, borderColor: 'gray', borderWidth: 0.5 }}
                 onChangeText={text => onChangeText(text)}
                 value={value}
                 placeholder="내용을 입력해주세요."
@@ -523,33 +376,11 @@ const SelectRequest = ({ route }) => {
 
 
       <Modal transparent={true} visible={select}>
+        <TouchableOpacity style={{width:chartWidth,height:chartHeight}} onPress={()=>setSelect(false)}>
         <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 150 }}>
-          <TouchableOpacity onPress={() => { SetlistCate('전기&조명'), setSelect(false), setListPlus('전기') }}>
-            <Text style={{ left: 5, marginTop: 5 }}>전기&조명</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => { SetlistCate('수도'), setSelect(false), setListPlus('상하수도') }}>
-            <Text style={{ left: 5, marginTop: 5 }}>수도</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => { SetlistCate('도배&장판'), setSelect(false), setListPlus('도배') }}>
-            <Text style={{ left: 5, marginTop: 5 }}>도배&장판</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => { SetlistCate('인테리어'), setSelect(false), setListPlus('화장실 리모델링') }}>
-            <Text style={{ left: 5, marginTop: 5 }}>인테리어</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => { SetlistCate('샷시&창호'), setSelect(false), setListPlus('샷시') }}>
-            <Text style={{ left: 5, marginTop: 5 }}>샷시&창호</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => { SetlistCate('청소&철거'), setSelect(false), setListPlus('입주청소') }}>
-            <Text style={{ left: 5, marginTop: 5 }}>청소&철거</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => { SetlistCate('보일러&배관'), setSelect(false), setListPlus('보일러') }}>
-            <Text style={{ left: 5, marginTop: 5 }}>보일러&배관</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => { SetlistCate('건물외부'), setSelect(false), setListPlus('외벽크랙') }}>
-            <Text style={{ left: 5, marginTop: 5 }}>건물외부</Text>
-          </TouchableOpacity>
+          <MainPush></MainPush>
         </View>
+        </TouchableOpacity>
       </Modal>
 
       <Subcate></Subcate>

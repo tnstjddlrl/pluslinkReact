@@ -29,7 +29,7 @@ const FootTer = () => {
     }
     
     useEffect(()=>{
-      const result = isFavorite().then((company_id) => {
+        isFavorite().then((company_id) => {
         setNewid(company_id)
       });
     })
