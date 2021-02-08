@@ -102,7 +102,7 @@ const TitleItem =(prop) =>{
     <View>
     <View style={{flexDirection:'row',alignItems:'center',marginTop:25,marginLeft:20}}>
     <Image source={{uri:prop.img}} style={{backgroundColor:'gray',borderRadius:28,width:60,height:60}}></Image>
-      <Text style={{marginLeft:5,fontSize:18,fontWeight:'bold',width:chartWidth/1.3}} numberOfLines={1}>{prop.title}</Text>
+      <Text style={{marginLeft:5,fontSize:18,fontWeight:'bold',width:chartWidth/1.3}} >{prop.title}</Text>
   </View>
 
   {/* 작성자 전화번호 이메일 일시 */}
@@ -119,7 +119,7 @@ const TitleItem =(prop) =>{
   </View>
 
   <View>
-      <WebView style={{width:chartWidth,height:500,marginTop:20}} source={{html: prop.main}}></WebView>
+      <WebView style={{width:chartWidth,height:500,marginTop:20}} source={{html: '<style>img { width: 800px;}</style>'+prop.main}}></WebView>
     </View>
   </View>
   )

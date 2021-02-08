@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Platform,
   Modal,
-  ImageBackground
+  ImageBackground,
+  Linking
 } from "react-native";
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
@@ -101,7 +102,7 @@ const HeadHeder = () => {
             </TouchableOpacity>
             </View>
             
-            <TouchableOpacity onPress={()=>navigation.navigate('쇼핑몰')}>
+            <TouchableOpacity onPress={ ()=>{ Linking.openURL('https://pluslink.kr/shop/')}}>
             <View style={{left:chartWidth/1.8,top:50,width:75,height:35,backgroundColor:'#b84dff',
                   borderTopLeftRadius: 17,
                   borderTopRightRadius: 17,
