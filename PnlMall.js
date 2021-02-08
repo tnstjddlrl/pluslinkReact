@@ -6,7 +6,8 @@ import {
   Dimensions,
   TouchableOpacity,
   Image,
-  ScrollView
+  ScrollView,
+  SafeAreaView
 } from 'react-native';
 
 const chartHeight = Dimensions.get('window').height;
@@ -24,7 +25,9 @@ import WebView from 'react-native-webview';
 
 const PnlMall = () => {
   return(
-    <WebView style={{height:chartHeight-30,width:chartWidth,marginTop:30}} source={{uri: 'https://pluslink.kr/shop/'}}></WebView>
+    <SafeAreaView style={{height:chartHeight,width:chartWidth}}>
+    <WebView style={{height:chartHeight,width:chartWidth}} source={{uri: 'https://pluslink.kr/shop/'}}></WebView>
+    </SafeAreaView>
   )
 }
 
