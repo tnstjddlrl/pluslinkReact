@@ -24,7 +24,7 @@ import axios from "axios";
 import { useNavigation } from '@react-navigation/native';
 
 
-const Gongzi = () => {
+const GongziPlus = ({route}) => {
 
   const [OneList,setOneList] = useState([]);
 
@@ -49,7 +49,7 @@ const Gongzi = () => {
     var pp = []
     const PushItem = () => {
       for(var i = 0;i<OneList.length;i++){
-        pp.push(<Mitem time={OneList[i].wr_datetime.substring(0,10)} title={OneList[i].wr_subject} id={OneList[i].wr_id}></Mitem>)
+        pp.push(<Mitem time={OneList[i].wr_datetime.substring(0,10)} title={OneList[i].wr_subject}></Mitem>)
       }
       return pp
     }
@@ -80,9 +80,8 @@ const Gongzi = () => {
 }
 
 const Mitem = (prop) =>{
-  const navigation = useNavigation()
   return(
-    <TouchableOpacity onPress={()=>navigation.navigate('공지사항상세',{id:prop.id})}>
+    <TouchableOpacity>
     <View style={{marginLeft:10,marginTop:20}}>
       <View style={{flexDirection:'row',marginBottom:5}}>
       <Text style={{fontSize:15}}>{prop.time}</Text>
@@ -94,4 +93,4 @@ const Mitem = (prop) =>{
   )
 }
 
-export default Gongzi;
+export default GongziPlus;

@@ -54,6 +54,7 @@ import SigongCancel from "./sigonCancel.js";
 import PnlMall from "./PnlMall.js";
 import Faq from "./faq.js";
 import Gongzi from "./gongzi.js";
+import GongziPlus from "./gongziPlus.js";
 
 
 
@@ -271,6 +272,8 @@ function App2() {
           name="자주묻는질문" component={Faq} />
           <Stack.Screen
           name="공지사항" component={Gongzi} />
+          <Stack.Screen
+          name="공지사항상세" component={GongziPlus} />
       </Stack.Navigator>
     </NavigationContainer>
   );
