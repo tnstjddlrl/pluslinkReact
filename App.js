@@ -51,6 +51,8 @@ import ReviewPlus from "./reviewPlus.js";
 import PayInfo from "./payinfo.js";
 import SigongCancel from "./sigonCancel.js";
 import PnlMall from "./PnlMall.js";
+import Faq from "./faq.js";
+import Gongzi from "./gongzi.js";
 
 
 
@@ -264,6 +266,10 @@ function App2() {
           name="시공취소" component={SigongCancel} />
           <Stack.Screen
           name="쇼핑몰" component={PnlMall} />
+          <Stack.Screen
+          name="자주묻는질문" component={Faq} />
+          <Stack.Screen
+          name="공지사항" component={Gongzi} />
       </Stack.Navigator>
     </NavigationContainer>
   );

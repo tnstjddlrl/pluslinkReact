@@ -124,7 +124,7 @@ const Mypage = () => {
                             </TouchableOpacity>
 
 
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={()=>navigation.navigate('공지사항')}>
                             <View style={{marginLeft:10,marginTop:30,flexDirection:"row",alignItems:"center"}}>
                                 <Text style={{fontSize:20}}>공지사항</Text>
                                 <Image source={arrow} style={{position:'absolute',right:20}}></Image>
@@ -148,7 +148,7 @@ const Mypage = () => {
                             <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
                             </TouchableOpacity>
 
-                            <TouchableOpacity >
+                            <TouchableOpacity onPress={()=>navigation.navigate('자주묻는질문')}>
                             <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
                                 <Text style={{fontSize:20}}>자주묻는질문</Text>
                                 <Image source={arrow} style={{position:'absolute',right:20}}></Image>
