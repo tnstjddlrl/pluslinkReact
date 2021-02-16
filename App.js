@@ -7,12 +7,13 @@ import {
 } from "react-native";
 
 import AsyncStorage from '@react-native-community/async-storage'; //로그인한 아이디값 저장하기 위한 앱 내부 저장소
+import axios from "axios";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useNavigation } from '@react-navigation/native'; //네비게이션을 위한 도구들
-import axios from "axios";
+
 
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";

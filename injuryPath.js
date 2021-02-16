@@ -1,19 +1,11 @@
 import React, { useState, Component, useEffect } from "react";
 import {
-    SafeAreaView,
     ScrollView,
     Text,
-    StyleSheet,
     View,
-    ImageBackground,
-    Animated,
-    useWindowDimensions,
-    AppRegistry,
     Dimensions,
     Image,
     TouchableOpacity,
-    Button,
-    TextInput,
     Modal,
     Alert
 } from "react-native";
@@ -116,7 +108,6 @@ const InjuryPath = () => {
                SetlistCate(list[i].cf_type)
                setSName(list[i].cf_state)
                setUri(list[i].cf_filename)
-               console.log('누구냐 넌:'+uri)
                return <Main from={state} state={list[i].cf_state}></Main>
             }
         }
@@ -217,15 +208,11 @@ const InjuryPath = () => {
                                             <Text>정보변경</Text>
                                         </TouchableOpacity>
                                     </View>
-
-
                                     <View style={{ left: chartWidth / 4 }}>
                                         <TouchableOpacity onPress={() => navigation.navigate('취약계층인증')}>
                                             <Text>취약계층인증</Text>
                                         </TouchableOpacity>
                                     </View>
-
-
                                     <View style={{ left: chartWidth / 2.5 }}>
                                         <TouchableOpacity onPress={() => navigation.navigate('정보변경')}>
                                             <Text>로그아웃</Text>
@@ -325,12 +312,13 @@ const InjuryPath = () => {
             <FootTer></FootTer>
             <Modal transparent={true} visible={select}>
                 <TouchableOpacity onPress={() => setSelect(false)} style={{ width: chartWidth, height: chartHeight }}>
-                    <View style={{ width: 100, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: chartWidth / 3.4, top: chartHeight / 3 }}>
+                    <View style={{ width: chartWidth-60, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5,left:30,top:chartWidth/2 }}>
                         <TouchableOpacity onPress={() => { SetlistCate('선택'), setSelect(false) }}>
-                            <Text style={{ left: 5, marginTop: 5 }}>선택</Text>
+                            <Text style={{ left: 5, margin:10,fontSize:20 }}>선택</Text>
+                            <View style={{borderWidth:0.5,width:chartWidth-60}}></View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => { SetlistCate('장애인'), setSelect(false) }}>
-                            <Text style={{ left: 5, marginTop: 5 }}>장애인</Text>
+                            <Text style={{ left: 5, margin:10,fontSize:20 }}>장애인</Text>
                         </TouchableOpacity>
                     </View>
                 </TouchableOpacity>

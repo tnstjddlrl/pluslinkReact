@@ -21,13 +21,17 @@ import HeadHeder from "./header.js";
 import { useNavigation } from '@react-navigation/native';
 import { TextInput } from 'react-native-gesture-handler';
 
+import AsyncStorage from '@react-native-community/async-storage'; //로그인한 아이디값 저장하기 위한 앱 내부 저장소
+import axios from "axios";
+
+const find = require('./img/find.png')
 
 const Faq = () => {
 
   return(
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
-        <ScrollView>
+        <ScrollView style={{backgroundColor:'white'}}>
           <View style={{marginBottom:500}}>
                       <View style={{width:chartWidth,marginTop:50}}>
                         <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
@@ -36,10 +40,10 @@ const Faq = () => {
                       </View>
 
             <View style={{margin:10}}>
-              <View style={{borderWidth:0.5,borderColor:'gray',width:chartWidth-20,flexDirection:"row"}}>
+              <View style={{borderWidth:0.5,borderColor:'gray',width:chartWidth-20,flexDirection:"row",backgroundColor:'#f2f2f2'}}>
                 <View style={{flexDirection:"row",alignItems:"center",margin:10}}>
-                  <View style={{borderWidth:0.5,width:40,height:40}}>
-                    <Image></Image>
+                  <View style={{width:40,height:40,justifyContent:"center",alignItems:'center',backgroundColor:'#cccccc',borderWidth:1,borderColor:'gray'}}>
+                    <Image style={{width:30,height:30}} source={find}></Image>
                   </View>
                   <View style={{width:chartWidth/1.8,height:40,borderWidth:0.5,borderColor:'gray'}}>
                     <TextInput style={{width:chartWidth/1.8,height:40}}></TextInput>
