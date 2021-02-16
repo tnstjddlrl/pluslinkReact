@@ -118,8 +118,8 @@ const TitleItem =(prop) =>{
     <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
   </View>
 
-  <View>
-      <WebView style={{width:chartWidth,height:500,marginTop:20}} source={{html: '<style>img { width: 800px;}</style>'+prop.main}}></WebView>
+    <View>
+      <WebView style={{width:chartWidth,height:500,marginTop:20}} source={{html: '<style>img { width: 80%;}</style>'+prop.main}}></WebView>
     </View>
   </View>
   )
