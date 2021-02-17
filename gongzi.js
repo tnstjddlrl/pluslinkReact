@@ -43,7 +43,12 @@ const Gongzi = () => {
         console.log(error);
       });
   }
-  refreshData('g5_write_notice')
+
+  useEffect(()=>{
+    refreshData('g5_write_notice')
+  },[])
+
+
 
   const [OneList,setOneList] = useState([]);
 
@@ -68,7 +73,9 @@ const Gongzi = () => {
     var pp = []
     const PushItem = () => {
       for(var i = 0;i<OneList.length;i++){
+        if(OneList[i].wr_is_comment == 0){
         pp.push(<Mitem time={OneList[i].wr_datetime.substring(0,10)} title={OneList[i].wr_subject} id={OneList[i].wr_id}></Mitem>)
+      }
       }
       return pp
     }

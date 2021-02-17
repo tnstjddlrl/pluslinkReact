@@ -20,7 +20,7 @@ const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
 
 import AsyncStorage from '@react-native-community/async-storage';
-
+import axios from "axios";
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";
 
@@ -28,6 +28,39 @@ const mt_b = require('./img/mt_b.jpg')
 const arrow = require('./img/arrow02.png')
 
 const Mypage = () => {
+
+  function refreshData(tableName) {
+    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+      id: tableName,
+    }))
+      .then(function (response) {
+        console.log('리스폰스 ', response);
+        if (response.request._response == 'suc') {
+        }
+        else {
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  useEffect(()=>{
+    refreshData('g5_faq_master')
+    refreshData('g5_faq')
+    refreshData('bidding')
+    refreshData('expertise')
+    refreshData('g5_member')
+    refreshData('g5_qa_content')
+    refreshData('g5_write_estimate')
+    refreshData('g5_write_event')
+    refreshData('g5_write_example')
+    refreshData('g5_write_review')
+    refreshData('g5_write_notice')
+    refreshData('partners')
+    refreshData('estimate_pay')
+  },[])
+
     const navigation = useNavigation();
 
     const fetchUser = async()=>{

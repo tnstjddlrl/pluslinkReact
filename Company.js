@@ -39,9 +39,11 @@ const Company=(prop)=>{
     });
   }
 
-  refreshData('g5_member')
-  refreshData('partners')
-  refreshData('g5_member')
+  useEffect(()=>{
+    refreshData('g5_member')
+    refreshData('partners')
+    refreshData('g5_member')
+  },[])
 
   async function GetExpertise() {
     try {
@@ -119,7 +121,7 @@ const Company=(prop)=>{
                  if(cate[i]==memberList[j].mb_id){
                   for(var x=0;x<patners.length;x++){
                     if(cate[i]==patners[x].mb_id &&count<3){
-                      List.push(<Item id={cate[i]} name={patners[x].pt_name} content={memberList[j].mb_profile.replace(/\r\n/g, '')} star={patners[x].pt_score}></Item>)
+                      List.push(<Item id={cate[i]} addr1={patners[x].pt_addr1} addr2={patners[x].pt_addr2} name={patners[x].pt_name} content={memberList[j].mb_profile.replace(/\r\n/g, '')} star={patners[x].pt_score}></Item>)
                       count += 1
                       console.log('작동체크')
                   }
@@ -144,24 +146,35 @@ const Company=(prop)=>{
   }
 
 
-  const Item = (prop)=>{
-    const navigation = useNavigation()
-    return(
-      <View>
-        <TouchableOpacity onPress={()=>navigation.navigate('회사자세히보기',{id:prop.id})}>
-       <View style={{width:chartWidth-40,backgroundColor:'#f2f2f2',borderRadius:10,marginLeft:20,marginRight:20,marginTop:10}}>
-          <View style={{flexDirection:'row', alignItems:'center'}}>
-            <Image source={{uri:'https://pluslink.kr/data/member_image/'+prop.id.substring(0,2) +'/'+prop.id+'.gif'}} style={{marginLeft:15,marginTop:15,borderRadius:28,width:55,height:55,backgroundColor:'red'}}></Image>
-            <Text style={{fontWeight:'500',fontSize:15,marginLeft:15,marginTop:15}}>{prop.name}</Text>
+  const marker = require('./img/marker.png')
+
+const Item = (prop) => {
+  const navigation = useNavigation()
+  return (
+    <View>
+      <TouchableOpacity onPress={() => navigation.navigate('회사자세히보기', { id: prop.id })}>
+        <View style={{ width: chartWidth - 40, backgroundColor: '#f2f2f2', borderRadius: 10, marginLeft: 20, marginRight: 20, marginTop: 10 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + prop.id.substring(0, 2) + '/' + prop.id + '.gif' }} style={{ marginLeft: 15, marginTop: 15, borderRadius: 28, width: 55, height: 55, backgroundColor: 'red' }}></Image>
+            <Text style={{ fontWeight: '500', fontSize: 15, marginLeft: 15, marginTop: 15 }}>{prop.name}</Text>
           </View>
-          <Text style={{margin:15,fontWeight:'200'}} numberOfLines={3}>{prop.content}</Text>
-          <View style={{flexDirection:'row',justifyContent:'flex-end',margin:15}}>
-            <Image source={starimg} style={{width:20,height:20}}></Image>
-            <Text>{prop.star}</Text>
+          <Text style={{ margin: 15, fontWeight: '200' }} numberOfLines={3}>{prop.content}</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15 }}>
+
+            <View style={{ flexDirection: "row" ,alignItems:"center"}}>
+              <Image source={marker} style={{ width: 20, height: 20 }}></Image>
+              <Text style={{ marginRight: 5 }}>{prop.addr1}</Text>
+              <Text>{prop.addr2}</Text>
+            </View>
+
+            <View style={{ flexDirection: "row" }}>
+              <Image source={starimg} style={{ width: 20, height: 20 }}></Image>
+              <Text>{prop.star}</Text>
+            </View>
           </View>
-       </View>
-       </TouchableOpacity>
-     </View>
+        </View>
+      </TouchableOpacity>
+    </View>
     )
   }
 

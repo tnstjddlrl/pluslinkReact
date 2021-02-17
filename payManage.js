@@ -24,6 +24,38 @@ import AsyncStorage from '@react-native-community/async-storage';
 import axios from "axios";
 
 const PayManage = () => {
+
+  function refreshData(tableName) {
+    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+      id: tableName,
+    }))
+      .then(function (response) {
+        console.log('리스폰스 ', response);
+        if (response.request._response == 'suc') {
+        }
+        else {
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  useEffect(()=>{
+    refreshData('g5_faq_master')
+    refreshData('g5_faq')
+    refreshData('bidding')
+    refreshData('expertise')
+    refreshData('g5_member')
+    refreshData('g5_qa_content')
+    refreshData('g5_write_estimate')
+    refreshData('g5_write_event')
+    refreshData('g5_write_example')
+    refreshData('g5_write_review')
+    refreshData('g5_write_notice')
+    refreshData('partners')
+    refreshData('estimate_pay')
+  },[])
   const [newid,setNewid] = useState('');
   
     async function isFavorite() {
@@ -102,7 +134,7 @@ const PayManage = () => {
           if(Wlist[i].wr_id==Blist[j].wr_id){
             
             for(let x = 0;x<memberList.length;x++){
-              if(Blist[j].mb_id==memberList[x].mb_id){
+              if(newid.toLowerCase()==memberList[x].mb_id){
                 console.log('작동테스트4')
                 List.push(<ListItem subj={Wlist[i].wr_subject} detail={Wlist[i].wr_id} state={Wlist[i].wr_8} Bstate={Blist[j].state} content={Wlist[i].wr_content} date={Wlist[i].wr_datetime} comname={memberList[x].mb_name}></ListItem>)
               }

@@ -84,17 +84,23 @@ const App = ({ }) => {
         console.log(error);
       });
   }
-  refreshData('bidding')
-  refreshData('expertise')
-  refreshData('g5_member')
-  refreshData('g5_qa_content')
-  refreshData('g5_write_estimate')
-  refreshData('g5_write_event')
-  refreshData('g5_write_example')
-  refreshData('g5_write_review')
-  refreshData('g5_write_notice')
-  refreshData('partners')
-  refreshData('estimate_pay')
+
+  useEffect(()=>{
+    refreshData('g5_faq_master')
+    refreshData('g5_faq')
+    refreshData('bidding')
+    refreshData('expertise')
+    refreshData('g5_member')
+    refreshData('g5_qa_content')
+    refreshData('g5_write_estimate')
+    refreshData('g5_write_event')
+    refreshData('g5_write_example')
+    refreshData('g5_write_review')
+    refreshData('g5_write_notice')
+    refreshData('partners')
+    refreshData('estimate_pay')
+    refreshData('stratum_list')
+  },[])
   
 
   const fetchUser = async () => {

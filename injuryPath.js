@@ -24,24 +24,29 @@ import HeadHeder from "./header.js";
 const mt_b = require('./img/mt_b.jpg')
 const arrow = require('./img/arrow02.png')
 
-function refreshData(tableName) {
-    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
-      id: tableName,
-    }))
-      .then(function (response) {
-        console.log('리스폰스 ', response);
-        if (response.request._response == 'suc') {
-        }
-        else {
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
+
 
 const InjuryPath = () => {
-    
+    function refreshData(tableName) {
+        axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+          id: tableName,
+        }))
+          .then(function (response) {
+            console.log('리스폰스 ', response);
+            if (response.request._response == 'suc') {
+            }
+            else {
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+
+      useEffect(()=>{
+        refreshData('stratum_list')
+      },[])
+
 
     const navigation = useNavigation();
 
@@ -101,9 +106,10 @@ const InjuryPath = () => {
 
     var mp = []
     function Mainpush (){
-        console.log(list)
+        console.log("asdfasdfsafas    "+newid)
         for(var i =0;i<list.length;i++){
             if((list[i].cf_id==newid && list[i].cf_state=='신청승인')||(list[i].cf_id==newid &&list[i].cf_state=='신청완료')){
+                console.log('작동이 왜안되지?')
                setState(true)
                SetlistCate(list[i].cf_type)
                setSName(list[i].cf_state)

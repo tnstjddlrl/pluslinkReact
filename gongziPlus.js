@@ -25,7 +25,7 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const GongziPlus = ({route}) => {
-
+  const navigation = useNavigation()
   const [OneList,setOneList] = useState([]);
 
     async function GetJson() {
@@ -81,10 +81,18 @@ const GongziPlus = ({route}) => {
             <PushItem></PushItem>
 
 
-            <ScrollView horizontal={true} style={{marginTop:100}}>
+
+            <Text style={{fontSize:20,fontWeight:'bold',marginTop:100,margin:10}}>-댓글-</Text>
+            <ScrollView horizontal={true} style={{marginTop:10}}>
               <SPush></SPush>
 
             </ScrollView>
+
+            <TouchableOpacity onPress={()=>navigation.goBack()}>
+            <View style={{height:30,width:50,backgroundColor:'black',justifyContent:"center",alignItems:"center",margin:10}}>
+              <Text style={{color:'white',fontWeight:'bold'}}>목록</Text>
+            </View>
+            </TouchableOpacity>
 
 
           </View>

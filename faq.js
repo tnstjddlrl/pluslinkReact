@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   View,
   Text,
@@ -6,7 +6,8 @@ import {
   Dimensions,
   TouchableOpacity,
   Image,
-  ScrollView
+  ScrollView,
+  Modal
 } from 'react-native';
 
 const chartHeight = Dimensions.get('window').height;
@@ -28,6 +29,99 @@ const find = require('./img/find.png')
 
 const Faq = () => {
 
+  function refreshData(tableName) {
+    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+      id: tableName,
+    }))
+      .then(function (response) {
+        console.log('리스폰스 ', response);
+        if (response.request._response == 'suc') {
+        }
+        else {
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  useEffect(()=>{
+    refreshData('g5_faq_master')
+    refreshData('g5_faq')
+  },[])
+ 
+
+  const [mList,setMlist] = useState([]);
+  const [faqList,setFaqList] =useState([])
+
+  async function GetMaster() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_faq_master.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
+  }
+
+  async function GetFaq() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_faq.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
+  }
+
+  useEffect(()=>{
+    if(mList.length==0){
+      GetMaster().then((res)=>{
+      setMlist(res.data)
+      console.log(list)
+      })
+    }
+    if(faqList.length==0){
+      GetFaq().then((res)=>{
+      setFaqList(res.data)
+      console.log(list)
+      })
+    }
+  })
+
+  var mm = []
+  const MPush = () => {
+    for(var i = 0;i<mList.length;i++){
+      mm.push(<Menu sub={mList[i].fm_subject} fmid={mList[i].fm_id}></Menu>)
+    }
+    return mm
+  }
+
+  const Menu = (prop) =>{
+    var oo = []
+
+    const MMPush = () =>{
+    for(var i = 0;i<faqList.length;i++){
+      if(faqList[i].fm_id==prop.fmid){
+        oo.push(<FaItem key={i} sub={faqList[i].fa_subject} cont={faqList[i].fa_content}></FaItem>)
+      }
+    }
+
+    if(oo==[]){
+      return <View><Text>등록된 FAQ가 없습니다.</Text></View>
+    }
+    return oo
+  }
+
+    return(
+      <View style={{marginTop:20}}>
+        <View style={{borderWidth:0.5,borderColor:'gray',height:30,justifyContent:"center",width:100,alignItems:"center"}}>
+          <Text style={{color:'#9900cc'}}>{prop.sub}</Text>
+        </View>
+
+        <MMPush></MMPush>
+      </View>
+    )
+  }
+
   return(
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
@@ -40,30 +134,8 @@ const Faq = () => {
                       </View>
 
             <View style={{margin:10}}>
-              <View style={{borderWidth:0.5,borderColor:'gray',width:chartWidth-20,flexDirection:"row",backgroundColor:'#f2f2f2'}}>
-                <View style={{flexDirection:"row",alignItems:"center",margin:10}}>
-                  <View style={{width:40,height:40,justifyContent:"center",alignItems:'center',backgroundColor:'#cccccc',borderWidth:1,borderColor:'gray'}}>
-                    <Image style={{width:30,height:30}} source={find}></Image>
-                  </View>
-                  <View style={{width:chartWidth/1.8,height:40,borderWidth:0.5,borderColor:'gray'}}>
-                    <TextInput style={{width:chartWidth/1.8,height:40}}></TextInput>
-                  </View>
-                </View>
 
-
-                <View style={{height:40,width:chartWidth/5,backgroundColor:'black',alignItems:"center",justifyContent:"center",margin:10}}>
-                  <Text style={{color:'white',fontSize:15,fontWeight:'bold'}}>검색하기</Text>
-                </View>
-              </View>
-
-
-
-
-
-
-
-
-
+              <MPush></MPush>
 
 
             </View>
@@ -80,13 +152,39 @@ const Faq = () => {
   )
 }
 
-const Menu = (prop) =>{
-  
+const FaItem = (prop) =>{
+  const [view,setView] = useState(false)
+  var cont = prop.cont
+  cont = cont.replace(/</g,"");
+  cont = cont.replace(/>/g,"");
+  cont = cont.replace(/p/g,"");
+  cont = cont.replace("/","");
   return(
     <View>
-      <View style={{borderWidth:0.5,borderColor:'gray'}}>
+      <TouchableOpacity onPress={() => setView(true)}>
+      <View style={{flexDirection:"row",marginTop:10}}>
+        <View style={{width:20,height:20,backgroundColor:'black',justifyContent:"center",alignItems:"center"}}>
+          <Text style={{color:'white'}}>+</Text>
+        </View>
+
         <Text>{prop.sub}</Text>
+
       </View>
+      <View style={{width:chartWidth-40,borderWidth:0.8,marginTop:5}}></View>
+      </TouchableOpacity>
+
+      <Modal visible={view} transparent={true}>
+        <TouchableOpacity  onPress={() => setView(false)}>
+          <View style={{justifyContent:"center",alignItems:"center"}}>
+        <View style={{width:chartWidth-60,height:chartHeight/2,top:chartHeight/3,borderWidth:0.5,backgroundColor:'white'}}>
+          <View style={{margin:20}}>
+          <Text style={{fontSize:18,fontWeight:'bold'}}>질문 : {prop.sub}</Text>
+          <Text style={{fontSize:15,marginTop:20}}>답변 : {cont}</Text>
+          </View>
+        </View>
+        </View>
+        </TouchableOpacity>
+      </Modal>
     </View>
   )
 }

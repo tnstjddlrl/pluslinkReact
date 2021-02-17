@@ -116,7 +116,7 @@ const CurrentPlus = ({ route }) => {
 
   const onError = (data) => {
     console.log('error', data);
-    Alert.alert('오류가 발생하였습니다. 이와같은 오류가 반복될시 문의하여 주시기 바랍니다..')
+    Alert.alert('오류가 발생하였습니다. 고객센터에 문의하여 주시기 바랍니다..')
   }
 
   const onReady = (data) => {
