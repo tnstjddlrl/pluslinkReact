@@ -108,6 +108,7 @@ const InjuryPath = () => {
     function Mainpush (){
         console.log("asdfasdfsafas    "+newid)
         for(var i =0;i<list.length;i++){
+            console.log(list[i])
             if((list[i].cf_id==newid && list[i].cf_state=='신청승인')||(list[i].cf_id==newid &&list[i].cf_state=='신청완료')){
                 console.log('작동이 왜안되지?')
                setState(true)
