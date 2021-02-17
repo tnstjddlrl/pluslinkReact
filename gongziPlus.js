@@ -46,13 +46,26 @@ const GongziPlus = ({route}) => {
       }
     })
 
-    var pp = []
-    const PushItem = () => {
-      for(var i = 0;i<OneList.length;i++){
-        pp.push(<Mitem time={OneList[i].wr_datetime.substring(0,10)} title={OneList[i].wr_subject}></Mitem>)
+  var pp = []
+  const PushItem = () => {
+    for (var i = 0; i < OneList.length; i++) {
+      if (OneList[i].wr_id == route.params.id) {
+        pp.push(<Mitem time={OneList[i].wr_datetime.substring(0, 10)} title={OneList[i].wr_subject} user={OneList[i].wr_name} chat={OneList[i].wr_comment} content={OneList[i].wr_content}></Mitem>)
+        return pp
       }
-      return pp
     }
+    return pp
+  }
+
+  var ee = []
+  const SPush = () => {
+    for (var i = 0; i < OneList.length; i++) {
+      if(OneList[i].wr_is_comment == 1 && OneList[i].wr_parent == route.params.id){
+        ee.push(<SmallText name={OneList[i].wr_name} id={OneList[i].mb_id} date={OneList[i].wr_datetime} content={OneList[i].wr_comment}></SmallText>)
+      }
+    }
+    return ee
+  }
 
   return (
     <View>
@@ -68,6 +81,12 @@ const GongziPlus = ({route}) => {
             <PushItem></PushItem>
 
 
+            <ScrollView horizontal={true} style={{marginTop:100}}>
+              <SPush></SPush>
+
+            </ScrollView>
+
+
           </View>
         </ScrollView>
       </View>
@@ -79,17 +98,57 @@ const GongziPlus = ({route}) => {
   )
 }
 
-const Mitem = (prop) =>{
-  return(
-    <TouchableOpacity>
-    <View style={{marginLeft:10,marginTop:20}}>
-      <View style={{flexDirection:'row',marginBottom:5}}>
-      <Text style={{fontSize:15}}>{prop.time}</Text>
-      <Text style={{fontSize:15,marginLeft:10,fontWeight:'bold'}} numberOfLines={1}>{prop.title}</Text>
+const SmallText = (prop) => {
+  return (
+    <View style={{ marginLeft: 10, borderWidth: 0.5, borderRadius: 5, borderColor: 'gray' }}>
+      <View style={{ margin: 5 }}>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={{ fontWeight: 'bold' }}>{prop.name}</Text>
+          <Text style={{ fontWeight: '100' }}>({prop.id})</Text>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
+          <Image source={clock} style={{ width: 10, height: 10 }}></Image>
+          <Text style={{ fontSize: 9, color: 'gray' }}>{prop.date}</Text>
+        </View>
+
+        <Text style={{ marginTop: 10, width: chartWidth / 2.0 }}>{prop.content}</Text>
       </View>
-      <View style={{borderWidth:0.5,width:chartWidth-20}}></View>
     </View>
-    </TouchableOpacity>
+  )
+}
+
+const clock = require('./img/clock2.png')
+const user = require('./img/user.png')
+const chat = require('./img/chat.png')
+
+const Mitem = (prop) => {
+  return (
+    <View>
+      <Text style={{ fontSize: 22, marginLeft: 10, marginTop: 10, fontWeight: 'bold' }} numberOfLines={1}>{prop.title}</Text>
+
+      <View style={{ marginLeft: 10, marginTop: 20 }}>
+        <View style={{ borderWidth: 0.5, width: chartWidth - 20, }}></View>
+        <View style={{ flexDirection: 'row', backgroundColor: '#e6e6e6', width: chartWidth - 20, height: 30, alignItems: "center" }}>
+
+          <Image source={user} style={{ width: 20, height: 20 }}></Image>
+          <Text style={{ fontSize: 15 }}>{prop.user}</Text>
+
+          <Image source={chat} style={{ width: 15, height: 15, marginLeft: 15,marginRight:5 }}></Image>
+          <Text style={{ fontSize: 15 }}>{prop.chat}</Text>
+
+          <Image source={clock} style={{ width: 20, height: 20, marginLeft: 15 }}></Image>
+          <Text style={{ fontSize: 15 }}>{prop.time}</Text>
+
+        </View>
+        <View style={{ borderWidth: 0.5, width: chartWidth - 20 }}></View>
+      </View>
+
+      <Text style={{margin:10}}>{prop.content}</Text>
+
+      
+
+
+    </View>
   )
 }
 

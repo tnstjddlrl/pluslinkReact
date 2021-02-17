@@ -24,7 +24,26 @@ import axios from "axios";
 import { useNavigation } from '@react-navigation/native';
 
 
+
+
 const Gongzi = () => {
+
+  function refreshData(tableName) {
+    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+      id: tableName,
+    }))
+      .then(function (response) {
+        console.log('리스폰스 ', response);
+        if (response.request._response == 'suc') {
+        }
+        else {
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  refreshData('g5_write_notice')
 
   const [OneList,setOneList] = useState([]);
 

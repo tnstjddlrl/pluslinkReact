@@ -55,6 +55,17 @@ const Faq = () => {
                   <Text style={{color:'white',fontSize:15,fontWeight:'bold'}}>검색하기</Text>
                 </View>
               </View>
+
+
+
+
+
+
+
+
+
+
+
             </View>
 
 
@@ -68,5 +79,17 @@ const Faq = () => {
     </View>
   )
 }
+
+const Menu = (prop) =>{
+  
+  return(
+    <View>
+      <View style={{borderWidth:0.5,borderColor:'gray'}}>
+        <Text>{prop.sub}</Text>
+      </View>
+    </View>
+  )
+}
+
 
 export default Faq;
