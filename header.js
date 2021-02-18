@@ -87,7 +87,7 @@ const HeadHeder = () => {
   return (
     <View>
       <View style={{ flex: 1 }}>
-        <View style={{ borderWidth: 1, position: 'absolute', width: chartWidth + 15, left: -2, bottom: (chartHeight / nowheight), height: 100, marginTop: 100, flexDirection: 'row', backgroundColor: 'white' }}>
+        <View style={{ borderWidth: 1, position: 'absolute', width: chartWidth + 15, left: -2, bottom: (chartHeight / nowheight), height: 100, flexDirection: 'row', backgroundColor: 'white' }}>
 
           <TouchableOpacity activeOpacity={0.5} onPress={() => { setViewmenu(true) }} style={{ top: 30, left: 10 }}>
             <Image

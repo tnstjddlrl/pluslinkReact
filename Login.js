@@ -76,17 +76,17 @@ const Login=()=>{
       <View>
       <View style={{height:chartHeight}}>
         
-        <View style={{position:'absolute',backgroundColor:'white',borderWidth: 1,borderColor:"#a6a6a6",margin:20 , width:350,height:500, top:100}}>
+        <View style={{position:'absolute',backgroundColor:'white',borderWidth: 1,borderColor:"#a6a6a6",margin:20 , width:chartWidth-40,height:500, top:100}}>
           <Text style={{color: 'black',fontSize: 30,fontWeight: 'bold',position:'absolute', top:40,left:15}}>로그인</Text>
           <View style={{position:'absolute',borderWidth:1,width:80,top:80,left:15}}></View>
           <TextInput
-            style={{position:'absolute', height: 40,width:315,marginLeft:15 ,top:120,  borderColor: 'gray', borderWidth: 1 }}
+            style={{position:'absolute', height: 40,width:chartWidth-80,marginLeft:15 ,top:120,  borderColor: 'gray', borderWidth: 1 }}
             onChangeText={text => onChangeId(text)}
             value={id}
             placeholder='아이디'
           />
           <TextInput
-            style={{position:'absolute', height: 40,width:315,marginLeft:15 ,top:180,  borderColor: 'gray', borderWidth: 1 }}
+            style={{position:'absolute', height: 40,width:chartWidth-80,marginLeft:15 ,top:180,  borderColor: 'gray', borderWidth: 1 }}
             onChangeText={text => onChangePSS(text)}
             value={pss}
             placeholder='비밀번호'
@@ -96,10 +96,10 @@ const Login=()=>{
           
           
           </View>
-          <View style={{position:'absolute', top:270,left:15,width:315}}>
+          <View style={{position:'absolute', top:270,left:15,width:chartWidth-80}}>
 
           <TouchableOpacity onPress={()=>{logindata(id,pss),console.log('버튼 눌러짐')}}>
-            <View style={{width:chartWidth-90,height:40,backgroundColor:'#d24dff',alignItems:'center'}}>
+            <View style={{width:chartWidth-80,height:40,backgroundColor:'#d24dff',alignItems:'center'}}>
                 <Text style={{color:'white',marginTop:10,fontWeight:'800'}}>로그인</Text>
             </View>
             </TouchableOpacity>
