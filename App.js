@@ -55,6 +55,7 @@ import PnlMall from "./PnlMall.js";
 import Faq from "./faq.js";
 import Gongzi from "./gongzi.js";
 import GongziPlus from "./gongziPlus.js";
+import FindId from "./findId.js";
 
 
 
@@ -68,6 +69,8 @@ const chartWidth = Dimensions.get('window').width; //현재 디바이스의 가�
 
 
 const App = ({ }) => {
+
+  const [newid, setNewid] = useState('');
 
   function refreshData(tableName) {
     axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
@@ -119,10 +122,17 @@ const App = ({ }) => {
   } //아이디값 가져오기
 
   useEffect(() => {
-    fetchUser()
+
     const result = isFavorite().then((company_id) => {
+      setNewid(company_id.toLowerCase());
       console.log('새 : ', company_id);
+      console.log('새새 : '+newid)
     });
+
+    if(newid == ''){
+      console.log('로그인정보 없음')
+      fetchUser()
+    }
   }, []) //위의 두 함수를 앱이 빌드될때 한번만 실행하게끔 useEffect를 걸어줬다. [] 안에 변수를 넣으면 변수의 값이 변경될때마다 useEffect가 리빌드된다.
 
 
@@ -282,6 +292,8 @@ function App2() {
           name="공지사항" component={Gongzi} />
           <Stack.Screen
           name="공지사항상세" component={GongziPlus} />
+           <Stack.Screen
+          name="아이디찾기" component={FindId} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -378,7 +378,7 @@ const CompanyList = ({ route }) => {
   return (
     <View>
       <View style={{ height: chartHeight, width: chartWidth }}>
-        <ScrollView>
+        <ScrollView style={{backgroundColor: 'white'}}>
           <View style={{ marginBottom: 100 }}>
             <View style={{ width: chartWidth, marginTop: 50 }}>
               <ImageBackground source={event} style={{ width: chartWidth, height: chartHeight / 7 }}>
@@ -405,11 +405,8 @@ const CompanyList = ({ route }) => {
                 </TouchableOpacity>
               </View>
 
-              <View style={{ backgroundColor: '#e6e6e6', width: chartWidth - 20, borderRadius: 17, borderWidth: 0.5, marginTop: 30 }}>
-
+              <View style={{ backgroundColor: 'white', width: chartWidth - 20, borderRadius: 17, borderWidth: 0.5, marginTop: 30 }}>
                 <PushItem></PushItem>
-
-
               </View>
             </View>
 

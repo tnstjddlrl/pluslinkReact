@@ -96,39 +96,48 @@ const PasswordCheck = () => {
         .catch(function (error) {
           console.log(error);
         });
-      }
+  }
 
 
   const [value, onChangeText] = React.useState('');//textinput용
   const navigation = useNavigation();
-  return(
+  return (
     <View>
-      <View style={{height:chartHeight,width:chartWidth}}>
-        <ScrollView>
-          <View style={{marginBottom:500}}>
-                      <View style={{width:chartWidth,marginTop:50}}>
-                        <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
-                        </ImageBackground>
-                        <Text style={{position:'absolute',color:"white",fontSize:20,fontWeight:'bold',top:40,left:10}}>비밀번호확인</Text>
-                      </View>
+      <View style={{ height: chartHeight, width: chartWidth }}>
+        <ScrollView style={{ backgroundColor: 'white' }}>
+          <View style={{ marginBottom: 500 }}>
+            <View style={{ width: chartWidth, marginTop: 50 }}>
+              <ImageBackground source={event} style={{ width: chartWidth, height: chartHeight / 7 }}>
+              </ImageBackground>
+              <Text style={{ position: 'absolute', color: "white", fontSize: 20, fontWeight: 'bold', top: 40, left: 10 }}>비밀번호확인</Text>
+            </View>
 
-            <View style={{margin:10,marginTop:30,borderWidth:1,width:chartWidth-20}}>
-              <Text style={{fontSize:16,margin:15,fontWeight:'bold'}}>회원 비밀번호 확인</Text>
-              <Text style={{fontSize:14,marginTop:15,marginLeft:15}}>비밀번호를 한번 더 입력해주세요.</Text>
-              <Text style={{fontSize:12,marginLeft:15,marginTop:5}}>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 한번더 확인합니다.</Text>
+            <View style={{ margin: 10, marginTop: 30, borderWidth: 0.5, borderColor: 'gray', width: chartWidth - 20 }}>
+              <Text style={{ fontSize: 16, margin: 15, fontWeight: 'bold' }}>회원 비밀번호 확인</Text>
+              <View style={{ borderWidth: 0.5, borderColor: 'gray', width: chartWidth - 20 }}></View>
+              <Text style={{ fontSize: 14, marginTop: 15, marginLeft: 15 }}>비밀번호를 한번 더 입력해주세요.</Text>
+              <Text style={{ fontSize: 12, marginLeft: 15, marginTop: 5 }}>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 한번더 확인합니다.</Text>
 
-            <Text style={{fontSize:14,marginTop:15,marginLeft:15}}>회원아이디 : {newid}</Text>
-              <TextInput      
-                style={{ height: 40,width:chartWidth-50,marginLeft:15,marginTop:10,marginBottom:20, borderColor: 'gray', borderWidth: 0.5 }}
+              <Text style={{ fontSize: 14, marginTop: 15, marginLeft: 15 }}>회원아이디 : {newid}</Text>
+              <TextInput
+                style={{ height: 40, width: chartWidth - 50, marginLeft: 15, marginTop: 10, marginBottom: 20, borderColor: 'gray', borderWidth: 0.5 }}
                 onChangeText={text => setPwd(text)}
                 value={pwd}
               />
-              <TouchableOpacity onPress={()=>pwCheck()}>
-              <View style={{margin:15,width:chartWidth-50,backgroundColor:'#d11aff'}}>
-                <Text style={{color:"white",margin:15,alignSelf:'center',fontWeight:'bold'}}>확인하기</Text>
-              </View>
+              <TouchableOpacity onPress={() => pwCheck()}>
+                <View style={{ margin: 15, width: chartWidth - 50, backgroundColor: '#d11aff' }}>
+                  <Text style={{ color: "white", margin: 15, alignSelf: 'center', fontWeight: 'bold',fontSize:18 }}>확인하기</Text>
+                </View>
               </TouchableOpacity>
 
+            </View> 
+
+            <View style={{justifyContent:"center",alignItems:"center"}}>
+              <TouchableOpacity onPress={() => navigation.navigate('홈')}>
+              <View style={{backgroundColor:'black',justifyContent:"center",alignItems:"center"}}>
+                <Text style={{color:'white', fontWeight:'bold',fontSize:15,margin:10}}>메인으로</Text>
+              </View>
+              </TouchableOpacity>
             </View>
 
 

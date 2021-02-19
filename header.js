@@ -8,7 +8,8 @@ import {
   Platform,
   Modal,
   ImageBackground,
-  Linking
+  Linking,
+  SafeAreaView
 } from "react-native";
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
@@ -70,12 +71,15 @@ const HeadHeder = () => {
 
   let nowheight;
   let mata;
+  let nnee;
   if (os == 'ios') {
     nowheight = 1.11;
     mata = 35;
+    nnee = 80
   } else {
     nowheight = 1.08;
     mata = 0;
+    nnee = 50;
   }
   useEffect(() => {
     console.log(os)
@@ -86,37 +90,38 @@ const HeadHeder = () => {
 
   return (
     <View>
-      <View style={{ flex: 1 }}>
-        <View style={{ borderWidth: 1, position: 'absolute', width: chartWidth + 15, left: -2, bottom: (chartHeight / nowheight), height: 100, flexDirection: 'row', backgroundColor: 'white' }}>
-
-          <TouchableOpacity activeOpacity={0.5} onPress={() => { setViewmenu(true) }} style={{ top: 30, left: 10 }}>
+        <View style={{justifyContent:'space-between',alignItems:"flex-end",borderWidth: 1, position: 'absolute', width: chartWidth + 15, left: -2, bottom: (chartHeight-nnee), height: 120, flexDirection: 'row', backgroundColor: 'white' }}>
+        
+          <TouchableOpacity activeOpacity={0.5} onPress={() => { setViewmenu(true) }} style={{ left: 10 }}>
+            <View style={{width:75,marginBottom:15}}>
             <Image
               source={logo2}
-              style={{ width: 40, height: 35, marginTop: 20 }}
+              style={{ width: 30, height: 25}}
             />
+            </View>
           </TouchableOpacity>
-          <View style={{ left: chartWidth / 3, height: 30, width: 40, top: 20 }}>
+          <View style={{ height: 30, width: 40,marginBottom:10}}>
             <TouchableOpacity onPress={() => navigation.navigate('홈')}>
-              <Image source={testlogo} style={{ width: 40, height: 34, marginTop: 35, }}>
+              <Image source={testlogo} style={{ width: 40, height: 34}}>
               </Image>
             </TouchableOpacity>
           </View>
 
           <TouchableOpacity onPress={() => { Linking.openURL('https://pluslink.kr/shop/') }}>
             <View style={{
-              left: chartWidth / 1.8, top: 50, width: 75, height: 35, backgroundColor: '#b84dff',
+             width: 75, height: 35, backgroundColor: '#b84dff',
               borderTopLeftRadius: 17,
               borderTopRightRadius: 17,
               borderBottomLeftRadius: 17,
               borderBottomRightRadius: 17,
+              marginRight:20,alignItems:"center",justifyContent:"center",marginBottom:10
             }}>
-              <Text style={{ width: 65, height: 70, marginLeft: 10, marginTop: 8, color: 'white', fontWeight: 'bold' }}>
+              <Text style={{ color: 'white', fontWeight: 'bold' }}>
                 PnL Mall
               </Text>
             </View>
           </TouchableOpacity>
         </View>
-      </View>
 
 
 

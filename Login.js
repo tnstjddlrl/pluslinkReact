@@ -46,6 +46,8 @@ async function isFavorite() {
 
 const Login=()=>{
 
+  const [toggleCheckBox, setToggleCheckBox] = useState(true)
+
   function logindata(id,pss){
     Axios.post('http://ip0131.cafe24.com/pluslink/json/memberJson.php', JSON.stringify({
       id : id,
@@ -68,68 +70,88 @@ const Login=()=>{
     });
   }
 
-    const [id, onChangeId] = React.useState('');//textinput용
-    const [pss, onChangePSS] = React.useState('');//textinput용
-    const [toggleCheckBox, setToggleCheckBox] = useState(false)//체크박스용
-    const navigation = useNavigation();
-    return(
-      <View>
-      <View style={{height:chartHeight}}>
-        
-        <View style={{position:'absolute',backgroundColor:'white',borderWidth: 1,borderColor:"#a6a6a6",margin:20 , width:chartWidth-40,height:500, top:100}}>
-          <Text style={{color: 'black',fontSize: 30,fontWeight: 'bold',position:'absolute', top:40,left:15}}>로그인</Text>
-          <View style={{position:'absolute',borderWidth:1,width:80,top:80,left:15}}></View>
+  const [id, onChangeId] = React.useState('');//textinput용
+  const [pss, onChangePSS] = React.useState('');//textinput용
+  const navigation = useNavigation();
+  return (
+    <View>
+      <View style={{ height: chartHeight, backgroundColor: 'white',justifyContent:"center",alignItems:"center" }}>
+
+        <View style={{  backgroundColor: 'white', borderWidth: 1, borderColor: "#a6a6a6", margin: 20, width: chartWidth - 40 }}>
+          <Text style={{ color: 'black', fontSize: 30, fontWeight: 'bold', left: 15,marginTop:60 }}>로그인</Text>
+          <View style={{  borderWidth: 1, width: 80, left: 15 ,marginBottom:20}}></View>
           <TextInput
-            style={{position:'absolute', height: 40,width:chartWidth-80,marginLeft:15 ,top:120,  borderColor: 'gray', borderWidth: 1 }}
+            style={{  height: 40, width: chartWidth - 80, marginLeft: 15, borderColor: 'gray', borderWidth: 1,marginBottom:20 }}
             onChangeText={text => onChangeId(text)}
             value={id}
             placeholder='아이디'
           />
           <TextInput
-            style={{position:'absolute', height: 40,width:chartWidth-80,marginLeft:15 ,top:180,  borderColor: 'gray', borderWidth: 1 }}
+            style={{  height: 40, width: chartWidth - 80, marginLeft: 15, borderColor: 'gray', borderWidth: 1 }}
             onChangeText={text => onChangePSS(text)}
             value={pss}
             placeholder='비밀번호'
           />
-  
-          <View style={{flex:1,flexDirection:'row',position:'absolute',top:230,left:10}}>
-          
-          
-          </View>
-          <View style={{position:'absolute', top:270,left:15,width:chartWidth-80}}>
 
-          <TouchableOpacity onPress={()=>{logindata(id,pss),console.log('버튼 눌러짐')}}>
-            <View style={{width:chartWidth-80,height:40,backgroundColor:'#d24dff',alignItems:'center'}}>
-                <Text style={{color:'white',marginTop:10,fontWeight:'800'}}>로그인</Text>
+          <View style={{ flexDirection: 'row', left: 10 }}>
+
+
+          </View>
+          <View style={{ margin: 15, width: chartWidth - 80 }}>
+
+            <View style={{ flexDirection: "row",alignItems:'center',justifyContent:'space-between' }}>
+
+              <View style={{flexDirection:"row",alignItems:"center"}}>
+              <CheckBox disabled={false}
+                value={toggleCheckBox}
+                onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                boxType={"square"} ></CheckBox>
+              <Text style={{marginLeft:5}}>자동로그인</Text>
+              </View>
+
+              <View style={{flexDirection:"row"}}>
+                <TouchableOpacity onPress={()=>navigation.navigate('아이디찾기')}>
+                <Text>아이디/비밀번호 찾기</Text>
+                </TouchableOpacity>
+              </View>
+
+
             </View>
+
+
+            <TouchableOpacity onPress={() => { logindata(id, pss), console.log('버튼 눌러짐') }}>
+              <View style={{ width: chartWidth - 80, height: 40, backgroundColor: '#d24dff', justifyContent:'center' , alignItems:'center',marginTop:20 }}>
+                <Text style={{ color: 'white', fontWeight: 'bold', }}>로그인</Text>
+              </View>
             </TouchableOpacity>
 
 
 
           </View>
-          <View style={{position:'absolute',borderWidth:1,borderColor:"#d9d9d9",width:350,top:440}}></View>
-          <View style={{position:'absolute',left:15,flex:1,flexDirection:'row',top:455,height:30,alignItems:'center'}}>
-            <Text style={{textAlignVertical:'center',marginRight:10}}>처음이신가요??</Text>
+          <View style={{  borderWidth: 1, borderColor: "#d9d9d9", width: 350,marginTop:50,marginBottom:10 }}></View>
 
-            <TouchableOpacity onPress={()=>navigation.navigate('회원가입')}>
-            <View style={{width:65,height:30,backgroundColor:'black',alignItems:'center'}}>
-                <Text style={{color:'white',marginTop:5,fontWeight:'800'}}>회원가입</Text>
-            </View>
+          <View style={{  left: 15, flexDirection: 'row', height: 30, alignItems: 'center',marginBottom:20 }}>
+            <Text style={{ textAlignVertical: 'center', marginRight: 10 }}>처음이신가요??</Text>
+
+            <TouchableOpacity onPress={() => navigation.navigate('회원가입')}>
+              <View style={{ width: 65, height: 30, backgroundColor: 'black', alignItems: 'center',justifyContent:"center" }}>
+                <Text style={{ color: 'white', fontWeight: 'bold' }}>회원가입</Text>
+              </View>
             </TouchableOpacity>
 
           </View>
-  
+
         </View>
-  
-      </View>
-
-        <HeadHeder></HeadHeder>
-        
-        <FootTer></FootTer>
 
       </View>
-    )
-  }
+
+      <HeadHeder></HeadHeder>
+
+      <FootTer></FootTer>
+
+    </View>
+  )
+}
   
   export default Login;
   
