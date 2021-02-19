@@ -5,7 +5,8 @@ import {
   Dimensions,
   Button,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 import CheckBox from '@react-native-community/checkbox';
 
@@ -51,23 +52,27 @@ const Login=()=>{
   function logindata(id,pss){
     Axios.post('http://ip0131.cafe24.com/pluslink/json/memberJson.php', JSON.stringify({
       id : id,
-      password : pss
+      password: pss
     }))
-    .then(function (response) {
-      console.log('리스폰스 ',response);
-      if(response.request._response=='suc'){
-      alert('로그인 되었습니다.')
-      fetchUser(id)
-      console.log (isFavorite());
-      navigation.navigate('홈');
-      }
-      else{
-        alert('아이디 또는 비밀번호를 확인해주세요')
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      .then(function (response) {
+        console.log('리스폰스 ', response);
+        if (response.request._response == 'suc') {
+          Alert.alert('로그인 되었습니다.')
+          fetchUser(id)
+          console.log(isFavorite());
+          navigation.navigate('홈');
+        }
+        else if (response.request._response == 'nodata') {
+          Alert.alert('탈퇴된 회원의 정보입니다.')
+        } else if (response.request._response == 'passwrod is not correct.') {
+          Alert.alert('아이디 혹은 비밀번호가 일치하지 않습니다..')
+        } else {
+          Alert.alert('등록된 아이디가 없습니다.')
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   const [id, onChangeId] = React.useState('');//textinput용

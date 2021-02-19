@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  TextInput
+  TextInput,
+  Alert
 } from 'react-native';
 
 const chartHeight = Dimensions.get('window').height;
@@ -24,6 +25,13 @@ import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
 
 const DeleteCheck = () => {
+
+  const fetchUser = async()=>{
+    AsyncStorage.setItem(
+      '@super:id',
+      '로그인해주세요'
+    );
+  }
 
   function refreshData(tableName){
     axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
@@ -86,8 +94,10 @@ const DeleteCheck = () => {
         .then(function (response) {
           console.log('리스폰스 ',response);
           if(response.request._response=='suc'){
-          alert('확인되었습니다.')
-          navigation.navigate('정보변경2')
+            delCheck();
+          Alert.alert('회원탈퇴가 정상 처리되었습니다. 그동안 감사했습니다.')
+          navigation.navigate('홈')
+            fetchUser()
           }
           else{
             alert('아이디 또는 비밀번호를 확인해주세요')
@@ -96,6 +106,22 @@ const DeleteCheck = () => {
         .catch(function (error) {
           console.log(error);
         });
+
+      function delCheck(){
+        axios.post('http://ip0131.cafe24.com/pluslink/json/deleteMember.php', JSON.stringify({
+          mb_id : newid,
+        }))
+        .then(function (response) {
+          console.log('리스폰스 ',response);
+          if(response.request._response=='suc'){
+          }
+          else{
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
   }
 
 
@@ -116,7 +142,7 @@ const DeleteCheck = () => {
               <Text style={{ fontSize: 16, margin: 15, fontWeight: 'bold' }}>회원 비밀번호 확인</Text>
               <View style={{ borderWidth: 0.5, borderColor: 'gray', width: chartWidth - 20 }}></View>
               <Text style={{ fontSize: 14, marginTop: 15, marginLeft: 15 }}>비밀번호를 한번 더 입력해주세요.</Text>
-              <Text style={{ fontSize: 12, marginLeft: 15, marginTop: 5 }}>회원님의 정보를 안전하게 보호하기 위해 비밀번호를 한번더 확인합니다.</Text>
+              <Text style={{ fontSize: 12, marginLeft: 15, marginTop: 5 }}>회원탈퇴를 위해 비밀번호를 한번더 확인합니다.</Text>
 
               <Text style={{ fontSize: 14, marginTop: 15, marginLeft: 15 }}>회원아이디 : {newid}</Text>
               <TextInput
@@ -126,7 +152,7 @@ const DeleteCheck = () => {
               />
               <TouchableOpacity onPress={() => pwCheck()}>
                 <View style={{ margin: 15, width: chartWidth - 50, backgroundColor: '#d11aff' }}>
-                  <Text style={{ color: "white", margin: 15, alignSelf: 'center', fontWeight: 'bold',fontSize:18 }}>확인하기</Text>
+                  <Text style={{ color: "white", margin: 15, alignSelf: 'center', fontWeight: 'bold',fontSize:18 }}>탈퇴하기</Text>
                 </View>
               </TouchableOpacity>
 

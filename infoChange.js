@@ -148,6 +148,11 @@ const InfoChange = () => {
                 
               </View>
               <View style={{flexDirection:'row',alignSelf:'center'}}>
+              <TouchableOpacity onPress={()=>navigation.navigate('회원탈퇴체크')}>
+                <View style={{borderWidth:0.5,borderColor:'gray',height:35,}}>
+                  <Text style={{alignSelf:'center',margin:10}}>회원탈퇴</Text>
+                </View>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={()=>changeData()}>
                 <View style={{backgroundColor:"#d24dff",width:70,height:35,}}>
                   <Text style={{color:'white',alignSelf:'center',marginTop:10}}>정보수정</Text>
