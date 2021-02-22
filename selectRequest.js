@@ -30,8 +30,11 @@ import axios from "axios";
 import AsyncStorage from '@react-native-community/async-storage';
 import { ceil } from 'react-native-reanimated';
 
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+
 const SelectRequest = ({ route }) => {
   const navigation = useNavigation()
+  const [response, setResponse] = React.useState(null);//사진
 
   function refreshData(tableName) {
     axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
@@ -196,6 +199,14 @@ const SelectRequest = ({ route }) => {
       return
     }
 
+    if(response == null){
+      var img = '1'
+      var type = '1'
+    }else{
+      var img = response.base64
+      var type = response.type
+    }
+
 
     axios.post('http://ip0131.cafe24.com/pluslink/json/selectRequest.php', JSON.stringify({
       wr_1: listCate, //카테고리
@@ -209,6 +220,8 @@ const SelectRequest = ({ route }) => {
       mb_id: newid,//아이디
       wr_password: pwss,//비번
       wr_name: name,//이름
+      img: img,
+      imgtype: type,
     }))
       .then(function (response) {
         console.log('리스폰스 ', response.request._response);
@@ -221,7 +234,7 @@ const SelectRequest = ({ route }) => {
         else {
           alert('견적 등록이 완료되었습니다..')
           refreshData('g5_write_estimate')
-          navigation.navigate('홈');
+          //navigation.navigate('홈');
         }
       })
       .catch(function (error) {
@@ -262,7 +275,7 @@ function MainPush(){
   return (
     <View>
       <View style={{ height: chartHeight, width: chartWidth }}>
-        <ScrollView>
+        <ScrollView style={{backgroundColor:'white'}}>
           <View style={{ marginBottom: 100 }}>
             <View style={{ width: chartWidth, marginTop: 50 }}>
               <ImageBackground source={event} style={{ width: chartWidth, height: chartHeight / 7 }}>
@@ -288,7 +301,7 @@ function MainPush(){
               </TouchableOpacity>
 
               <Text style={{ marginTop: 15, fontWeight: 'bold' }}>지정업체</Text>
-              <View style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, marginTop: 5, backgroundColor: '#ffcccc' }}>
+              <View style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 30, marginTop: 5, backgroundColor: '#ffcccc' }}>
                 <Text style={{ margin: 10, fontWeight: '100' }}>{route.params.comname}</Text>
               </View>
 
@@ -305,7 +318,7 @@ function MainPush(){
                   {
                     "alignItems": "flex-start",
                     "marginTop": 8,
-                    "width": 325,
+                    "width": chartWidth-30,
                     "height": 37,
                     "borderWidth": 1,
                     "borderColor": "rgba(171, 171, 171, 255)",
@@ -314,7 +327,7 @@ function MainPush(){
                 }
                 ><Text>{text}</Text></View>
               </TouchableOpacity>
-              <TextInput placeholder='상세주소' onChangeText={(text) => setChanAddr(text)} value={chanAddr} style={{ marginTop: 8, width: 325, height: 37, borderWidth: 1, borderColor: 'gray', }}></TextInput>
+              <TextInput placeholder='상세주소' onChangeText={(text) => setChanAddr(text)} value={chanAddr} style={{ marginTop: 8, width: chartWidth-30, height: 37, borderWidth: 1, borderColor: 'gray', }}></TextInput>
 
               <Text style={
                 {
@@ -330,7 +343,7 @@ function MainPush(){
                   {
                     "alignItems": "flex-start",
                     "marginTop": 10,
-                    "width": 325,
+                    "width": chartWidth-30,
                     "height": 37,
                     "borderWidth": 1,
                     "borderColor": "rgba(171, 171, 171, 255)",
@@ -349,6 +362,40 @@ function MainPush(){
                 placeholder="내용을 입력해주세요."
                 multiline={true}
               />
+
+
+              <View>
+                <View style={{ flexDirection: 'row', marginTop: 50 }}>
+                  <Text>이미지첨부</Text>
+                </View>
+                <TouchableOpacity onPress={() =>
+                  launchImageLibrary(
+                    {
+                      mediaType: 'photo',
+                      includeBase64: true,
+                      maxHeight: chartHeight,
+                      maxWidth: chartWidth / 1.1,
+                    },
+                    (response) => {
+                      setResponse(response);
+                      console.log(response)
+                      // console.log(JSON.stringify(response))
+                    },
+                  )
+                }>
+                  <View style={{ marginTop: 15, marginBottom: 15, borderWidth: 0.5, width: 80, height: 30, alignItems: 'center' }}>
+                    <Text style={{ marginTop: 5 }}>사진선택</Text>
+                  </View>
+                </TouchableOpacity></View>
+
+              {response && (
+                <View>
+                  <Image
+                    style={{ width: response.width, height: response.height }}
+                    source={{ uri: response.uri }}
+                  />
+                </View>
+              )}
 
               <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 20 }}>
                 <TouchableOpacity onPress={() => insert()}>

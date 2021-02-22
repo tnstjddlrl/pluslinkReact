@@ -155,7 +155,7 @@ const Item = (prop) => {
       <TouchableOpacity onPress={() => navigation.navigate('회사자세히보기', { id: prop.id })}>
         <View style={{ width: chartWidth - 40, backgroundColor: '#f2f2f2', borderRadius: 10, marginLeft: 20, marginRight: 20, marginTop: 10 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + prop.id.substring(0, 2) + '/' + prop.id + '.gif' }} style={{ marginLeft: 15, marginTop: 15, borderRadius: 28, width: 55, height: 55, backgroundColor: 'red' }}></Image>
+            <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + prop.id.substring(0, 2) + '/' + prop.id + '.gif' }} style={{ marginLeft: 15, marginTop: 15, borderRadius: 28, width: 55, height: 55, backgroundColor: 'gray' }}></Image>
             <Text style={{ fontWeight: '500', fontSize: 15, marginLeft: 15, marginTop: 15 }}>{prop.name}</Text>
           </View>
           <Text style={{ margin: 15, fontWeight: '200' }} numberOfLines={3}>{prop.content}</Text>

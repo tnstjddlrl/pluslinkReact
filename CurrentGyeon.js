@@ -30,7 +30,7 @@ var allC = 0
 var count = 0
 
 
-const CurGyeon = () => {
+const CurGyeon = ({route}) => {
   const [newid,setNewid] = useState('');
   
     async function isFavorite() {
@@ -76,32 +76,61 @@ const CurGyeon = () => {
   const [list,setList] = useState([]);
       useEffect(()=>{
         if(list.length==0){
-            GetJson().then((res)=>{
+          GetJson().then((res) => {
             setList(res.data)
             console.log(list)
-            })
-          }
+          })
+        }
       })
 
-     
-      const [all,setAll] = useState('') //전체 갯수
 
-      if(count <10){
-          if(list.length !=0){
-          for(var i = 0;i<list.length;i++){
-            if(list[i].mb_id == newid.toLowerCase()){
-              allC += 1
-            }
-            count +=1
-            console.log(count)
-          }
-          setAll(allC)
-        }
+  const [all, setAll] = useState(0) //전체 갯수
+  const [wait, setWait] = useState(0) //입찰대기
+  const [ipload,setIpload] = useState(0) //입찰진행중
+  const [siload,setSiload] = useState(0) //시공진행중
+  const [complete,setComplete] = useState(0) //시공완료
+  const [sicancel, setSicancel] = useState(0) //시공취소
+  const [gyoncancel, setGyoncancel] = useState(0)//견적취소
+
+
+  function cnt(){
+    var nn = 0
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].mb_id == newid.toLowerCase() && list[i].wr_is_comment == '0') {
+        nn += 1
+        console.log('작동 테스트')
       }
+      console.log(nn)
+    }
+    return nn
+  }
+
+  function newcnt(name){
+    var nn = 0
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].mb_id == newid.toLowerCase() && list[i].wr_is_comment == '0' && list[i].wr_8 == name) {
+        nn += 1
+        console.log('작동 테스트')
+      }
+      console.log(nn)
+    }
+    return nn
+  }
+
+  useEffect(() => {
+    setAll(cnt())
+    setWait(newcnt('입찰대기'))
+    setIpload(newcnt('입찰진행중'))
+    setSiload(newcnt('시공진행중'))
+    setComplete(newcnt('시공완료'))
+    setSicancel(newcnt('시공취소'))
+    setGyoncancel(newcnt('견적취소'))
+  })
+
 
     return (
         <View>
-          <ScrollView style={{width:chartWidth,height:chartHeight}}>
+          <ScrollView style={{width:chartWidth,height:chartHeight,backgroundColor:'white'}}>
           
             <View style={{width:chartWidth,marginTop:50}}>
             <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
@@ -120,7 +149,7 @@ const CurGyeon = () => {
 
                             <TouchableOpacity onPress={()=>navigation.navigate('견적테이블',{name:'입찰대기'})}>
                             <View style={{marginLeft:10,marginTop:40,flexDirection:"row",alignItems:"center"}}>
-                                <Text style={{fontSize:15}}>입찰대기</Text>
+                                <Text style={{fontSize:15}}>입찰대기({wait})</Text>
                                 <Image source={arrow} style={{position:'absolute',right:20}}></Image>
                             </View>
                             <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
@@ -128,7 +157,7 @@ const CurGyeon = () => {
 
                             <TouchableOpacity onPress={()=>navigation.navigate('견적테이블',{name:'입찰진행중'})}>
                             <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
-                                <Text style={{fontSize:15}}>입찰진행중</Text>
+                                <Text style={{fontSize:15}}>입찰진행중({ipload})</Text>
                                 <Image source={arrow} style={{position:'absolute',right:20}}></Image>
                             </View>
                             <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
@@ -137,7 +166,7 @@ const CurGyeon = () => {
 
                             <TouchableOpacity onPress={()=>navigation.navigate('견적테이블',{name:'시공진행중'})}>
                             <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
-                                <Text style={{fontSize:15}}>시공진행중</Text>
+                                <Text style={{fontSize:15}}>시공진행중({siload})</Text>
                                 <Image source={arrow} style={{position:'absolute',right:20}}></Image>
                             </View>
                             <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
@@ -145,7 +174,7 @@ const CurGyeon = () => {
 
                             <TouchableOpacity onPress={()=>navigation.navigate('견적테이블',{name:'시공완료'})}>
                             <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
-                                <Text style={{fontSize:15}}>시공완료</Text>
+                                <Text style={{fontSize:15}}>시공완료({complete})</Text>
                                 <Image source={arrow} style={{position:'absolute',right:20}}></Image>
                             </View>
                             <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
@@ -153,7 +182,7 @@ const CurGyeon = () => {
 
                             <TouchableOpacity onPress={()=>navigation.navigate('견적테이블',{name:'시공취소'})}>
                             <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
-                                <Text style={{fontSize:15}}>시공취소</Text>
+                                <Text style={{fontSize:15}}>시공취소({sicancel})</Text>
                                 <Image source={arrow} style={{position:'absolute',right:20}}></Image>
                             </View>
                             <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
@@ -161,7 +190,7 @@ const CurGyeon = () => {
 
                             <TouchableOpacity onPress={()=>navigation.navigate('견적테이블',{name:'견적취소'})}>
                             <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
-                                <Text style={{fontSize:15}}>견적취소</Text>
+                                <Text style={{fontSize:15}}>견적취소({gyoncancel})</Text>
                                 <Image source={arrow} style={{position:'absolute',right:20}}></Image>
                             </View>
                             <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>

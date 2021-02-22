@@ -230,7 +230,7 @@ const ComLook=({route})=>{
     return(
       <View>
       <View style={{height:chartHeight,width:chartWidth}}>
-        <ScrollView>
+        <ScrollView style={{backgroundColor:'white'}}>
           <View style={{marginBottom:100}}>
                       
             <PushItem></PushItem>
