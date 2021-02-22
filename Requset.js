@@ -28,9 +28,15 @@ import { TextInput } from 'react-native-gesture-handler';
 import axios from 'axios'
 import AsyncStorage from '@react-native-community/async-storage';
 
+
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+
+
 const REquset = () => {
+  const navigation = useNavigation()
 
   const [newid, setNewid] = useState('');
+  const [response, setResponse] = React.useState(null);//사진
 
   async function isFavorite() {
     try {
@@ -353,6 +359,16 @@ const REquset = () => {
     console.log('비밀번호 테스트 : ', pwss)
     console.log('이름테스트 : ', name)
 
+    if(response == null){
+      var img = '1'
+      var type = '1'
+    }else{
+      var img = response.base64
+      var type = response.type
+    }
+
+    console.log(img + type)
+
     axios.post('http://ip0131.cafe24.com/pluslink/json/insertTest.php', JSON.stringify({
       wr_1: listCate, //카테고리
       wr_2: listPlus, //세부항목
@@ -363,7 +379,9 @@ const REquset = () => {
       mb_id: newid,//아이디
       wr_password: pwss,//비번
       wr_name: name,//이름
-      bo_table: 'estimate'
+      bo_table: 'estimate',
+      img: img,
+      imgtype: type,
     }))
       .then(function (response) {
         console.log('리스폰스 ', response.request._response);
@@ -385,7 +403,7 @@ const REquset = () => {
   return (
     <View>
       <View style={{ height: chartHeight, width: chartWidth }}>
-        <ScrollView>
+        <ScrollView style={{backgroundColor:'white'}}>
           <View style={{ marginBottom: 100 }}>
             <View style={{ width: chartWidth, marginTop: 50 }}>
               <ImageBackground source={event} style={{ width: chartWidth, height: chartHeight / 7 }}>
@@ -472,15 +490,50 @@ const REquset = () => {
                 multiline={true}
               />
 
+              <View>
+                <View style={{ flexDirection: 'row', marginTop: 50 }}>
+                  <Text>이미지첨부</Text>
+                </View>
+                <TouchableOpacity onPress={() =>
+                  launchImageLibrary(
+                    {
+                      mediaType: 'photo',
+                      includeBase64: true,
+                      maxHeight: chartHeight,
+                      maxWidth: chartWidth / 1.1,
+                    },
+                    (response) => {
+                      setResponse(response);
+                      console.log(response)
+                      // console.log(JSON.stringify(response))
+                    },
+                  )
+                }>
+                  <View style={{ marginTop: 15, marginBottom: 15, borderWidth: 0.5, width: 80, height: 30, alignItems: 'center' }}>
+                    <Text style={{ marginTop: 5 }}>사진선택</Text>
+                  </View>
+                </TouchableOpacity></View>
+
+                {response && (
+                                <View>
+                                        <Image
+                                            style={{ width: response.width, height: response.height }}
+                                            source={{ uri: response.uri }}
+                                        />
+                                </View>
+                            )}
+
               <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 20 }}>
                 <TouchableOpacity onPress={() => insert()}>
                   <View style={{ backgroundColor: "#d24dff", width: 70, height: 35, }}>
                     <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>작성하기</Text>
                   </View>
-                </TouchableOpacity>
+                </TouchableOpacity >
+                <TouchableOpacity onPress={() => navigation.goBack()}>
                 <View style={{ backgroundColor: "#404040", width: 50, height: 35, }}>
                   <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>취소</Text>
                 </View>
+                </TouchableOpacity>
               </View>
 
 
