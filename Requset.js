@@ -425,7 +425,7 @@ const REquset = () => {
                   {
                     "alignItems": "flex-start",
                     "marginTop": 8,
-                    "width": 325,
+                    "width": chartWidth-30,
                     "height": 37,
                     "borderWidth": 1,
                     "borderColor": "rgba(171, 171, 171, 255)",
@@ -434,7 +434,7 @@ const REquset = () => {
                 }
                 ><Text>{text}</Text></View>
               </TouchableOpacity>
-              <TextInput placeholder='상세주소' style={{ marginTop: 8, width: 325, height: 37, borderWidth: 1, borderColor: 'gray', }}
+              <TextInput placeholder='상세주소' style={{ marginTop: 8, width: chartWidth-30, height: 37, borderWidth: 1, borderColor: 'gray', }}
                 onChangeText={text => setChanAddr(text)}
                 value={chanAddr}></TextInput>
 
@@ -452,7 +452,7 @@ const REquset = () => {
                   {
                     "alignItems": "flex-start",
                     "marginTop": 10,
-                    "width": 325,
+                    "width": chartWidth-30,
                     "height": 37,
                     "borderWidth": 1,
                     "borderColor": "rgba(171, 171, 171, 255)",

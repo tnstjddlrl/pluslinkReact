@@ -387,12 +387,12 @@ const CurrentPlus = ({ route }) => {
       for (var i = 0; i < estimate.length; i++) {
         if (estimate[i].wr_id == route.params.num) {
           if (estimate[i].wr_subject == '일반견적') {
-            main.push(<MainContent lastpay={lastPay} content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={estimate[i].wr_9} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4 + ' ' + estimate[i].wr_5}></MainContent>)
+            main.push(<MainContent lastpay={lastPay} img={estimate[i].as_thumb} content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={estimate[i].wr_9} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4 + ' ' + estimate[i].wr_5}></MainContent>)
             setSigongstate(estimate[i].wr_8)
             return main
           } else {
             if (estimate[i].wr_3 == patners[j].no) {
-              main.push(<MainContent lastpay={lastPay} content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={patners[j].pt_name} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4 + ' ' + estimate[i].wr_5}></MainContent>)
+              main.push(<MainContent lastpay={lastPay} img={estimate[i].as_thumb} content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={patners[j].pt_name} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4 + ' ' + estimate[i].wr_5}></MainContent>)
               setSigongstate(estimate[i].wr_8)
               return main
             }
@@ -584,6 +584,7 @@ const CurrentPlus = ({ route }) => {
         <View style={{ marginTop: 15, marginLeft: 15 }}>
           <Text style={{ fontSize: 16 }}>상세내용</Text>
           <View style={{ borderWidth: 0.5, borderColor: 'gray', marginTop: 15, marginBottom: 15, marginRight: 15 }}>
+            { !(prop.img == '' || prop.img == '1') && <Image style={{width:chartWidth-100,height:chartHeight/2}} source={{uri:prop.img}}></Image>}
             <Text style={{ margin: 10 }}>{prop.content}</Text>
           </View>
         </View>

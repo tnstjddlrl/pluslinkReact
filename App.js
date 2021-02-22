@@ -125,15 +125,16 @@ const App = ({ }) => {
   useEffect(() => {
 
     const result = isFavorite().then((company_id) => {
-      setNewid(company_id.toLowerCase());
-      console.log('새 : ', company_id);
-      console.log('새새 : '+newid)
+      if(company_id == null){
+        console.log('로그인정보 없음')
+        fetchUser()
+      }else{
+        setNewid(company_id.toLowerCase());
+        console.log('새 : ', company_id);
+        console.log('새새 : '+newid)
+      }
     });
 
-    if(newid == ''){
-      console.log('로그인정보 없음')
-      fetchUser()
-    }
   }, []) //위의 두 함수를 앱이 빌드될때 한번만 실행하게끔 useEffect를 걸어줬다. [] 안에 변수를 넣으면 변수의 값이 변경될때마다 useEffect가 리빌드된다.
 
 
