@@ -8,6 +8,7 @@ import {
   Image,
   ScrollView,
   TextInput,
+  Alert,
 } from 'react-native';
 
 const chartHeight = Dimensions.get('window').height;
@@ -80,6 +81,15 @@ const InfoChange = () => {
     
 
     function changeData(){
+
+      if(pwd == '' || cpwd == '' || email == ''|| hp  == ''){
+        Alert.alert('모든 칸을 전부 채워주세요!')
+        return
+      }else if(pwd != cpwd){
+        Alert.alert('비밀번호가 서로 다릅니다!')
+        return
+      }
+
       axios.post('http://ip0131.cafe24.com/pluslink/json/updateMember.php', JSON.stringify({
         id : newid,
         password : pwd,

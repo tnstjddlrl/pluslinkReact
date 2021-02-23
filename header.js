@@ -157,7 +157,7 @@ const HeadHeder = () => {
 
 
       <Modal transparent={true} visible={viewmenu}>
-        <View style={{ width: chartWidth / 1.45, height: chartHeight, position: 'absolute', backgroundColor: 'gray' }}>
+        <View style={{ width: chartWidth / 1.45, height: chartHeight, position: 'absolute', backgroundColor: 'white' }}>
           <View>
             <ImageBackground source={graBox} style={{ width: chartWidth / 1.45, height: 220 }}>
               <View style={{ marginTop: mata }}>
