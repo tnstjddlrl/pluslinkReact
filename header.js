@@ -153,8 +153,12 @@ const HeadHeder = () => {
       var subll = []
 
       for (var i = 0; i < cateList.length; i++) {
-        if (cateList[i].category == prop.title && cateList[i].subcategory != '') {
-          subll.push(cateList[i].subcategory)
+        if (cateList[i].category == prop.title) {
+          if(cateList[i].subcategory == ''){
+            subll.push("전체")
+          }else{
+            subll.push(cateList[i].subcategory)
+          }
         }
       }
       for (var i = 0; i < subll.length; i++) {

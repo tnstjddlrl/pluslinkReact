@@ -291,10 +291,20 @@ const CompanyList = ({ route }) => {
       return false;
     }
   }
+  async function GetCate() {
+    try {
+      console.log('겟멤버 작동됨')
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/category.json');
+    } catch (error) {
+      console.log('에러 : ', error)
+      return false;
+    }
+  }
 
   const [patners, setPatners] = useState([])
   const [expertise, setExpertise] = useState([])
   const [memberList, setMemberList] = useState([])
+  const [cateList, setCateList] = useState([])
   useEffect(() => {
     if (expertise.length == 0) {
       GetExpertise().then((res) => {
@@ -309,6 +319,11 @@ const CompanyList = ({ route }) => {
     if (memberList.length == 0) {
       GetMember().then((res) => {
         setMemberList(res.data)
+      })
+    }
+    if (cateList.length == 0) {
+      GetCate().then((res) => {
+        setCateList(res.data)
       })
     }
   })
@@ -380,7 +395,32 @@ const CompanyList = ({ route }) => {
     return List
   }
 
+  const MainModalItem = (prop) =>{
+    return(
+      <TouchableOpacity onPress={() => { SetlistCate(prop.cate), setSelect(false), setListPlus('전체') }}>
+              <Text style={{ left: 5, marginTop: 5 }}>{prop.cate}</Text>
+            </TouchableOpacity>
+    )
+  }
 
+const MainMPush =() =>{
+  var ll = []
+  var cate = []
+  for(var i = 0;i<cateList.length; i++){
+    cate.push(cateList[i].category)
+  }
+
+  const set = new Set(cate);  
+  cate = [...set];
+
+  console.log('asdfasdgaweeeeewrwr' + cate)
+
+  for(var i = 0;i<cate.length;i++){
+    ll.push(<MainModalItem key={i} cate={cate[i]}></MainModalItem>)
+  }
+  
+  return ll
+}
 
 
 
@@ -436,8 +476,10 @@ const CompanyList = ({ route }) => {
 
 
       <Modal transparent={true} visible={select}>
+        <TouchableOpacity style={{width:chartWidth,height:chartHeight}} onPress={()=>setSelect(false)}></TouchableOpacity>
         <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 150 }}>
-          <TouchableOpacity onPress={() => { SetlistCate('전기&조명'), setSelect(false), setListPlus('전체') }}>
+          <MainMPush></MainMPush>
+          {/* <TouchableOpacity onPress={() => { SetlistCate('전기&조명'), setSelect(false), setListPlus('전체') }}>
             <Text style={{ left: 5, marginTop: 5 }}>전기&조명</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => { SetlistCate('수도'), setSelect(false), setListPlus('전체') }}>
@@ -461,7 +503,7 @@ const CompanyList = ({ route }) => {
           </TouchableOpacity>
           <TouchableOpacity onPress={() => { SetlistCate('건물외부'), setSelect(false), setListPlus('전체') }}>
             <Text style={{ left: 5, marginTop: 5 }}>건물외부</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </Modal>
 
@@ -470,6 +512,8 @@ const CompanyList = ({ route }) => {
     </View>
   )
 }
+
+
 
 const ListItem = (prop) => {
   const navigation = useNavigation()
