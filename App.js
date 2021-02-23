@@ -104,6 +104,7 @@ const App = ({ }) => {
     refreshData('partners')
     refreshData('estimate_pay')
     refreshData('stratum_list')
+    refreshData('category')
   },[])
   
 

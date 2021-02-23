@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  TextInput
+  TextInput,
+  Alert
 } from 'react-native';
 
 const chartHeight = Dimensions.get('window').height;
@@ -86,7 +87,7 @@ const PasswordCheck = () => {
         .then(function (response) {
           console.log('리스폰스 ',response);
           if(response.request._response=='suc'){
-          alert('확인되었습니다.')
+          Alert.alert('확인되었습니다.')
           navigation.navigate('정보변경2')
           }
           else{

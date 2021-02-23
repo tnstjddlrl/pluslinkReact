@@ -18,6 +18,7 @@ import { useNavigation } from '@react-navigation/native';
 import { DrawerActions } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
+import { ScrollView } from "react-native-gesture-handler";
 
 
 const logo = { uri: "https://pluslink.kr/img/pluslink/logo.png" };
@@ -47,9 +48,7 @@ const HeadHeder = () => {
     }
   }
 
-  const result = isFavorite().then((company_id) => {
-    setNewid(company_id.toLowerCase())
-  });
+
 
   const fetchUser = async (id) => {
     AsyncStorage.setItem(
@@ -89,69 +88,136 @@ const HeadHeder = () => {
 
   async function GetMember() {
     try {
-        console.log('겟멤버 작동됨')
+      console.log('겟멤버 작동됨')
       return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_member.json');
     } catch (error) {
-      console.log('에러 : ',error)
+      console.log('에러 : ', error)
+      return false;
+    }
+  }
+  async function GetCate() {
+    try {
+      console.log('겟멤버 작동됨')
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/category.json');
+    } catch (error) {
+      console.log('에러 : ', error)
       return false;
     }
   }
 
-  const [memberList,setMemberList] = useState([]);
-      useEffect(()=>{
-        if(memberList.length==0){
-            console.log('작동테스트')
-          GetMember().then((res)=>{
-            setMemberList(res.data)
-            })
-        }
-        
+  const [memberList, setMemberList] = useState([]);
+  const [cateList, setCateList] = useState([])
+  useEffect(() => {
+    if (memberList.length == 0) {
+      console.log('작동테스트')
+      GetMember().then((res) => {
+        setMemberList(res.data)
       })
-  
-  const [name,setName] = useState('')
-  useEffect(()=>{
-    for(var i = 0; i<memberList.length;i++){
-      if(memberList[i].mb_id == newid){
-       setName(memberList[i].mb_name)
-      }
-    } 
+    }
+    if (cateList.length == 0) {
+      GetCate().then((res) => {
+        setCateList(res.data)
+      })
+    }
   })
+
+  const [name, setName] = useState('')
+  useEffect(() => {
+    const result = isFavorite().then((company_id) => {
+      setNewid(company_id.toLowerCase())
+    });
+    for (var i = 0; i < memberList.length; i++) {
+      if (memberList[i].mb_id == newid) {
+        setName(memberList[i].mb_name)
+        break
+      } else {
+        setName(newid)
+      }
+    }
+  })
+
+  const MenuChild = (prop) => {
+    return (
+      <TouchableOpacity onPress={() => { navigation.navigate('업체목록', { cate: prop.title, subcate: prop.text }), setViewmenu(false) }}>
+        <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 5, fontSize: 15 }}>{prop.text}</Text>
+      </TouchableOpacity>
+    )
+  }
+
+
+  const LeftMenu = (prop) => {
+    const [test, setTest] = useState(false)
+    const [tcolor, setTcolor] = useState('black')
+    const List = () => {
+      var ll = []
+      var subll = []
+
+      for (var i = 0; i < cateList.length; i++) {
+        if (cateList[i].category == prop.title && cateList[i].subcategory != '') {
+          subll.push(cateList[i].subcategory)
+        }
+      }
+      for (var i = 0; i < subll.length; i++) {
+        ll.push(<MenuChild key={i} text={subll[i]} title={prop.title}></MenuChild>)
+      }
+      return ll
+    }
+
+    function view() {
+      if (test) { setTest(false) } else { setTest(true) }
+    }
+    function colcol() {
+      if (tcolor == 'black') { setTcolor('#ac00e6') } else { setTcolor('black') }
+    }
+
+    return (
+      <View>
+        <TouchableOpacity onPress={() => { view(), colcol() }}>
+          <View style={{ width: chartWidth / 1.45, height: 50, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
+            <Text style={{ margin: 15, fontWeight: 'bold', fontSize: 15, color: tcolor }}>{prop.title}</Text>
+            <Image source={arrow} style={{ position: 'absolute', right: 10, }}></Image>
+          </View>
+        </TouchableOpacity>
+        {test && <View style={{ backgroundColor: '#e6e6e6' }}><List></List></View>}
+      </View>
+    )
+  }
 
 
   return (
     <View>
-        <View style={{justifyContent:'space-between',alignItems:"flex-end",borderWidth: 1, position: 'absolute', width: chartWidth + 15, left: -2, bottom: (chartHeight-nnee), height: 120, flexDirection: 'row', backgroundColor: 'white' }}>
-        
-          <TouchableOpacity activeOpacity={0.5} onPress={() => { setViewmenu(true) }} style={{ left: 10 }}>
-            <View style={{width:75,marginBottom:15}}>
+      <View style={{ justifyContent: 'space-between', alignItems: "flex-end", borderWidth: 1, position: 'absolute', width: chartWidth + 15, left: -2, bottom: (chartHeight - nnee), height: 120, flexDirection: 'row', backgroundColor: 'white' }}>
+
+        <TouchableOpacity activeOpacity={0.5} onPress={() => { setViewmenu(true) }} style={{ left: 10 }}>
+          <View style={{ width: 75, marginBottom: 15 }}>
             <Image
               source={logo2}
-              style={{ width: 30, height: 25}}
+              style={{ width: 30, height: 25 }}
             />
-            </View>
-          </TouchableOpacity>
-          <View style={{ height: 30, width: 40,marginBottom:10}}>
-            <TouchableOpacity onPress={() => navigation.navigate('홈')}>
-              <Image source={testlogo} style={{ width: 40, height: 34}}>
-              </Image>
-            </TouchableOpacity>
           </View>
-
-          <TouchableOpacity onPress={() => { Linking.openURL('https://pluslink.kr/shop/') }}>
-            <View style={{
-             width: 75, height: 35, backgroundColor: '#b84dff',
-              borderTopLeftRadius: 17,
-              borderTopRightRadius: 17,
-              borderBottomLeftRadius: 17,
-              borderBottomRightRadius: 17,
-              marginRight:20,alignItems:"center",justifyContent:"center",marginBottom:10
-            }}>
-              <Text style={{ color: 'white', fontWeight: 'bold' }}>
-                PnL Mall
-              </Text>
-            </View>
+        </TouchableOpacity>
+        <View style={{ height: 30, width: 40, marginBottom: 10 }}>
+          <TouchableOpacity onPress={() => navigation.navigate('홈')}>
+            <Image source={testlogo} style={{ width: 40, height: 34 }}>
+            </Image>
           </TouchableOpacity>
         </View>
+
+        <TouchableOpacity onPress={() => { Linking.openURL('https://pluslink.kr/shop/') }}>
+          <View style={{
+            width: 75, height: 35, backgroundColor: '#b84dff',
+            borderTopLeftRadius: 17,
+            borderTopRightRadius: 17,
+            borderBottomLeftRadius: 17,
+            borderBottomRightRadius: 17,
+            marginRight: 20, alignItems: "center", justifyContent: "center", marginBottom: 10
+          }}>
+            <Text style={{ color: 'white', fontWeight: 'bold' }}>
+              PnL Mall
+              </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
 
 
 
@@ -164,9 +230,9 @@ const HeadHeder = () => {
 
                 <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 10, alignItems: 'center' }}>
                   <View style={{ backgroundColor: 'white', width: 50, height: 50, borderRadius: 28 }}>
-                    <Image source={{uri:'https://pluslink.kr/data/member_image/re/reph.gif'}} style={{width: 50, height: 50, borderRadius: 28}}></Image>
+                    <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + newid.substr(0, 2) + '/' + newid + '.gif' }} style={{ width: 50, height: 50, borderRadius: 28 }}></Image>
                   </View>
-                  <Text style={{ fontWeight: 'bold', marginLeft: 10,color:'white' ,fontSize:18 }}>{name}</Text>
+                  <Text style={{ fontWeight: 'bold', marginLeft: 10, color: 'white', fontSize: 18 }}>{name}</Text>
 
                   <TouchableOpacity onPress={() => setViewmenu(false)} style={{ width: 50, height: 50, backgroundColor: 'white', borderRadius: 27, right: 10, top: -10, position: 'absolute' }}>
                     <View style={{ width: 50, height: 50, left: 0 }}>
@@ -196,7 +262,7 @@ const HeadHeder = () => {
                       </View>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => { fetchUser('로그인해주세요'), setViewmenu(false), navigation.navigate('홈') }}>
+                    <TouchableOpacity onPress={() => { fetchUser('로그인해주세요'), setViewmenu(false), navigation.navigate('홈'), setName('로그인해주세요') }}>
                       <View style={{ backgroundColor: 'white', width: chartWidth / 3.5, height: 40, borderRadius: 5, marginLeft: 10 }}>
                         <Text style={{ alignSelf: 'center', marginTop: 10, fontSize: 15 }}>로그아웃</Text>
                       </View>
@@ -235,58 +301,18 @@ const HeadHeder = () => {
               </View>
             </ImageBackground>
 
-            <TouchableOpacity onPress={() => { navigation.navigate('업체목록', { cate: '전기&조명' }), setViewmenu(false) }}>
-              <View style={{ width: chartWidth / 1.45, height: 50, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ margin: 15, fontWeight: 'bold', fontSize: 15 }}>전기&조명</Text>
-                <Image source={arrow} style={{ position: 'absolute', right: 10, }}></Image>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { navigation.navigate('업체목록', { cate: '수도' }), setViewmenu(false) }}>
-              <View style={{ width: chartWidth / 1.45, height: 50, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ margin: 15, fontWeight: 'bold', fontSize: 15 }}>수도</Text>
-                <Image source={arrow} style={{ position: 'absolute', right: 10, }}></Image>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => { navigation.navigate('업체목록', { cate: '도배&장판' }), setViewmenu(false) }}>
-              <View style={{ width: chartWidth / 1.45, height: 50, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ margin: 15, fontWeight: 'bold', fontSize: 15 }}>도배&장판</Text>
-                <Image source={arrow} style={{ position: 'absolute', right: 10, }}></Image>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => { navigation.navigate('업체목록', { cate: '인테리어' }), setViewmenu(false) }}>
-              <View style={{ width: chartWidth / 1.45, height: 50, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ margin: 15, fontWeight: 'bold', fontSize: 15 }}>인테리어</Text>
-                <Image source={arrow} style={{ position: 'absolute', right: 10, }}></Image>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => { navigation.navigate('업체목록', { cate: '샷시&창호' }), setViewmenu(false) }}>
-              <View style={{ width: chartWidth / 1.45, height: 50, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ margin: 15, fontWeight: 'bold', fontSize: 15 }}>샷시&창호</Text>
-                <Image source={arrow} style={{ position: 'absolute', right: 10, }}></Image>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => { navigation.navigate('업체목록', { cate: '청소&철거' }), setViewmenu(false) }}>
-              <View style={{ width: chartWidth / 1.45, height: 50, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ margin: 15, fontWeight: 'bold', fontSize: 15 }}>청소&철거</Text>
-                <Image source={arrow} style={{ position: 'absolute', right: 10, }}></Image>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { navigation.navigate('업체목록', { cate: '보일러&배관' }), setViewmenu(false) }}>
-              <View style={{ width: chartWidth / 1.45, height: 50, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ margin: 15, fontWeight: 'bold', fontSize: 15 }}>보일러&배관</Text>
-                <Image source={arrow} style={{ position: 'absolute', right: 10, }}></Image>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { navigation.navigate('업체목록', { cate: '건물외부' }), setViewmenu(false) }}>
-              <View style={{ width: chartWidth / 1.45, height: 50, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ margin: 15, fontWeight: 'bold', fontSize: 15 }}>건물외부</Text>
-                <Image source={arrow} style={{ position: 'absolute', right: 10, }}></Image>
-              </View>
-            </TouchableOpacity>
+            <ScrollView>
+              <LeftMenu title={'전기&조명'} ></LeftMenu>
+              <LeftMenu title={'수도'} ></LeftMenu>
+              <LeftMenu title={'도배&장판'} ></LeftMenu>
+              <LeftMenu title={'인테리어&리모델링'} ></LeftMenu>
+              <LeftMenu title={'샷시&창호'} ></LeftMenu>
+              <LeftMenu title={'청소'} ></LeftMenu>
+              <LeftMenu title={'보일러&배관'} ></LeftMenu>
+              <LeftMenu title={'건물외부'} ></LeftMenu>
+              <LeftMenu title={'철거 및 처리'} ></LeftMenu>
+              <LeftMenu title={'이사'} ></LeftMenu>
+            </ScrollView>
 
 
 

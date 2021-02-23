@@ -32,6 +32,7 @@ const CompanyList = ({ route }) => {
 
   useEffect(() => {
     SetlistCate(route.params.cate);
+    setListPlus(route.params.subcate);
   }, [route])
 
 
