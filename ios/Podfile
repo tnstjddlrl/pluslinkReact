@@ -8,7 +8,6 @@ target 'pltest2' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
   target 'pltest2Tests' do
     inherit! :complete

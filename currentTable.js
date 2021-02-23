@@ -187,7 +187,7 @@ const CurrentTable =({route}) =>{
                     </View>
 
 
-                    <View style={{flexDirection:'row'}}>
+                    <View style={{flexDirection:'row',justifyContent:"space-between"}}>
                         <TouchableOpacity onPress={()=>setSelect(true)}>
                             <View style={{width:100,height:30,borderWidth:0.7,left:10,marginTop:20,alignItems:"center",flexDirection:"row"}}>
                                 <Text style={{left:2}}>{listCate}</Text>
@@ -195,7 +195,7 @@ const CurrentTable =({route}) =>{
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>navigation.navigate('견적의뢰')}>
-                            <View style={{backgroundColor:'#A579C9',width:70,height:30,left:10,marginTop:20,alignItems:'center',alignContent:'center'}}>
+                            <View style={{backgroundColor:'#A579C9',width:70,height:30,marginTop:20,alignItems:'center',alignContent:'center',marginRight:10}}>
                                 <Text style={{color:'white',marginTop:5,fontWeight:"800"}}>견적의뢰</Text>
                             </View>
                         </TouchableOpacity>

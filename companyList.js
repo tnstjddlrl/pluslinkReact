@@ -41,6 +41,7 @@ const CompanyList = ({ route }) => {
     if (listCate == '전기&조명') {
       return (
         <Modal transparent={true} visible={subSelect}>
+          <TouchableOpacity style={{width:chartWidth,height:chartHeight}} onPress={()=>setSubselect(false)}></TouchableOpacity>
           <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 300 }}>
             <TouchableOpacity onPress={() => { setListPlus('전체'), setSubselect(false) }}>
               <Text style={{ left: 5, marginTop: 5 }}>전체</Text>
@@ -76,6 +77,7 @@ const CompanyList = ({ route }) => {
     } else if (listCate == '수도') {
       return (
         <Modal transparent={true} visible={subSelect}>
+          <TouchableOpacity style={{width:chartWidth,height:chartHeight}} onPress={()=>setSubselect(false)}></TouchableOpacity>
           <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 300 }}>
             <TouchableOpacity onPress={() => { setListPlus('전체'), setSubselect(false) }}>
               <Text style={{ left: 5, marginTop: 5 }}>전체</Text>
@@ -108,6 +110,7 @@ const CompanyList = ({ route }) => {
     } else if (listCate == '도배&장판') {
       return (
         <Modal transparent={true} visible={subSelect}>
+          <TouchableOpacity style={{width:chartWidth,height:chartHeight}} onPress={()=>setSubselect(false)}></TouchableOpacity>
           <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 300 }}>
             <TouchableOpacity onPress={() => { setListPlus('전체'), setSubselect(false) }}>
               <Text style={{ left: 5, marginTop: 5 }}>전체</Text>
@@ -137,6 +140,7 @@ const CompanyList = ({ route }) => {
     } else if (listCate == '인테리어') {
       return (
         <Modal transparent={true} visible={subSelect}>
+          <TouchableOpacity style={{width:chartWidth,height:chartHeight}} onPress={()=>setSubselect(false)}></TouchableOpacity>
           <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 300 }}>
             <TouchableOpacity onPress={() => { setListPlus('전체'), setSubselect(false) }}>
               <Text style={{ left: 5, marginTop: 5 }}>전체</Text>
@@ -156,6 +160,7 @@ const CompanyList = ({ route }) => {
     } else if (listCate == '샷시&창호') {
       return (
         <Modal transparent={true} visible={subSelect}>
+          <TouchableOpacity style={{width:chartWidth,height:chartHeight}} onPress={()=>setSubselect(false)}></TouchableOpacity>
           <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 300 }}>
             <TouchableOpacity onPress={() => { setListPlus('전체'), setSubselect(false) }}>
               <Text style={{ left: 5, marginTop: 5 }}>전체</Text>
@@ -172,6 +177,7 @@ const CompanyList = ({ route }) => {
     } else if (listCate == '청소&철거') {
       return (
         <Modal transparent={true} visible={subSelect}>
+          <TouchableOpacity style={{width:chartWidth,height:chartHeight}} onPress={()=>setSubselect(false)}></TouchableOpacity>
           <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 300 }}>
             <TouchableOpacity onPress={() => { setListPlus('전체'), setSubselect(false) }}>
               <Text style={{ left: 5, marginTop: 5 }}>전체</Text>
@@ -207,6 +213,7 @@ const CompanyList = ({ route }) => {
     } else if (listCate == '보일러&배관') {
       return (
         <Modal transparent={true} visible={subSelect}>
+          <TouchableOpacity style={{width:chartWidth,height:chartHeight}} onPress={()=>setSubselect(false)}></TouchableOpacity>
           <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 300 }}>
             <TouchableOpacity onPress={() => { setListPlus('전체'), setSubselect(false) }}>
               <Text style={{ left: 5, marginTop: 5 }}>전체</Text>
@@ -223,6 +230,7 @@ const CompanyList = ({ route }) => {
     } else if (listCate == '건물외부') {
       return (
         <Modal transparent={true} visible={subSelect}>
+          <TouchableOpacity style={{width:chartWidth,height:chartHeight}} onPress={()=>setSubselect(false)}></TouchableOpacity>
           <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 300 }}>
             <TouchableOpacity onPress={() => { setListPlus('전체'), setSubselect(false) }}>
               <Text style={{ left: 5, marginTop: 5 }}>전체</Text>

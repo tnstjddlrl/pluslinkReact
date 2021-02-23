@@ -17,7 +17,7 @@ import styles from './styles.js'
 import { useNavigation } from '@react-navigation/native';
 import { DrawerActions } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
-import Axios from 'axios'
+import axios from 'axios'
 
 
 const logo = { uri: "https://pluslink.kr/img/pluslink/logo.png" };
@@ -48,7 +48,7 @@ const HeadHeder = () => {
   }
 
   const result = isFavorite().then((company_id) => {
-    setNewid(company_id)
+    setNewid(company_id.toLowerCase())
   });
 
   const fetchUser = async (id) => {
@@ -86,6 +86,36 @@ const HeadHeder = () => {
     console.log(nowheight)
     console.log('헤더 콘솔 체크: ', newid)
   }, [])
+
+  async function GetMember() {
+    try {
+        console.log('겟멤버 작동됨')
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_member.json');
+    } catch (error) {
+      console.log('에러 : ',error)
+      return false;
+    }
+  }
+
+  const [memberList,setMemberList] = useState([]);
+      useEffect(()=>{
+        if(memberList.length==0){
+            console.log('작동테스트')
+          GetMember().then((res)=>{
+            setMemberList(res.data)
+            })
+        }
+        
+      })
+  
+  const [name,setName] = useState('')
+  useEffect(()=>{
+    for(var i = 0; i<memberList.length;i++){
+      if(memberList[i].mb_id == newid){
+       setName(memberList[i].mb_name)
+      }
+    } 
+  })
 
 
   return (
@@ -133,8 +163,10 @@ const HeadHeder = () => {
               <View style={{ marginTop: mata }}>
 
                 <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 10, alignItems: 'center' }}>
-                  <View style={{ backgroundColor: 'white', width: 50, height: 50, borderRadius: 28 }}></View>
-                  <Text style={{ fontWeight: 'bold', marginLeft: 10 }}>{newid}</Text>
+                  <View style={{ backgroundColor: 'white', width: 50, height: 50, borderRadius: 28 }}>
+                    <Image source={{uri:'https://pluslink.kr/data/member_image/re/reph.gif'}} style={{width: 50, height: 50, borderRadius: 28}}></Image>
+                  </View>
+                  <Text style={{ fontWeight: 'bold', marginLeft: 10,color:'white' ,fontSize:18 }}>{name}</Text>
 
                   <TouchableOpacity onPress={() => setViewmenu(false)} style={{ width: 50, height: 50, backgroundColor: 'white', borderRadius: 27, right: 10, top: -10, position: 'absolute' }}>
                     <View style={{ width: 50, height: 50, left: 0 }}>
