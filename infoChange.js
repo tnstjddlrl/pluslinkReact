@@ -22,7 +22,6 @@ import HeadHeder from "./header.js";
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
-var count = 0 //무한렌더링 방지
 const InfoChange = () => {
   const navigation = useNavigation()
   const [newid,setNewid] = useState('');
@@ -58,27 +57,27 @@ const InfoChange = () => {
           })
       }
 
-      reload()
     })
 
     const [email,setEmail] = useState('')
     const [name,setName] = useState('')
-    const [hp,setHp] = useState('')
-    const [pwd,setPwd] = useState('')
-    const [cpwd,setCpwd] = useState('')
-    
-    function reload(){
-        for(var i = 0;i<memberList.length;i++){
-          
-          if(memberList[i].mb_id.toLowerCase()==newid && count<1){
-            setEmail(memberList[i].mb_email)
-            setHp(memberList[i].mb_hp)
-            setName(memberList[i].mb_name)
-            count += 1
-            console.log(count)
-          }
+  const [hp, setHp] = useState('')
+  const [pwd, setPwd] = useState('')
+  const [cpwd, setCpwd] = useState('')
+
+  useEffect(() => {
+   
+      for (var i = 0; i < memberList.length; i++) {
+        if (memberList[i].mb_id == newid) {
+          setEmail(memberList[i].mb_email)
+          setHp(memberList[i].mb_hp)
+          setName(memberList[i].mb_name)
+        }
       }
-    }
+    
+  })
+
+    
 
     function changeData(){
       axios.post('http://ip0131.cafe24.com/pluslink/json/updateMember.php', JSON.stringify({
