@@ -38,6 +38,15 @@ const CompanyList = ({ route }) => {
 
   const [subSelect, setSubselect] = useState(false)
   const [listPlus, setListPlus] = useState('전체') //세부카테고리
+
+  const SubCateItem = (prop) => {
+    return(
+      <TouchableOpacity onPress={() => { setListPlus(prop.text), setSubselect(false) }}>
+              <Text style={{ left: 5, marginTop: 5 }}>{prop.text}</Text>
+            </TouchableOpacity>
+    )
+  }
+
   const Subcate = () => {
     if (listCate == '전기&조명') {
       return (
