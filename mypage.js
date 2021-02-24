@@ -80,9 +80,6 @@ const Mypage = () => {
       }
     }
     
-      const result = isFavorite().then((company_id) => {
-        setNewid(company_id)
-      });
 
     let os = Platform.OS
     console.log(os)
@@ -93,34 +90,71 @@ const Mypage = () => {
         nowheight = 60;
       }
 
+      async function GetMember() {
+        try {
+          console.log('겟멤버 작동됨')
+          return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_member.json');
+        } catch (error) {
+          console.log('에러 : ', error)
+          return false;
+        }
+      }
+    
+      const [memberList, setMemberList] = useState([]);
+      useEffect(() => {
+        if (memberList.length == 0) {
+          console.log('작동테스트')
+          GetMember().then((res) => {
+            setMemberList(res.data)
+          })
+        }
+      })
+    
+      const [name, setName] = useState('')
+      useEffect(() => {
+        const result = isFavorite().then((company_id) => {
+          setNewid(company_id.toLowerCase())
+        });
+        for (var i = 0; i < memberList.length; i++) {
+          if (memberList[i].mb_id == newid) {
+            setName(memberList[i].mb_name)
+            break
+          } else {
+            setName(newid)
+          }
+        }
+      })
+
     return (
         <View>
             <View style={{height:chartHeight,width:chartWidth}}>
                 <View style={{top:nowheight,backgroundColor:'white'}}>
                     <View style={{marginLeft:20,marginRight:20,marginTop:10,backgroundColor:'white',height:chartHeight}}>
                         <View style={{flexDirection:"row",alignItems:"center"}}>
-                            <View style={{borderWidth:1,height:60,width:60,borderRadius:27,backgroundColor:30}}></View>
-                            <Text style={{fontSize:20,marginLeft:10}}>{newid}</Text>
+                            <View style={{borderWidth:1,height:60,width:60,borderRadius:27,backgroundColor:'white'}}>
+                              <Image style={{height:60,width:60,borderRadius:27,}} source={{ uri: 'https://pluslink.kr/data/member_image/' + newid.substr(0, 2) + '/' + newid + '.gif' }}></Image>
+                            </View>
+                            <Text style={{fontSize:20,marginLeft:10}}>{name}</Text>
                         </View>
 
                         <View style={{width:chartWidth-40,borderWidth:0.5,marginBottom:5,marginTop:10}}></View>
                         <View style={{flexDirection:"row",alignItems:"center",}}>
-                            <View style={{flexDirection:"row",width:chartWidth}}>
-                                    <View style={{left:chartWidth/15}}>
+                            <View style={{flexDirection: "row",left:10, width: chartWidth-70,justifyContent:'space-between'}}>
+                                    <View>
                                     <TouchableOpacity onPress={()=>navigation.navigate('정보변경')}>
                                         <Text>정보변경</Text>
                                     </TouchableOpacity>
                                     </View>
                                 
                                 
-                                    <View style={{left:chartWidth/4}}>
+                                    <View>
                                     <TouchableOpacity onPress={()=>navigation.navigate('취약계층인증')}>
                                         <Text>취약계층인증</Text>
                                         </TouchableOpacity>
                                     </View>
                                 
                                 
-                                    <View style={{left:chartWidth/2.5}}>
+                                    <View>
                                     <TouchableOpacity onPress={()=>{navigation.navigate('홈'),fetchUser('로그인해주세요')}}>
                                         <Text>로그아웃</Text>
                                         </TouchableOpacity>

@@ -196,7 +196,7 @@ const HeadHeder = () => {
           <View style={{ width: 75, marginBottom: 15 }}>
             <Image
               source={logo2}
-              style={{ width: 30, height: 25 }}
+              style={{ width: 33, height: 27 }}
             />
           </View>
         </TouchableOpacity>
@@ -226,7 +226,10 @@ const HeadHeder = () => {
 
 
 
-      <Modal transparent={true} visible={viewmenu}>
+      <Modal transparent={false} visible={viewmenu}>
+        <TouchableOpacity onPress={()=>setViewmenu(false)}>
+        <View style={{width:chartWidth,height:chartHeight,backgroundColor:'black'}}></View>
+        </TouchableOpacity>
         <View style={{ width: chartWidth / 1.45, height: chartHeight, position: 'absolute', backgroundColor: 'white' }}>
           <View>
             <ImageBackground source={graBox} style={{ width: chartWidth / 1.45, height: 220 }}>
@@ -305,7 +308,7 @@ const HeadHeder = () => {
               </View>
             </ImageBackground>
 
-            <ScrollView>
+            <ScrollView style={{maxHeight:chartHeight/1.5}}>
               <LeftMenu title={'전기&조명'} ></LeftMenu>
               <LeftMenu title={'수도'} ></LeftMenu>
               <LeftMenu title={'도배&장판'} ></LeftMenu>

@@ -203,24 +203,26 @@ const InjuryPath = () => {
                     <View style={{ top: nowheight, backgroundColor: 'white' }}>
                         <View style={{ marginLeft: 20, marginRight: 20, marginTop: 10, backgroundColor: 'white', marginBottom: 200 }}>
                             <View style={{ flexDirection: "row", alignItems: "center" }}>
-                                <View style={{ borderWidth: 1, height: 60, width: 60, borderRadius: 27, backgroundColor: 30 }}></View>
+                                <View style={{ borderWidth: 1, height: 60, width: 60, borderRadius: 27, backgroundColor:'white' }}>
+                                <Image style={{height:60,width:60,borderRadius:27,}} source={{ uri: 'https://pluslink.kr/data/member_image/' + newid.substr(0, 2) + '/' + newid + '.gif' }}></Image>
+                                </View>
                                 <Text style={{ fontSize: 20, marginLeft: 10 }}>{newid}</Text>
                             </View>
 
                             <View style={{ width: chartWidth - 40, borderWidth: 0.5, marginBottom: 5, marginTop: 10 }}></View>
                             <View style={{ flexDirection: "row", alignItems: "center", }}>
-                                <View style={{ flexDirection: "row", width: chartWidth }}>
-                                    <View style={{ left: chartWidth / 15 }}>
+                                <View style={{ flexDirection: "row",left:10, width: chartWidth-70,justifyContent:'space-between' }}>
+                                    <View>
                                         <TouchableOpacity onPress={() => navigation.navigate('정보변경')}>
                                             <Text>정보변경</Text>
                                         </TouchableOpacity>
                                     </View>
-                                    <View style={{ left: chartWidth / 4 }}>
+                                    <View>
                                         <TouchableOpacity onPress={() => navigation.navigate('취약계층인증')}>
                                             <Text>취약계층인증</Text>
                                         </TouchableOpacity>
                                     </View>
-                                    <View style={{ left: chartWidth / 2.5 }}>
+                                    <View>
                                         <TouchableOpacity onPress={() => navigation.navigate('정보변경')}>
                                             <Text>로그아웃</Text>
                                         </TouchableOpacity>

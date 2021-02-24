@@ -25,9 +25,10 @@ import { TextInput } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage'; //로그인한 아이디값 저장하기 위한 앱 내부 저장소
 import axios from "axios";
 
-const find = require('./img/find.png')
 
 const Faq = () => {
+
+  const [text,setText] = useState('') //검색창용
 
   function refreshData(tableName) {
     axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
@@ -122,6 +123,23 @@ const Faq = () => {
     )
   }
 
+  const NewPush = () =>{
+    var oo = []
+
+    for(var i = 0;i<faqList.length;i++){
+      if(faqList[i].fa_subject.indexOf(text)==0){
+        oo.push(<FaItem key={i} sub={faqList[i].fa_subject} cont={faqList[i].fa_content}></FaItem>)
+      }
+    }
+
+    if(oo==[]){
+      return <View><Text>등록된 FAQ가 없습니다.</Text></View>
+    }
+    return oo
+  }
+
+  const find = require('./img/find.png')
+
   return(
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
@@ -130,12 +148,27 @@ const Faq = () => {
                       <View style={{width:chartWidth,marginTop:50}}>
                         <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
                         </ImageBackground>
-                        <Text style={{position:'absolute',color:"white",fontSize:20,fontWeight:'bold',top:40,left:10}}>FAQ</Text>
+                        <Text style={{position:'absolute',color:"white",fontSize:20,fontWeight:'bold',top:40,left:10}}>FAQ</  Text>
                       </View>
 
             <View style={{margin:10}}>
+              <View style={{borderWidth:0.4,width:chartWidth-20,height:60,justifyContent:"center",backgroundColor:'#f2f2f2'}}>
+                <View style={{flexDirection:"row",justifyContent:'space-between',width:chartWidth-40,marginLeft:10}}>
+                  <View style={{flexDirection:"row"}}>
+                  <View style={{width:30,height:30,backgroundColor:'#d9d9d9',borderTopWidth:0.4,borderBottomWidth:0.4,borderLeftWidth:0.4,justifyContent:"center",alignItems:"center"}}>
+                    <Image style={{width:20,height:20}} source={find}></Image>
+                  </View>
+                  <View style={{width:chartWidth/2.3,height:30,borderWidth:0.4}}>
+                    <TextInput onChangeText={(txt)=>setText(txt)} value={text} style={{width:chartWidth/2.3,height:40}}></TextInput>
+                  </View>
+                  </View>
+                  <View style={{height:30,width:chartWidth/3,backgroundColor:'black',justifyContent:"center",alignItems:"center"}}>
+                    <Text style={{color:'white',fontWeight:'bold'}}>검색하기</Text>
+                  </View>
+                </View>
+              </View>
 
-              <MPush></MPush>
+              {(text=='')  ? <MPush></MPush> : <NewPush></NewPush>}
 
 
             </View>

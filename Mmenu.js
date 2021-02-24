@@ -33,6 +33,8 @@ const Mmenu = () =>{
   const [color6,setColor6] = useState(gray)
   const [color7,setColor7] = useState(gray)
   const [color8,setColor8] = useState(gray)
+  const [color9,setColor9] = useState(gray)
+  const [color10,setColor10] = useState(gray)
 
 
   function listTouch(){
@@ -44,6 +46,8 @@ const Mmenu = () =>{
     setColor6(gray)
     setColor7(gray)
     setColor8(gray)
+    setColor9(gray)
+    setColor10(gray)
   }
 
 
@@ -310,6 +314,70 @@ const Mmenu = () =>{
                 </View>
                 </View>
                 </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>{listTouch(),setColor9(puple),setWhoclicked('철거 및 처리')}}>
+                <View style = {
+                    {
+                      "alignItems": "flex-start"
+                    }
+                  } >
+                <View style={{marginTop:10,marginLeft:10}}>
+                <View style = {
+                  {
+                    "alignItems": "flex-start",
+                    "paddingStart": 10,
+                    "paddingTop": 8,
+                    "width": 95,
+                    "height": 32,
+                    "borderRadius": 16,
+                    "borderWidth": 1,
+                    "borderColor": color9
+                  }
+                } >
+                <Text style = {
+                  {
+                    "fontWeight": "bold",
+                    "fontSize": 12,
+                    "color": "rgba(0, 0, 0, 255)"
+                  }
+                } > # 철거 및 처리 </Text>
+                </View>
+                </View>
+                </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>{listTouch(),setColor10(puple),setWhoclicked('이사')}}>
+                <View style = {
+                    {
+                      "alignItems": "flex-start"
+                    }
+                  } >
+                <View style={{marginTop:10,marginLeft:10}}>
+                <View style = {
+                  {
+                    "alignItems": "flex-start",
+                    "paddingStart": 10,
+                    "paddingTop": 8,
+                    "width": 60,
+                    "height": 32,
+                    "borderRadius": 16,
+                    "borderWidth": 1,
+                    "borderColor": color10
+                  }
+                } >
+                <Text style = {
+                  {
+                    "fontWeight": "bold",
+                    "fontSize": 12,
+                    "color": "rgba(0, 0, 0, 255)"
+                  }
+                } > # 이사 </Text>
+                </View>
+                </View>
+                </View>
+                </TouchableOpacity>
+
+
                  
                   
               </ScrollView>
