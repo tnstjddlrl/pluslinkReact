@@ -78,7 +78,7 @@ const CompanyList = ({ route }) => {
       return (
         <Modal transparent={true} visible={subSelect}>
           <TouchableOpacity style={{width:chartWidth,height:chartHeight}} onPress={()=>setSubselect(false)}></TouchableOpacity>
-          <View style={{ width: chartWidth - 30,height:300, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: top }}>
+          <View style={{ width: chartWidth - 30,maxHeight:300, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: top }}>
             <ScrollView>
             <SubPush></SubPush>
             </ScrollView>
@@ -215,6 +215,9 @@ const CompanyList = ({ route }) => {
               }
             }
           }
+        }
+        if(List==[]){
+          return <View><Text>주변 업체가 없습니다.</Text></View>
         }
         return List
       }
