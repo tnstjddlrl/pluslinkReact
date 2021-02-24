@@ -58,8 +58,10 @@ const EEvent =({}) =>{
 
   return (
     <View style={styles.cardview}>
+      <TouchableOpacity onPress={()=>navigation.navigate('이벤트목록')}>
       <Text style={styles.etitle}>이벤트</Text>
       <Text style={styles.etitle2}>진행중인 이벤트를 확인해보세요!</Text>
+      </TouchableOpacity>
       <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}

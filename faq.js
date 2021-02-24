@@ -127,7 +127,7 @@ const Faq = () => {
     var oo = []
 
     for(var i = 0;i<faqList.length;i++){
-      if(faqList[i].fa_subject.indexOf(text)==0){
+      if(faqList[i].fa_subject.indexOf(text)!=-1){
         oo.push(<FaItem key={i} sub={faqList[i].fa_subject} cont={faqList[i].fa_content}></FaItem>)
       }
     }
