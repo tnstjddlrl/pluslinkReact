@@ -72,10 +72,9 @@ const BestView = ({route}) => {
 
   return(
     <View>
-      <View style={{height:chartHeight,width:chartWidth}}>
-        <ScrollView style={{backgroundColor:'white'}}>
+      <View style={{height:chartHeight,width:chartWidth,backgroundColor:'white'}}>
           {/* 상단 이미지 */}
-          <View style={{marginBottom:50}}>
+          <View style={{marginBottom:100}}>
                       <View style={{width:chartWidth,marginTop:50}}>
                         <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
                         </ImageBackground>
@@ -85,7 +84,7 @@ const BestView = ({route}) => {
             
               
           </View>
-        </ScrollView>
+        
       </View>
 
 
@@ -100,7 +99,7 @@ const BestView = ({route}) => {
 const TitleItem =(prop) =>{
   return(
     <View>
-    <View style={{flexDirection:'row',alignItems:'center',marginTop:25,marginLeft:20}}>
+    <View style={{flexDirection:'row',alignItems:'center',marginTop:10,marginLeft:20}}>
     <Image source={{uri:prop.img}} style={{backgroundColor:'gray',borderRadius:28,width:60,height:60}}></Image>
       <Text style={{marginLeft:5,fontSize:18,fontWeight:'bold',width:chartWidth/1.3}} >{prop.title}</Text>
   </View>
@@ -118,9 +117,9 @@ const TitleItem =(prop) =>{
     <View style={{width:chartWidth-30,borderWidth:0.4,borderColor:'gray'}}></View>
   </View>
 
-    <View>
-      <WebView style={{width:chartWidth,height:500,marginTop:20}} source={{html: '<style>img { width: 80%;}</style>'+prop.main}}></WebView>
-    </View>
+    <ScrollView>
+      <WebView style={{width:chartWidth,height:chartHeight/2,marginTop:10}} source={{html: prop.main+'<style>img { width: 80%;} p,span,div {font-size:30px;}</style>'}}></WebView>
+      </ScrollView>
   </View>
   )
 }

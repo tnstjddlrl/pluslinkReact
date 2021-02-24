@@ -86,6 +86,9 @@ const SelectRequest = ({ route }) => {
   const [pwss, setPwss] = useState('') //비밀번호
   const [name, setName] = useState('') //이름
   const [comno, setComno] = useState('') //시공업체의 파트너 번호
+
+  const [link1,setLink1] = useState('')
+  const [link2,setLink2] = useState('') //좌표
   
   const SubItem = (prop) => {
     return (
@@ -222,6 +225,8 @@ const SelectRequest = ({ route }) => {
       wr_name: name,//이름
       img: img,
       imgtype: type,
+      link1:link1,
+      link2:link2
     }))
       .then(function (response) {
         console.log('리스폰스 ', response.request._response);
@@ -232,9 +237,9 @@ const SelectRequest = ({ route }) => {
           
         }
         else {
-          alert('견적 등록이 완료되었습니다..')
+          Alert.alert('견적 등록이 완료되었습니다..')
           refreshData('g5_write_estimate')
-          //navigation.navigate('홈');
+          navigation.navigate('홈');
         }
       })
       .catch(function (error) {
@@ -267,6 +272,24 @@ function MainPush(){
   }
 
   return mainP
+}
+
+function getAddr (addr) {
+
+  const Kakao = axios.create ({
+    baseURL : "https://dapi.kakao.com",
+    headers : {
+    Authorization : "KakaoAK "+ '1fca8682191d27067ab092d740c45ecf'
+    }
+    });
+
+    Kakao.get ( "/v2/local/search/address.json?query="+addr)
+    .then (res => {
+      console.log(res.data.documents[0].address.x)
+      setLink1(res.data.documents[0].address.y)
+      setLink2(res.data.documents[0].address.x)
+    })
+
 }
 
 
@@ -442,7 +465,7 @@ function MainPush(){
             <View style={{ width: chartWidth - 60, height: chartHeight - 150, position: 'absolute', marginLeft: 30, marginTop: 100, borderWidth: 0.5 }}>
               <Postcode
                 jsOptions={{ animated: true }}
-                onSelected={(data) => { setText(JSON.stringify(data.address).replace(/"/gi, '')), setShow(false) }}
+                onSelected={(data) => { setText(JSON.stringify(data.address).replace(/"/gi, '')), setShow(false),getAddr(JSON.stringify(data.address).replace(/"/gi, '')) }}
               />
             </View>
             </View>

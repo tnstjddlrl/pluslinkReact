@@ -14,6 +14,7 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
+  Linking
 } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 const chartHeight = Dimensions.get('window').height;
@@ -23,6 +24,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import axios from "axios";
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 const mt_b = require('./img/mt_b.jpg')
 const arrow = require('./img/arrow02.png')
@@ -85,9 +87,9 @@ const Mypage = () => {
     console.log(os)
     let nowheight;
       if(os == 'ios'){
-       nowheight = 100;
+       nowheight = 80;
       }else{
-        nowheight = 60;
+        nowheight = 50;
       }
 
       async function GetMember() {
@@ -129,6 +131,7 @@ const Mypage = () => {
         <View>
             <View style={{height:chartHeight,width:chartWidth}}>
                 <View style={{top:nowheight,backgroundColor:'white'}}>
+                  <ScrollView>
                     <View style={{marginLeft:20,marginRight:20,marginTop:10,backgroundColor:'white',height:chartHeight}}>
                         <View style={{flexDirection:"row",alignItems:"center"}}>
                             <View style={{borderWidth:1,height:60,width:60,borderRadius:27,backgroundColor:'white'}}>
@@ -225,8 +228,12 @@ const Mypage = () => {
                             
 
                         </View>
+                        <TouchableWithoutFeedback onPress={()=>{ Linking.openURL('https://pluslink.kr/shop/') }}>
+                        <Image style={{width:chartWidth-40,height:120,marginBottom:100}} source={{uri:'https://pluslink.kr/img/pluslink/mt_b.jpg'}}></Image>
+                        </TouchableWithoutFeedback>
 
                     </View>
+                    </ScrollView>
                 </View>
 
 

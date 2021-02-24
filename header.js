@@ -196,7 +196,7 @@ const HeadHeder = () => {
           <View style={{ width: 75, marginBottom: 15 }}>
             <Image
               source={logo2}
-              style={{ width: 33, height: 27 }}
+              style={{ width: 31, height: 23 }}
             />
           </View>
         </TouchableOpacity>

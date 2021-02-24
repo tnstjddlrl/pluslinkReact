@@ -50,6 +50,22 @@ const REquset = () => {
     setNewid(company_id.toLowerCase())
   });
 
+  function refreshData(tableName) {
+    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+      id: tableName,
+    }))
+      .then(function (response) {
+        console.log('리스폰스 ', response);
+        if (response.request._response == 'suc') {
+        }
+        else {
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   const [select, setSelect] = useState(false)
 
   const [listCate, SetlistCate] = useState("전기&조명") //카테고리
@@ -68,6 +84,9 @@ const REquset = () => {
 
   const [pwss, setPwss] = useState('') //비밀번호
   const [name, setName] = useState('') //이름
+
+  const [link1,setLink1] = useState('')
+  const [link2,setLink2] = useState('') //좌표
 
 
 
@@ -382,23 +401,45 @@ const REquset = () => {
       bo_table: 'estimate',
       img: img,
       imgtype: type,
+      link1:link1,
+      link2:link2
     }))
       .then(function (response) {
         console.log('리스폰스 ', response.request._response);
         if (response.request._response == 'succ') {
           alert('로그인 되었습니다.')
-          fetchUser(id)
           console.log(isFavorite());
           navigation.navigate('홈');
         }
         else {
-          alert(response.request._response)
+          Alert.alert('견적 등록이 완료되었습니다..')
+          refreshData('g5_write_estimate')
+          //navigation.navigate('홈');
         }
       })
       .catch(function (error) {
         console.log(error);
       });
   }
+
+  function getAddr (addr) {
+
+    const Kakao = axios.create ({
+      baseURL : "https://dapi.kakao.com",
+      headers : {
+      Authorization : "KakaoAK "+ '1fca8682191d27067ab092d740c45ecf'
+      }
+      });
+
+      Kakao.get ( "/v2/local/search/address.json?query="+addr)
+      .then (res => {
+        console.log(res.data.documents[0].address.x)
+        setLink1(res.data.documents[0].address.y)
+        setLink2(res.data.documents[0].address.x)
+      })
+  
+  }
+
 
   return (
     <View>
@@ -596,7 +637,7 @@ const REquset = () => {
             <View style={{ width: chartWidth - 60, height: chartHeight - 150, position: 'absolute', marginLeft: 30, marginTop: 100, borderWidth: 0.5 }}>
               <Postcode
                 jsOptions={{ animated: true }}
-                onSelected={(data) => { setText(JSON.stringify(data.address).replace(/"/gi, '')), setShow(false) }}
+                onSelected={(data) => { setText(JSON.stringify(data.address).replace(/"/gi, '')), setShow(false),getAddr(JSON.stringify(data.address).replace(/"/gi, '')) }}
               />
             </View>
             </View>

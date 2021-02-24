@@ -54,7 +54,7 @@ const GongziPlus = ({route}) => {
         return pp
       }
     }
-    return pp
+  return pp
   }
 
   var ee = []
@@ -66,6 +66,8 @@ const GongziPlus = ({route}) => {
     }
     return ee
   }
+
+  
 
   return (
     <View>
