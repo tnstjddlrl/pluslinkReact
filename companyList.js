@@ -30,14 +30,32 @@ const CompanyList = ({ route }) => {
   const [select, setSelect] = useState(false)
   const [listCate, SetlistCate] = useState("전기&조명")
 
+  const [subSelect, setSubselect] = useState(false)
+  const [listPlus, setListPlus] = useState('전체') //세부카테고리
+
   useEffect(() => {
     SetlistCate(route.params.cate);
     setListPlus(route.params.subcate);
   }, [route])
 
+  function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
+    function deg2rad(deg) { return deg * (Math.PI / 180) } 
+    
+    var R = 6371; // Radius of the earth in km 
+    var dLat = deg2rad(lat2-lat1); // deg2rad below 
+    var dLon = deg2rad(lng2 - lng1); 
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2); 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); 
+    var d = R * c; // Distance in km 
+    return d; 
+  }
 
-  const [subSelect, setSubselect] = useState(false)
-  const [listPlus, setListPlus] = useState('전체') //세부카테고리
+
+
+
+
+
+  
 
   const SubCateItem = (prop) => {
     return (
@@ -82,34 +100,6 @@ const CompanyList = ({ route }) => {
             <ScrollView>
             <SubPush></SubPush>
             </ScrollView>
-            {/* <TouchableOpacity onPress={() => { setListPlus('전체'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>전체</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('전기'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>전기</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('조명'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>조명</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('cctv'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>cctv</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => { setListPlus('인터폰 및 도어폰'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>인터폰 및 도어폰</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('에어컨'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>에어컨</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('통신설비'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>통신설비</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('계전'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>계전</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { setListPlus('음향'), setSubselect(false) }}>
-              <Text style={{ left: 5, marginTop: 5 }}>음향</Text>
-            </TouchableOpacity> */}
           </View>
         </Modal>
       )
@@ -178,18 +168,6 @@ const CompanyList = ({ route }) => {
   })
   var List = []
   const PushItem = () => {
-    // if(expertise.length !=0&&patners.length !=0&&memberList.length !=0){
-    //   for(var i = 0; i<patners.length;i++){
-    //     if(patners[i].pt_state=='승인'){
-    //       for(var j = 0; j<memberList.length;j++){
-    //         if(patners[i].mb_id==memberList[j].mb_id){
-    //           List.push(<ListItem id={patners[i].mb_id} comname={patners[i].pt_name} score={patners[i].pt_score} content={memberList[j].mb_profile}></ListItem>)
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
-
     var cate = []
 
     if (expertise.length != 0 && patners.length != 0 && memberList.length != 0) {
@@ -261,8 +239,6 @@ const MainMPush =() =>{
 
   const set = new Set(cate);  
   cate = [...set];
-
-  console.log('asdfasdgaweeeeewrwr' + cate)
 
   for(var i = 0;i<cate.length;i++){
     ll.push(<MainModalItem key={i} cate={cate[i]}></MainModalItem>)
