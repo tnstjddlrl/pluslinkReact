@@ -232,7 +232,7 @@ const HeadHeder = () => {
         </TouchableOpacity>
         <View style={{ width: chartWidth / 1.45, height: chartHeight, position: 'absolute', backgroundColor: 'white' }}>
           <View>
-            <ImageBackground source={graBox} style={{ width: chartWidth / 1.45, height: 220 }}>
+            <ImageBackground source={graBox} style={{ width: chartWidth / 1.45, masHeight: 220 }}>
               <View style={{ marginTop: mata }}>
 
                 <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 10, alignItems: 'center' }}>
@@ -279,7 +279,7 @@ const HeadHeder = () => {
 
               </View>
 
-              <View style={{ position: 'absolute', bottom: 0, flexDirection: 'row', }}>
+              <View style={{ bottom: 0, flexDirection: 'row', }}>
                 <TouchableOpacity onPress={() => { navigation.navigate('홈'), setViewmenu(false) }}>
                   <View>
                     <ImageBackground source={ffimg} style={{ width: 65, height: 65, }}>
