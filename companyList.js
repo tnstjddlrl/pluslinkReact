@@ -312,7 +312,6 @@ const CompanyList = ({ route }) => {
         return List
       }
 
-
     }
     
     return List

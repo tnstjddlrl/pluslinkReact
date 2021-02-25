@@ -146,10 +146,19 @@ const SelectRequest = ({ route }) => {
       return false;
     }
   }
+  async function GetExpertise_ena() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/expertise_enable.json');
+    } catch (error) {
+      console.log('에러 : ', error)
+      return false;
+    }
+  }
 
   const [expertise, setExpertise] = useState([])
   const [patners, setPatners] = useState([])
   const [memberList, setMemberList] = useState([]);
+  const [expertise_ena, setExpertise_ena] = useState([])
   useEffect(() => {
     if (memberList.length == 0) {
       console.log('작동테스트')
@@ -165,6 +174,11 @@ const SelectRequest = ({ route }) => {
     if (expertise.length == 0) {
       GetExpertise().then((res) => {
         setExpertise(res.data)
+      })
+    }
+    if (expertise_ena.length == 0) {
+      GetExpertise_ena().then((res) => {
+        setExpertise_ena(res.data)
       })
     }
   })
