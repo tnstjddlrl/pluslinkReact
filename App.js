@@ -105,6 +105,7 @@ const App = ({ }) => {
     refreshData('estimate_pay')
     refreshData('stratum_list')
     refreshData('category')
+    refreshData('user_address')
   },[])
   
 

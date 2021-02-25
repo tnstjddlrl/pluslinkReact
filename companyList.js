@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  Modal
+  Modal,
+  Alert
 } from 'react-native';
 
 const chartHeight = Dimensions.get('window').height;
@@ -114,6 +115,14 @@ const CompanyList = ({ route }) => {
       return false;
     }
   }
+  async function GetExpertise_ena() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/expertise_enable.json');
+    } catch (error) {
+      console.log('에러 : ', error)
+      return false;
+    }
+  }
   async function GetPatners() {
     try {
       return await axios.get('http://ip0131.cafe24.com/pluslink/json/partners.json');
@@ -139,15 +148,32 @@ const CompanyList = ({ route }) => {
       return false;
     }
   }
+  async function GetUserAddress() {
+    try {
+      console.log('겟멤버 작동됨')
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/user_address.json');
+    } catch (error) {
+      console.log('에러 : ', error)
+      return false;
+    }
+  }
+
 
   const [patners, setPatners] = useState([])
   const [expertise, setExpertise] = useState([])
+  const [expertise_ena, setExpertise_ena] = useState([])
   const [memberList, setMemberList] = useState([])
   const [cateList, setCateList] = useState([])
+  const [useraddress, setUseraddress] = useState([])
   useEffect(() => {
     if (expertise.length == 0) {
       GetExpertise().then((res) => {
         setExpertise(res.data)
+      })
+    }
+    if (expertise_ena.length == 0) {
+      GetExpertise_ena().then((res) => {
+        setExpertise_ena(res.data)
       })
     }
     if (patners.length == 0) {
@@ -165,40 +191,38 @@ const CompanyList = ({ route }) => {
         setCateList(res.data)
       })
     }
+    if (useraddress.length == 0) {
+      GetUserAddress().then((res) => {
+        setUseraddress(res.data)
+      })
+    }
   })
   var List = []
   const PushItem = () => {
     var cate = []
 
-    if (expertise.length != 0 && patners.length != 0 && memberList.length != 0) {
-      if (listPlus == '전체') {
-        for (var i = 0; i < expertise.length; i++) {
-          if (expertise[i].category == listCate && expertise[i].state == '정상') {
-            cate.push(expertise[i].mb_id)
-          }
-        }
-        const set = new Set(cate);
-        cate = [...set];
-      } else {
-        for (var i = 0; i < expertise.length; i++) {
-          if (expertise[i].subcategory == listPlus) {
-            for (var j = 0; j < memberList.length; j++) {
-              console.log('동작테스트 : ', listPlus)
-              if (expertise[i].mb_id == memberList[j].mb_id) {
-                for (var x = 0; x < patners.length; x++) {
-                  if (expertise[i].mb_id == patners[x].mb_id) {
-                    List.push(<ListItem id={expertise[i].mb_id} comname={patners[x].pt_name} score={patners[x].pt_score} content={memberList[j].mb_profile}></ListItem>)
-                  }
+    
+
+    if(listPlus == '전체'){
+   
+      for(var i = 0; i < expertise.length;i++){
+        if(expertise[i].category == listCate && expertise[i].state=='정상'){
+          for(var j = 0; j<patners.length;j++){
+            if(expertise[i].mb_id==patners[j].mb_id && patners[j].pt_state == '승인'){
+              for(var x = 0;x<expertise_ena.length;x++){
+                if(expertise[i].no==expertise_ena[x].ex_id && expertise_ena[x].state=='활성화'){
+                  cate.push(expertise[i].mb_id)
                 }
               }
             }
           }
         }
-        if(List==[]){
-          return <View><Text>주변 업체가 없습니다.</Text></View>
-        }
-        return List
       }
+
+      const set = new Set(cate);
+      cate = [...set];
+
+      //Alert.alert(cate)
 
       if (cate.length != 0) {
         for (var i = 0; i < cate.length; i++) {
@@ -216,9 +240,10 @@ const CompanyList = ({ route }) => {
       } else {
         return (<Text>업체가 없습니다.</Text>)
       }
+
+
     }
-
-
+    
     return List
   }
 
