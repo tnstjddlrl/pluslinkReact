@@ -274,7 +274,16 @@ function MainPush(){
   var mainP = []
   for(var i = 0;i<expertise.length;i++){
     if(expertise[i].mb_id==route.params.comid && expertise[i].state == '정상'){
-      maincate.push(expertise[i].category)
+      for(var j =0;j<patners.length;j++){
+        if(expertise[i].mb_id == patners[j].mb_id && patners[j].pt_state == '승인'){
+          for(var x = 0;x<expertise_ena.length;x++){
+            if(expertise[i].no == expertise_ena[x].ex_id && expertise_ena[x].state == '활성화'){
+              maincate.push(expertise[i].category)
+            }
+          }
+        }
+      }
+      
     }
   }
 
