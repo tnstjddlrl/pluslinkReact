@@ -24,6 +24,7 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage, { useAsyncStorage } from '@react-native-community/async-storage';
 import axios from "axios";
 import { SafeAreaView } from 'react-navigation';
+import Postcode from 'react-native-daum-postcode';
 
 const heart = require('./img/handhart.png')
 const starimg = require('./img/review.png')
@@ -39,6 +40,7 @@ const CompanyList = ({ route }) => {
 
   const [lat,setLat] = useState('')
   const [lng,setLng] = useState('') //좌표값
+  const [wwkm,setWWkm] = useState(50)
 
   useEffect(() => {
     SetlistCate(route.params.cate);
@@ -342,6 +344,7 @@ const MainMPush =() =>{
 }
 
 const [addrModal,setAddrModal] = useState(false)
+const [postShow,setPostShow] = useState(false)
 
 const AddrModalItem = (prop) => {
   return(
@@ -376,8 +379,8 @@ const AddressPush = () =>{
         setLat(useraddress[i].lat)
         setLng(useraddress[i].lng)
         setBasicAddr(useraddress[i].addr)
-        pp.push(<AddrModalItem addr={'기본주소'} sub={''} no={'0'} lat={'0'} lng={'0'}></AddrModalItem>)
       }
+        pp.push(<AddrModalItem addr={'기본주소'} sub={''} no={''} lat={'0'} lng={'0'}></AddrModalItem>)
         pp.push(<AddrModalItem addr={useraddress[i].addr} sub={useraddress[i].addr_sub} no={useraddress[i].no} lat={useraddress[i].lat} lng={useraddress[i].lng}></AddrModalItem>)
       } else {
         pp.push(<AddrModalItem addr={useraddress[i].addr} sub={useraddress[i].addr_sub} no={useraddress[i].no} lat={useraddress[i].lat} lng={useraddress[i].lng}></AddrModalItem>)
@@ -387,7 +390,7 @@ const AddressPush = () =>{
 
   const AModalPush = () =>{
     if(pp.length == 0){
-      pp.push(<AddrModalItem addr={'기본주소'} sub={''} no={'0'} lat={'0'} lng={'0'}></AddrModalItem>)
+      pp.push(<AddrModalItem addr={'기본주소'} sub={''} no={''} lat={'0'} lng={'0'}></AddrModalItem>)
       return pp
     }else{
       return pp
@@ -399,10 +402,10 @@ const AddressPush = () =>{
       <View style={{ backgroundColor: '#e6e6e6', width: chartWidth - 20, borderRadius: 17, marginTop: 20 }}>
         <View style={{ flexDirection: "row", justifyContent: "space-between", width: chartWidth / 2, alignItems: "center" }}>
           <Text style={{ fontSize: 18, marginTop: 15, marginLeft: 15 }}>주소</Text>
-          <TouchableOpacity onPress={()=>setAddrModal(true)}>
-          <View style={{ width: 80, height: 35, backgroundColor: '#ecb3ff', borderRadius: 5, justifyContent: "center", alignItems: "center", marginTop: 10 }}>
-            <Text>주소검색</Text>
-          </View>
+          <TouchableOpacity onPress={() => setAddrModal(true)}>
+            <View style={{ width: 80, height: 35, backgroundColor: '#ecb3ff', borderRadius: 5, justifyContent: "center", alignItems: "center", marginTop: 10 }}>
+              <Text>주소검색</Text>
+            </View>
           </TouchableOpacity>
         </View>
         <View style={{ alignItems: "flex-end", width: chartWidth / 1.25 }}>
@@ -416,21 +419,65 @@ const AddressPush = () =>{
 
       <Modal visible={addrModal}>
         <SafeAreaView>
-          <View style={{ width: chartWidth, height: chartHeight,backgroundColor:'white' }}>
-            <TouchableOpacity onPress={()=>setAddrModal(false)}>
-              <View style={{width:50,height:50,borderRadius:28,borderWidth:0.5,justifyContent:"center",alignItems:"center",margin:10}}>
-                <Text style={{fontSize:30}}>X</Text>
-                </View>
-                </TouchableOpacity>
-            
+          <View style={{ width: chartWidth, height: chartHeight, backgroundColor: 'white' }}>
+            <View style={{flexDirection:"row",justifyContent:"space-between",width:chartWidth-20,alignItems:"center"}}>
+            <TouchableOpacity onPress={() => setAddrModal(false)}>
+              <View style={{ width: 50, height: 50, borderRadius: 28, borderWidth: 0.5, justifyContent: "center", alignItems: "center", margin: 10 }}>
+                <Text style={{ fontSize: 30 }}>X</Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={()=>{setAddrModal(false),setPostShow(true)}}>
+              <View style={{width:80,height:50,justifyContent:"center",alignItems:"center",backgroundColor:'#ecb3ff',borderRadius:5}}>
+                <Text>주소검색</Text>
+              </View>
+            </TouchableOpacity>
+            </View>
+
             <AModalPush></AModalPush>
 
           </View>
         </SafeAreaView>
       </Modal>
 
+      <Modal transparent={true} visible={postShow}>
+      <View>
+        <TouchableOpacity onPress={() => setPostShow(false)}>
+          <View style={{backgroundColor:'white',width:60,height:60,borderRadius:28,marginTop:40,justifyContent:"center",alignItems:'center',borderWidth:0.5}}>
+            <Text style={{fontWeight:'bold',fontSize:28}}>X</Text>
+          </View>
+        </TouchableOpacity>
+            <View style={{ width: chartWidth - 60, height: chartHeight - 150, position: 'absolute', marginLeft: 30, marginTop: 100, borderWidth: 0.5 }}>
+              <Postcode
+                jsOptions={{ animated: true }}
+                onSelected={(data) => { setBasicAddr(JSON.stringify(data.address).replace(/"/gi, '')), setPostShow(false),getAddr(JSON.stringify(data.address).replace(/"/gi, '')) }}
+              />
+            </View>
+            </View>
+      </Modal>
+
+      
+
     </View>
   )
+
+}
+
+function getAddr (addr) {
+
+  const Kakao = axios.create ({
+    baseURL : "https://dapi.kakao.com",
+    headers : {
+    Authorization : "KakaoAK "+ '1fca8682191d27067ab092d740c45ecf'
+    }
+    });
+
+    Kakao.get ( "/v2/local/search/address.json?query="+addr)
+    .then (res => {
+      console.log(res.data.documents[0].address.x)
+      setLat(res.data.documents[0].address.y)
+      setLng(res.data.documents[0].address.x)
+    })
 
 }
 
