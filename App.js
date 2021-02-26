@@ -57,6 +57,7 @@ import Gongzi from "./gongzi.js";
 import GongziPlus from "./gongziPlus.js";
 import FindId from "./findId.js";
 import DeleteCheck from "./deletCheck.js";
+import WriteReview from "./writeReview.js";
 
 
 
@@ -301,6 +302,8 @@ function App2() {
           name="아이디찾기" component={FindId} />
           <Stack.Screen
           name="회원탈퇴체크" component={DeleteCheck} />
+          <Stack.Screen
+          name="리뷰쓰기" component={WriteReview} />
       </Stack.Navigator>
     </NavigationContainer>
   );

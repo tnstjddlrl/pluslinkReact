@@ -5,6 +5,7 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
@@ -17,11 +18,30 @@ const maker = require('./img/main_marker.png')
 
 import { useNavigation } from '@react-navigation/native'; //네비게이션 프롭을 다른 페이지에서 받지않고도 이 페이지에서 단독으로 네비게이션을 사용할 수 있는 도구
 import axios from "axios";
+import AsyncStorage from '@react-native-community/async-storage';
 
 //prop(아무 변수이름)으로 App에서 Company를 생성할때 넣어준 값을 받아올 수 있다.
 //네비게이터로 화면을 넘겨올때 값을 받을 때는 route를 사용해야한다.
 
+function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
+  function deg2rad(deg) { return deg * (Math.PI / 180) } 
+  
+  var R = 6371; // Radius of the earth in km 
+  var dLat = deg2rad(lat2-lat1); // deg2rad below 
+  var dLon = deg2rad(lng2 - lng1); 
+  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2); 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); 
+  var d = R * c; // Distance in km 
+  return d; 
+}
+
 const Company = (prop) => {
+  const [newid, setNewid] = useState('');
+
+  const [lat,setLat] = useState('')
+  const [lng,setLng] = useState('') //좌표값
+
+  const navigation = useNavigation()
 
   function refreshData(tableName) {
     axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
@@ -43,6 +63,63 @@ const Company = (prop) => {
     refreshData('g5_member')
     refreshData('partners')
   }, [])
+
+  async function isFavorite() {
+    try {
+      return await AsyncStorage.getItem("@super:id");
+    } catch (error) {
+      return false;
+    }
+  } //아이디값 가져오기
+
+  useEffect(() => {
+
+    const result = isFavorite().then((company_id) => {
+      if(company_id == null){
+        setNewid('')
+      }else{
+        setNewid(company_id.toLowerCase());
+        console.log('새 : ', company_id);
+        console.log('새새 : '+newid)
+      }
+    });
+    getGeo()
+  }, [])
+
+
+  function refresh(){
+    for(var i = 0;i<20;i++){
+      isFavorite().then((company_id) => {
+        setNewid(company_id.toLowerCase())
+      });
+      console.log(newid)
+    }
+  }
+
+  function getGeo(){
+   
+    if(newid == '로그인해주세요' || newid == ''){
+    }else{
+      for(var i = 0;i<useraddress.length;i++){
+        if(useraddress[i].mb_id == newid){
+          setLng(useraddress[i].lng)
+          setLat(useraddress[i].lat)
+          break
+        }
+      }
+    }
+    
+  }
+
+
+  const unsubscribe = navigation.addListener('focus', () => {
+    refresh();
+    getGeo()
+  });
+  useEffect(() => {
+    return () => unsubscribe();
+  });
+    
 
   async function GetExpertise() {
     try {
@@ -76,11 +153,21 @@ const Company = (prop) => {
       return false;
     }
   }
+  async function GetUserAddress() {
+    try {
+      console.log('겟멤버 작동됨')
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/user_address.json');
+    } catch (error) {
+      console.log('에러 : ', error)
+      return false;
+    }
+  }
 
   const [patners, setPatners] = useState([])
   const [expertise, setExpertise] = useState([])
   const [expertise_ena, setExpertise_ena] = useState([])
   const [memberList, setMemberList] = useState([])
+  const [useraddress, setUseraddress] = useState([])
   useEffect(() => {
     if (expertise.length == 0) {
       GetExpertise().then((res) => {
@@ -102,7 +189,16 @@ const Company = (prop) => {
         setMemberList(res.data)
       })
     }
+    if (useraddress.length == 0) {
+      GetUserAddress().then((res) => {
+        setUseraddress(res.data)
+      })
+    }
   })
+
+
+
+
 
   var List = []
   var cate = []
@@ -134,9 +230,15 @@ const Company = (prop) => {
       if (cate[i] == memberList[j].mb_id) {
         for (var x = 0; x < patners.length; x++) {
           if (cate[i] == patners[x].mb_id && count < 4 && patners[x].pt_state == '승인') {
-            List.push(<Item id={cate[i]} addr1={patners[x].pt_addr1} addr2={patners[x].pt_addr2} name={patners[x].pt_name} content={memberList[j].mb_profile.replace(/\r\n/g, '')} star={patners[x].pt_score}></Item>)
-            count += 1
-            console.log('작동체크')
+            if (lng != '' || lat != '') {
+              var km = String(getDistanceFromLatLonInKm(lat, lng, patners[x].pt_lat, patners[x].pt_lng))
+              km = km.split('.')
+              if (km[0] < 50) {
+                List.push(<Item id={cate[i]} addr1={patners[x].pt_addr1} addr2={patners[x].pt_addr2} name={patners[x].pt_name} content={memberList[j].mb_profile.replace(/\r\n/g, '')} star={patners[x].pt_score}></Item>)
+                count += 1
+                console.log('작동체크')
+              }
+            }
           }
         }
       }
@@ -144,15 +246,7 @@ const Company = (prop) => {
   }
 
 
-
-
-
-
-
-
-
-
-  if (count == 0) {
+  if (List.length == 0) {
     List.push(<NoItem></NoItem>)
   }
   return List

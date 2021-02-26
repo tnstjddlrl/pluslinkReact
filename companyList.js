@@ -29,6 +29,23 @@ import Postcode from 'react-native-daum-postcode';
 const heart = require('./img/handhart.png')
 const starimg = require('./img/review.png')
 
+function refreshData(tableName) {
+  axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+    id: tableName,
+  }))
+    .then(function (response) {
+      console.log('리스폰스 ', response);
+      if (response.request._response == 'suc') {
+      }
+      else {
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
+
 const CompanyList = ({ route }) => {
   const [select, setSelect] = useState(false)
   const [listCate, SetlistCate] = useState("전기&조명")
@@ -85,7 +102,9 @@ const CompanyList = ({ route }) => {
   }, [])
 
 
-
+useEffect(()=>{
+  refreshData('user_address')
+},[addrModal])
 
   
 
@@ -350,12 +369,40 @@ const [addrModal,setAddrModal] = useState(false)
 const [postShow,setPostShow] = useState(false)
 
 const AddrModalItem = (prop) => {
+
+  function delAddr(){
+    axios.post('http://ip0131.cafe24.com/pluslink/json/deleteAddr.php', JSON.stringify({
+    no:prop.no
+  }))
+    .then(function (response) {
+      console.log('리스폰스 ', response.request._response);
+      if (response.request._response == 'succ') {
+        
+        fetchUser(id)
+        console.log(isFavorite());
+        
+      }
+      else {
+        Alert.alert('삭제가 완료되었습니다.')
+        refreshData('user_address')
+        setAddrModal(false)
+        setUseraddress([])
+        setTimeout(() => {
+          setAddrModal(true)  
+        }, 300);
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+  
   return(
     <View style={{justifyContent:"center",alignItems:"center",marginTop:10}}>
       <View style={{width:chartWidth-40,borderWidth:0.5,borderColor:'gray',borderRadius:5,height:70}}>
         <Text style={{margin:10}}>주소 : {prop.addr}  {prop.sub}</Text>
         <View style={{flex:1,flexDirection:"row",justifyContent:"center",alignItems:'flex-end',marginBottom:5,marginTop:20}}>
-          {(prop.no != '') ? <TouchableOpacity>
+          {(prop.no != '') ? <TouchableOpacity onPress={()=>delAddr()}>
           <View style={{width:chartWidth/2.5,height:30,borderWidth:0.5,borderColor:'gray',justifyContent:"center",alignItems:"center"}}>
             <Text style={{margin:5,}}>삭제</Text>
           </View>
@@ -647,7 +694,7 @@ const ListItem = (prop) => {
           </View>
 
           <Text style={{ marginTop: 10 }}>업체소개</Text>
-          <View style={{ width: 50, borderWidth: 0.5, marginTop: 3 }}></View>
+          <View style={{ width: 30, borderWidth: 0.5, marginTop: 3 }}></View>
           <Text numberOfLines={1} style={{ marginTop: 10 }}>{prop.content}</Text>
 
           <TouchableOpacity onPress={() => { if(ttView==false){setTTview(true)}else{setTTview(false)}  }}>

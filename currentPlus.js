@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Image,
   Modal,
-  Alert
+  Alert,
+  SafeAreaView
 } from 'react-native';
 
 const chartHeight = Dimensions.get('window').height;
@@ -387,12 +388,12 @@ const CurrentPlus = ({ route }) => {
       for (var i = 0; i < estimate.length; i++) {
         if (estimate[i].wr_id == route.params.num) {
           if (estimate[i].wr_subject == '일반견적') {
-            main.push(<MainContent lastpay={lastPay} img={estimate[i].as_thumb} content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={estimate[i].wr_9} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4 + ' ' + estimate[i].wr_5}></MainContent>)
+            main.push(<MainContent lastpay={lastPay} id={patners[j].mb_id} img={estimate[i].as_thumb} content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={estimate[i].wr_9} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4 + ' ' + estimate[i].wr_5}></MainContent>)
             setSigongstate(estimate[i].wr_8)
             return main
           } else {
             if (estimate[i].wr_3 == patners[j].no) {
-              main.push(<MainContent lastpay={lastPay} img={estimate[i].as_thumb} content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={patners[j].pt_name} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4 + ' ' + estimate[i].wr_5}></MainContent>)
+              main.push(<MainContent lastpay={lastPay} id={patners[j].mb_id} img={estimate[i].as_thumb} content={estimate[i].wr_content} num={estimate[i].wr_id} state={estimate[i].wr_8} subj={estimate[i].wr_subject} com={patners[j].pt_name} cate={estimate[i].wr_1} subcate={estimate[i].wr_2} fdate={estimate[i].wr_7} addr={estimate[i].wr_4 + ' ' + estimate[i].wr_5}></MainContent>)
               setSigongstate(estimate[i].wr_8)
               return main
             }
@@ -570,6 +571,36 @@ const CurrentPlus = ({ route }) => {
       return Cmodal
     }
 
+    const ReviewModal = () =>{
+      return(
+        <SafeAreaView style={{justifyContent:"center",alignItems:"center"}}>
+          
+        <View style={{width:chartWidth-40, height:chartHeight/1.5,backgroundColor:'white',marginTop:30,borderWidth:0.5}}>
+          <ImageBackground source={{uri:'https://pluslink.kr/img/pluslink/review.jpg'}} style={{width:chartWidth-40, height:chartHeight/1.5,borderWidth:0.5}}>
+            
+            <TouchableOpacity onPress={()=>{navigation.navigate('리뷰쓰기',{no:prop.num,patner:prop.id}),setReview(false)}}>
+              <View style={{marginLeft:10,width:chartWidth - 60,height:40,backgroundColor:'white',borderRadius:8,marginTop:chartHeight/1.8,justifyContent:"center",alignItems:"center"}}>
+              <Text>리뷰 남기기</Text>
+              </View>
+            </TouchableOpacity>
+          </ImageBackground>
+        </View>
+        <TouchableOpacity onPress={()=>setReview(false)}>
+          <View style={{width:50,height:50,borderRadius:28,borderWidth:0.5,backgroundColor:'white',justifyContent:"center",alignItems:"center"}}>
+          <Text style={{fontSize:30,fontWeight:'bold'}}>X</Text>
+          </View>
+          </TouchableOpacity>
+        </SafeAreaView>
+      )
+    }
+
+    const [review, setReview] = useState(false)
+
+    useEffect(()=>{
+      if(prop.state == '시공완료' && lapay == true){
+        setReview(true)
+      }
+    },[])
 
     return (
       <View>
@@ -617,10 +648,12 @@ const CurrentPlus = ({ route }) => {
             </View>
           </TouchableOpacity>}
 
-          {(prop.state == '시공완료' && lapay == true) && <View><Text style={{marginLeft:20,marginTop:20,fontWeight:'bold',fontSize:18}}>!시공완료가 확정되었습니다!</Text></View>}
-
+          {/* {(prop.state == '시공완료' && lapay == true) && } */}
+          <Modal visible={review} transparent={true}><ReviewModal></ReviewModal></Modal>
 
         <ModalPush></ModalPush>
+
+        
 
       </View>
     )
