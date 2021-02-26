@@ -117,35 +117,35 @@ const Company = (prop) => {
   }
 
 
-    for (var i = 0; i < expertise.length; i++) {
-      if (expertise[i].category == menu && expertise[i].state == '정상') {
-            cate.push(expertise[i].mb_id)
-      }
+  for (var i = 0; i < expertise.length; i++) {
+    if (expertise[i].category == menu && expertise[i].state == '정상') {
+      cate.push(expertise[i].mb_id)
     }
+  }
 
-    const set = new Set(cate);
-    cate = [...set];
+  const set = new Set(cate);
+  cate = [...set];
 
-    // console.log('중복체크  ', cate)
-    // console.log('이상체크 : ', memberList[5])
+  // console.log('중복체크  ', cate)
+  // console.log('이상체크 : ', memberList[5])
 
-    for (var i = 0; i < 5; i++) {
-      for (var j = 0; j < memberList.length; j++) {
-        if (cate[i] == memberList[j].mb_id) {
-          for (var x = 0; x < patners.length; x++) {
-            if (cate[i] == patners[x].mb_id && count < 4 && patners[x].pt_state == '승인') {
-              List.push(<Item id={cate[i]} addr1={patners[x].pt_addr1} addr2={patners[x].pt_addr2} name={patners[x].pt_name} content={memberList[j].mb_profile.replace(/\r\n/g, '')} star={patners[x].pt_score}></Item>)
-              count += 1
-              console.log('작동체크')
-            }
+  for (var i = 0; i < 5; i++) {
+    for (var j = 0; j < memberList.length; j++) {
+      if (cate[i] == memberList[j].mb_id) {
+        for (var x = 0; x < patners.length; x++) {
+          if (cate[i] == patners[x].mb_id && count < 4 && patners[x].pt_state == '승인') {
+            List.push(<Item id={cate[i]} addr1={patners[x].pt_addr1} addr2={patners[x].pt_addr2} name={patners[x].pt_name} content={memberList[j].mb_profile.replace(/\r\n/g, '')} star={patners[x].pt_score}></Item>)
+            count += 1
+            console.log('작동체크')
           }
         }
       }
     }
+  }
 
 
 
-  
+
 
 
 
@@ -173,7 +173,7 @@ const Item = (prop) => {
     }
   }
 
-  const [examp,setExamp] = useState([]);
+  const [examp, setExamp] = useState([]);
 
   useEffect(() => {
     if (examp.length == 0) {
@@ -183,9 +183,9 @@ const Item = (prop) => {
     }
   })
 
-var nc = 0
-  for(var i = 0;i<examp.length; i++){
-    if(examp[i].mb_id==prop.id){
+  var nc = 0
+  for (var i = 0; i < examp.length; i++) {
+    if (examp[i].mb_id == prop.id) {
       nc += 1
     }
   }
@@ -197,14 +197,14 @@ var nc = 0
     <View>
       <TouchableOpacity onPress={() => navigation.navigate('회사자세히보기', { id: prop.id })}>
         <View style={{ width: chartWidth - 40, backgroundColor: '#f2f2f2', borderRadius: 10, marginLeft: 20, marginRight: 20, marginTop: 10 }}>
-          <View style={{flexDirection:"row",justifyContent:'space-between'}}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + prop.id.substring(0, 2) + '/' + prop.id + '.gif' }} style={{ marginLeft: 15, marginTop: 15, borderRadius: 28, width: 55, height: 55, backgroundColor: 'gray' }}></Image>
-            <Text style={{ fontWeight: '500', fontSize: 15, marginLeft: 15, marginTop: 15 }}>{prop.name}</Text>
-          </View>
-          <View style={{margin:15,borderWidth:0.5,borderRadius:10,maxHeight:30,justifyContent:"center",alignItems:"center"}}>
-  <Text style={{margin:3}}>시공사례 {nc}건</Text>
-          </View>
+          <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + prop.id.substring(0, 2) + '/' + prop.id + '.gif' }} style={{ marginLeft: 15, marginTop: 15, borderRadius: 28, width: 55, height: 55, backgroundColor: 'gray' }}></Image>
+              <Text style={{ fontWeight: '500', fontSize: 15, marginLeft: 15, marginTop: 15 }}>{prop.name}</Text>
+            </View>
+            <View style={{ margin: 15, borderWidth: 0.5, borderRadius: 10, maxHeight: 30, justifyContent: "center", alignItems: "center" }}>
+              <Text style={{ margin: 3 }}>시공사례 {nc}건</Text>
+            </View>
           </View>
           <Text style={{ margin: 15, fontWeight: '200' }} numberOfLines={3}>{prop.content}</Text>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15 }}>
