@@ -116,11 +116,10 @@ const Company = (prop) => {
     console.log(menu)
   }
 
-  if (expertise.length != 0 && patners.length != 0 && memberList.length != 0) {
+
     for (var i = 0; i < expertise.length; i++) {
       if (expertise[i].category == menu && expertise[i].state == '정상') {
             cate.push(expertise[i].mb_id)
-          
       }
     }
 
@@ -130,11 +129,11 @@ const Company = (prop) => {
     // console.log('중복체크  ', cate)
     // console.log('이상체크 : ', memberList[5])
 
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 5; i++) {
       for (var j = 0; j < memberList.length; j++) {
         if (cate[i] == memberList[j].mb_id) {
           for (var x = 0; x < patners.length; x++) {
-            if (cate[i] == patners[x].mb_id && count < 3 && patners[x].pt_state == '승인') {
+            if (cate[i] == patners[x].mb_id && count < 4 && patners[x].pt_state == '승인') {
               List.push(<Item id={cate[i]} addr1={patners[x].pt_addr1} addr2={patners[x].pt_addr2} name={patners[x].pt_name} content={memberList[j].mb_profile.replace(/\r\n/g, '')} star={patners[x].pt_score}></Item>)
               count += 1
               console.log('작동체크')
@@ -146,7 +145,7 @@ const Company = (prop) => {
 
 
 
-  }
+  
 
 
 
