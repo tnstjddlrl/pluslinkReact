@@ -241,8 +241,9 @@ const CompanyList = ({ route }) => {
           for(var j = 0; j<patners.length;j++){
             if(expertise[i].mb_id==patners[j].mb_id && patners[j].pt_state == '승인'){
               for(var x = 0;x<expertise_ena.length;x++){
-                if(expertise[i].no==expertise_ena[x].ex_id && expertise_ena[x].state=='활성화'){
+                if(expertise[i].no==expertise_ena[x].ex_id){
                   cate.push(expertise[i].mb_id)
+                  
                 }
               }
             }
@@ -252,8 +253,6 @@ const CompanyList = ({ route }) => {
 
       const set = new Set(cate);
       cate = [...set];
-
-      //Alert.alert(cate)
 
       if (cate.length != 0) {
         for (var i = 0; i < cate.length; i++) {
@@ -288,7 +287,7 @@ const CompanyList = ({ route }) => {
           for(var j = 0; j<patners.length;j++){
             if(expertise[i].mb_id==patners[j].mb_id && patners[j].pt_state == '승인'){
               for(var x = 0;x<expertise_ena.length;x++){
-                if(expertise[i].no==expertise_ena[x].ex_id && expertise_ena[x].state=='활성화'){
+                if(expertise[i].no==expertise_ena[x].ex_id){
 
                   if(basicAddr == '기본주소' || basicAddr == ''){
                     List.push(<ListItem id={expertise[i].mb_id} cate={listCate} comname={patners[x].pt_name} score={patners[x].pt_score} content={memberList[j].mb_profile}></ListItem>)
