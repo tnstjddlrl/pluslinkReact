@@ -42,12 +42,19 @@ const Company = (prop) => {
   useEffect(() => {
     refreshData('g5_member')
     refreshData('partners')
-    refreshData('g5_member')
   }, [])
 
   async function GetExpertise() {
     try {
       return await axios.get('http://ip0131.cafe24.com/pluslink/json/expertise.json');
+    } catch (error) {
+      console.log('에러 : ', error)
+      return false;
+    }
+  }
+  async function GetExpertise_ena() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/expertise_enable.json');
     } catch (error) {
       console.log('에러 : ', error)
       return false;
@@ -72,11 +79,17 @@ const Company = (prop) => {
 
   const [patners, setPatners] = useState([])
   const [expertise, setExpertise] = useState([])
+  const [expertise_ena, setExpertise_ena] = useState([])
   const [memberList, setMemberList] = useState([])
   useEffect(() => {
     if (expertise.length == 0) {
       GetExpertise().then((res) => {
         setExpertise(res.data)
+      })
+    }
+    if (expertise_ena.length == 0) {
+      GetExpertise_ena().then((res) => {
+        setExpertise_ena(res.data)
       })
     }
     if (patners.length == 0) {
@@ -113,8 +126,8 @@ const Company = (prop) => {
     const set = new Set(cate);
     cate = [...set];
 
-    console.log('중복체크  ', cate)
-    console.log('이상체크 : ', memberList[5])
+    // console.log('중복체크  ', cate)
+    // console.log('이상체크 : ', memberList[5])
 
     for (var i = 0; i < 3; i++) {
       for (var j = 0; j < memberList.length; j++) {
