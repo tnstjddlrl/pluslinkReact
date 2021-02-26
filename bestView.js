@@ -118,7 +118,7 @@ const TitleItem =(prop) =>{
   </View>
 
     <ScrollView>
-      <WebView style={{width:chartWidth,height:chartHeight/2,marginTop:10}} source={{html: prop.main+'<style>img { width: 80%;} p,span,div {font-size:30px;}</style>'}}></WebView>
+      <WebView style={{width:chartWidth,height:chartHeight/2,marginTop:10}} source={{html: prop.main+'<style>img { width: 80%;} p,span,div,b {font-size:30px !important;}</style>'}}></WebView>
       </ScrollView>
   </View>
   )

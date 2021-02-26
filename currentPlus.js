@@ -31,6 +31,7 @@ import { BootpayWebView } from 'react-native-bootpay';
 
 
 const CurrentPlus = ({ route }) => {
+  
   const [isLoading, setIsLoading] = useState(false)
   function refreshData(tableName) {
     axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
@@ -594,13 +595,17 @@ const CurrentPlus = ({ route }) => {
       )
     }
 
+
     const [review, setReview] = useState(false)
 
-    useEffect(()=>{
-      if(prop.state == '시공완료' && lapay == true){
-        setReview(true)
-      }
-    },[])
+    // useEffect(()=>{
+    //   if(review == false){
+    //     if(prop.state == '시공완료' && lapay == true){
+    //       setReview(true)
+    //     }
+    //   }
+
+    // },[])
 
     return (
       <View>
@@ -648,7 +653,13 @@ const CurrentPlus = ({ route }) => {
             </View>
           </TouchableOpacity>}
 
-          {/* {(prop.state == '시공완료' && lapay == true) && } */}
+          {(prop.state == '시공완료' && lapay == true) && 
+          <View>
+            <TouchableOpacity onPress={()=>setReview(true)}>
+            <View style={{width:chartWidth-60,height:40,backgroundColor:'#c61aff',justifyContent:"center",alignItems:"center",borderRadius:10}}>
+             <Text style={{color:'white',fontSize:18,fontWeight:'bold'}}>리뷰 쓰기</Text>
+             </View></TouchableOpacity>
+             </View>}
           <Modal visible={review} transparent={true}><ReviewModal></ReviewModal></Modal>
 
         <ModalPush></ModalPush>
