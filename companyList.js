@@ -650,7 +650,7 @@ const ListItem = (prop) => {
           <View style={{ width: 50, borderWidth: 0.5, marginTop: 3 }}></View>
           <Text numberOfLines={1} style={{ marginTop: 10 }}>{prop.content}</Text>
 
-          <TouchableOpacity onPress={() => { setTTview(true) }}>
+          <TouchableOpacity onPress={() => { if(ttView==false){setTTview(true)}else{setTTview(false)}  }}>
             <View style={{ flexDirection: "row", alignItems: "center", marginLeft: 10, marginTop: 10, }}>
               <Text style={{ fontSize: 15 }}>{prop.cate} 시공가능 분야</Text>
               <View style={{ width: 25, height: 25, borderRadius: 28, backgroundColor: 'white', borderWidth: 0.5, borderColor: 'gray', justifyContent: 'center', alignItems: "center", marginLeft: 5 }}>
