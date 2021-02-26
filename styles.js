@@ -7,7 +7,7 @@ import {
 
 const styles = StyleSheet.create({
     wrapper: {
-      marginTop:30,
+      marginTop:20,
       height:200,
     },
     slide1: {
