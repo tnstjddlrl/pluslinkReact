@@ -31,14 +31,31 @@ const FootTer = () => {
     
     useEffect(()=>{
         isFavorite().then((company_id) => {
-        setNewid(company_id)
+        setNewid(company_id.toLowerCase())
       });
     })
+
+    function refresh(){
+      for(var i = 0;i<20;i++){
+        isFavorite().then((company_id) => {
+          setNewid(company_id.toLowerCase())
+        });
+        console.log(newid)
+      }
+
+    }
+
+    const unsubscribe = navigation.addListener('focus', () => {
+      refresh();
+    });
+    useEffect(() => {
+      return () => unsubscribe();
+    });
       
 
 
   function logCheck(prop){
-    if(newid == '로그인해주세요'){
+    if(newid == '로그인해주세요' || newid == ''){
       alert('로그인을 먼저 해주세요.')
       navigation.navigate('로그인')
     }else{
@@ -50,25 +67,25 @@ const FootTer = () => {
    
     <View style={{flex:1}}>
         <View style={{borderWidth:1,position:'absolute',bottom:0,flexDirection: 'row',}}>
-        <TouchableOpacity onPress={() => navigation.navigate('홈')}>
+        <TouchableOpacity onPress={() => {refresh(),navigation.navigate('홈')}}>
         <View style={{backgroundColor:'white'}}>
           <ImageBackground source={ffimg} style={{width:65,height:65,marginLeft:30,marginBottom:15}}>
           </ImageBackground>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => logCheck('견적의뢰')}>
+        <TouchableOpacity onPress={() => {refresh(),logCheck('견적의뢰')}}>
         <View style={{backgroundColor:'white'}}>
           <ImageBackground source={ffimg2} style={{width:65,height:65,marginLeft:20,marginRight:10,marginBottom:15}}>
           </ImageBackground>
         </View>
         </TouchableOpacity >
-        <TouchableOpacity onPress={() => logCheck('견적현황')}>
+        <TouchableOpacity onPress={() => {refresh(),logCheck('견적현황')}}>
         <View style={{backgroundColor:'white'}}>
           <ImageBackground source={ffimg3} style={{width:65,height:65,marginLeft:20,marginRight:10,marginBottom:15}}>
           </ImageBackground>
         </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => logCheck('마이페이지')}>
+        <TouchableOpacity onPress={() => {refresh(),logCheck('마이페이지')}}>
         <View style={{backgroundColor:'white'}}>
           <ImageBackground source={ffimg4} style={{width:65,height:65,marginLeft:20,marginRight:60,marginBottom:15}}>
           </ImageBackground>

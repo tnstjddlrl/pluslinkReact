@@ -62,17 +62,17 @@ const FindId = () => {
             <View style={{margin:15}}>
               <Text>회원가입시 등록하신 이메일 주소를 입력해 주세요. 해당 이메일 주소로 비밀번호 정보를 전달해 드립니다.</Text>
 
-              <TextInput onChangeText={(txt)=>setEmail(txt)} value={email} placeholder={'이메일주소'} style={{width:chartWidth-30,height:30,borderWidth:0.5,borderColor:'gray',marginTop:20}}></TextInput>
+              <TextInput onChangeText={(txt)=>setEmail(txt)} value={email} placeholder={'이메일주소'} style={{width:chartWidth-30,height:40,borderWidth:0.5,borderColor:'gray',marginTop:20}}></TextInput>
               <View style={{flexDirection:"row",justifyContent:"center",alignItems:"center",marginTop:50}}>
               <TouchableOpacity onPress={()=>finde()}>
-                <View style={{width:50,height:40,justifyContent:"center",alignItems:"center",backgroundColor:'gray'}}>
-                  <Text>확인</Text>
+                <View style={{width:50,height:40,justifyContent:"center",alignItems:"center",backgroundColor:'#c61aff'}}>
+                  <Text style={{color:'white'}}>확인</Text>
                 </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity>
-                <View style={{width:50,height:40,justifyContent:"center",alignItems:"center",backgroundColor:'gray',marginLeft:10}}>
-                  <Text>취소</Text>
+                <View style={{width:50,height:40,justifyContent:"center",alignItems:"center",backgroundColor:'black',marginLeft:10}}>
+                  <Text style={{color:'white'}}>취소</Text>
                 </View>
                 </TouchableOpacity>
 

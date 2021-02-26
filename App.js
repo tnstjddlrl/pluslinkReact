@@ -183,6 +183,7 @@ const App = ({ }) => {
       </View>
 
       <HeadHeder></HeadHeder>
+      <FootTer></FootTer>
 
 
 
