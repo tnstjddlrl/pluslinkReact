@@ -119,12 +119,8 @@ const Company = (prop) => {
   if (expertise.length != 0 && patners.length != 0 && memberList.length != 0) {
     for (var i = 0; i < expertise.length; i++) {
       if (expertise[i].category == menu && expertise[i].state == '정상') {
-        for(var j = 0;j<expertise_ena.length;j++){
-          if(expertise[i].no == expertise_ena[j].ex_id && expertise_ena[j].state == '활성화'){
             cate.push(expertise[i].mb_id)
-          }
-        }
-        
+          
       }
     }
 

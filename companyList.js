@@ -286,21 +286,26 @@ const CompanyList = ({ route }) => {
         if(expertise[i].subcategory == listPlus && expertise[i].state=='정상'){
           for(var j = 0; j<patners.length;j++){
             if(expertise[i].mb_id==patners[j].mb_id && patners[j].pt_state == '승인'){
-              for(var x = 0;x<expertise_ena.length;x++){
-                if(expertise[i].no==expertise_ena[x].ex_id){
-
-                  if(basicAddr == '기본주소' || basicAddr == ''){
-                    List.push(<ListItem id={expertise[i].mb_id} cate={listCate} comname={patners[x].pt_name} score={patners[x].pt_score} content={memberList[j].mb_profile}></ListItem>)
-                  }else{
-                    var km =String(getDistanceFromLatLonInKm(lat,lng,patners[x].pt_lat,patners[x].pt_lng))
-                    km = km.split('.')
-                    if(km[0]<50){
-                      List.push(<ListItem id={expertise[i].mb_id} cate={listCate} comname={patners[x].pt_name} score={patners[x].pt_score} content={memberList[j].mb_profile}></ListItem>)
+              for(var xx = 0; xx<memberList.length;xx++){
+                if(expertise[i].mb_id == memberList[xx].mb_id){
+                  for(var x = 0;x<expertise_ena.length;x++){
+                    if(expertise[i].no==expertise_ena[x].ex_id){
+    
+                      if(basicAddr == '기본주소' || basicAddr == ''){
+                        List.push(<ListItem id={expertise[i].mb_id} cate={listCate} comname={patners[j].pt_name} score={patners[j].pt_score} content={memberList[xx].mb_profile}></ListItem>)
+                      }else{
+                        var km =String(getDistanceFromLatLonInKm(lat,lng,patners[j].pt_lat,patners[j].pt_lng))
+                        km = km.split('.')
+                        if(km[0]<50){
+                          List.push(<ListItem id={expertise[i].mb_id} cate={listCate} comname={patners[j].pt_name} score={patners[j].pt_score} content={memberList[xx].mb_profile}></ListItem>)
+                        }
+                      }
+    
                     }
                   }
-
                 }
               }
+              
             }
           }
         }
@@ -596,14 +601,10 @@ const ListItem = (prop) => {
   var cate = []
   
   for(var i = 0; i < expertise.length;i++){
-    if(expertise[i].category == prop.cate && expertise[i].state=='정상'){
+    if(expertise[i].category == prop.cate && expertise[i].state=='정상' && expertise[i].mb_id == prop.id){
       for(var j = 0; j<patners.length;j++){
         if(expertise[i].mb_id==patners[j].mb_id && patners[j].pt_state == '승인'){
-          for(var x = 0;x<expertise_ena.length;x++){
-            if(expertise[i].no==expertise_ena[x].ex_id && expertise_ena[x].state=='활성화'){
               cate.push(expertise[i].subcategory)
-            }
-          }
         }
       }
     }
@@ -616,7 +617,7 @@ const ListItem = (prop) => {
   var tt = []
   if(cate.length != 0 ){
     for(var i = 0; i<cate.length;i++){
-      tt.push(<Text style={{marginLeft:10,marginTop:10,fontSize:18}}>{prop.cate} - {cate[i]}</Text>)
+      tt.push(<Text style={{marginLeft:10,marginTop:10,fontSize:18}}>={prop.cate} - {cate[i]}</Text>)
     }
   }
 
@@ -649,29 +650,30 @@ const ListItem = (prop) => {
           <View style={{ width: 50, borderWidth: 0.5, marginTop: 3 }}></View>
           <Text numberOfLines={1} style={{ marginTop: 10 }}>{prop.content}</Text>
 
-<TouchableOpacity onPress={()=>{setTTview(true)}}>
-  <View style={{flexDirection:"row",alignItems:"center",marginLeft:10,marginTop:10,}}>
-    <Text style={{fontSize:15}}>{prop.cate} 시공가능 분야</Text>
-    <View style={{width:25,height:25,borderRadius:28,backgroundColor:'white',borderWidth:0.5,borderColor:'gray',justifyContent:'center',alignItems:"center",marginLeft:5}}>
-      <Image style={{width:10,height:10}} source={arrow}></Image>
-    </View>
-  </View>
-  
-  </TouchableOpacity>
+          <TouchableOpacity onPress={() => { setTTview(true) }}>
+            <View style={{ flexDirection: "row", alignItems: "center", marginLeft: 10, marginTop: 10, }}>
+              <Text style={{ fontSize: 15 }}>{prop.cate} 시공가능 분야</Text>
+              <View style={{ width: 25, height: 25, borderRadius: 28, backgroundColor: 'white', borderWidth: 0.5, borderColor: 'gray', justifyContent: 'center', alignItems: "center", marginLeft: 5 }}>
+                <Image style={{ width: 10, height: 10 }} source={arrow}></Image>
+              </View>
+            </View>
+          </TouchableOpacity>
+
+          { ttView && <TTPush></TTPush>}
 
           <View style={{ width: chartWidth - 60, borderWidth: 0.8, marginTop: 10, borderColor: '#a6a6a6' }}></View>
         </TouchableOpacity>
       </View>
 
-      <Modal transparent={true} visible={ttView}>
-        <TouchableOpacity onPress={()=>setTTview(false)} style={{width:chartWidth,height:chartHeight,justifyContent:"center",alignItems:"center"}}>
-        <View style={{width:chartWidth-60,maxHeight:300,minHeight:150,backgroundColor:'white',borderColor:'gray',borderWidth:0.5,borderRadius:5}}>
-          <ScrollView>
-            <TTPush></TTPush>
-          </ScrollView>
-        </View>
+      {/* <Modal transparent={true} visible={ttView}>
+        <TouchableOpacity onPress={() => setTTview(false)} style={{ width: chartWidth, height: chartHeight, justifyContent: "center", alignItems: "center" }}>
+          <View style={{ width: chartWidth - 60, maxHeight: 300, minHeight: 150, backgroundColor: 'white', borderColor: 'gray', borderWidth: 0.5, borderRadius: 5 }}>
+            <ScrollView>
+              <TTPush></TTPush>
+            </ScrollView>
+          </View>
         </TouchableOpacity>
-      </Modal>
+      </Modal> */}
 
     </View>
   )
