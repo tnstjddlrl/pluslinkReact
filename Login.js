@@ -139,6 +139,7 @@ const Login=()=>{
             onChangeText={text => onChangePSS(text)}
             value={pss}
             placeholder='비밀번호'
+            secureTextEntry={true}
           />
 
           <View style={{ flexDirection: 'row', left: 10 }}>
