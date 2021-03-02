@@ -124,6 +124,7 @@ const PasswordCheck = () => {
                 style={{ height: 40, width: chartWidth - 50, marginLeft: 15, marginTop: 10, marginBottom: 20, borderColor: 'gray', borderWidth: 0.5 }}
                 onChangeText={text => setPwd(text)}
                 value={pwd}
+                secureTextEntry={true}
               />
               <TouchableOpacity onPress={() => pwCheck()}>
                 <View style={{ margin: 15, width: chartWidth - 50, backgroundColor: '#d11aff' }}>
