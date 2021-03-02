@@ -414,7 +414,7 @@ const REquset = () => {
         else {
           Alert.alert('견적 등록이 완료되었습니다..')
           refreshData('g5_write_estimate')
-          //navigation.navigate('홈');
+          navigation.navigate('홈');
         }
       })
       .catch(function (error) {

@@ -13,7 +13,7 @@ import CheckBox from '@react-native-community/checkbox';
 import FootTer from './footer.js'
 import HeadHeder from "./header.js";
 import { useNavigation } from '@react-navigation/native';
-import Axios from 'axios'
+import axios from 'axios'
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -45,30 +45,73 @@ async function isFavorite() {
 }
 
 
+
+
 const Login=()=>{
+  const [newid,setNewid] = useState('')
+
+  useEffect(()=>{
+    isFavorite().then((res)=>{
+      setNewid(res)
+    })
+  })
+
+  const [memberList, setMemberList] = useState([]);
+
+    async function GetMember() {
+      try {
+        console.log('겟멤버 작동됨')
+        return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_member.json');
+      } catch (error) {
+        console.log('에러 : ', error)
+        return false;
+      }
+    }
+
+    useEffect(()=>{
+      if (memberList.length == 0) {
+        console.log('작동테스트')
+        GetMember().then((res) => {
+          setMemberList(res.data)
+        })
+      }
+    })
 
   const [toggleCheckBox, setToggleCheckBox] = useState(true)
 
   function logindata(id,pss){
-    Axios.post('http://ip0131.cafe24.com/pluslink/json/memberJson.php', JSON.stringify({
+    axios.post('http://ip0131.cafe24.com/pluslink/json/memberJson.php', JSON.stringify({
       id : id,
       password: pss
     }))
       .then(function (response) {
         console.log('리스폰스 ', response);
-        if (response.request._response == 'suc') {
-          Alert.alert('로그인 되었습니다.')
-          fetchUser(id)
-          console.log(isFavorite());
-          navigation.navigate('홈');
+        for (var i = 0; i < memberList.length; i++) {
+          if (memberList[i].mb_id == id && memberList[i].mb_level != 2) {
+            Alert.alert('업체나 관리자는 로그인 할 수 없습니다.')
+            return
+          }
         }
-        else if (response.request._response == 'nodata') {
-          Alert.alert('탈퇴된 회원의 정보입니다.')
-        } else if (response.request._response == 'passwrod is not correct.') {
-          Alert.alert('아이디 혹은 비밀번호가 일치하지 않습니다..')
-        } else {
-          Alert.alert('등록된 아이디가 없습니다.')
-        }
+        
+          if (response.request._response == 'suc') {
+            Alert.alert('로그인 되었습니다.')
+            fetchUser(id)
+            console.log(isFavorite());
+            navigation.navigate('홈');
+            return
+          }
+          else if (response.request._response == 'nodata') {
+            Alert.alert('탈퇴된 회원의 정보입니다.')
+            return
+          } else if (response.request._response == 'passwrod is not correct.') {
+            Alert.alert('아이디 혹은 비밀번호가 일치하지 않습니다..')
+            return
+          } else {
+            Alert.alert('등록된 아이디가 없습니다.')
+            return
+
+          }
+
       })
       .catch(function (error) {
         console.log(error);
