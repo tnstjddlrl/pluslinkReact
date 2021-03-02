@@ -159,9 +159,9 @@ const InfoChange = () => {
                 <Text style={{ margin: 10, fontWeight: '100' }}>{newid}</Text>
               </View>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>비밀번호</Text>
-              <TextInput onChangeText={(text) => setPwd(text)} value={pwd} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
+              <TextInput onChangeText={(text) => setPwd(text)} value={pwd} secureTextEntry={true} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>비밀번호 확인</Text>
-              <TextInput onChangeText={(text) => setCpwd(text)} value={cpwd} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
+              <TextInput onChangeText={(text) => setCpwd(text)} value={cpwd} secureTextEntry={true} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>E-mail</Text>
               <TextInput onChangeText={(text) => setEmail(text)} value={email} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, marginBottom: 20 }}></TextInput>
             </View>
