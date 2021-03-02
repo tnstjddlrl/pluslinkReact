@@ -837,7 +837,7 @@ const SmallText = (prop) => {
           <Text style={{ fontSize: 9, color: 'gray' }}>{prop.date}</Text>
         </View>
 
-        <Text style={{ marginTop: 10, width: chartWidth / 2.0 }}>{prop.content}</Text>
+        <Text style={{ marginTop: 10, maxWidth: chartWidth *0.5 }}>{prop.content}</Text>
       </View>
     </View>
   )

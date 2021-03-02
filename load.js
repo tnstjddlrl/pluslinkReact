@@ -32,8 +32,8 @@ const Loading = () => {
   const logo = { uri: "https://pluslink.kr/img/pluslink/logo.png" };
   
   return(
-    <View style={{width:chartWidth,height:chartHeight,justifyContent:"center",alignItems:"center"}}>
-      <Image style={{width:300,height:245}} source={logo}></Image>
+    <View style={{width:chartWidth,height:chartHeight,justifyContent:"center",alignItems:"center",backgroundColor:'white'}}>
+      <Image style={{width:300,height:249}} source={logo}></Image>
     </View>
   )
 }
