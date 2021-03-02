@@ -28,7 +28,7 @@ import CheckBox from '@react-native-community/checkbox';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 
-const InfoChange = () => {
+const InfoChange = ({route}) => {
   const navigation = useNavigation()
   const [newid, setNewid] = useState('');
   const [response, setResponse] = React.useState(null); //ㅅㅏ진
@@ -46,6 +46,7 @@ const InfoChange = () => {
   const result = isFavorite().then((company_id) => {
     setNewid(company_id.toLowerCase())
   });
+
 
   async function GetMember() {
     try {
@@ -75,48 +76,38 @@ const InfoChange = () => {
   const [cpwd, setCpwd] = useState('')
 
   useEffect(() => {
-    for (var i = 0; i < memberList.length; i++) {
-      if (memberList[i].mb_id == newid) {
-        setEmail(memberList[i].mb_email)
-        setHp(memberList[i].mb_hp)
-        setName(memberList[i].mb_name)
+    if(email == '' && hp == '' && name == ''){
+      for (var i = 0; i < memberList.length; i++) {
+        if (memberList[i].mb_id == newid) {
+          setEmail(memberList[i].mb_email)
+          setHp(memberList[i].mb_hp)
+          setName(memberList[i].mb_name)
+        }
       }
     }
   })
 
   const [pwss, setPwss] = useState('') //비밀번호
 
-  useEffect(()=>{
-    
-    if (memberList.length != 0 && pwss == '') {
-      for (var i = 0; i < memberList.length; i++) {
-        if (memberList[i].mb_id == newid.toLowerCase()) {
-          setPwss(memberList[i].mb_password)
-          Alert.alert(memberList[i].mb_password)
-        }
-      }
-    }
-
-
-  },[])
-
+  
 
 
 
   function changeData() {
 
 
-    if (pwd == '' || cpwd == '') {
+    if (pwd == '' && cpwd == '') {
       if( email == '' || hp == ''){
-        Alert.alert('모든 칸을 전부 채워주세요!')
+        Alert.alert('이메일 및 휴대폰번호 칸을 전부 채워주세요!')
         return
       }else{
-        setPwd(pwss)
-        setCpwd(pwss)
+        var ppppp = route.params.pwd
       }
     } else if (pwd != cpwd) {
       Alert.alert('비밀번호가 서로 다릅니다!')
       return
+    } else if(pwd == cpwd){
+      var ppppp = pwd
     }
 
     if(response == null){
@@ -133,7 +124,7 @@ const InfoChange = () => {
 
     axios.post('http://ip0131.cafe24.com/pluslink/json/updateMember.php', JSON.stringify({
       id: newid,
-      password: pwd,
+      password: ppppp,
       email: email,
       hp: hp,
       img: im,
@@ -142,13 +133,13 @@ const InfoChange = () => {
       .then(function (response) {
         console.log('리스폰스 ', response);
         if (response.request._response == 'suc') {
-          alert('로그인 되었습니다.')
+          Alert.alert('로그인 되었습니다.')
           fetchUser(id)
           console.log(isFavorite());
           navigation.navigate('홈');
         }
         else {
-          alert('변경되었습니다.')
+          Alert.alert('변경되었습니다.')
           navigation.navigate('홈');
         }
       })

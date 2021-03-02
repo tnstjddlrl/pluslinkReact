@@ -555,14 +555,14 @@ const REquset = () => {
                   </View>
                 </TouchableOpacity></View>
 
-                {response && (
-                                <View>
-                                        <Image
-                                            style={{ width: response.width, height: response.height }}
-                                            source={{ uri: response.uri }}
-                                        />
-                                </View>
-                            )}
+              {response && (
+                <View>
+                  <Image
+                    style={{ width: response.width, height: response.height }}
+                    source={{ uri: response.uri }}
+                  />
+                </View>
+              )}
 
               <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 20 }}>
                 <TouchableOpacity onPress={() => insert()}>

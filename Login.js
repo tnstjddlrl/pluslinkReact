@@ -168,7 +168,7 @@ const Login=()=>{
             </View>
 
 
-            <TouchableOpacity onPress={() => { logindata(id, pss), console.log('버튼 눌러짐') }}>
+            <TouchableOpacity onPress={() => { logindata(id.toLowerCase(), pss), console.log('버튼 눌러짐') }}>
               <View style={{ width: chartWidth - 80, height: 40, backgroundColor: '#d24dff', justifyContent:'center' , alignItems:'center',marginTop:20 }}>
                 <Text style={{ color: 'white', fontWeight: 'bold', }}>로그인</Text>
               </View>
