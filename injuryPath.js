@@ -167,9 +167,12 @@ const InjuryPath = () => {
                     console.log('리스폰스 ', response.request._response);
                     if (response.request._response == '') {
                         Alert.alert('신청이 완료되었습니다.')
+                        refreshData('stratum_list')
                     }
                     else {
-                        Alert.alert(response.request._response)
+                        Alert.alert('신청이 완료되었습니다.')
+                        refreshData('stratum_list')
+                        navigation.goBack()
                     }
                 })
                 .catch(function (error) {
@@ -186,6 +189,8 @@ const InjuryPath = () => {
                     console.log('리스폰스 ', response.request._response);
                     if (response.request._response == '') {
                         Alert.alert('신청이 취소되었습니다.')
+                        refreshData('stratum_list')
+                        navigation.goBack()
                     }
                     else {
                         Alert.alert(response.request._response)

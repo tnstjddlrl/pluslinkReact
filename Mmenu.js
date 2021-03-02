@@ -73,7 +73,7 @@ const Mmenu = () =>{
                     "alignItems": "flex-start",
                     "paddingStart": 10,
                     "paddingTop": 8,
-                    "width": 91,
+                    
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
@@ -84,7 +84,8 @@ const Mmenu = () =>{
                   {
                     "fontWeight": "bold",
                     "fontSize": 12,
-                    "color": "rgba(0, 0, 0, 255)"
+                    "color": "rgba(0, 0, 0, 255)",
+                    marginRight:13
                   }
                 } > # 전기 & 조명 </Text>
                 </View>

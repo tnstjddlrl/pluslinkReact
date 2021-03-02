@@ -25,7 +25,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
 import CheckBox from '@react-native-community/checkbox';
 
-
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 
@@ -35,7 +34,6 @@ const InfoChange = () => {
   const [response, setResponse] = React.useState(null); //ㅅㅏ진
   const [toggleCheckBox, setToggleCheckBox] = useState(false)
 
-
   async function isFavorite() {
     try {
       return await AsyncStorage.getItem("@super:id");
@@ -44,6 +42,7 @@ const InfoChange = () => {
     }
   }
 
+  
   const result = isFavorite().then((company_id) => {
     setNewid(company_id.toLowerCase())
   });
@@ -85,13 +84,36 @@ const InfoChange = () => {
     }
   })
 
+  const [pwss, setPwss] = useState('') //비밀번호
+
+  useEffect(()=>{
+    
+    if (memberList.length != 0 && pwss == '') {
+      for (var i = 0; i < memberList.length; i++) {
+        if (memberList[i].mb_id == newid.toLowerCase()) {
+          setPwss(memberList[i].mb_password)
+          Alert.alert(memberList[i].mb_password)
+        }
+      }
+    }
+
+
+  },[])
+
+
 
 
   function changeData() {
 
-    if (pwd == '' || cpwd == '' || email == '' || hp == '') {
-      Alert.alert('모든 칸을 전부 채워주세요!')
-      return
+
+    if (pwd == '' || cpwd == '') {
+      if( email == '' || hp == ''){
+        Alert.alert('모든 칸을 전부 채워주세요!')
+        return
+      }else{
+        setPwd(pwss)
+        setCpwd(pwss)
+      }
     } else if (pwd != cpwd) {
       Alert.alert('비밀번호가 서로 다릅니다!')
       return
@@ -127,7 +149,7 @@ const InfoChange = () => {
         }
         else {
           alert('변경되었습니다.')
-          //navigation.navigate('홈');
+          navigation.navigate('홈');
         }
       })
       .catch(function (error) {
