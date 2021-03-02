@@ -24,11 +24,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 //네비게이터로 화면을 넘겨올때 값을 받을 때는 route를 사용해야한다.
 
 function getDistanceFromLatLonInKm(lat1, lng1, lat2, lng2) {
-  function deg2rad(deg) { return deg * (Math.PI / 180) } 
+  function deg2rad(deg) { return deg * (Math.PI / 180) }
   
-  var R = 6371; // Radius of the earth in km 
-  var dLat = deg2rad(lat2-lat1); // deg2rad below 
-  var dLon = deg2rad(lng2 - lng1); 
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1); // deg2rad below
+  var dLon = deg2rad(lng2 - lng1);
   var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2); 
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)); 
   var d = R * c; // Distance in km 
@@ -43,26 +43,7 @@ const Company = (prop) => {
 
   const navigation = useNavigation()
 
-  function refreshData(tableName) {
-    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
-      id: tableName,
-    }))
-      .then(function (response) {
-        console.log('리스폰스 ', response);
-        if (response.request._response == 'suc') {
-        }
-        else {
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
 
-  useEffect(() => {
-    refreshData('g5_member')
-    refreshData('partners')
-  }, [])
 
   async function isFavorite() {
     try {
@@ -73,6 +54,7 @@ const Company = (prop) => {
   } //아이디값 가져오기
 
   useEffect(() => {
+    navigation.navigate('로딩')
 
     const result = isFavorite().then((company_id) => {
       if(company_id == null){
@@ -197,9 +179,6 @@ const Company = (prop) => {
   })
 
 
-
-
-
   var List = []
   var cate = []
   var count = 0;
@@ -238,6 +217,10 @@ const Company = (prop) => {
                 count += 1
                 console.log('작동체크')
               }
+            }else{
+              List.push(<Item id={cate[i]} addr1={patners[x].pt_addr1} addr2={patners[x].pt_addr2} name={patners[x].pt_name} content={memberList[j].mb_profile.replace(/\r\n/g, '')} star={patners[x].pt_score}></Item>)
+              count += 1
+              console.log('작동체크')
             }
           }
         }

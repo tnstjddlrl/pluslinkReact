@@ -284,7 +284,7 @@ useEffect(()=>{
                   }else{
                     var km =String(getDistanceFromLatLonInKm(lat,lng,patners[x].pt_lat,patners[x].pt_lng))
                     km = km.split('.')
-                    if(km[0]<50){
+                    if(km[0]<30){
                       List.push(<ListItem id={cate[i]} cate={listCate} comname={patners[x].pt_name} score={patners[x].pt_score} content={memberList[j].mb_profile}></ListItem>)
                     }
                   }

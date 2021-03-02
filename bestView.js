@@ -82,13 +82,9 @@ const BestView = ({route}) => {
                       </View>
             <PushTitle></PushTitle>
             
-              
           </View>
-        
       </View>
 
-
-      {/* 헤더와 푸터를 맨밑에 배치하는 이유는, 여러가지 시도 후 맨 마지막에 렌더링된 아이템이 맨 상단에 올라와진다는 것을 알게되었기 때문이다. */}
       <HeadHeder></HeadHeder>
       <FootTer></FootTer>
 
