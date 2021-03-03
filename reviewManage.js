@@ -6,7 +6,8 @@ import {
   Dimensions,
   TouchableOpacity,
   Image,
-  ScrollView
+  ScrollView,
+  Alert
 } from 'react-native';
 
 const chartHeight = Dimensions.get('window').height;
@@ -99,9 +100,19 @@ const ReviewManage = () => {
             List.push(<ListItem date={list[i].wr_datetime} content={list[i].wr_content} id={memberList[j].mb_name} detail={list[i].wr_id}></ListItem>)
           }
         }
-
       }
     }
+
+    if(List.length == 0){
+      return(
+        <View style={{justifyContent:"center",alignItems:"center"}}>
+          <View style={{width:chartWidth-60,height:70,justifyContent:"center",alignItems:"center", borderWidth:0.5,borderColor:'gray',borderRadius:5}}>
+            <Text>작성하신 리뷰가 없습니다. 시공을 의뢰하시고 리뷰를 남겨보세요!</Text>
+          </View>
+        </View>
+      )
+    }
+
 
     return List
   }
@@ -163,6 +174,7 @@ const ReviewManage = () => {
     </View>
   )
 }
+
 
 
 

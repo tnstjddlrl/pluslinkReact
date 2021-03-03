@@ -145,6 +145,16 @@ const PayManage = () => {
         }
       }
     }
+
+    if(List.length == 0){
+      return(
+        <View style={{justifyContent:"center",alignItems:"center"}}>
+          <View style={{width:chartWidth-60,height:70,justifyContent:"center",alignItems:"center", borderWidth:0.5,borderColor:'gray',borderRadius:5}}>
+            <Text>아직 결제 내역이 없습니다!</Text>
+          </View>
+        </View>
+      )
+    }
     
     return List
   }
@@ -205,6 +215,8 @@ const ListItem = (prop) =>{
               </View>
   )
 }
+
+
 
 
 
