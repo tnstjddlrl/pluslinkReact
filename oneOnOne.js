@@ -85,7 +85,7 @@ const OneonOne = () => {
     if (OneList.length != 0) {
       console.log('1대1문의 숫자 : ', OneList.length)
       for (let i = 0; i < OneList.length; i++) {
-        if (OneList[i].mb_id.toLowerCase() == newid.toLowerCase()) {
+        if (OneList[i].mb_id.toLowerCase() == newid.toLowerCase() && OneList[i].qa_subject.indexOf(text) != -1) {
           var date = OneList[i].qa_datetime
           date = date.substring(0, 10)
           if (OneList[i].qa_status == '1') {
