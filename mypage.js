@@ -134,7 +134,7 @@ const Mypage = () => {
   const unsubscribe = navigation.addListener('focus', () => {
     setTimeout(() => {
       setIspng(false)
-    }, 100);
+    }, 300);
   });
   useEffect(() => {
     return () => unsubscribe();

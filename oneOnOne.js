@@ -109,7 +109,7 @@ const OneonOne = () => {
     <View>
       <View style={{ height: chartHeight, width: chartWidth }}>
         <ScrollView style={{ backgroundColor: 'white' }}>
-          <View style={{ marginBottom: 500 }}>
+          <View style={{ marginBottom: 100 }}>
             <View style={{ width: chartWidth, marginTop: 50 }}>
               <ImageBackground source={event} style={{ width: chartWidth, height: chartHeight / 7 }}>
               </ImageBackground>
@@ -188,7 +188,7 @@ const ListItem = (prop) => {
             </View>
           </View>
         </View>
-        <View style={{ width: chartWidth - 60, borderWidth: 0.3, marginTop: 5 }}></View>
+        <View style={{ width: chartWidth - 30, borderWidth: 0.8, marginTop: 5,borderColor:'rgb(216,216,216)' }}></View>
       </TouchableOpacity>
     </View>
   )
