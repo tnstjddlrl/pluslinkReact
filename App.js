@@ -154,7 +154,7 @@ const App = ({ }) => {
   return (
     <View>
       <View style={{width:chartWidth,height:chartHeight}}>
-        <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: 'white' }}>
+        <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: 'white',marginTop:10 }}>
           {/* 메인 맨 위 배너 */}
           <Banner></Banner>
 

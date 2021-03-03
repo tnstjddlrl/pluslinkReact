@@ -1,8 +1,11 @@
 import React,{} from "react";
 import {
   StyleSheet,
+  Dimensions
 } from "react-native";
 
+const chartHeight = Dimensions.get('window').height;
+const chartWidth = Dimensions.get('window').width;
 
 
 const styles = StyleSheet.create({
@@ -102,7 +105,7 @@ const styles = StyleSheet.create({
     marginRight:2,
   },
   bannerimg:{
-    width:400,
+    width:chartWidth,
     height:180,
   },
   button:{
