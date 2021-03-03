@@ -32,6 +32,8 @@ const ffimg3 = require('./img/b03.png')
 const ffimg4 = require('./img/b04.png')
 const arrow = require('./img/arrow02.png')
 
+const userplus = require('./img/contact.png')
+
 const HeadHeder = () => {
   const navigation = useNavigation();
 
@@ -187,6 +189,15 @@ const HeadHeder = () => {
     )
   }
 
+  const [ispng,setIspng] = useState(false)
+
+  const unsubscribe = navigation.addListener('focus', () => {
+    setIspng(false)
+  });
+  useEffect(() => {
+    return () => unsubscribe();
+  });
+
 
   return (
     <View>
@@ -236,8 +247,14 @@ const HeadHeder = () => {
               <View style={{ marginTop: mata }}>
 
                 <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 10, alignItems: 'center' }}>
-                  <View style={{ backgroundColor: 'white', width: 50, height: 50, borderRadius: 28 }}>
-                    <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + newid.substr(0, 2) + '/' + newid + '.gif' }} style={{ width: 50, height: 50, borderRadius: 28 }}></Image>
+                  <View style={{ backgroundColor: 'white', width: 50, height: 50, borderRadius: 28,justifyContent:"center",alignItems:"center" }}>
+                    
+                    
+                    {ispng ?<Image source={userplus} style={{ width: 35, height: 40, borderRadius: 0,justifyContent:"center",alignItems:"center" }}></Image> :
+                    <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + newid.substr(0, 2) + '/' + newid + '.gif' }} onError={()=>setIspng(true)} style={{ width: 50, height: 50, borderRadius: 28,backgroundColor:'white' }}></Image>
+                    }
+
+                    
                   </View>
                   <Text style={{ fontWeight: 'bold', marginLeft: 10, color: 'white', fontSize: 18 }}>{name}</Text>
 
