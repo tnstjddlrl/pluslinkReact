@@ -134,9 +134,11 @@ const Mypage = () => {
                   <ScrollView>
                     <View style={{marginLeft:20,marginRight:20,marginTop:10,backgroundColor:'white',height:chartHeight}}>
                         <View style={{flexDirection:"row",alignItems:"center"}}>
+                            <TouchableOpacity onPress={()=>navigation.navigate('마이포토')}>
                             <View style={{borderWidth:1,height:60,width:60,borderRadius:27,backgroundColor:'white'}}>
                               <Image style={{height:60,width:60,borderRadius:27,}} source={{ uri: 'https://pluslink.kr/data/member_image/' + newid.substr(0, 2) + '/' + newid + '.gif' }}></Image>
                             </View>
+                            </TouchableOpacity>
                             <Text style={{fontSize:20,marginLeft:10}}>{name}</Text>
                         </View>
 

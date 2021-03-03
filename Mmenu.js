@@ -105,7 +105,6 @@ const Mmenu = () =>{
                     "alignItems": "flex-start",
                     "paddingStart": 10,
                     "paddingTop": 8,
-                    "width": 63,
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
@@ -116,7 +115,7 @@ const Mmenu = () =>{
                   {
                     "fontWeight": "bold",
                     "fontSize": 12,
-                    "color": "rgba(0, 0, 0, 255)"
+                    "color": "rgba(0, 0, 0, 255)",marginRight:16
                   }
                 } > # 수도 </Text>
                 </View>
@@ -138,7 +137,6 @@ const Mmenu = () =>{
                     "alignItems": "flex-start",
                     "paddingStart": 10,
                     "paddingTop": 8,
-                    "width": 91,
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
@@ -149,7 +147,7 @@ const Mmenu = () =>{
                   {
                     "fontWeight": "bold",
                     "fontSize": 12,
-                    "color": "rgba(0, 0, 0, 255)"
+                    "color": "rgba(0, 0, 0, 255)",marginRight:16
                   }
                 } > # 도배 & 장판 </Text>
                 </View>
@@ -170,7 +168,6 @@ const Mmenu = () =>{
                     "alignItems": "flex-start",
                     "paddingStart": 10,
                     "paddingTop": 8,
-                    "width": 80,
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
@@ -181,7 +178,7 @@ const Mmenu = () =>{
                   {
                     "fontWeight": "bold",
                     "fontSize": 12,
-                    "color": "rgba(0, 0, 0, 255)"
+                    "color": "rgba(0, 0, 0, 255)",marginRight:16
                   }
                 } > # 인테리어 </Text>
                 </View>
@@ -201,7 +198,6 @@ const Mmenu = () =>{
                     "alignItems": "flex-start",
                     "paddingStart": 10,
                     "paddingTop": 8,
-                    "width": 91,
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
@@ -212,7 +208,7 @@ const Mmenu = () =>{
                   {
                     "fontWeight": "bold",
                     "fontSize": 12,
-                    "color": "rgba(0, 0, 0, 255)"
+                    "color": "rgba(0, 0, 0, 255)",marginRight:16
                   }
                 } > # 샷시 & 창호 </Text>
                 </View>
@@ -233,7 +229,6 @@ const Mmenu = () =>{
                     "alignItems": "flex-start",
                     "paddingStart": 10,
                     "paddingTop": 8,
-                    "width": 91,
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
@@ -244,7 +239,7 @@ const Mmenu = () =>{
                   {
                     "fontWeight": "bold",
                     "fontSize": 12,
-                    "color": "rgba(0, 0, 0, 255)"
+                    "color": "rgba(0, 0, 0, 255)",marginRight:16
                   }
                 } > # 청소 & 철거 </Text>
                 </View>
@@ -265,7 +260,6 @@ const Mmenu = () =>{
                     "alignItems": "flex-start",
                     "paddingStart": 10,
                     "paddingTop": 8,
-                    "width": 95,
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
@@ -276,7 +270,7 @@ const Mmenu = () =>{
                   {
                     "fontWeight": "bold",
                     "fontSize": 12,
-                    "color": "rgba(0, 0, 0, 255)"
+                    "color": "rgba(0, 0, 0, 255)",marginRight:16
                   }
                 } > # 보일러&배관 </Text>
                 </View>
@@ -308,7 +302,7 @@ const Mmenu = () =>{
                   {
                     "fontWeight": "bold",
                     "fontSize": 12,
-                    "color": "rgba(0, 0, 0, 255)"
+                    "color": "rgba(0, 0, 0, 255)",marginRight:16
                   }
                 } > # 건물외부 </Text>
                 </View>
@@ -328,7 +322,6 @@ const Mmenu = () =>{
                     "alignItems": "flex-start",
                     "paddingStart": 10,
                     "paddingTop": 8,
-                    "width": 95,
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
@@ -339,7 +332,7 @@ const Mmenu = () =>{
                   {
                     "fontWeight": "bold",
                     "fontSize": 12,
-                    "color": "rgba(0, 0, 0, 255)"
+                    "color": "rgba(0, 0, 0, 255)",marginRight:16
                   }
                 } > # 철거 및 처리 </Text>
                 </View>
@@ -359,7 +352,6 @@ const Mmenu = () =>{
                     "alignItems": "flex-start",
                     "paddingStart": 10,
                     "paddingTop": 8,
-                    "width": 60,
                     "height": 32,
                     "borderRadius": 16,
                     "borderWidth": 1,
@@ -370,7 +362,7 @@ const Mmenu = () =>{
                   {
                     "fontWeight": "bold",
                     "fontSize": 12,
-                    "color": "rgba(0, 0, 0, 255)"
+                    "color": "rgba(0, 0, 0, 255)",marginRight:16
                   }
                 } > # 이사 </Text>
                 </View>
