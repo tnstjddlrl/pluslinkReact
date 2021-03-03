@@ -97,7 +97,7 @@ const ReviewManage = () => {
       if (list[i].mb_id  == newid) {
         for (var j = 0; j < memberList.length; j++) {
           if (list[i].wr_2 == memberList[j].mb_id) {
-            List.push(<ListItem date={list[i].wr_datetime} content={list[i].wr_content} id={memberList[j].mb_name} detail={list[i].wr_id}></ListItem>)
+            List.push(<ListItem date={list[i].wr_datetime} content={list[i].wr_content} id={memberList[j].mb_name} star={list[i].wr_3} detail={list[i].wr_id}></ListItem>)
           }
         }
       }
@@ -120,16 +120,22 @@ const ReviewManage = () => {
   const ListItem = (prop) => {
     const navigation = useNavigation();
 
+    
+    var ss = []
+    function Starpush(){
+      for(var i = 0;i<prop.star;i++){
+        ss.push(<Image source={starimg} style={{ width: 15, height: 15 }}></Image>)
+      }
+
+      return ss
+    }
+
     return (
       <View style={{ borderWidth: 0.6, borderColor: 'gray', borderRadius: 17, marginTop: 10 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', width: chartWidth / 1.15, margin: 15 }}>
           <Text>{prop.id}</Text>
           <View style={{ flexDirection: 'row', right: 0, position: 'absolute' }}>
-            <Image source={starimg} style={{ width: 15, height: 15 }}></Image>
-            <Image source={starimg} style={{ width: 15, height: 15 }}></Image>
-            <Image source={starimg} style={{ width: 15, height: 15 }}></Image>
-            <Image source={starimg} style={{ width: 15, height: 15 }}></Image>
-            <Image source={starimg} style={{ width: 15, height: 15 }}></Image>
+            <Starpush></Starpush>
           </View>
         </View>
         <Text style={{ marginLeft: 10, marginRight: 10 }} numberOfLines={3}>{prop.content}</Text>
