@@ -127,15 +127,20 @@ const Mypage = () => {
     }
   })
 
+  const [ispng, setIspng] = useState(false)
+  const userplus = require('./img/contact.png')
+
+  
   const unsubscribe = navigation.addListener('focus', () => {
-    setIspng(false)
+    setTimeout(() => {
+      setIspng(false)
+    }, 100);
   });
   useEffect(() => {
     return () => unsubscribe();
   });
 
-  const [ispng, setIspng] = useState(false)
-  const userplus = require('./img/contact.png')
+
   return (
     <View>
       <View style={{ height: chartHeight, width: chartWidth }}>
@@ -166,7 +171,7 @@ const Mypage = () => {
                   <View>
                     <TouchableOpacity onPress={() => navigation.navigate('취약계층인증')}>
                       <Text>취약계층인증</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> 
                   </View>
 
 
