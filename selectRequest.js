@@ -470,9 +470,11 @@ function vsCal (day){
                     <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>작성하기</Text>
                   </View>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.goBack()}>
                 <View style={{ backgroundColor: "#404040", width: 50, height: 35, }}>
                   <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>취소</Text>
                 </View>
+                </TouchableOpacity>
               </View>
 
 

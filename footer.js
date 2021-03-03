@@ -5,6 +5,7 @@ import {
   Dimensions,
   TouchableOpacity,
   SafeAreaView,
+  Alert,
 } from "react-native";
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
@@ -56,7 +57,7 @@ const FootTer = () => {
 
   function logCheck(prop){
     if(newid == '로그인해주세요' || newid == ''){
-      alert('로그인을 먼저 해주세요.')
+      Alert.alert('로그인을 먼저 해주세요.')
       navigation.navigate('로그인')
     }else{
       navigation.navigate(prop)
