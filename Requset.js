@@ -31,6 +31,12 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
+var dateee = new Date().getDate(); //Current Date
+var monthee = new Date().getMonth() + 1; //Current Month
+var yearee = new Date().getFullYear(); //Current Year
+
+
+
 
 const REquset = () => {
   const navigation = useNavigation()
@@ -440,6 +446,23 @@ const REquset = () => {
   
   }
 
+  function vsCal (day){
+    var nn = day.split('-')
+    if(nn[0]<yearee){
+      Alert.alert('이전 날짜는 선택할 수 없습니다.')
+      return
+    }else if(nn[1]<monthee){
+      Alert.alert('이전 날짜는 선택할 수 없습니다.')
+      return
+    }else if(nn[2]<dateee){
+      Alert.alert('이전 날짜는 선택할 수 없습니다.')
+      return
+    }else{
+      setCalShow(false)
+      setDate(day)
+    }
+  }
+
 
   return (
     <View>
@@ -646,10 +669,10 @@ const REquset = () => {
       <Modal transparent={true} visible={calShow}>
       <TouchableOpacity onPress={() => setCalShow(false)}>
           <View style={{ width: chartWidth, height: chartHeight }}>
-        <View style={{ height: chartHeight / 2, top: chartHeight / 2.5,borderWidth:0.5 }}>
+        <View style={{ height: chartHeight / 2, top: chartHeight / 2.5,borderWidth:1 }}>
           <Calendar
-            onDayPress={(day) => { console.log('selected day', day), setCalShow(false), setDate(day.dateString) }}
-            onDayLongPress={(day) => { console.log('selected day', day) }}
+            onDayPress={(day) => {vsCal(day.dateString) }}
+            onDayLongPress={(day) => { console.log( yearee+':' + monthee +':' + dateee ) }}
             monthFormat={'yyyy MM'}
             onMonthChange={(month) => { console.log('month changed', month) }}
             hideExtraDays={false}
@@ -669,5 +692,7 @@ const REquset = () => {
     </View>
   )
 }
+
+
 
 export default REquset;

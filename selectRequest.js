@@ -32,6 +32,10 @@ import { ceil } from 'react-native-reanimated';
 
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
+var dateee = new Date().getDate(); //Current Date
+var monthee = new Date().getMonth() + 1; //Current Month
+var yearee = new Date().getFullYear(); //Current Year
+
 const SelectRequest = ({ route }) => {
   const navigation = useNavigation()
   const [response, setResponse] = React.useState(null);//사진
@@ -315,6 +319,23 @@ function getAddr (addr) {
 
 }
 
+function vsCal (day){
+  var nn = day.split('-')
+  if(nn[0]<yearee){
+    Alert.alert('이전 날짜는 선택할 수 없습니다.')
+    return
+  }else if(nn[1]<monthee){
+    Alert.alert('이전 날짜는 선택할 수 없습니다.')
+    return
+  }else if(nn[2]<dateee){
+    Alert.alert('이전 날짜는 선택할 수 없습니다.')
+    return
+  }else{
+    setCalShow(false)
+    setDate(day)
+  }
+}
+
 
 
 
@@ -500,7 +521,7 @@ function getAddr (addr) {
           <View style={{ width: chartWidth, height: chartHeight }}>
             <View style={{ height: chartHeight / 2, top: chartHeight / 2.5 }}>
               <Calendar
-                onDayPress={(day) => { console.log('selected day', day), setCalShow(false), setDate(day.dateString) }}
+                onDayPress={(day) => { vsCal(day.dateString) }}
                 onDayLongPress={(day) => { console.log('selected day', day) }}
                 monthFormat={'yyyy MM'}
                 onMonthChange={(month) => { console.log('month changed', month) }}
