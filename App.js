@@ -218,7 +218,7 @@ function App2() {
   return (
     //실제론 앱이 빌드될때 전체 정보가 다 빌드된다. 하지만 맨 앞엔 홈이 자리잡고있기때문에 홈만 로딩된것 처럼 보인다.
     <NavigationContainer>
-      <Stack.Navigator headerMode={"none"} mode='modal'>
+      <Stack.Navigator headerMode={"none"}>
         <Stack.Screen
           name="홈"
           component={App}

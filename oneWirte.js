@@ -117,7 +117,7 @@ const OneWrite = () => {
                       </View>
 
             <View style={{margin:15}}>
-              <View style={{borderWidth:0.3,width:chartWidth-30,borderColor:'gray'}}>
+              <View style={{borderWidth:0.3,width:chartWidth-30,borderColor:'gray',backgroundColor:'rgb(241,241,241)'}}>
                 <Text style={{margin:15}}>글작성</Text>
               </View>
 
@@ -130,7 +130,7 @@ const OneWrite = () => {
 
               <Text style={{marginTop:20}}>E-mail</Text>
               <TextInput
-                style={{ height: 40,width:chartWidth-30,marginTop:10, borderColor: 'gray', borderWidth: 0.5}}
+                style={{ height: 40,width:chartWidth-30,marginTop:10, borderWidth: 0.7}}
                 onChangeText={text => setEmail(text)}
                 placeholder='test@test.com'
                 value={email}
@@ -138,7 +138,7 @@ const OneWrite = () => {
 
               <Text style={{marginTop:20}}>휴대폰</Text>
               <TextInput      
-                style={{ height: 40,width:chartWidth-30,marginTop:10, borderColor: 'gray', borderWidth: 0.5 }}
+                style={{ height: 40,width:chartWidth-30,marginTop:10, borderWidth: 0.7 }}
                 onChangeText={text => setHp(text)}
                 placeholder='010-1234-1234'
                 keyboardType='number-pad'
@@ -147,13 +147,13 @@ const OneWrite = () => {
 
               <Text style={{marginTop:20}}>제목</Text>
               <TextInput      
-                style={{ height: 40,width:chartWidth-30,marginTop:10, borderColor: 'gray', borderWidth: 0.5 }}
+                style={{ height: 40,width:chartWidth-30,marginTop:10, borderWidth: 0.7 }}
                 onChangeText={text => setTitle(text)}
                 value={title}
               />
 
               <TextInput      
-                style={{ height: 150,width:chartWidth-30,marginTop:10, borderColor: 'gray', borderWidth: 0.5 }}
+                style={{ height: 150,width:chartWidth-30,marginTop:10, borderWidth: 0.7 }}
                 onChangeText={text => setContent(text)}
                 value={content}
                 placeholder="내용을 입력해주세요."
