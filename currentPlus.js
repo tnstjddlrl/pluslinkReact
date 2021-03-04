@@ -219,35 +219,6 @@ const CurrentPlus = ({ route }) => {
           }
 
         </View>
-
-        <Text style={{fontSize:18,fontWeight:'bold',marginTop:10}}>시공진행내역</Text>
-        <View style={{borderWidth:1,borderColor:'rgb(216,216,216)',width:chartWidth-60,marginTop:10,marginBottom:10}}></View>
-        <View style={{flexDirection:"row",justifyContent:"space-between",marginTop:5}}>
-        <Text style={{fontSize:16,fontWeight:'bold'}}>시공진행현황</Text>
-        <Text style={{fontSize:16}}>내용</Text>
-        </View>
-        <View style={{flexDirection:"row",justifyContent:"space-between",marginTop:15}}>
-        <Text style={{fontSize:16,fontWeight:'bold'}}>남은A/S기간</Text>
-        <Text style={{fontSize:16}}>내용</Text>
-        </View>
-        <View style={{borderWidth:1,borderColor:'rgb(216,216,216)',width:chartWidth-60,marginTop:10,marginBottom:10}}></View>
-
-        <View style={{justifyContent:"center",alignItems:"center",marginTop:20}}>
-          <View style={{borderWidth:1,borderColor:'rgb(216,216,216)',width:chartWidth-80}}>
-            <View style={{justifyContent:"center",alignItems:"center"}}>
-              <Text style={{fontSize:18,fontWeight:'bold',marginTop:10}}>시공전</Text>
-              <Image source={{uri:'https://pluslink.kr/img/no_addimg.png'}} style={{width:chartWidth-40,height:300}}></Image>
-            </View>
-          </View>
-          <View style={{borderWidth:1,borderColor:'rgb(216,216,216)',width:chartWidth-80,marginTop:20,marginBottom:20}}>
-            <View style={{justifyContent:"center",alignItems:"center"}}>
-              <Text style={{fontSize:18,fontWeight:'bold',marginTop:10}}>시공후</Text>
-              <Image source={{uri:'https://pluslink.kr/img/no_addimg.png'}} style={{width:chartWidth-40,height:300}}></Image>
-            </View>
-          </View>
-        </View>
-
-
       </View>
     )
   }
@@ -766,6 +737,122 @@ const CurrentPlus = ({ route }) => {
 
   }
 
+  function dateAddDel(sDate, nNum, type) {
+    var yy = parseInt(sDate.substr(0, 4), 10);
+    var mm = parseInt(sDate.substr(5, 2), 10);
+    var dd = parseInt(sDate.substr(8), 10);
+   
+    
+    if (type == "d") {
+        d = new Date(yy, mm - 1, dd + nNum);
+    }
+    else if (type == "m") {
+        d = new Date(yy, mm - 1, dd + (nNum * 31));
+    }
+    else if (type == "y") {
+        d = new Date(yy + nNum, mm - 1, dd);
+    }
+ 
+    yy = d.getFullYear();
+    mm = d.getMonth() + 1; mm = (mm < 10) ? '0' + mm : mm;
+    dd = d.getDate(); dd = (dd < 10) ? '0' + dd : dd;
+ 
+    return '' + yy + '-' +  mm  + '-' + dd;
+}
+  
+
+  const BeforeAfter = (prop) => {
+
+    var date2;
+    var date3;
+
+    var sDate = prop.day
+
+    var concon = prop.cons.split('_')
+
+    var nn = prop.as.split('_')
+
+    var nNum = parseInt(nn[0])
+
+    var nNum2 =  parseInt(concon[0])
+
+    //Alert.alert(String(nNum))
+
+    
+    if(nn[1] == '일'){
+      var type = 'd'
+    }else if(nn[1] == '개월'){
+      var type = 'm'
+    }else if(nn[1] == '년'){
+      var type = 'y'
+    }
+
+
+    if(concon[1] == '일'){
+      var type2 = 'd'
+    }else if(concon[1] == '개월'){
+      var type2 = 'm'
+    }else if(concon[1] == '년'){
+      var type2 = 'y'
+    }
+
+    
+
+    //Alert.alert(prop.no+concon[1]+type2)
+
+    date3 = dateAddDel(sDate,nNum2,type2) //시공기간계산
+
+    date2 = dateAddDel(date3,nNum,type) //as기간계산
+    
+// Alert.alert(date2)
+
+    return (
+      <View>
+        <Text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 10 }}>시공진행내역</Text>
+        <View style={{ borderWidth: 1, borderColor: 'rgb(216,216,216)', width: chartWidth - 60, marginTop: 10, marginBottom: 10 }}></View>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>시공진행현황</Text>
+          <Text style={{ fontSize: 16 }}>{prop.state}</Text>
+        </View>
+        <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 15 }}>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>남은A/S기간</Text>
+          <Text style={{ fontSize: 16 }}>{date2} 까지</Text>
+        </View>
+        <View style={{ borderWidth: 1, borderColor: 'rgb(216,216,216)', width: chartWidth - 60, marginTop: 10, marginBottom: 10 }}></View>
+
+        <View style={{ justifyContent: "center", alignItems: "center", marginTop: 20 }}>
+          <View style={{ borderWidth: 1, borderColor: 'rgb(216,216,216)', width: chartWidth - 80 }}>
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+              <Text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 10 }}>시공전</Text>
+              <Image source={{ uri: 'https://pluslink.kr/img/no_addimg.png' }} style={{ width: chartWidth - 40, height: 300 }}></Image>
+            </View>
+          </View>
+          <View style={{ borderWidth: 1, borderColor: 'rgb(216,216,216)', width: chartWidth - 80, marginTop: 20, marginBottom: 20 }}>
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+              <Text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 10 }}>시공후</Text>
+              <Image source={{ uri: 'https://pluslink.kr/img/no_addimg.png' }} style={{ width: chartWidth - 40, height: 300 }}></Image>
+            </View>
+          </View>
+        </View>
+      </View>
+    )
+  }
+
+  const BAPush = () =>{
+    
+    for(var i = 0; i<estimate.length;i++){
+      if(estimate[i].wr_id == route.params.num && estimate[i].wr_9 != ''){
+        for(var j = 0; j<bidding.length;j++){
+          if(estimate[i].wr_id==bidding[j].wr_id && estimate[i].wr_9 == bidding[j].mb_id &&bidding[j].state == '입찰'){
+            return(<BeforeAfter no={bidding[j].no} state={estimate[i].wr_8} day={estimate[i].wr_7} as={bidding[j].as_period} cons={bidding[j].construction} ></BeforeAfter>)
+          }
+        }
+      }
+    }
+
+    return(<View></View>)
+  }
+
 
   return (
     <View>
@@ -819,6 +906,7 @@ const CurrentPlus = ({ route }) => {
                     </View>}
 
                   <Paypush></Paypush>
+                  <BAPush></BAPush>
 
                 </View>
               </View>
