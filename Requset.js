@@ -91,8 +91,8 @@ const REquset = () => {
   const [pwss, setPwss] = useState('') //비밀번호
   const [name, setName] = useState('') //이름
 
-  const [link1,setLink1] = useState('')
-  const [link2,setLink2] = useState('') //좌표
+  const [link1, setLink1] = useState('')
+  const [link2, setLink2] = useState('') //좌표
 
 
 
@@ -367,16 +367,16 @@ const REquset = () => {
 
   function insert() {
 
-    if(text=='기본주소'){
+    if (text == '기본주소') {
       Alert.alert('기본주소를 입력해주세요')
       return
-    }else if(chanAddr==''){
+    } else if (chanAddr == '') {
       Alert.alert('기본주소를 입력해주세요')
       return
-    }else if(date=='날짜를 입력해주세요'){
+    } else if (date == '날짜를 입력해주세요') {
       Alert.alert('기본주소를 입력해주세요')
       return
-    }else if(value==''){
+    } else if (value == '') {
       Alert.alert('상세설명을 입력해주세요')
       return
     }
@@ -384,10 +384,10 @@ const REquset = () => {
     console.log('비밀번호 테스트 : ', pwss)
     console.log('이름테스트 : ', name)
 
-    if(response == null){
+    if (response == null) {
       var img = '1'
       var type = '1'
-    }else{
+    } else {
       var img = response.base64
       var type = response.type
     }
@@ -407,8 +407,8 @@ const REquset = () => {
       bo_table: 'estimate',
       img: img,
       imgtype: type,
-      link1:link1,
-      link2:link2
+      link1: link1,
+      link2: link2
     }))
       .then(function (response) {
         console.log('리스폰스 ', response.request._response);
@@ -428,36 +428,36 @@ const REquset = () => {
       });
   }
 
-  function getAddr (addr) {
+  function getAddr(addr) {
 
-    const Kakao = axios.create ({
-      baseURL : "https://dapi.kakao.com",
-      headers : {
-      Authorization : "KakaoAK "+ '1fca8682191d27067ab092d740c45ecf'
+    const Kakao = axios.create({
+      baseURL: "https://dapi.kakao.com",
+      headers: {
+        Authorization: "KakaoAK " + '1fca8682191d27067ab092d740c45ecf'
       }
-      });
+    });
 
-      Kakao.get ( "/v2/local/search/address.json?query="+addr)
-      .then (res => {
+    Kakao.get("/v2/local/search/address.json?query=" + addr)
+      .then(res => {
         console.log(res.data.documents[0].address.x)
         setLink1(res.data.documents[0].address.y)
         setLink2(res.data.documents[0].address.x)
       })
-  
+
   }
 
-  function vsCal (day){
+  function vsCal(day) {
     var nn = day.split('-')
-    if(nn[0]<yearee){
+    if (nn[0] < yearee) {
       Alert.alert('이전 날짜는 선택할 수 없습니다.')
       return
-    }else if(nn[1]<monthee){
+    } else if (nn[1] < monthee) {
       Alert.alert('이전 날짜는 선택할 수 없습니다.')
       return
-    }else if(nn[2]<dateee){
+    } else if (nn[2] < dateee) {
       Alert.alert('이전 날짜는 선택할 수 없습니다.')
       return
-    }else{
+    } else {
       setCalShow(false)
       setDate(day)
     }
@@ -467,7 +467,7 @@ const REquset = () => {
   return (
     <View>
       <View style={{ height: chartHeight, width: chartWidth }}>
-        <ScrollView style={{backgroundColor:'white'}}>
+        <ScrollView style={{ backgroundColor: 'white' }}>
           <View style={{ marginBottom: 100 }}>
             <View style={{ width: chartWidth, marginTop: 50 }}>
               <ImageBackground source={event} style={{ width: chartWidth, height: chartHeight / 7 }}>
@@ -507,7 +507,7 @@ const REquset = () => {
                   {
                     "alignItems": "flex-start",
                     "marginTop": 8,
-                    "width": chartWidth-30,
+                    "width": chartWidth - 30,
                     "height": 37,
                     "borderWidth": 1,
                     "borderColor": "rgba(171, 171, 171, 255)",
@@ -516,7 +516,7 @@ const REquset = () => {
                 }
                 ><Text>{text}</Text></View>
               </TouchableOpacity>
-              <TextInput placeholder='상세주소' style={{ marginTop: 8, width: chartWidth-30, height: 37, borderWidth: 1, borderColor: 'gray', }}
+              <TextInput placeholder='상세주소' style={{ marginTop: 8, width: chartWidth - 30, height: 37, borderWidth: 1, borderColor: 'gray', }}
                 onChangeText={text => setChanAddr(text)}
                 value={chanAddr}></TextInput>
 
@@ -534,7 +534,7 @@ const REquset = () => {
                   {
                     "alignItems": "flex-start",
                     "marginTop": 10,
-                    "width": chartWidth-30,
+                    "width": chartWidth - 30,
                     "height": 37,
                     "borderWidth": 1,
                     "borderColor": "rgba(171, 171, 171, 255)",
@@ -595,9 +595,9 @@ const REquset = () => {
                   </View>
                 </TouchableOpacity >
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                <View style={{ backgroundColor: "#404040", width: 50, height: 35, }}>
-                  <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>취소</Text>
-                </View>
+                  <View style={{ backgroundColor: "#404040", width: 50, height: 35, }}>
+                    <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>취소</Text>
+                  </View>
                 </TouchableOpacity>
               </View>
 
@@ -652,42 +652,42 @@ const REquset = () => {
       <Subcate></Subcate>
 
       <Modal transparent={true} visible={show}>
-      <View>
-        <TouchableOpacity onPress={() => setShow(false)}>
-          <View style={{backgroundColor:'white',width:60,height:60,borderRadius:28,marginTop:40,justifyContent:"center",alignItems:'center',borderWidth:0.5}}>
-            <Text style={{fontWeight:'bold',fontSize:28}}>X</Text>
+        <View>
+          <TouchableOpacity onPress={() => setShow(false)}>
+            <View style={{ backgroundColor: 'white', width: 60, height: 60, borderRadius: 28, marginTop: 40, justifyContent: "center", alignItems: 'center', borderWidth: 0.5 }}>
+              <Text style={{ fontWeight: 'bold', fontSize: 28 }}>X</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={{ width: chartWidth - 60, height: chartHeight - 150, position: 'absolute', marginLeft: 30, marginTop: 100, borderWidth: 0.5 }}>
+            <Postcode
+              jsOptions={{ animated: true }}
+              onSelected={(data) => { setText(JSON.stringify(data.address).replace(/"/gi, '')), setShow(false), getAddr(JSON.stringify(data.address).replace(/"/gi, '')) }}
+            />
           </View>
-        </TouchableOpacity>
-            <View style={{ width: chartWidth - 60, height: chartHeight - 150, position: 'absolute', marginLeft: 30, marginTop: 100, borderWidth: 0.5 }}>
-              <Postcode
-                jsOptions={{ animated: true }}
-                onSelected={(data) => { setText(JSON.stringify(data.address).replace(/"/gi, '')), setShow(false),getAddr(JSON.stringify(data.address).replace(/"/gi, '')) }}
-              />
-            </View>
-            </View>
+        </View>
       </Modal>
 
       <Modal transparent={true} visible={calShow}>
-      <TouchableOpacity onPress={() => setCalShow(false)}>
+        <TouchableOpacity onPress={() => setCalShow(false)}>
           <View style={{ width: chartWidth, height: chartHeight }}>
-        <View style={{ height: chartHeight / 2, top: chartHeight / 2.5,borderWidth:1 }}>
-          <Calendar
-            onDayPress={(day) => {vsCal(day.dateString) }}
-            onDayLongPress={(day) => { console.log( yearee+':' + monthee +':' + dateee ) }}
-            monthFormat={'yyyy MM'}
-            onMonthChange={(month) => { console.log('month changed', month) }}
-            hideExtraDays={false}
-            disableMonthChange={true}
-            firstDay={1}
-            hideDayNames={false}
-            showWeekNumbers={false}
-            onPressArrowLeft={substractMonth => substractMonth()}
-            onPressArrowRight={addMonth => addMonth()}
-            disableAllTouchEventsForDisabledDays={true}
-          />
-        </View>
-      </View>
-      </TouchableOpacity>
+            <View style={{ height: chartHeight / 2, top: chartHeight / 2.5, borderWidth: 1 }}>
+              <Calendar
+                onDayPress={(day) => { vsCal(day.dateString) }}
+                onDayLongPress={(day) => { console.log(yearee + ':' + monthee + ':' + dateee) }}
+                monthFormat={'yyyy MM'}
+                onMonthChange={(month) => { console.log('month changed', month) }}
+                hideExtraDays={false}
+                disableMonthChange={true}
+                firstDay={1}
+                hideDayNames={false}
+                showWeekNumbers={false}
+                onPressArrowLeft={substractMonth => substractMonth()}
+                onPressArrowRight={addMonth => addMonth()}
+                disableAllTouchEventsForDisabledDays={true}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
       </Modal>
 
     </View>
