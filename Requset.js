@@ -543,9 +543,10 @@ const REquset = () => {
                 }
                 ><Text>{date}</Text></View>
               </TouchableOpacity>
-              <Text style={{ color: 'red' }}>#방문날짜 이전에 낙찰이 되지않으면 견적이 자동취소 됩니다.</Text>
+              <Text style={{ color: 'red' }}>※ 방문날짜 이전에 낙찰이 되지 않으면 견적이 자동취소 됩니다.</Text>
 
               <Text style={{ fontWeight: 'bold', marginTop: 10 }}>상세설명</Text>
+              <Text style={{ color: 'red' }}>※ 사진 첨부를 자세히 할수록 견적을 상사하게 받을 수 있습니다.</Text>
               <TextInput
                 style={{ height: 150, width: chartWidth - 30, marginTop: 10, borderColor: 'gray', borderWidth: 0.5 }}
                 onChangeText={text => onChangeText(text)}
