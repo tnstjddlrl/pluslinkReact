@@ -219,6 +219,35 @@ const CurrentPlus = ({ route }) => {
           }
 
         </View>
+
+        <Text style={{fontSize:18,fontWeight:'bold',marginTop:10}}>시공진행내역</Text>
+        <View style={{borderWidth:1,borderColor:'rgb(216,216,216)',width:chartWidth-60,marginTop:10,marginBottom:10}}></View>
+        <View style={{flexDirection:"row",justifyContent:"space-between",marginTop:5}}>
+        <Text style={{fontSize:16,fontWeight:'bold'}}>시공진행현황</Text>
+        <Text style={{fontSize:16}}>내용</Text>
+        </View>
+        <View style={{flexDirection:"row",justifyContent:"space-between",marginTop:15}}>
+        <Text style={{fontSize:16,fontWeight:'bold'}}>남은A/S기간</Text>
+        <Text style={{fontSize:16}}>내용</Text>
+        </View>
+        <View style={{borderWidth:1,borderColor:'rgb(216,216,216)',width:chartWidth-60,marginTop:10,marginBottom:10}}></View>
+
+        <View style={{justifyContent:"center",alignItems:"center",marginTop:20}}>
+          <View style={{borderWidth:1,borderColor:'rgb(216,216,216)',width:chartWidth-80}}>
+            <View style={{justifyContent:"center",alignItems:"center"}}>
+              <Text style={{fontSize:18,fontWeight:'bold',marginTop:10}}>시공전</Text>
+              <Image source={{uri:'https://pluslink.kr/img/no_addimg.png'}} style={{width:chartWidth-40,height:300}}></Image>
+            </View>
+          </View>
+          <View style={{borderWidth:1,borderColor:'rgb(216,216,216)',width:chartWidth-80,marginTop:20,marginBottom:20}}>
+            <View style={{justifyContent:"center",alignItems:"center"}}>
+              <Text style={{fontSize:18,fontWeight:'bold',marginTop:10}}>시공후</Text>
+              <Image source={{uri:'https://pluslink.kr/img/no_addimg.png'}} style={{width:chartWidth-40,height:300}}></Image>
+            </View>
+          </View>
+        </View>
+
+
       </View>
     )
   }
