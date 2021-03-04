@@ -2,7 +2,9 @@ import React,{useState,useEffect} from 'react'
 import { 
   View,
   Text,
-  Dimensions
+  Dimensions,
+  SafeAreaView,
+  ScrollView
  } from "react-native";
 
  const chartHeight = Dimensions.get('window').height;
@@ -59,8 +61,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
  const Item = (prop) =>{
    const navigation = useNavigation()
    return(
-     <View style={{width:chartWidth-20,height:chartHeight-80,marginTop:40,backgroundColor:'white'}}>
-       <View style={{flexDirection:"row",alignItems:"center",width:chartWidth/1.5,justifyContent:"space-between",marginLeft:10,marginTop:80}}>
+    <SafeAreaView>
+     <View style={{width:chartWidth-20,height:chartHeight-80,backgroundColor:'white'}}>
+       <ScrollView>
+       <View style={{flexDirection:"row",alignItems:"center",width:chartWidth/1.5,justifyContent:"space-between",marginLeft:10,marginTop:40}}>
           <Text>견적비용</Text>
           <View style={{backgroundColor:'#cccccc'}}>
             <Text style={{margin:5,width:150,fontSize:18}}>{prop.pay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원</Text>
@@ -105,13 +109,15 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
       </View>
 
       <TouchableOpacity onPress={()=>navigation.navigate('견적자세히보기')}>
-      <View style={{borderWidth:0.7,borderColor:'#8600b3',width:chartWidth-40,marginLeft:10,borderRadius:5,height:50,justifyContent:"center",alignItems:"center",bottom:0}}>
+      <View style={{borderWidth:0.7,borderColor:'#8600b3',width:chartWidth-40,marginLeft:10,borderRadius:5,height:50,justifyContent:"center",alignItems:"center",bottom:0,marginBottom:50}}>
         <Text style={{color:'#8600b3'}}>닫기</Text>
       </View>
       </TouchableOpacity>
-
-
+      </ScrollView>
      </View>
+     
+
+     </SafeAreaView>
    )
  }
 
