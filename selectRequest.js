@@ -440,11 +440,8 @@ const SelectRequest = ({ route }) => {
               />
 
 
-              <View>
-                <View style={{ flexDirection: 'row', marginTop: 50 }}>
-                  <Text>이미지첨부</Text>
-                </View>
-              </View>
+<Text style={{ margin: 5, fontWeight: "bold", fontSize: 18, marginTop: 10 }}>첨부파일</Text>
+              <Text style={{ color: 'red' }}>※ 시공 부분 사진을 첨부해주세요</Text>
 
               <View style={{ marginTop: 15 }}>
                 {response && (
@@ -459,7 +456,7 @@ const SelectRequest = ({ route }) => {
 
                 <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
                   <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ margin: 5 }}>파일1</Text>
+                    <Text style={{ margin: 5 }}>사진1</Text>
                   </View>
                   <TouchableOpacity onPress={() =>
                     launchImageLibrary(
@@ -496,7 +493,7 @@ const SelectRequest = ({ route }) => {
 
                 <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
                   <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ margin: 5 }}>파일2</Text>
+                    <Text style={{ margin: 5 }}>사진2</Text>
                   </View>
                   <TouchableOpacity onPress={() =>
                     launchImageLibrary(
@@ -533,7 +530,7 @@ const SelectRequest = ({ route }) => {
 
                 <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
                   <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ margin: 5 }}>파일3</Text>
+                    <Text style={{ margin: 5 }}>사진3</Text>
                   </View>
                   <TouchableOpacity onPress={() =>
                     launchImageLibrary(
@@ -570,7 +567,7 @@ const SelectRequest = ({ route }) => {
 
                 <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
                   <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ margin: 5 }}>파일4</Text>
+                    <Text style={{ margin: 5 }}>사진4</Text>
                   </View>
                   <TouchableOpacity onPress={() =>
                     launchImageLibrary(
@@ -607,7 +604,7 @@ const SelectRequest = ({ route }) => {
 
                 <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
                   <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ margin: 5 }}>파일5</Text>
+                    <Text style={{ margin: 5 }}>사진5</Text>
                   </View>
                   <TouchableOpacity onPress={() =>
                     launchImageLibrary(
@@ -645,7 +642,7 @@ const SelectRequest = ({ route }) => {
 
                 <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
                   <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ margin: 5 }}>파일6</Text>
+                    <Text style={{ margin: 5 }}>사진6</Text>
                   </View>
                   <TouchableOpacity onPress={() =>
                     launchImageLibrary(
@@ -682,7 +679,7 @@ const SelectRequest = ({ route }) => {
 
                 <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
                   <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ margin: 5 }}>파일7</Text>
+                    <Text style={{ margin: 5 }}>사진7</Text>
                   </View>
                   <TouchableOpacity onPress={() =>
                     launchImageLibrary(
@@ -720,7 +717,7 @@ const SelectRequest = ({ route }) => {
 
                 <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
                   <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ margin: 5 }}>파일8</Text>
+                    <Text style={{ margin: 5 }}>사진8</Text>
                   </View>
                   <TouchableOpacity onPress={() =>
                     launchImageLibrary(
@@ -758,7 +755,7 @@ const SelectRequest = ({ route }) => {
 
                 <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
                   <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ margin: 5 }}>파일9</Text>
+                    <Text style={{ margin: 5 }}>사진9</Text>
                   </View>
                   <TouchableOpacity onPress={() =>
                     launchImageLibrary(
@@ -796,7 +793,7 @@ const SelectRequest = ({ route }) => {
 
                 <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
                   <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
-                    <Text style={{ margin: 5 }}>파일10</Text>
+                    <Text style={{ margin: 5 }}>사진10</Text>
                   </View>
                   <TouchableOpacity onPress={() =>
                     launchImageLibrary(
