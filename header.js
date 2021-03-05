@@ -325,7 +325,7 @@ const HeadHeder = () => {
               </View>
             </ImageBackground>
 
-            <ScrollView style={{maxHeight:chartHeight/1.5}}>
+            <ScrollView style={{maxHeight:chartHeight/1.5}} showsVerticalScrollIndicator={false}>
               <LeftMenu title={'전기&조명'} ></LeftMenu>
               <LeftMenu title={'수도'} ></LeftMenu>
               <LeftMenu title={'도배&장판'} ></LeftMenu>

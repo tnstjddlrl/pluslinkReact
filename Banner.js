@@ -24,7 +24,7 @@ const Banimg3 =require('./img/banner3.png')
 const Banner = ()=>{
   return(
     // 스와이퍼 오픈소스를 활용하여 메인 배너 구성, 구성 요소는 ImageBackground로 구성한다.
-    <Swiper style={styles.wrapper} showsButtons={true} autoplay={true}>
+    <Swiper style={styles.wrapper} showsButtons={false} autoplay={true} autoplayTimeout={4}>
         <View style={styles.slide1}>
         <ImageBackground source={Banimg} style={styles.bannerimg}>
         </ImageBackground>
