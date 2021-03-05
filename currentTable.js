@@ -179,7 +179,7 @@ const CurrentTable =({route}) =>{
     return(
         <View>
             <View style={{width:chartWidth,height:chartHeight}}>
-                <ScrollView>
+                <ScrollView style={{backgroundColor:'white'}}>
                     <View style={{width:chartWidth,marginTop:50}}>
                     <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
                     </ImageBackground>
