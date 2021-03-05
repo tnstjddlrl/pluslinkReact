@@ -65,8 +65,8 @@ const SelectRequest = ({ route }) => {
       });
   }
 
-    
-  
+
+
 
   const [newid, setNewid] = useState('');
 
@@ -100,13 +100,13 @@ const SelectRequest = ({ route }) => {
   const [name, setName] = useState('') //이름
   const [comno, setComno] = useState('') //시공업체의 파트너 번호
 
-  const [link1,setLink1] = useState('')
-  const [link2,setLink2] = useState('') //좌표
-  
+  const [link1, setLink1] = useState('')
+  const [link2, setLink2] = useState('') //좌표
+
   const SubItem = (prop) => {
     return (
       <TouchableOpacity onPress={() => { setListPlus(prop.sub), setSubselect(false) }}>
-        <Text style={{ left: 5, margin:10, fontSize:18 }}>{prop.sub}</Text>
+        <Text style={{ left: 5, margin: 10, fontSize: 18 }}>{prop.sub}</Text>
       </TouchableOpacity>
     )
   }
@@ -114,24 +114,24 @@ const SelectRequest = ({ route }) => {
 
   const Subcate = () => {
     var subP = []
-    for(var i = 0; i<expertise.length;i++){
-      if(expertise[i].category == listCate && expertise[i].mb_id == route.params.comid && expertise[i].state == '정상'){
+    for (var i = 0; i < expertise.length; i++) {
+      if (expertise[i].category == listCate && expertise[i].mb_id == route.params.comid && expertise[i].state == '정상') {
         subP.push(<SubItem sub={expertise[i].subcategory}></SubItem>)
       }
     }
-    const Push = () =>{
+    const Push = () => {
       console.log(subP)
       return subP
     }
-      return (
-        <Modal transparent={true} visible={subSelect}>
-          <TouchableOpacity style={{width:chartWidth,height:chartHeight}} onPress={()=>setSubselect(false)}>
-          <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: chartHeight/3 }}>
+    return (
+      <Modal transparent={true} visible={subSelect}>
+        <TouchableOpacity style={{ width: chartWidth, height: chartHeight }} onPress={() => setSubselect(false)}>
+          <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: chartHeight / 3 }}>
             <Push></Push>
           </View>
-          </TouchableOpacity>
-        </Modal>
-      )
+        </TouchableOpacity>
+      </Modal>
+    )
   }
 
   async function GetMember() {
@@ -215,24 +215,24 @@ const SelectRequest = ({ route }) => {
 
   function insert() {
 
-    if(text=='기본주소'){
+    if (text == '기본주소') {
       Alert.alert('기본주소를 입력해주세요')
       return
-    }else if(chanAddr==''){
+    } else if (chanAddr == '') {
       Alert.alert('기본주소를 입력해주세요')
       return
-    }else if(date=='날짜를 입력해주세요'){
+    } else if (date == '날짜를 입력해주세요') {
       Alert.alert('기본주소를 입력해주세요')
       return
-    }else if(value==''){
+    } else if (value == '') {
       Alert.alert('상세설명을 입력해주세요')
       return
     }
 
-    if(response == null){
+    if (response == null) {
       var img = '1'
       var type = '1'
-    }else{
+    } else {
       var img = response.base64
       var type = response.type
     }
@@ -252,16 +252,16 @@ const SelectRequest = ({ route }) => {
       wr_name: name,//이름
       img: img,
       imgtype: type,
-      link1:link1,
-      link2:link2
+      link1: link1,
+      link2: link2
     }))
       .then(function (response) {
         console.log('리스폰스 ', response.request._response);
         if (response.request._response == 'succ') {
-          
+
           fetchUser(id)
           console.log(isFavorite());
-          
+
         }
         else {
           Alert.alert('견적 등록이 완료되었습니다..')
@@ -274,76 +274,76 @@ const SelectRequest = ({ route }) => {
       });
   }
 
-const MainItem = (prop) => {
-  return(
-    <TouchableOpacity onPress={() => { SetlistCate(prop.tem), setSelect(false), setListPlus('세부항목을 선택해주세요') }}>
-            <Text style={{ left: 5, margin:10 ,fontSize:18}}>{prop.tem}</Text>
-          </TouchableOpacity>
-  )
-}
+  const MainItem = (prop) => {
+    return (
+      <TouchableOpacity onPress={() => { SetlistCate(prop.tem), setSelect(false), setListPlus('세부항목을 선택해주세요') }}>
+        <Text style={{ left: 5, margin: 10, fontSize: 18 }}>{prop.tem}</Text>
+      </TouchableOpacity>
+    )
+  }
 
-function MainPush(){
-  var maincate = []
-  var mainP = []
-  for(var i = 0;i<expertise.length;i++){
-    if(expertise[i].mb_id==route.params.comid && expertise[i].state == '정상'){
-      for(var j =0;j<patners.length;j++){
-        if(expertise[i].mb_id == patners[j].mb_id && patners[j].pt_state == '승인'){
-          for(var x = 0;x<expertise_ena.length;x++){
-            if(expertise[i].no == expertise_ena[x].ex_id && expertise_ena[x].state == '활성화'){
-              maincate.push(expertise[i].category)
+  function MainPush() {
+    var maincate = []
+    var mainP = []
+    for (var i = 0; i < expertise.length; i++) {
+      if (expertise[i].mb_id == route.params.comid && expertise[i].state == '정상') {
+        for (var j = 0; j < patners.length; j++) {
+          if (expertise[i].mb_id == patners[j].mb_id && patners[j].pt_state == '승인') {
+            for (var x = 0; x < expertise_ena.length; x++) {
+              if (expertise[i].no == expertise_ena[x].ex_id && expertise_ena[x].state == '활성화') {
+                maincate.push(expertise[i].category)
+              }
             }
           }
         }
+
       }
-      
     }
+
+    const set = new Set(maincate);
+    maincate = [...set];
+
+    for (var i = 0; i < maincate.length; i++) {
+      mainP.push(<MainItem tem={maincate[i]}></MainItem>)
+    }
+
+    return mainP
   }
 
-  const set = new Set(maincate);
-  maincate = [...set];
+  function getAddr(addr) {
 
-  for(var i = 0;i<maincate.length;i++){
-    mainP.push(<MainItem tem={maincate[i]}></MainItem>)
-  }
-
-  return mainP
-}
-
-function getAddr (addr) {
-
-  const Kakao = axios.create ({
-    baseURL : "https://dapi.kakao.com",
-    headers : {
-    Authorization : "KakaoAK "+ '1fca8682191d27067ab092d740c45ecf'
-    }
+    const Kakao = axios.create({
+      baseURL: "https://dapi.kakao.com",
+      headers: {
+        Authorization: "KakaoAK " + '1fca8682191d27067ab092d740c45ecf'
+      }
     });
 
-    Kakao.get ( "/v2/local/search/address.json?query="+addr)
-    .then (res => {
-      console.log(res.data.documents[0].address.x)
-      setLink1(res.data.documents[0].address.y)
-      setLink2(res.data.documents[0].address.x)
-    })
+    Kakao.get("/v2/local/search/address.json?query=" + addr)
+      .then(res => {
+        console.log(res.data.documents[0].address.x)
+        setLink1(res.data.documents[0].address.y)
+        setLink2(res.data.documents[0].address.x)
+      })
 
-}
-
-function vsCal (day){
-  var nn = day.split('-')
-  if(nn[0]<yearee){
-    Alert.alert('이전 날짜는 선택할 수 없습니다.')
-    return
-  }else if(nn[1]<monthee){
-    Alert.alert('이전 날짜는 선택할 수 없습니다.')
-    return
-  }else if(nn[2]<dateee){
-    Alert.alert('이전 날짜는 선택할 수 없습니다.')
-    return
-  }else{
-    setCalShow(false)
-    setDate(day)
   }
-}
+
+  function vsCal(day) {
+    var nn = day.split('-')
+    if (nn[0] < yearee) {
+      Alert.alert('이전 날짜는 선택할 수 없습니다.')
+      return
+    } else if (nn[1] < monthee) {
+      Alert.alert('이전 날짜는 선택할 수 없습니다.')
+      return
+    } else if (nn[2] < dateee) {
+      Alert.alert('이전 날짜는 선택할 수 없습니다.')
+      return
+    } else {
+      setCalShow(false)
+      setDate(day)
+    }
+  }
 
 
 
@@ -351,7 +351,7 @@ function vsCal (day){
   return (
     <View>
       <View style={{ height: chartHeight, width: chartWidth }}>
-        <ScrollView style={{backgroundColor:'white'}}>
+        <ScrollView style={{ backgroundColor: 'white' }}>
           <View style={{ marginBottom: 100 }}>
             <View style={{ width: chartWidth, marginTop: 50 }}>
               <ImageBackground source={event} style={{ width: chartWidth, height: chartHeight / 7 }}>
@@ -394,7 +394,7 @@ function vsCal (day){
                   {
                     "alignItems": "flex-start",
                     "marginTop": 8,
-                    "width": chartWidth-30,
+                    "width": chartWidth - 30,
                     "height": 37,
                     "borderWidth": 1,
                     "borderColor": "rgba(171, 171, 171, 255)",
@@ -403,7 +403,7 @@ function vsCal (day){
                 }
                 ><Text>{text}</Text></View>
               </TouchableOpacity>
-              <TextInput placeholder='상세주소' onChangeText={(text) => setChanAddr(text)} value={chanAddr} style={{ marginTop: 8, width: chartWidth-30, height: 37, borderWidth: 1, borderColor: 'gray', }}></TextInput>
+              <TextInput placeholder='상세주소' onChangeText={(text) => setChanAddr(text)} value={chanAddr} style={{ marginTop: 8, width: chartWidth - 30, height: 37, borderWidth: 1, borderColor: 'gray', }}></TextInput>
 
               <Text style={
                 {
@@ -419,7 +419,7 @@ function vsCal (day){
                   {
                     "alignItems": "flex-start",
                     "marginTop": 10,
-                    "width": chartWidth-30,
+                    "width": chartWidth - 30,
                     "height": 37,
                     "borderWidth": 1,
                     "borderColor": "rgba(171, 171, 171, 255)",
@@ -444,9 +444,9 @@ function vsCal (day){
                 <View style={{ flexDirection: 'row', marginTop: 50 }}>
                   <Text>이미지첨부</Text>
                 </View>
-                </View>
+              </View>
 
-                <View style={{ marginTop: 15 }}>
+              <View style={{ marginTop: 15 }}>
                 {response && (
                   <View>
                     <Image
@@ -818,7 +818,7 @@ function vsCal (day){
                     </View>
                   </TouchableOpacity>
                 </View>
-                <Text style={{margin:20,fontSize:18,fontWeight:'bold'}}>사진은 최대 10개까지 등록할 수 있습니다!</Text>
+                <Text style={{ margin: 20, fontSize: 18, fontWeight: 'bold' }}>사진은 최대 10개까지 등록할 수 있습니다!</Text>
               </View>}
 
 
@@ -832,10 +832,10 @@ function vsCal (day){
                     <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>작성하기</Text>
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>navigation.goBack()}>
-                <View style={{ backgroundColor: "#404040", width: 50, height: 35, }}>
-                  <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>취소</Text>
-                </View>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                  <View style={{ backgroundColor: "#404040", width: 50, height: 35, }}>
+                    <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>취소</Text>
+                  </View>
                 </TouchableOpacity>
               </View>
 
@@ -854,10 +854,10 @@ function vsCal (day){
 
 
       <Modal transparent={true} visible={select}>
-        <TouchableOpacity style={{width:chartWidth,height:chartHeight}} onPress={()=>setSelect(false)}>
-        <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 150 }}>
-          <MainPush></MainPush>
-        </View>
+        <TouchableOpacity style={{ width: chartWidth, height: chartHeight }} onPress={() => setSelect(false)}>
+          <View style={{ width: chartWidth - 30, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 150 }}>
+            <MainPush></MainPush>
+          </View>
         </TouchableOpacity>
       </Modal>
 
@@ -865,19 +865,19 @@ function vsCal (day){
 
       <Modal transparent={true} visible={show}>
         <View>
-        <TouchableOpacity onPress={() => setShow(false)}>
-          <View style={{backgroundColor:'white',width:60,height:60,borderRadius:28,marginTop:40,justifyContent:"center",alignItems:'center',borderWidth:0.5}}>
-            <Text style={{fontWeight:'bold',fontSize:28}}>X</Text>
+          <TouchableOpacity onPress={() => setShow(false)}>
+            <View style={{ backgroundColor: 'white', width: 60, height: 60, borderRadius: 28, marginTop: 40, justifyContent: "center", alignItems: 'center', borderWidth: 0.5 }}>
+              <Text style={{ fontWeight: 'bold', fontSize: 28 }}>X</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={{ width: chartWidth - 60, height: chartHeight - 150, position: 'absolute', marginLeft: 30, marginTop: 100, borderWidth: 0.5 }}>
+            <Postcode
+              jsOptions={{ animated: true }}
+              onSelected={(data) => { setText(JSON.stringify(data.address).replace(/"/gi, '')), setShow(false), getAddr(JSON.stringify(data.address).replace(/"/gi, '')) }}
+            />
           </View>
-        </TouchableOpacity>
-            <View style={{ width: chartWidth - 60, height: chartHeight - 150, position: 'absolute', marginLeft: 30, marginTop: 100, borderWidth: 0.5 }}>
-              <Postcode
-                jsOptions={{ animated: true }}
-                onSelected={(data) => { setText(JSON.stringify(data.address).replace(/"/gi, '')), setShow(false),getAddr(JSON.stringify(data.address).replace(/"/gi, '')) }}
-              />
-            </View>
-            </View>
-        
+        </View>
+
       </Modal>
 
       <Modal transparent={true} visible={calShow}>

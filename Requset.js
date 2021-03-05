@@ -601,6 +601,13 @@ const REquset = () => {
                       <Text style={{ marginTop: 5 }}>사진선택</Text>
                     </View>
                   </TouchableOpacity>
+                  {
+                    (response && !response2) && <TouchableOpacity onPress={() => { setResponse(null) }}>
+                      <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10, backgroundColor: 'black' }}>
+                        <Text style={{ marginTop: 5, color: 'white' }}>사진삭제</Text>
+                      </View>
+                    </TouchableOpacity>
+                  }
                 </View>
               </View>
 
@@ -638,6 +645,14 @@ const REquset = () => {
                       <Text style={{ marginTop: 5 }}>사진선택</Text>
                     </View>
                   </TouchableOpacity>
+                  {
+                    (response2 && !response3) && <TouchableOpacity onPress={() => { setResponse2(null) }}>
+                      <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10, backgroundColor: 'black' }}>
+                        <Text style={{ marginTop: 5, color: 'white' }}>사진삭제</Text>
+                      </View>
+                    </TouchableOpacity>
+                  }
+
                 </View>
               </View>}
 
@@ -675,6 +690,13 @@ const REquset = () => {
                       <Text style={{ marginTop: 5 }}>사진선택</Text>
                     </View>
                   </TouchableOpacity>
+                  {
+                    (response3 && !response4) && <TouchableOpacity onPress={() => { setResponse3(null) }}>
+                      <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10, backgroundColor: 'black' }}>
+                        <Text style={{ marginTop: 5, color: 'white' }}>사진삭제</Text>
+                      </View>
+                    </TouchableOpacity>
+                  }
                 </View>
               </View>}
 
@@ -712,6 +734,13 @@ const REquset = () => {
                       <Text style={{ marginTop: 5 }}>사진선택</Text>
                     </View>
                   </TouchableOpacity>
+                  {
+                    (response4 && !response5) && <TouchableOpacity onPress={() => { setResponse4(null) }}>
+                      <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10, backgroundColor: 'black' }}>
+                        <Text style={{ marginTop: 5, color: 'white' }}>사진삭제</Text>
+                      </View>
+                    </TouchableOpacity>
+                  }
                 </View>
               </View>}
 
@@ -749,6 +778,13 @@ const REquset = () => {
                       <Text style={{ marginTop: 5 }}>사진선택</Text>
                     </View>
                   </TouchableOpacity>
+                  {
+                    (response5 && !response6) && <TouchableOpacity onPress={() => { setResponse5(null) }}>
+                      <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10, backgroundColor: 'black' }}>
+                        <Text style={{ marginTop: 5, color: 'white' }}>사진삭제</Text>
+                      </View>
+                    </TouchableOpacity>
+                  }
                 </View>
               </View>}
 
@@ -787,6 +823,13 @@ const REquset = () => {
                       <Text style={{ marginTop: 5 }}>사진선택</Text>
                     </View>
                   </TouchableOpacity>
+                  {
+                    (response6 && !response7) && <TouchableOpacity onPress={() => { setResponse6(null) }}>
+                      <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10, backgroundColor: 'black' }}>
+                        <Text style={{ marginTop: 5, color: 'white' }}>사진삭제</Text>
+                      </View>
+                    </TouchableOpacity>
+                  }
                 </View>
               </View>}
 
@@ -824,6 +867,13 @@ const REquset = () => {
                       <Text style={{ marginTop: 5 }}>사진선택</Text>
                     </View>
                   </TouchableOpacity>
+                  {
+                    (response7 && !response8) && <TouchableOpacity onPress={() => { setResponse2(null) }}>
+                      <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10, backgroundColor: 'black' }}>
+                        <Text style={{ marginTop: 5, color: 'white' }}>사진삭제</Text>
+                      </View>
+                    </TouchableOpacity>
+                  }
                 </View>
               </View>}
 
@@ -862,6 +912,13 @@ const REquset = () => {
                       <Text style={{ marginTop: 5 }}>사진선택</Text>
                     </View>
                   </TouchableOpacity>
+                  {
+                    (response8 && !response9) && <TouchableOpacity onPress={() => { setResponse8(null) }}>
+                      <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10, backgroundColor: 'black' }}>
+                        <Text style={{ marginTop: 5, color: 'white' }}>사진삭제</Text>
+                      </View>
+                    </TouchableOpacity>
+                  }
                 </View>
               </View>}
 
@@ -900,6 +957,13 @@ const REquset = () => {
                       <Text style={{ marginTop: 5 }}>사진선택</Text>
                     </View>
                   </TouchableOpacity>
+                  {
+                    (response9 && !response10) && <TouchableOpacity onPress={() => { setResponse9(null) }}>
+                      <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10, backgroundColor: 'black' }}>
+                        <Text style={{ marginTop: 5, color: 'white' }}>사진삭제</Text>
+                      </View>
+                    </TouchableOpacity>
+                  }
                 </View>
               </View>}
 
@@ -938,8 +1002,15 @@ const REquset = () => {
                       <Text style={{ marginTop: 5 }}>사진선택</Text>
                     </View>
                   </TouchableOpacity>
+                  {
+                    response10 && <TouchableOpacity onPress={() => { setResponse10(null) }}>
+                      <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10, backgroundColor: 'black' }}>
+                        <Text style={{ marginTop: 5, color: 'white' }}>사진삭제</Text>
+                      </View>
+                    </TouchableOpacity>
+                  }
                 </View>
-                <Text style={{margin:20,fontSize:18,fontWeight:'bold'}}>사진은 최대 10개까지 등록할 수 있습니다!</Text>
+                <Text style={{ margin: 20, fontSize: 18, fontWeight: 'bold' }}>사진은 최대 10개까지 등록할 수 있습니다!</Text>
               </View>}
 
 
