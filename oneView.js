@@ -100,7 +100,7 @@ const OneView = ({route}) => {
     <View>
       <View style={{height:chartHeight,width:chartWidth}}>
         <ScrollView style={{backgroundColor:'white'}}>
-          <View style={{marginBottom:500}}>
+          <View style={{marginBottom:100}}>
                       <View style={{width:chartWidth,marginTop:50}}>
                         <ImageBackground source={event} style={{width:chartWidth,height:chartHeight/7}}>
                         </ImageBackground>
@@ -145,7 +145,7 @@ const Content = (prop) => {
               <View style={{width:chartWidth-20,borderWidth:0.4,borderColor:'gray'}}></View>
 
               {prop.file1 != 'null' && <Image source={{uri:'https://pluslink.kr/data/qa/'+prop.file1}} style={{width:400,height:400,marginTop:15}}></Image>}
-              {prop.file2 != 'null' && <Image source={{uri:'https://pluslink.kr/data/qa/'+prop.file1}} style={{width:400,height:400,marginTop:15}}></Image>}
+              {prop.file2 != 'null' && <Image source={{uri:'https://pluslink.kr/data/qa/'+prop.file2}} style={{width:400,height:400,marginTop:15}}></Image>}
 
                 <Text style={{margin:15,fontSize:15}}>{prop.content}</Text>
 

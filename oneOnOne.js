@@ -28,6 +28,8 @@ const clock = require('./img/clock.png')
 
 const OneonOne = () => {
 
+  const navigation = useNavigation();
+
   function refreshData(tableName) {
     axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
       id: tableName,
@@ -43,8 +45,18 @@ const OneonOne = () => {
         console.log(error);
       });
   }
-  refreshData('g5_qa_content')
-  const navigation = useNavigation();
+
+  const unsubscribe = navigation.addListener('focus', () => {
+    refreshData('g5_qa_content')
+  });
+  useEffect(() => {
+    return () => unsubscribe();
+  });
+    
+
+
+
+  
 
   const [newid, setNewid] = useState('');
 
