@@ -39,6 +39,15 @@ var yearee = new Date().getFullYear(); //Current Year
 const SelectRequest = ({ route }) => {
   const navigation = useNavigation()
   const [response, setResponse] = React.useState(null);//사진
+  const [response2, setResponse2] = React.useState(null);//사진
+  const [response3, setResponse3] = React.useState(null);//사진
+  const [response4, setResponse4] = React.useState(null);//사진
+  const [response5, setResponse5] = React.useState(null);//사진
+  const [response6, setResponse6] = React.useState(null);//사진
+  const [response7, setResponse7] = React.useState(null);//사진
+  const [response8, setResponse8] = React.useState(null);//사진
+  const [response9, setResponse9] = React.useState(null);//사진
+  const [response10, setResponse10] = React.useState(null);//사진
 
   function refreshData(tableName) {
     axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
@@ -435,34 +444,387 @@ function vsCal (day){
                 <View style={{ flexDirection: 'row', marginTop: 50 }}>
                   <Text>이미지첨부</Text>
                 </View>
-                <TouchableOpacity onPress={() =>
-                  launchImageLibrary(
-                    {
-                      mediaType: 'photo',
-                      includeBase64: true,
-                      maxHeight: chartHeight,
-                      maxWidth: chartWidth / 1.1,
-                    },
-                    (response) => {
-                      setResponse(response);
-                      console.log(response)
-                      // console.log(JSON.stringify(response))
-                    },
-                  )
-                }>
-                  <View style={{ marginTop: 15, marginBottom: 15, borderWidth: 0.5, width: 80, height: 30, alignItems: 'center' }}>
-                    <Text style={{ marginTop: 5 }}>사진선택</Text>
-                  </View>
-                </TouchableOpacity></View>
-
-              {response && (
-                <View>
-                  <Image
-                    style={{ width: response.width, height: response.height }}
-                    source={{ uri: response.uri }}
-                  />
                 </View>
-              )}
+
+                <View style={{ marginTop: 15 }}>
+                {response && (
+                  <View>
+                    <Image
+                      style={{ width: response.width, height: response.height }}
+                      source={{ uri: response.uri }}
+                    />
+                  </View>
+                )}
+
+
+                <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
+                  <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
+                    <Text style={{ margin: 5 }}>파일1</Text>
+                  </View>
+                  <TouchableOpacity onPress={() =>
+                    launchImageLibrary(
+                      {
+                        mediaType: 'photo',
+                        includeBase64: true,
+                        maxHeight: chartHeight,
+                        maxWidth: chartWidth / 1.1,
+                      },
+                      (response) => {
+                        setResponse(response);
+                        console.log(response)
+                        // console.log(JSON.stringify(response))
+                      },
+                    )
+                  }>
+                    <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10 }}>
+                      <Text style={{ marginTop: 5 }}>사진선택</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              {response && <View style={{ marginTop: 15 }}>
+                {response2 && (
+                  <View>
+                    <Image
+                      style={{ width: response2.width, height: response2.height }}
+                      source={{ uri: response2.uri }}
+                    />
+                  </View>
+                )}
+
+
+                <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
+                  <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
+                    <Text style={{ margin: 5 }}>파일2</Text>
+                  </View>
+                  <TouchableOpacity onPress={() =>
+                    launchImageLibrary(
+                      {
+                        mediaType: 'photo',
+                        includeBase64: true,
+                        maxHeight: chartHeight,
+                        maxWidth: chartWidth / 1.1,
+                      },
+                      (response) => {
+                        setResponse2(response);
+                        console.log(response)
+                        // console.log(JSON.stringify(response))
+                      },
+                    )
+                  }>
+                    <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10 }}>
+                      <Text style={{ marginTop: 5 }}>사진선택</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>}
+
+              {response2 && <View style={{ marginTop: 15 }}>
+                {response3 && (
+                  <View>
+                    <Image
+                      style={{ width: response3.width, height: response3.height }}
+                      source={{ uri: response3.uri }}
+                    />
+                  </View>
+                )}
+
+
+                <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
+                  <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
+                    <Text style={{ margin: 5 }}>파일3</Text>
+                  </View>
+                  <TouchableOpacity onPress={() =>
+                    launchImageLibrary(
+                      {
+                        mediaType: 'photo',
+                        includeBase64: true,
+                        maxHeight: chartHeight,
+                        maxWidth: chartWidth / 1.1,
+                      },
+                      (response) => {
+                        setResponse3(response);
+                        console.log(response)
+                        // console.log(JSON.stringify(response))
+                      },
+                    )
+                  }>
+                    <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10 }}>
+                      <Text style={{ marginTop: 5 }}>사진선택</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>}
+
+              {response3 && <View style={{ marginTop: 15 }}>
+                {response4 && (
+                  <View>
+                    <Image
+                      style={{ width: response4.width, height: response4.height }}
+                      source={{ uri: response4.uri }}
+                    />
+                  </View>
+                )}
+
+
+                <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
+                  <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
+                    <Text style={{ margin: 5 }}>파일4</Text>
+                  </View>
+                  <TouchableOpacity onPress={() =>
+                    launchImageLibrary(
+                      {
+                        mediaType: 'photo',
+                        includeBase64: true,
+                        maxHeight: chartHeight,
+                        maxWidth: chartWidth / 1.1,
+                      },
+                      (response) => {
+                        setResponse4(response);
+                        console.log(response)
+                        // console.log(JSON.stringify(response))
+                      },
+                    )
+                  }>
+                    <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10 }}>
+                      <Text style={{ marginTop: 5 }}>사진선택</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>}
+
+              {response4 && <View style={{ marginTop: 15 }}>
+                {response5 && (
+                  <View>
+                    <Image
+                      style={{ width: response5.width, height: response5.height }}
+                      source={{ uri: response5.uri }}
+                    />
+                  </View>
+                )}
+
+
+                <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
+                  <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
+                    <Text style={{ margin: 5 }}>파일5</Text>
+                  </View>
+                  <TouchableOpacity onPress={() =>
+                    launchImageLibrary(
+                      {
+                        mediaType: 'photo',
+                        includeBase64: true,
+                        maxHeight: chartHeight,
+                        maxWidth: chartWidth / 1.1,
+                      },
+                      (response) => {
+                        setResponse5(response);
+                        console.log(response)
+                        // console.log(JSON.stringify(response))
+                      },
+                    )
+                  }>
+                    <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10 }}>
+                      <Text style={{ marginTop: 5 }}>사진선택</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>}
+
+
+              {response5 && <View style={{ marginTop: 15 }}>
+                {response6 && (
+                  <View>
+                    <Image
+                      style={{ width: response6.width, height: response6.height }}
+                      source={{ uri: response6.uri }}
+                    />
+                  </View>
+                )}
+
+
+                <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
+                  <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
+                    <Text style={{ margin: 5 }}>파일6</Text>
+                  </View>
+                  <TouchableOpacity onPress={() =>
+                    launchImageLibrary(
+                      {
+                        mediaType: 'photo',
+                        includeBase64: true,
+                        maxHeight: chartHeight,
+                        maxWidth: chartWidth / 1.1,
+                      },
+                      (response) => {
+                        setResponse6(response);
+                        console.log(response)
+                        // console.log(JSON.stringify(response))
+                      },
+                    )
+                  }>
+                    <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10 }}>
+                      <Text style={{ marginTop: 5 }}>사진선택</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>}
+
+              {response6 && <View style={{ marginTop: 15 }}>
+                {response7 && (
+                  <View>
+                    <Image
+                      style={{ width: response7.width, height: response7.height }}
+                      source={{ uri: response7.uri }}
+                    />
+                  </View>
+                )}
+
+
+                <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
+                  <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
+                    <Text style={{ margin: 5 }}>파일7</Text>
+                  </View>
+                  <TouchableOpacity onPress={() =>
+                    launchImageLibrary(
+                      {
+                        mediaType: 'photo',
+                        includeBase64: true,
+                        maxHeight: chartHeight,
+                        maxWidth: chartWidth / 1.1,
+                      },
+                      (response) => {
+                        setResponse7(response);
+                        console.log(response)
+                        // console.log(JSON.stringify(response))
+                      },
+                    )
+                  }>
+                    <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10 }}>
+                      <Text style={{ marginTop: 5 }}>사진선택</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>}
+
+
+              {response7 && <View style={{ marginTop: 15 }}>
+                {response8 && (
+                  <View>
+                    <Image
+                      style={{ width: response8.width, height: response8.height }}
+                      source={{ uri: response8.uri }}
+                    />
+                  </View>
+                )}
+
+
+                <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
+                  <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
+                    <Text style={{ margin: 5 }}>파일8</Text>
+                  </View>
+                  <TouchableOpacity onPress={() =>
+                    launchImageLibrary(
+                      {
+                        mediaType: 'photo',
+                        includeBase64: true,
+                        maxHeight: chartHeight,
+                        maxWidth: chartWidth / 1.1,
+                      },
+                      (response) => {
+                        setResponse8(response);
+                        console.log(response)
+                        // console.log(JSON.stringify(response))
+                      },
+                    )
+                  }>
+                    <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10 }}>
+                      <Text style={{ marginTop: 5 }}>사진선택</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>}
+
+
+              {response8 && <View style={{ marginTop: 15 }}>
+                {response9 && (
+                  <View>
+                    <Image
+                      style={{ width: response9.width, height: response9.height }}
+                      source={{ uri: response9.uri }}
+                    />
+                  </View>
+                )}
+
+
+                <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
+                  <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
+                    <Text style={{ margin: 5 }}>파일9</Text>
+                  </View>
+                  <TouchableOpacity onPress={() =>
+                    launchImageLibrary(
+                      {
+                        mediaType: 'photo',
+                        includeBase64: true,
+                        maxHeight: chartHeight,
+                        maxWidth: chartWidth / 1.1,
+                      },
+                      (response) => {
+                        setResponse9(response);
+                        console.log(response)
+                        // console.log(JSON.stringify(response))
+                      },
+                    )
+                  }>
+                    <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10 }}>
+                      <Text style={{ marginTop: 5 }}>사진선택</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>}
+
+
+              {response9 && <View style={{ marginTop: 15 }}>
+                {response10 && (
+                  <View>
+                    <Image
+                      style={{ width: response10.width, height: response10.height }}
+                      source={{ uri: response10.uri }}
+                    />
+                  </View>
+                )}
+
+
+                <View style={{ borderWidth: 1, borderColor: 'rgb(197,197,197)', flexDirection: 'row' }}>
+                  <View style={{ height: 30, backgroundColor: 'rgb(235,235,235)', justifyContent: "center", alignItems: "center" }}>
+                    <Text style={{ margin: 5 }}>파일10</Text>
+                  </View>
+                  <TouchableOpacity onPress={() =>
+                    launchImageLibrary(
+                      {
+                        mediaType: 'photo',
+                        includeBase64: true,
+                        maxHeight: chartHeight,
+                        maxWidth: chartWidth / 1.1,
+                      },
+                      (response) => {
+                        setResponse10(response);
+                        console.log(response)
+                        // console.log(JSON.stringify(response))
+                      },
+                    )
+                  }>
+                    <View style={{ borderWidth: 0.5, width: 80, height: 30, alignItems: 'center', marginLeft: 10 }}>
+                      <Text style={{ marginTop: 5 }}>사진선택</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+                <Text style={{margin:20,fontSize:18,fontWeight:'bold'}}>사진은 최대 10개까지 등록할 수 있습니다!</Text>
+              </View>}
+
+
+
+
+
 
               <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 20 }}>
                 <TouchableOpacity onPress={() => insert()}>
