@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     color:'white',
   },
   reviewCard:{
-    backgroundColor: '#e0e0eb',
+    backgroundColor: 'rgb(233,233,233)',
     height:250,
     width:170,
       borderTopLeftRadius: 10,
