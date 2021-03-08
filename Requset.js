@@ -221,73 +221,153 @@ const REquset = () => {
     if (response == null) {
       var img = '1'
       var type = '1'
+      var width = ''
+      var height = ''
+      var fileSize = ''
+      var fileName = ''
     } else {
       var img = response.base64
       var type = response.type
+      var width = response.width
+      var height = response.height
+      var fileSize = response.fileSize
+      var fileName = response.fileName
     }
 
     if (response2 == null) {
       var img2 = '1'
       var type2 = '1'
+      var width2 = ''
+      var height2 = ''
+      var fileSize2 = ''
+      var fileName2 = ''
     } else {
       var img2 = response2.base64
       var type2 = response2.type
+      var width2 = response2.width
+      var height2 = response2.height
+      var fileSize2 = response2.fileSize
+      var fileName2 = response2.fileName
     }
     if (response3 == null) {
       var img3 = '1'
       var type3 = '1'
+      var width3 = ''
+      var height3 = ''
+      var fileSize3 = ''
+      var fileName3 = ''
     } else {
       var img3 = response3.base64
       var type3 = response3.type
+      var width3 = response3.width
+      var height3 = response3.height
+      var fileSize3 = response3.fileSize
+      var fileName3 = response3.fileName
     }
     if (response4 == null) {
       var img4 = '1'
       var type4 = '1'
+      var width4 = ''
+      var height4 = ''
+      var fileSize4 = ''
+      var fileName4 = ''
     } else {
       var img4 = response4.base64
       var type4 = response4.type
+      var width4 = response4.width
+      var height4 = response4.height
+      var fileSize4 = response4.fileSize
+      var fileName4 = response4.fileName
     }
     if (response5 == null) {
       var img5 = '1'
       var type5 = '1'
+      var width5 = ''
+      var height5 = ''
+      var fileSize5 = ''
+      var fileName5 = ''
     } else {
       var img5 = response5.base64
       var type5 = response5.type
+      var width5 = response5.width
+      var height5 = response5.height
+      var fileSize5 = response5.fileSize
+      var fileName5 = response5.fileName
     }
     if (response6 == null) {
       var img6 = '1'
       var type6 = '1'
+      var width6 = ''
+      var height6 = ''
+      var fileSize6 = ''
+      var fileName6 = ''
     } else {
       var img6 = response6.base64
       var type6 = response6.type
+      var width6 = response6.width
+      var height6 = response6.height
+      var fileSize6 = response6.fileSize
+      var fileName6 = response6.fileName
     }
     if (response7 == null) {
       var img7 = '1'
       var type7 = '1'
+      var width7 = ''
+      var height7 = ''
+      var fileSize7 = ''
+      var fileName7 = ''
     } else {
       var img7 = response7.base64
       var type7 = response7.type
+      var width7 = response7.width
+      var height7 = response7.height
+      var fileSize7 = response7.fileSize
+      var fileName7 = response7.fileName
     }
     if (response8 == null) {
       var img8 = '1'
       var type8 = '1'
+      var width8 = ''
+      var height8 = ''
+      var fileSize8 = ''
+      var fileName8 = ''
     } else {
       var img8 = response8.base64
       var type8 = response8.type
+      var width8 = response8.width
+      var height8 = response8.height
+      var fileSize8 = response8.fileSize
+      var fileName8 = response8.fileName
     }
     if (response9 == null) {
       var img9 = '1'
       var type9 = '1'
+      var width9 = ''
+      var height9 = ''
+      var fileSize9 = ''
+      var fileName9 = ''
     } else {
       var img9 = response9.base64
       var type9 = response9.type
+      var width9 = response9.width
+      var height9 = response9.height
+      var fileSize9 = response9.fileSize
+      var fileName9 = response9.fileName
     }
     if (response10 == null) {
       var img10 = '1'
       var type10 = '1'
+      var width10 = ''
+      var height10 = ''
+      var fileSize10 = ''
+      var fileName10 = ''
     } else {
       var img10 = response10.base64
       var type10 = response10.type
+      var width10 = response10.width
+      var height10 = response10.height
+      var fileSize10 = response10.fileSize
+      var fileName10 = response10.fileName
     }
 
     console.log(img + type)
@@ -307,10 +387,64 @@ const REquset = () => {
       link2: link2,
       img: img,
       imgtype: type,
-      imgwidth:response.width,
-      imgheight:response.height,
-      imgfilesize:response.fileSize,
-      imgfilename:response.fileName,
+      imgwidth:width,
+      imgheight:height,
+      imgfilesize:fileSize,
+      imgfilename:fileName,
+      img2: img2,
+      imgtype2: type2,
+      imgwidth2:width2,
+      imgheight2:height2,
+      imgfilesize2:fileSize2,
+      imgfilename2:fileName2,
+      img3: img3,
+      imgtype3: type3,
+      imgwidth3:width3,
+      imgheight3:height3,
+      imgfilesize3:fileSize3,
+      imgfilename3:fileName3,
+      img4: img4,
+      imgtype4: type4,
+      imgwidth4:width4,
+      imgheight4:height4,
+      imgfilesize4:fileSize4,
+      imgfilename4:fileName4,
+      img5: img5,
+      imgtype5: type5,
+      imgwidth5:width5,
+      imgheight5:height5,
+      imgfilesize5:fileSize5,
+      imgfilename5:fileName5,
+      img6: img6,
+      imgtype6: type6,
+      imgwidth6:width6,
+      imgheight6:height6,
+      imgfilesize6:fileSize6,
+      imgfilename6:fileName6,
+      img7: img7,
+      imgtype7: type7,
+      imgwidth7:width7,
+      imgheight7:height7,
+      imgfilesize7:fileSize7,
+      imgfilename7:fileName7,
+      img8: img8,
+      imgtype8: type8,
+      imgwidth8:width8,
+      imgheight8:height8,
+      imgfilesize8:fileSize8,
+      imgfilename8:fileName8,
+      img9: img9,
+      imgtype9: type9,
+      imgwidth9:width9,
+      imgheight9:height9,
+      imgfilesize9:fileSize9,
+      imgfilename9:fileName9,
+      img10: img10,
+      imgtype10: type10,
+      imgwidth10:width10,
+      imgheight10:height10,
+      imgfilesize10:fileSize10,
+      imgfilename10:fileName10,
     }))
       .then(function (response) {
         console.log('리스폰스 ', response.request._response);
@@ -322,7 +456,7 @@ const REquset = () => {
         else {
           Alert.alert('견적 등록이 완료되었습니다..')
           refreshData('g5_write_estimate')
-          //navigation.navigate('홈');
+          navigation.navigate('홈');
         }
       })
       .catch(function (error) {
