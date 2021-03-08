@@ -708,7 +708,7 @@ const CurrentPlus = ({ route }) => {
           
           </View>}
 
-          {sigongNo && <TouchableOpacity onPress={() => { sigongNo(prop.num)}}>
+          {sigongNo && <TouchableOpacity onPress={() => {}}>
             <View style={{ marginTop: 15, marginLeft: 15, width: chartWidth - 90, height: 50, backgroundColor: 'rgb(237,237,237)', justifyContent: "center", alignItems: "center" }}>
               <Text style={{ fontSize: 18, fontWeight: 'bold' }}>지급보류연장</Text>
             </View>
