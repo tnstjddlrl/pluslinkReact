@@ -134,29 +134,29 @@ const REquset = () => {
 
 
   const Subcate = () => {
-    const Push = () =>{
+    const Push = () => {
       var cc = []
-      for(var i = 0;i<cateList.length;i++){
-        if(cateList[i].category == listCate){
-          if(cateList[i].subcategory == ''){
+      for (var i = 0; i < cateList.length; i++) {
+        if (cateList[i].category == listCate) {
+          if (cateList[i].subcategory == '') {
             cc.push(<SubItem key={i} sub={'선택해주세요'}></SubItem>)
-          }else{
+          } else {
             cc.push(<SubItem key={i} sub={cateList[i].subcategory}></SubItem>)
           }
         }
       }
       return cc
     }
-    
+
 
     return (
       <Modal transparent={true} visible={subSelect}>
         <TouchableOpacity onPress={() => setSubselect(false)}>
           <View style={{ width: chartWidth, height: chartHeight }}>
 
-            <View style={{ width: chartWidth - 30,maxHeight:300, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 250 }}>
+            <View style={{ width: chartWidth - 30, maxHeight: 300, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 250 }}>
               <ScrollView>
-              <Push></Push>
+                <Push></Push>
               </ScrollView>
             </View>
           </View>
@@ -387,64 +387,64 @@ const REquset = () => {
       link2: link2,
       img: img,
       imgtype: type,
-      imgwidth:width,
-      imgheight:height,
-      imgfilesize:fileSize,
-      imgfilename:fileName,
+      imgwidth: width,
+      imgheight: height,
+      imgfilesize: fileSize,
+      imgfilename: fileName,
       img2: img2,
       imgtype2: type2,
-      imgwidth2:width2,
-      imgheight2:height2,
-      imgfilesize2:fileSize2,
-      imgfilename2:fileName2,
+      imgwidth2: width2,
+      imgheight2: height2,
+      imgfilesize2: fileSize2,
+      imgfilename2: fileName2,
       img3: img3,
       imgtype3: type3,
-      imgwidth3:width3,
-      imgheight3:height3,
-      imgfilesize3:fileSize3,
-      imgfilename3:fileName3,
+      imgwidth3: width3,
+      imgheight3: height3,
+      imgfilesize3: fileSize3,
+      imgfilename3: fileName3,
       img4: img4,
       imgtype4: type4,
-      imgwidth4:width4,
-      imgheight4:height4,
-      imgfilesize4:fileSize4,
-      imgfilename4:fileName4,
+      imgwidth4: width4,
+      imgheight4: height4,
+      imgfilesize4: fileSize4,
+      imgfilename4: fileName4,
       img5: img5,
       imgtype5: type5,
-      imgwidth5:width5,
-      imgheight5:height5,
-      imgfilesize5:fileSize5,
-      imgfilename5:fileName5,
+      imgwidth5: width5,
+      imgheight5: height5,
+      imgfilesize5: fileSize5,
+      imgfilename5: fileName5,
       img6: img6,
       imgtype6: type6,
-      imgwidth6:width6,
-      imgheight6:height6,
-      imgfilesize6:fileSize6,
-      imgfilename6:fileName6,
+      imgwidth6: width6,
+      imgheight6: height6,
+      imgfilesize6: fileSize6,
+      imgfilename6: fileName6,
       img7: img7,
       imgtype7: type7,
-      imgwidth7:width7,
-      imgheight7:height7,
-      imgfilesize7:fileSize7,
-      imgfilename7:fileName7,
+      imgwidth7: width7,
+      imgheight7: height7,
+      imgfilesize7: fileSize7,
+      imgfilename7: fileName7,
       img8: img8,
       imgtype8: type8,
-      imgwidth8:width8,
-      imgheight8:height8,
-      imgfilesize8:fileSize8,
-      imgfilename8:fileName8,
+      imgwidth8: width8,
+      imgheight8: height8,
+      imgfilesize8: fileSize8,
+      imgfilename8: fileName8,
       img9: img9,
       imgtype9: type9,
-      imgwidth9:width9,
-      imgheight9:height9,
-      imgfilesize9:fileSize9,
-      imgfilename9:fileName9,
+      imgwidth9: width9,
+      imgheight9: height9,
+      imgfilesize9: fileSize9,
+      imgfilename9: fileName9,
       img10: img10,
       imgtype10: type10,
-      imgwidth10:width10,
-      imgheight10:height10,
-      imgfilesize10:fileSize10,
-      imgfilename10:fileName10,
+      imgwidth10: width10,
+      imgheight10: height10,
+      imgfilesize10: fileSize10,
+      imgfilename10: fileName10,
     }))
       .then(function (response) {
         console.log('리스폰스 ', response.request._response);
@@ -1125,8 +1125,8 @@ const REquset = () => {
 
       <Modal transparent={true} visible={calShow}>
         <TouchableOpacity onPress={() => setCalShow(false)}>
-          <View style={{ width: chartWidth, height: chartHeight,alignItems:"center" }}>
-            <View style={{ top: chartHeight / 2.5, borderWidth: 1,width:chartWidth-20 }}>
+          <View style={{ width: chartWidth, height: chartHeight, alignItems: "center" }}>
+            <View style={{ top: chartHeight / 2.5, borderWidth: 1, width: chartWidth - 20 }}>
               <Calendar
                 onDayPress={(day) => { vsCal(day.dateString) }}
                 onDayLongPress={(day) => { console.log(yearee + ':' + monthee + ':' + dateee) }}

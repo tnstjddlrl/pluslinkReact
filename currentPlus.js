@@ -296,6 +296,15 @@ const CurrentPlus = ({ route }) => {
       return false;
     }
   }
+  async function GetFile() {
+    try {
+      return await axios.get('http://ip0131.cafe24.com/pluslink/json/g5_board_file.json');
+    } catch (error) {
+      console.log('에러 : ', error)
+      return false;
+    }
+  }
+
 
   const [memberList, setMemberList] = useState([]);
   const [list, setlist] = useState([]);
@@ -303,6 +312,7 @@ const CurrentPlus = ({ route }) => {
   const [patners, setPatners] = useState([])
   const [bidding, setBidding] = useState([])
   const [paylist, setPaylist] = useState([])
+  const [fileList,setFilelist] = useState([])
 
   useEffect(() => {
     if (list.length == 0) {
@@ -336,6 +346,11 @@ const CurrentPlus = ({ route }) => {
     if (paylist.length == 0) {
       GetPay().then((res) => {
         setPaylist(res.data)
+      })
+    }
+    if(fileList.length==0){
+      GetFile().then((res) => {
+        setFilelist(res.data)
       })
     }
   })
@@ -378,9 +393,9 @@ const CurrentPlus = ({ route }) => {
   var lastPay = false
   const [lapay,setLapay] = useState(false)
   const [sigonNo,setsigonNo] = useState(false)
+
   const MainPush = () => {
     
-
     for(var i = 0;i<paylist.length;i++){
       if(paylist[i].wr_id == route.params.num && paylist[i].pay_state == '시공완료확정'){
         lastPay = true
@@ -462,6 +477,19 @@ const CurrentPlus = ({ route }) => {
   const heart = require('./img/handhart.png')
 
   const MainContent = (prop) => {
+
+    const ImagePush = () =>{
+      var cc =[]
+      for(var i = 0;i<fileList.length;i++){
+        if(fileList[i].wr_id==prop.num && fileList[i].bo_table == 'estimate'){
+          cc.push(<Image source={{uri:'https://pluslink.kr/data/file/estimate/'+fileList[i].bf_file}} style={{width:chartWidth-80,maxHeight:500,height:parseInt(fileList[i].bf_height)}}></Image>)
+        }
+      }
+
+      return cc
+    }
+
+
     const [cancelView, setCanceView] = useState(false)
     const navigation = useNavigation()
     const [cancelText,setCancelText] = useState('')
@@ -638,7 +666,8 @@ const CurrentPlus = ({ route }) => {
         <View style={{ marginTop: 15, marginLeft: 15 }}>
           <Text style={{ fontSize: 16 }}>상세내용</Text>
           <View style={{ borderWidth: 0.5, borderColor: 'gray', marginTop: 15, marginBottom: 15, marginRight: 15 }}>
-            { !(prop.img == '' || prop.img == '1') && <Image style={{width:chartWidth-100,height:chartHeight/2}} source={{uri:prop.img}}></Image>}
+            {/* { !(prop.img == '' || prop.img == '1') && <Image style={{width:chartWidth-100,height:chartHeight/2}} source={{uri:prop.img}}></Image>} */}
+            <ImagePush></ImagePush>
             <Text style={{ margin: 10 }}>{prop.content}</Text>
           </View>
         </View>
