@@ -625,15 +625,6 @@ const CurrentPlus = ({ route }) => {
 
     const [review, setReview] = useState(false)
 
-    // useEffect(()=>{
-    //   if(review == false){
-    //     if(prop.state == '시공완료' && lapay == true){
-    //       setReview(true)
-    //     }
-    //   }
-
-    // },[])
-
     return (
       <View>
         <PlusItem key={1} name='견적번호' num={prop.num}></PlusItem>
