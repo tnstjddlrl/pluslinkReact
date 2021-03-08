@@ -29,16 +29,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import axios from "axios";
 import { BootpayWebView } from 'react-native-bootpay';
 
-var now = new Date()
-var today = new Date(now.setDate(now.getDate() + 7));
 
-let nowyear = today.getFullYear(); // 년도
-let nowmonth = today.getMonth() + 1;  // 월
-let nowdate = today.getDate();  // 날짜
-
-let hours = today.getHours(); // 시
-let minutes = today.getMinutes();  // 분
-let seconds = today.getSeconds();
 
 
 const CurrentPlus = ({ route }) => {
@@ -536,7 +527,6 @@ const CurrentPlus = ({ route }) => {
       axios.post('http://ip0131.cafe24.com/pluslink/json/sigonNo.php', JSON.stringify({
         id: id,
         add_id: newid,
-        relDate:nowyear+'-'+nowmonth+'-'+nowdate+' '+hours+':'+minutes+':'+seconds
       }))
         .then(function (response) {
           console.log('리스폰스 ', response);
