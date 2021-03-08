@@ -226,6 +226,70 @@ const REquset = () => {
       var type = response.type
     }
 
+    if (response2 == null) {
+      var img2 = '1'
+      var type2 = '1'
+    } else {
+      var img2 = response2.base64
+      var type2 = response2.type
+    }
+    if (response3 == null) {
+      var img3 = '1'
+      var type3 = '1'
+    } else {
+      var img3 = response3.base64
+      var type3 = response3.type
+    }
+    if (response4 == null) {
+      var img4 = '1'
+      var type4 = '1'
+    } else {
+      var img4 = response4.base64
+      var type4 = response4.type
+    }
+    if (response5 == null) {
+      var img5 = '1'
+      var type5 = '1'
+    } else {
+      var img5 = response5.base64
+      var type5 = response5.type
+    }
+    if (response6 == null) {
+      var img6 = '1'
+      var type6 = '1'
+    } else {
+      var img6 = response6.base64
+      var type6 = response6.type
+    }
+    if (response7 == null) {
+      var img7 = '1'
+      var type7 = '1'
+    } else {
+      var img7 = response7.base64
+      var type7 = response7.type
+    }
+    if (response8 == null) {
+      var img8 = '1'
+      var type8 = '1'
+    } else {
+      var img8 = response8.base64
+      var type8 = response8.type
+    }
+    if (response9 == null) {
+      var img9 = '1'
+      var type9 = '1'
+    } else {
+      var img9 = response9.base64
+      var type9 = response9.type
+    }
+    if (response10 == null) {
+      var img10 = '1'
+      var type10 = '1'
+    } else {
+      var img10 = response10.base64
+      var type10 = response10.type
+    }
+
     console.log(img + type)
 
     axios.post('http://ip0131.cafe24.com/pluslink/json/insertTest.php', JSON.stringify({
@@ -239,10 +303,14 @@ const REquset = () => {
       wr_password: pwss,//비번
       wr_name: name,//이름
       bo_table: 'estimate',
+      link1: link1,
+      link2: link2,
       img: img,
       imgtype: type,
-      link1: link1,
-      link2: link2
+      imgwidth:response.width,
+      imgheight:response.height,
+      imgfilesize:response.fileSize,
+      imgfilename:response.fileName,
     }))
       .then(function (response) {
         console.log('리스폰스 ', response.request._response);
@@ -254,7 +322,7 @@ const REquset = () => {
         else {
           Alert.alert('견적 등록이 완료되었습니다..')
           refreshData('g5_write_estimate')
-          navigation.navigate('홈');
+          //navigation.navigate('홈');
         }
       })
       .catch(function (error) {
@@ -416,7 +484,7 @@ const REquset = () => {
                       },
                       (response) => {
                         setResponse(response);
-                        console.log(response)
+                        // console.log(response)
                         // console.log(JSON.stringify(response))
                       },
                     )
@@ -460,7 +528,7 @@ const REquset = () => {
                       },
                       (response) => {
                         setResponse2(response);
-                        console.log(response)
+                        // console.log(response)
                         // console.log(JSON.stringify(response))
                       },
                     )
