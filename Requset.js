@@ -154,7 +154,7 @@ const REquset = () => {
         <TouchableOpacity onPress={() => setSubselect(false)}>
           <View style={{ width: chartWidth, height: chartHeight }}>
 
-            <View style={{ width: chartWidth - 30,maxHeight:300, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 300 }}>
+            <View style={{ width: chartWidth - 30,maxHeight:300, position: 'absolute', backgroundColor: 'white', borderWidth: 0.5, left: 15, top: 250 }}>
               <ScrollView>
               <Push></Push>
               </ScrollView>
@@ -923,8 +923,8 @@ const REquset = () => {
 
       <Modal transparent={true} visible={calShow}>
         <TouchableOpacity onPress={() => setCalShow(false)}>
-          <View style={{ width: chartWidth, height: chartHeight }}>
-            <View style={{ height: chartHeight / 2, top: chartHeight / 2.5, borderWidth: 1 }}>
+          <View style={{ width: chartWidth, height: chartHeight,alignItems:"center" }}>
+            <View style={{ top: chartHeight / 2.5, borderWidth: 1,width:chartWidth-20 }}>
               <Calendar
                 onDayPress={(day) => { vsCal(day.dateString) }}
                 onDayLongPress={(day) => { console.log(yearee + ':' + monthee + ':' + dateee) }}
