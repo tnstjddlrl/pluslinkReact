@@ -169,7 +169,7 @@ const Mypage = () => {
 
 
                   <View>
-                    <TouchableOpacity onPress={() => navigation.navigate('취약계층인증')}>
+                    <TouchableOpacity onPress={() => navigation.navigate('취약계층인증',{name:name})}>
                       <Text>취약계층인증</Text>
                     </TouchableOpacity> 
                   </View>

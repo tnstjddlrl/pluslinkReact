@@ -26,7 +26,7 @@ const arrow = require('./img/arrow02.png')
 
 
 
-const InjuryPath = () => {
+const InjuryPath = ({route}) => {
     function refreshData(tableName) {
         axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
           id: tableName,
@@ -63,9 +63,9 @@ const InjuryPath = () => {
     console.log(os)
     let nowheight;
     if (os == 'ios') {
-        nowheight = 100;
+        nowheight = 80;
     } else {
-        nowheight = 60;
+        nowheight = 50;
     }
 
     const [newid, setNewid] = useState('');
@@ -211,7 +211,7 @@ const InjuryPath = () => {
                                 <View style={{ borderWidth: 1, height: 60, width: 60, borderRadius: 27, backgroundColor:'white' }}>
                                 <Image style={{height:60,width:60,borderRadius:27,}} source={{ uri: 'https://pluslink.kr/data/member_image/' + newid.substr(0, 2) + '/' + newid + '.gif' }}></Image>
                                 </View>
-                                <Text style={{ fontSize: 20, marginLeft: 10 }}>{newid}</Text>
+                                <Text style={{ fontSize: 20, marginLeft: 10 }}>{route.params.name}</Text>
                             </View>
 
                             <View style={{ width: chartWidth - 40, borderWidth: 0.5, marginBottom: 5, marginTop: 10 }}></View>

@@ -29,6 +29,17 @@ import AsyncStorage from '@react-native-community/async-storage';
 import axios from "axios";
 import { BootpayWebView } from 'react-native-bootpay';
 
+var now = new Date()
+var today = new Date(now.setDate(now.getDate() + 7));
+
+let nowyear = today.getFullYear(); // 년도
+let nowmonth = today.getMonth() + 1;  // 월
+let nowdate = today.getDate();  // 날짜
+
+let hours = today.getHours(); // 시
+let minutes = today.getMinutes();  // 분
+let seconds = today.getSeconds();
+
 
 const CurrentPlus = ({ route }) => {
   
@@ -127,7 +138,7 @@ const CurrentPlus = ({ route }) => {
 
   const onConfirm = (data) => {
     console.log('confirm', data);
-    Alert.alert('결제가 완료되었습니다2.')
+    Alert.alert('결제가 완료되었습니다.')
     nowPay(data.order_id)
     refreshData('g5_write_estimate')
     setIsLoading(true)
@@ -375,6 +386,7 @@ const CurrentPlus = ({ route }) => {
   var main = []
   var lastPay = false
   const [lapay,setLapay] = useState(false)
+  const [sigonNo,setsigonNo] = useState(false)
   const MainPush = () => {
     
 
@@ -382,6 +394,10 @@ const CurrentPlus = ({ route }) => {
       if(paylist[i].wr_id == route.params.num && paylist[i].pay_state == '시공완료확정'){
         lastPay = true
         setLapay(true)
+      }
+
+      if(paylist[i].wr_id == route.params.num && paylist[i].pay_state == '지급보류'){
+        setsigonNo(true)
       }
     }
 
@@ -514,6 +530,25 @@ const CurrentPlus = ({ route }) => {
           console.log(error);
         });
       Alert.alert('시공완료가 확정되었습니다.')
+      navigation.goBack()
+    }
+    function sigongNo(id){
+      axios.post('http://ip0131.cafe24.com/pluslink/json/sigonNo.php', JSON.stringify({
+        id: id,
+        add_id: newid,
+        relDate:nowyear+'-'+nowmonth+'-'+nowdate+' '+hours+':'+minutes+':'+seconds
+      }))
+        .then(function (response) {
+          console.log('리스폰스 ', response);
+          if (response.request._response == 'suc') {
+          }
+          else {
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      Alert.alert('지급보류 되었습니다.')
       navigation.goBack()
     }
 
@@ -649,11 +684,26 @@ const CurrentPlus = ({ route }) => {
           </TouchableOpacity>}
         
           {(prop.state == '시공완료' && lapay == false) &&
+          <View>
           <TouchableOpacity onPress={() => { sigongok(prop.num)}}>
             <View style={{ marginTop: 15, marginLeft: 15, width: chartWidth - 90, height: 50, backgroundColor: 'black', justifyContent: "center", alignItems: "center" }}>
               <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>시공완료확정</Text>
             </View>
+          </TouchableOpacity>
+          {!sigongNo && <TouchableOpacity onPress={() => { sigongNo(prop.num)}}>
+            <View style={{ marginTop: 15, marginLeft: 15, width: chartWidth - 90, height: 50, backgroundColor: 'rgb(237,237,237)', justifyContent: "center", alignItems: "center" }}>
+              <Text style={{ fontSize: 18, fontWeight: 'bold' }}>지급보류</Text>
+            </View>
           </TouchableOpacity>}
+          
+          </View>}
+
+          {sigongNo && <TouchableOpacity onPress={() => { sigongNo(prop.num)}}>
+            <View style={{ marginTop: 15, marginLeft: 15, width: chartWidth - 90, height: 50, backgroundColor: 'rgb(237,237,237)', justifyContent: "center", alignItems: "center" }}>
+              <Text style={{ fontSize: 18, fontWeight: 'bold' }}>지급보류연장</Text>
+            </View>
+          </TouchableOpacity>}
+
 
           {(prop.state == '시공완료' && lapay == true) && 
           <View>
