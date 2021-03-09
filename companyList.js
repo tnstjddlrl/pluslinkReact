@@ -469,7 +469,7 @@ const AddressPush = () =>{
 
       <Modal visible={addrModal}>
         <SafeAreaView>
-          <View style={{ width: chartWidth, height: chartHeight, backgroundColor: 'white' }}>
+          <View style={{ width: chartWidth, height: chartHeight-60, backgroundColor: 'white' }}>
             <View style={{flexDirection:"row",justifyContent:"space-between",width:chartWidth-20,alignItems:"center"}}>
             <TouchableOpacity onPress={() => setAddrModal(false)}>
               <View style={{ width: 50, height: 50, borderRadius: 28, borderWidth: 0.5, justifyContent: "center", alignItems: "center", margin: 10 }}>
@@ -483,9 +483,9 @@ const AddressPush = () =>{
               </View>
             </TouchableOpacity>
             </View>
-
+            <ScrollView style={{height:500}}>
             <AModalPush></AModalPush>
-
+            </ScrollView>
           </View>
         </SafeAreaView>
       </Modal>
