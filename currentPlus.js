@@ -29,13 +29,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import axios from "axios";
 import { BootpayWebView } from 'react-native-bootpay';
 
-const fs = require('fs');
-fs.readdir('https://pluslink.kr/data/estimate/249/before/', function (err, items) {
-  if(err) return;
-  for(let item of items) {
-     console.log(item);
-  }
-});
+
 
 
 const CurrentPlus = ({ route }) => {
