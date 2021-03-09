@@ -878,6 +878,8 @@ const CurrentPlus = ({ route }) => {
   }
 
   function dateAddDel(sDate, nNum, type) {
+    var d;
+
     var yy = parseInt(sDate.substr(0, 4), 10);
     var mm = parseInt(sDate.substr(5, 2), 10);
     var dd = parseInt(sDate.substr(8), 10);
@@ -907,18 +909,13 @@ const CurrentPlus = ({ route }) => {
     var date3;
 
     var sDate = prop.day
-
     var concon = prop.cons.split('_')
-
     var nn = prop.as.split('_')
-
     var nNum = parseInt(nn[0])
-
     var nNum2 =  parseInt(concon[0])
 
     //Alert.alert(String(nNum))
 
-    
     if(nn[1] == '일'){
       var type = 'd'
     }else if(nn[1] == '개월'){
@@ -927,7 +924,6 @@ const CurrentPlus = ({ route }) => {
       var type = 'y'
     }
 
-
     if(concon[1] == '일'){
       var type2 = 'd'
     }else if(concon[1] == '개월'){
@@ -935,13 +931,8 @@ const CurrentPlus = ({ route }) => {
     }else if(concon[1] == '년'){
       var type2 = 'y'
     }
-
-    
-
     //Alert.alert(prop.no+concon[1]+type2)
-
     date3 = dateAddDel(sDate,nNum2,type2) //시공기간계산
-
     date2 = dateAddDel(date3,nNum,type) //as기간계산
     
       // Alert.alert(date2)
