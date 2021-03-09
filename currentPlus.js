@@ -29,24 +29,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 import axios from "axios";
 import { BootpayWebView } from 'react-native-bootpay';
 
-import * as RNFS from 'react-native-fs';
-
-
 
 
 const CurrentPlus = ({ route }) => {
-
-useEffect(()=>{
-  RNFS.readDir('https://pluslink.kr/data/estimate/249/before/').then(files => {
-  Alert.alert(files)
-})
-.catch(err => {
-  console.log(err.message, err.code);
-});
-Alert.alert('?')
-},[])
-
-
   
   const [isLoading, setIsLoading] = useState(false)
   function refreshData(tableName) {
