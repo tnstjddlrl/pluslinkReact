@@ -165,10 +165,12 @@ const InfoChange = ({route}) => {
             </View>
 
             <View style={{ margin: 15, borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}>
+              <View style={{backgroundColor:'rgb(243,243,243)'}}>
               <Text style={{ margin: 10, fontWeight: 'bold' }}>이용정보입력</Text>
+              </View>
               <View style={{ borderColor: '#cccccc', borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}></View>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>아이디</Text>
-              <View style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, marginLeft: 10, marginTop: 5, backgroundColor: '#ffcccc' }}>
+              <View style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, marginLeft: 10, marginTop: 5, backgroundColor: 'rgb(235,235,235)' }}>
                 <Text style={{ margin: 10, fontWeight: '100' }}>{newid}</Text>
               </View>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>비밀번호</Text>
@@ -180,10 +182,12 @@ const InfoChange = ({route}) => {
             </View>
 
             <View style={{ margin: 15, borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}>
+            <View style={{backgroundColor:'rgb(243,243,243)'}}>
               <Text style={{ margin: 10, fontWeight: 'bold' }}>본인확인</Text>
+              </View>
               <View style={{ borderColor: '#cccccc', borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}></View>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>이름</Text>
-              <View style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, marginLeft: 10, marginTop: 5, backgroundColor: '#ffcccc' }}>
+              <View style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, marginLeft: 10, marginTop: 5, backgroundColor: 'rgb(235,235,235)' }}>
                 <Text style={{ margin: 10, fontWeight: '100' }}>{name}</Text>
               </View>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>휴대폰번호</Text>
@@ -192,7 +196,9 @@ const InfoChange = ({route}) => {
             </View>
 
             <View style={{ margin: 15, borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}>
+            <View style={{backgroundColor:'rgb(243,243,243)'}}>
               <Text style={{ margin: 10, fontWeight: 'bold' }}>이미지 등록</Text>
+              </View>
               <View style={{ borderColor: '#cccccc', borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}></View>
 
               <View style={{ flexDirection: "row", alignItems: "center", width: chartWidth / 2, justifyContent: "space-between" }}>

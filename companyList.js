@@ -25,6 +25,7 @@ import AsyncStorage, { useAsyncStorage } from '@react-native-community/async-sto
 import axios from "axios";
 import { SafeAreaView } from 'react-navigation';
 import Postcode from 'react-native-daum-postcode';
+import { block } from 'react-native-reanimated';
 
 const heart = require('./img/handhart.png')
 const starimg = require('./img/review.png')
@@ -451,19 +452,20 @@ const AddressPush = () =>{
   return (
     <View>
       <View style={{ backgroundColor: '#e6e6e6', width: chartWidth - 20, borderRadius: 17, marginTop: 20 }}>
-        <View style={{ flexDirection: "row", justifyContent: "space-between", width: chartWidth / 2, alignItems: "center" }}>
-          <Text style={{ fontSize: 18, marginTop: 15, marginLeft: 15 }}>주소</Text>
+          <View style={{margin:20}}>
+          <Text style={{ fontSize: 18,fontWeight:"bold" }}>주소</Text>
+
           <TouchableOpacity onPress={() => setAddrModal(true)}>
-            <View style={{ width: 80, height: 35, backgroundColor: '#ecb3ff', borderRadius: 5, justifyContent: "center", alignItems: "center", marginTop: 10 }}>
+            <View style={{ width: 80, height: 35, backgroundColor: 'rgb(210,186,218)', borderRadius: 5, justifyContent: "center", alignItems: "center", marginTop: 20 }}>
               <Text>주소검색</Text>
             </View>
           </TouchableOpacity>
-        </View>
-        <View style={{ alignItems: "flex-end", width: chartWidth / 1.25 }}>
-          <View style={{ height: 35, width: chartWidth / 2, borderWidth: 0.5, borderRadius: 5, borderColor: 'gray', backgroundColor: "#ffcccc", marginTop: 10, marginBottom: 10, justifyContent: "center" }}>
+
+        
+          <View style={{ height: 35, width: chartWidth -60,marginTop:10, borderWidth: 0.5, borderRadius: 5, borderColor: 'gray', backgroundColor: "white", justifyContent: "center" }}>
             <Text>{basicAddr}</Text>
           </View>
-        </View>
+          </View>
 
       </View>
 

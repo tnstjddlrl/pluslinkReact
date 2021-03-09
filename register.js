@@ -90,7 +90,9 @@ const Register = () => {
             </View>
 
             <View style={{ margin: 15, borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}>
+            <View style={{backgroundColor:'rgb(243,243,243)'}}>
               <Text style={{ margin: 10, fontWeight: 'bold' }}>이용정보입력</Text>
+              </View>
               <View style={{ borderColor: '#cccccc', borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}></View>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>아이디</Text>
               <TextInput onChangeText={(text) => setId(text)} value={id} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
@@ -107,7 +109,9 @@ const Register = () => {
             </View>
 
             <View style={{ margin: 15, borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}>
+            <View style={{backgroundColor:'rgb(243,243,243)'}}>
               <Text style={{ margin: 10, fontWeight: 'bold' }}>본인확인</Text>
+              </View>
               <View style={{ borderColor: '#cccccc', borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}></View>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>이름</Text>
               <TextInput onChangeText={(text) => setName(text)} value={name} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, marginBottom: 15 }}></TextInput>
@@ -117,7 +121,9 @@ const Register = () => {
             </View>
 
             <View style={{ margin: 15, borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}>
+            <View style={{backgroundColor:'rgb(243,243,243)'}}>
               <Text style={{ margin: 10, fontWeight: 'bold' }}>이미지 등록</Text>
+              </View>
               <View style={{ borderColor: '#cccccc', borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}></View>
 
               <View style={{ flexDirection: "row", alignItems: "center", width: chartWidth / 2, justifyContent: "space-between" }}>
