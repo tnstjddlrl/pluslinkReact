@@ -33,6 +33,7 @@ const ffimg4 = require('./img/b04.png')
 const arrow = require('./img/arrow02.png')
 
 const userplus = require('./img/contact.png')
+const axe = require('./img/axe.png')
 
 const HeadHeder = () => {
   const navigation = useNavigation();
@@ -220,7 +221,7 @@ const HeadHeder = () => {
 
         <TouchableOpacity onPress={() => { Linking.openURL('https://pluslink.kr/shop/') }}>
           <View style={{
-            width: 75, height: 35, backgroundColor: '#b84dff',
+            width: 75, height: 35, backgroundColor: 'rgb(125,50,184)',
             borderTopLeftRadius: 17,
             borderTopRightRadius: 17,
             borderBottomLeftRadius: 17,
@@ -259,8 +260,8 @@ const HeadHeder = () => {
                   <Text style={{ fontWeight: 'bold', marginLeft: 10, color: 'white', fontSize: 18 }}>{name}</Text>
 
                   <TouchableOpacity onPress={() => setViewmenu(false)} style={{ width: 50, height: 50, backgroundColor: 'white', borderRadius: 27, right: 10, top: -10, position: 'absolute' }}>
-                    <View style={{ width: 50, height: 50, left: 0 }}>
-                      <Text style={{ fontWeight: 'bold', fontSize: 25, alignSelf: 'center', marginTop: 10 }}>X</Text>
+                    <View style={{ width: 50, height: 50, left: 0 ,justifyContent:"center",alignItems:"center"}}>
+                      <Image style={{width:20,height:20}} source={axe}></Image>
                     </View>
                   </TouchableOpacity>
                 </View>

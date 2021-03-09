@@ -28,6 +28,7 @@ import Postcode from 'react-native-daum-postcode';
 
 const heart = require('./img/handhart.png')
 const starimg = require('./img/review.png')
+const axe = require('./img/axe.png')
 
 function refreshData(tableName) {
   axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
@@ -473,7 +474,7 @@ const AddressPush = () =>{
             <View style={{flexDirection:"row",justifyContent:"space-between",width:chartWidth-20,alignItems:"center"}}>
             <TouchableOpacity onPress={() => setAddrModal(false)}>
               <View style={{ width: 50, height: 50, borderRadius: 28, borderWidth: 0.5, justifyContent: "center", alignItems: "center", margin: 10 }}>
-                <Text style={{ fontSize: 30 }}>X</Text>
+                <Image style={{width:20,height:20}} source={axe}></Image>
               </View>
             </TouchableOpacity>
 

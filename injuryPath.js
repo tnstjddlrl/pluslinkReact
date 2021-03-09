@@ -277,7 +277,7 @@ const InjuryPath = ({route}) => {
                                     </View>
                                     <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 20 }}>
                                         <TouchableOpacity onPress={() => navigation.goBack()}>
-                                            <View style={{ backgroundColor: '#df80ff', width: 80, height: 50, justifyContent: "center", alignItems: "center" }}>
+                                            <View style={{ backgroundColor: 'rgb(125,50,184)', width: 80, height: 50, justifyContent: "center", alignItems: "center" }}>
                                                 <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white' }}>확인</Text>
                                             </View>
                                         </TouchableOpacity>
@@ -301,7 +301,7 @@ const InjuryPath = ({route}) => {
                                     </View>
                                     <View style={{ flexDirection: "row", justifyContent: "center", marginTop: 20 }}>
                                         <TouchableOpacity onPress={() => req()}>
-                                            <View style={{ backgroundColor: '#df80ff', width: 80, height: 50, justifyContent: "center", alignItems: "center" }}>
+                                            <View style={{ backgroundColor: 'rgb(125,50,184)', width: 80, height: 50, justifyContent: "center", alignItems: "center" }}>
                                                 <Text style={{ fontSize: 15, fontWeight: 'bold', color: 'white' }}>신청</Text>
                                             </View>
                                         </TouchableOpacity>

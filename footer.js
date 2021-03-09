@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Alert,
+  TouchableWithoutFeedback,
 } from "react-native";
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width;
@@ -64,37 +65,39 @@ const FootTer = () => {
   }
 
   return (
-   
-    <View style={{flex:1}}>
-        <View style={{borderWidth:1,position:'absolute',bottom:0,flexDirection: 'row',marginLeft:-5}}>
-        <TouchableOpacity onPress={() => {refresh(),navigation.navigate('홈')}}>
-        <View style={{backgroundColor:'white'}}>
-          <ImageBackground source={ffimg} style={{width:65,height:65,marginLeft:32,marginBottom:15}}>
-          </ImageBackground>
-        </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {refresh(),logCheck('견적의뢰')}}>
-        <View style={{backgroundColor:'white'}}>
-          <ImageBackground source={ffimg2} style={{width:65,height:65,marginLeft:20,marginRight:10,marginBottom:15}}>
-          </ImageBackground>
-        </View>
-        </TouchableOpacity >
-        <TouchableOpacity onPress={() => {refresh(),logCheck('견적현황')}}>
-        <View style={{backgroundColor:'white'}}>
-          <ImageBackground source={ffimg3} style={{width:65,height:65,marginLeft:25,marginRight:10,marginBottom:15}}>
-          </ImageBackground>
-        </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {refresh(),logCheck('마이페이지')}}>
-        <View style={{backgroundColor:'white'}}>
-          <ImageBackground source={ffimg4} style={{width:65,height:65,marginLeft:20,marginRight:60,marginBottom:15}}>
-          </ImageBackground>
-        </View>
-        </TouchableOpacity>
 
+    <View style={{ flex: 1 }}>
+      <View style={{ borderWidth: 1, position: 'absolute', bottom: 0, marginLeft: -5,width:chartWidth+10,backgroundColor:'white' }}>
+        <View style={{justifyContent:'space-between', flexDirection: 'row'}}>
+          <TouchableWithoutFeedback onPress={() => { refresh(), navigation.navigate('홈') }}>
+            <View style={{ backgroundColor: 'white' }}>
+              <ImageBackground source={ffimg} style={{ width: 65, height: 65, marginBottom: 15,marginLeft:10 }}>
+              </ImageBackground>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => { refresh(), logCheck('견적의뢰') }}>
+            <View style={{ backgroundColor: 'white' }}>
+              <ImageBackground source={ffimg2} style={{ width: 65, height: 65, marginLeft: 20, marginRight: 10, marginBottom: 15 }}>
+              </ImageBackground>
+            </View>
+          </TouchableWithoutFeedback >
+          <TouchableWithoutFeedback onPress={() => { refresh(), logCheck('견적현황') }}>
+            <View style={{ backgroundColor: 'white' }}>
+              <ImageBackground source={ffimg3} style={{ width: 65, height: 65, marginLeft: 25, marginRight: 10, marginBottom: 15 }}>
+              </ImageBackground>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => { refresh(), logCheck('마이페이지') }}>
+            <View style={{ backgroundColor: 'white' }}>
+              <ImageBackground source={ffimg4} style={{ width: 65, height: 65, marginLeft: 20, marginBottom: 15,marginRight:10 }}>
+              </ImageBackground>
+            </View>
+          </TouchableWithoutFeedback>
         </View>
+
+      </View>
     </View>
-    
+
    
   );
 };

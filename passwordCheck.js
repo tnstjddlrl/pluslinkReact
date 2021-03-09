@@ -91,7 +91,7 @@ const PasswordCheck = () => {
           navigation.navigate('정보변경2',{pwd:pwd})
           }
           else{
-            alert('아이디 또는 비밀번호를 확인해주세요')
+            Alert.alert('아이디 또는 비밀번호를 확인해주세요')
           }
         })
         .catch(function (error) {
@@ -127,7 +127,7 @@ const PasswordCheck = () => {
                 secureTextEntry={true}
               />
               <TouchableOpacity onPress={() => pwCheck()}>
-                <View style={{ margin: 15, width: chartWidth - 50, backgroundColor: '#d11aff' }}>
+                <View style={{ margin: 15, width: chartWidth - 50, backgroundColor: 'rgb(125,50,184)' }}>
                   <Text style={{ color: "white", margin: 15, alignSelf: 'center', fontWeight: 'bold',fontSize:18 }}>확인하기</Text>
                 </View>
               </TouchableOpacity>

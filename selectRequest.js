@@ -1098,12 +1098,12 @@ const SelectRequest = ({ route }) => {
 
               <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 20 }}>
                 <TouchableOpacity onPress={() => insert()}>
-                  <View style={{ backgroundColor: "#d24dff", width: 70, height: 35, }}>
+                  <View style={{ backgroundColor: "rgb(125,50,184)", width: 70, height: 35, }}>
                     <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>작성하기</Text>
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                  <View style={{ backgroundColor: "#404040", width: 50, height: 35, }}>
+                  <View style={{ backgroundColor: "#404040", width: 50, height: 35,marginLeft:10 }}>
                     <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>취소</Text>
                   </View>
                 </TouchableOpacity>

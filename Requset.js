@@ -35,6 +35,8 @@ var dateee = new Date().getDate(); //Current Date
 var monthee = new Date().getMonth() + 1; //Current Month
 var yearee = new Date().getFullYear(); //Current Year
 
+const axe = require('./img/axe.png')
+
 
 
 
@@ -1043,12 +1045,12 @@ const REquset = () => {
 
               <View style={{ flexDirection: 'row', alignSelf: 'center', marginTop: 20 }}>
                 <TouchableOpacity onPress={() => insert()}>
-                  <View style={{ backgroundColor: "#d24dff", width: 70, height: 35, }}>
+                  <View style={{ backgroundColor: "rgb(125,50,184)", width: 70, height: 35, }}>
                     <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>작성하기</Text>
                   </View>
                 </TouchableOpacity >
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                  <View style={{ backgroundColor: "#404040", width: 50, height: 35, }}>
+                  <View style={{ backgroundColor: "#404040", width: 50, height: 35,marginLeft:10 }}>
                     <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>취소</Text>
                   </View>
                 </TouchableOpacity>
@@ -1111,7 +1113,7 @@ const REquset = () => {
         <View>
           <TouchableOpacity onPress={() => setShow(false)}>
             <View style={{ backgroundColor: 'white', width: 60, height: 60, borderRadius: 28, marginTop: 40, justifyContent: "center", alignItems: 'center', borderWidth: 0.5 }}>
-              <Text style={{ fontWeight: 'bold', fontSize: 28 }}>X</Text>
+            <Image style={{width:20,height:20}} source={axe}></Image>
             </View>
           </TouchableOpacity>
           <View style={{ width: chartWidth - 60, height: chartHeight - 150, position: 'absolute', marginLeft: 30, marginTop: 100, borderWidth: 0.5 }}>

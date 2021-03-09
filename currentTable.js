@@ -195,7 +195,7 @@ const CurrentTable =({route}) =>{
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>navigation.navigate('견적의뢰')}>
-                            <View style={{backgroundColor:'#A579C9',width:70,height:30,marginTop:20,alignItems:'center',alignContent:'center',marginRight:10}}>
+                            <View style={{backgroundColor:'rgb(125,50,184)',width:70,height:30,marginTop:20,alignItems:'center',alignContent:'center',marginRight:10}}>
                                 <Text style={{color:'white',marginTop:5,fontWeight:"800"}}>견적의뢰</Text>
                             </View>
                         </TouchableOpacity>
