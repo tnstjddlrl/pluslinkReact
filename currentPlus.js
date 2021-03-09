@@ -28,10 +28,65 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from "axios";
 import { BootpayWebView } from 'react-native-bootpay';
-
+import Swiper from 'react-native-swiper'
+import styles from './styles.js'
 
 
 const CurrentPlus = ({ route }) => {
+  const [before,setBefore] = useState([])
+  const [after,setAfter] = useState([])
+  const [isisiBefore,setIsisiBefore] = useState(false)
+  const [isisiAfter,setIsisiAfter] = useState(false)
+
+  function getFile() {
+    axios.post('http://ip0131.cafe24.com/pluslink/json/isfile.php', JSON.stringify({
+      wr_id: route.params.num,
+    }))
+      .then(function (response) {
+        console.log('리스폰스 ', response);
+        if (response.request._response != '') {
+          //Alert.alert(response.request._response)
+          var jj = response.request._response
+          setBefore(jj.split('/'))
+          setIsisiBefore(true)
+          //Alert.alert(before.length)
+        }
+        else {
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  function getFile2(){
+    axios.post('http://ip0131.cafe24.com/pluslink/json/isfileAfter.php', JSON.stringify({
+      wr_id: route.params.num,
+    }))
+      .then(function (response) {
+        console.log('리스폰스 ', response);
+        if (response.request._response != '') {
+           //Alert.alert(response.request._response)
+           var jj = response.request._response
+           setAfter(jj.split('/'))
+           setIsisiAfter(true)
+           // Alert.alert(after[0])
+        }
+        else {
+         
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  useEffect(()=>{
+    setTimeout(() => {
+      getFile()
+      getFile2()
+    }, 500);
+  },[])
   
   const [isLoading, setIsLoading] = useState(false)
   function refreshData(tableName) {
@@ -49,6 +104,8 @@ const CurrentPlus = ({ route }) => {
         console.log(error);
       });
   }
+
+  
 
   const bootpay = useRef(<BootpayWebView />);
 
@@ -888,6 +945,34 @@ const CurrentPlus = ({ route }) => {
     date2 = dateAddDel(date3,nNum,type) //as기간계산
     
       // Alert.alert(date2)
+      
+      
+      const BeforePush = () =>{
+        var img = []
+        for(var i = 0;i<before.length;i++){
+          if(before[i]=='..' ||before[i]=='.'){
+          }else{
+            img.push(<View><Image source={{ uri:'https://pluslink.kr/data/estimate/'+prop.num+'/before/'+before[i]}} style={{width:chartWidth-85,height:300}}/></View>)
+            // Alert.alert('링크 : ' + 'https://pluslink.kr/data/estimate/'+prop.num+'/before/'+before[i])
+            // console.log('링크 : ' + 'https://pluslink.kr/data/estimate/'+prop.num+'/before/'+before[i])
+            // console.log(img)
+          }
+        }
+          console.log(img)
+          return img
+      }
+
+      const AfterPush = () =>{
+        var img = []
+        for(var i = 0;i<after.length;i++){
+          if(after[i]=='..' ||after[i]=='.'||after[i]==''){
+          }else{
+            img.push(<View><Image source={{ uri:'https://pluslink.kr/data/estimate/'+prop.num+'/after/'+after[i]}} style={{width:chartWidth-80,height:300}}/></View>)
+            //Alert.alert('링크 : ' + 'https://pluslink.kr/data/estimate/'+prop.num+'/before/'+before[i])
+          }
+        }
+        return img
+      }
 
     return (
       <View>
@@ -907,13 +992,30 @@ const CurrentPlus = ({ route }) => {
           <View style={{ borderWidth: 1, borderColor: 'rgb(216,216,216)', width: chartWidth - 80 }}>
             <View style={{ justifyContent: "center", alignItems: "center" }}>
               <Text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 10 }}>시공전</Text>
-              <Image source={{ uri: 'https://pluslink.kr/img/no_addimg.png' }} style={{ width: chartWidth - 40, height: 300 }}></Image>
+              {/* <Image source={{ uri: 'https://pluslink.kr/img/no_addimg.png' }} style={{ width: chartWidth - 40, height: 300 }}></Image> */}
+
+              {/* <Swiper style={{height:300,marginTop:50}} showsButtons={true}> */}
+
+              {isisiBefore ?<ScrollView horizontal={true} pagingEnabled={true} style={{marginTop:30}}><BeforePush></BeforePush></ScrollView>:
+              <Image source={{ uri: 'https://pluslink.kr/img/no_addimg.png' }} style={{width:chartWidth-80,height:300}}/>}
+                {/* {before == [] ?
+                  <Image source={{ uri: 'https://pluslink.kr/img/no_addimg.png' }} style={{width:chartWidth-80,height:300}}/>
+                 : }
+                 */}
+                
+                
+              {/* </Swiper> */}
+
             </View>
           </View>
           <View style={{ borderWidth: 1, borderColor: 'rgb(216,216,216)', width: chartWidth - 80, marginTop: 20, marginBottom: 20 }}>
             <View style={{ justifyContent: "center", alignItems: "center" }}>
               <Text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 10 }}>시공후</Text>
-              <Image source={{ uri: 'https://pluslink.kr/img/no_addimg.png' }} style={{ width: chartWidth - 40, height: 300 }}></Image>
+              
+                {isisiAfter ?<ScrollView horizontal={true} pagingEnabled={true} style={{marginTop:30}}><AfterPush></AfterPush></ScrollView>:
+                <Image source={{ uri: 'https://pluslink.kr/img/no_addimg.png' }} style={{width:chartWidth-80,height:300}}/>}
+                
+              
             </View>
           </View>
         </View>
@@ -927,7 +1029,7 @@ const CurrentPlus = ({ route }) => {
       if(estimate[i].wr_id == route.params.num && estimate[i].wr_9 != ''){
         for(var j = 0; j<bidding.length;j++){
           if(estimate[i].wr_id==bidding[j].wr_id && estimate[i].wr_9 == bidding[j].mb_id &&bidding[j].state == '입찰'){
-            return(<BeforeAfter no={bidding[j].no} state={estimate[i].wr_8} day={estimate[i].wr_7} as={bidding[j].as_period} cons={bidding[j].construction} ></BeforeAfter>)
+            return(<BeforeAfter no={bidding[j].no} state={estimate[i].wr_8} day={estimate[i].wr_7} as={bidding[j].as_period} num={estimate[i].wr_id} cons={bidding[j].construction} ></BeforeAfter>)
           }
         }
       }
