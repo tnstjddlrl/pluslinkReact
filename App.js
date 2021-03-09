@@ -109,6 +109,7 @@ const App = ({ }) => {
     refreshData('stratum_list')
     refreshData('category')
     refreshData('user_address')
+    refreshData('g5_board_file')
   },[])
   
 

@@ -29,10 +29,24 @@ import AsyncStorage from '@react-native-community/async-storage';
 import axios from "axios";
 import { BootpayWebView } from 'react-native-bootpay';
 
+import * as RNFS from 'react-native-fs';
+
 
 
 
 const CurrentPlus = ({ route }) => {
+
+useEffect(()=>{
+  RNFS.readDir('https://pluslink.kr/data/estimate/249/before/').then(files => {
+  Alert.alert(files)
+})
+.catch(err => {
+  console.log(err.message, err.code);
+});
+Alert.alert('?')
+},[])
+
+
   
   const [isLoading, setIsLoading] = useState(false)
   function refreshData(tableName) {
@@ -354,6 +368,30 @@ const CurrentPlus = ({ route }) => {
       })
     }
   })
+
+  function refresh(tableName) {
+    axios.post('http://ip0131.cafe24.com/pluslink/json/jsonMember.php', JSON.stringify({
+      id: tableName,
+    }))
+      .then(function (response) {
+        console.log('리스폰스 ', response);
+        if (response.request._response == 'suc') {
+        }
+        else {
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    refresh('g5_board_file')
+    setFilelist([])
+    console.log('파일리스트 : '+fileList)
+  },[])
+
+
 
 
   const StPush = () => {
