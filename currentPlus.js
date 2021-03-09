@@ -29,7 +29,13 @@ import AsyncStorage from '@react-native-community/async-storage';
 import axios from "axios";
 import { BootpayWebView } from 'react-native-bootpay';
 
-
+const fs = require('fs');
+fs.readdir('https://pluslink.kr/data/estimate/249/before/', function (err, items) {
+  if(err) return;
+  for(let item of items) {
+     console.log(item);
+  }
+});
 
 
 const CurrentPlus = ({ route }) => {
@@ -392,7 +398,7 @@ const CurrentPlus = ({ route }) => {
   var main = []
   var lastPay = false
   const [lapay,setLapay] = useState(false)
-  const [sigonNo,setsigonNo] = useState(false)
+  const [issigonNo,setIssigonNo] = useState(false)
 
   const MainPush = () => {
     
@@ -403,7 +409,7 @@ const CurrentPlus = ({ route }) => {
       }
 
       if(paylist[i].wr_id == route.params.num && paylist[i].pay_state == '지급보류'){
-        setsigonNo(true)
+        setIssigonNo(true)
       }
     }
 
@@ -700,7 +706,7 @@ const CurrentPlus = ({ route }) => {
               <Text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }}>시공완료확정</Text>
             </View>
           </TouchableOpacity>
-          {!sigongNo && <TouchableOpacity onPress={() => { sigongNo(prop.num)}}>
+          {!issigonNo && <TouchableOpacity onPress={() => { sigongNo(prop.num)}}>
             <View style={{ marginTop: 15, marginLeft: 15, width: chartWidth - 90, height: 50, backgroundColor: 'rgb(237,237,237)', justifyContent: "center", alignItems: "center" }}>
               <Text style={{ fontSize: 18, fontWeight: 'bold' }}>지급보류</Text>
             </View>
@@ -708,7 +714,7 @@ const CurrentPlus = ({ route }) => {
           
           </View>}
 
-          {sigongNo && <TouchableOpacity onPress={() => {}}>
+          {issigonNo && <TouchableOpacity onPress={() => {Alert.alert('지급보류 연장을 이미 신청하셨습니다. 다음 연장은 7일후 가능합니다.')}}>
             <View style={{ marginTop: 15, marginLeft: 15, width: chartWidth - 90, height: 50, backgroundColor: 'rgb(237,237,237)', justifyContent: "center", alignItems: "center" }}>
               <Text style={{ fontSize: 18, fontWeight: 'bold' }}>지급보류연장</Text>
             </View>
@@ -864,7 +870,7 @@ const CurrentPlus = ({ route }) => {
 
     date2 = dateAddDel(date3,nNum,type) //as기간계산
     
-// Alert.alert(date2)
+      // Alert.alert(date2)
 
     return (
       <View>
@@ -909,7 +915,6 @@ const CurrentPlus = ({ route }) => {
         }
       }
     }
-
     return(<View></View>)
   }
 
