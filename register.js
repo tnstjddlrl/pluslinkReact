@@ -169,12 +169,12 @@ const Register = () => {
 
             <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
               <TouchableOpacity onPress={() => checkpw()}>
-                <View style={{ backgroundColor: "#d24dff", width: 70, height: 35, }}>
-                  <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>회원가입</Text>
+                <View style={{ backgroundColor: "rgb(125,50,184)", width: 70, height: 35, }}>
+                  <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10,fontWeight:"bold" }}>회원가입</Text>
                 </View>
               </TouchableOpacity>
-              <View style={{ backgroundColor: "#404040", width: 50, height: 35, }}>
-                <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10 }}>취소</Text>
+              <View style={{ backgroundColor: "#404040", width: 50, height: 35,marginLeft:10 }}>
+                <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10,fontWeight:"bold" }}>취소</Text>
               </View>
             </View>
           </View>

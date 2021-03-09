@@ -27,10 +27,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const TableItem = (prop) => {
 
-
-
-
-
     const navigation = useNavigation();
     return(
       <View>
@@ -43,7 +39,7 @@ const TableItem = (prop) => {
           <Text style={{width:40,}}>{prop.subcate}</Text>
           <Text style={{width:120,}} numberOfLines={2}>{prop.content}</Text>
           <TouchableOpacity onPress={()=>navigation.navigate('견적자세히보기',{num:prop.num, date:prop.date, fdate:prop.fdate, cate:prop.cate, subcate:prop.subcate, content:prop.content, state:prop.state, addr:prop.addr, subj:prop.subj,com:prop.com})}>
-          <View style={{width:45,height:30,backgroundColor:'gray',alignItems:'center'}}>
+          <View style={{width:45,height:30,backgroundColor:'rgb(117,117,117)',alignItems:'center'}}>
               <Text style={{color:'white',marginTop:7}}>보기</Text>
           </View>
           </TouchableOpacity>
