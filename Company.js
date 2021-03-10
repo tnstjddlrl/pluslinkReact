@@ -19,6 +19,7 @@ const maker = require('./img/main_marker.png')
 import { useNavigation } from '@react-navigation/native'; //네비게이션 프롭을 다른 페이지에서 받지않고도 이 페이지에서 단독으로 네비게이션을 사용할 수 있는 도구
 import axios from "axios";
 import AsyncStorage from '@react-native-community/async-storage';
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 //prop(아무 변수이름)으로 App에서 Company를 생성할때 넣어준 값을 받아올 수 있다.
 //네비게이터로 화면을 넘겨올때 값을 받을 때는 route를 사용해야한다.
@@ -272,7 +273,7 @@ const Item = (prop) => {
 
   return (
     <View>
-      <TouchableOpacity onPress={() => navigation.navigate('회사자세히보기', { id: prop.id })}>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate('회사자세히보기', { id: prop.id })}>
         <View style={{ width: chartWidth - 20, backgroundColor: '#f2f2f2', borderRadius: 10, marginLeft: 10, marginRight: 20, marginTop: 10 }}>
           <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -290,13 +291,13 @@ const Item = (prop) => {
               <Text style={{color:'gray'}}>{prop.addr2}</Text>
             </View>
 
-            <View style={{ flexDirection: "row" }}>
+            <View style={{ flexDirection: "row",alignItems:"center" }}>
               <Image source={starimg} style={{ width: 20, height: 20 }}></Image>
               <Text>{prop.star}</Text>
             </View>
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
     </View>
   )
 }

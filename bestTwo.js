@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; //네비게이션 프롭을 다른 페이지에서 받지않고도 이 페이지에서 단독으로 네비게이션을 사용할 수 있는 도구
 import axios from "axios";
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 const chartHeight = Dimensions.get('window').height;
 const chartWidth = Dimensions.get('window').width; //현재 디바이스의 창크기를 얻어오는 함수들
 
@@ -61,13 +62,13 @@ const BestTwo = () => {
 
 
   return (
-    <View style={{ marginTop: 0, marginBottom: 250 }}>
+    <View style={{ marginTop: 0, marginBottom: 80 }}>
       <View>
         <ImageBackground source={bg_1} style={{ width: chartWidth, height: 250 }}>
           <Text style={{ alignSelf: 'center', top: 160, fontSize: 20, fontWeight: 'bold' }}>우수시공사례</Text>
         </ImageBackground>
         {/* 스크롤뷰의 horizontal 옵션은 가로 스크롤을 할수있도록 만들어준다. */}
-        <ScrollView
+        {/* <ScrollView
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           onMomentumScrollEnd={
@@ -75,13 +76,11 @@ const BestTwo = () => {
           }
           style={{ position: 'absolute', top: 200 }}
         >
+            </ScrollView> */}
           {/* 스크롤뷰 안에 들어가는 아이템들은 컴포넌트화 시켜서 넣어줬다. */}
+          <View style={{marginTop:-40}}>
           <PushItem></PushItem>
-
-
-        </ScrollView>
-
-
+          </View>
 
       </View>
     </View>
@@ -91,17 +90,19 @@ const BestTwo = () => {
 const ListItem = (prop) => {
   const navigation = useNavigation()
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('베스트보기', { id: prop.id })}>
-      <View style={{ width: chartWidth / 2.3, height: 268, borderWidth: 0.6, marginLeft: 18, borderColor: 'gray', marginBottom: 20, marginTop: 10 }}>
-        <Image source={{ uri: prop.thumb }} style={{ width: chartWidth / 2.3, height: 150 }}></Image>
-        <Text style={{ width: chartWidth / 2.5, margin: 10, fontWeight: 'bold' }} numberOfLines={1}>{prop.title}</Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + prop.wrid.substring(0, 2) + '/' + prop.wrid + '.gif' }} style={{ width: 30, height: 30, borderRadius: 28, marginLeft: 10 }}></Image>
-          <Text style={{ marginLeft: 10, fontWeight: '200' }}>{prop.name}</Text>
+    <TouchableWithoutFeedback onPress={() => navigation.navigate('베스트보기', { id: prop.id })}>
+      <View style={{ width: chartWidth-20, height: chartHeight/2, borderWidth: 0.6, marginLeft: 10, borderColor: 'gray', marginBottom: 20}}>
+        <Image source={{ uri: prop.thumb }} style={{ flex:3}}></Image>
+        <View style={{flex:2}}>
+        <Text style={{ width: chartWidth -60, margin: 15, fontWeight: 'bold',fontSize:18 }} numberOfLines={1}>{prop.title}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center',marginLeft:15 }}>
+          <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + prop.wrid.substring(0, 2) + '/' + prop.wrid + '.gif' }} style={{ width: 30, height: 30, borderRadius: 28}}></Image>
+          <Text style={{ color:'#888',fontSize:15,marginLeft:10 }}>{prop.name}</Text>
         </View>
-        <Text numberOfLines={2} style={{ margin: 5, color: '#888', fontSize: 12 }}>{prop.content}</Text>
+        <Text numberOfLines={2} style={{ margin: 15, color: '#888', fontSize: 15 ,marginTop:20 }}>{prop.content}</Text>
+        </View>
       </View>
-    </TouchableOpacity>
+    </TouchableWithoutFeedback>
   )
 }
 
