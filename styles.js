@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   cardview :{
     backgroundColor: '#fff',
     height:300,
-  
+    marginTop:20
   },
   etitle:{
     fontSize: 20,
