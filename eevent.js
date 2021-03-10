@@ -65,11 +65,7 @@ const EEvent = ({ }) => {
       </TouchableWithoutFeedback>
       <ScrollView
         horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        onMomentumScrollEnd={
-          () => { console.log('Scrolling is End') }
-        }
-      >
+        showsHorizontalScrollIndicator={false}>
 
         <PushItem></PushItem>
 
