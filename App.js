@@ -4,6 +4,7 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
+  Text
 } from "react-native";
 
 import AsyncStorage from '@react-native-community/async-storage'; //로그인한 아이디값 저장하기 위한 앱 내부 저장소
@@ -182,6 +183,12 @@ const App = ({ }) => {
 
           {/* 메인 하단의 리뷰보기 */}
           <REview></REview>
+
+          <View style={{alignItems:"center",justifyContent:"center",marginBottom:120,flexDirection:"row"}}>
+            <Text style={{fontWeight:'bold'}}>PLUS LINK </Text>
+            <Text>©</Text>
+            <Text> All rights reserved.</Text>
+          </View>
 
         </ScrollView>
       </View>

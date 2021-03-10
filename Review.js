@@ -22,6 +22,7 @@ import styles from './styles.js'
 
 import { useNavigation } from '@react-navigation/native'; //네비게이션 프롭을 다른 페이지에서 받지않고도 이 페이지에서 단독으로 네비게이션을 사용할 수 있는 도구
 import axios from "axios";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 const image = { uri: "https://pluslink.kr/img/review_bg.jpg" };
 const pinimg = require("./img/map_icon.png")
@@ -100,11 +101,11 @@ const REview = (prop) => {
 
   const ListItem = (prop) => {
     const navigation = useNavigation()
-    return (<TouchableOpacity onPress={() => navigation.navigate('회사자세히보기', { id: prop.ptid })}><ReviewText id={prop.id} name={prop.name} content={prop.content} ptid={prop.ptid} star={prop.star}></ReviewText></TouchableOpacity>)
+    return (<TouchableWithoutFeedback onPress={() => navigation.navigate('회사자세히보기', { id: prop.ptid })}><ReviewText id={prop.id} name={prop.name} content={prop.content} ptid={prop.ptid} star={prop.star}></ReviewText></TouchableWithoutFeedback>)
   }
 
   return (
-    <View style={styles.reviewc}>
+    <View style={{height:400,backgroundColor : "#ff0043",marginBottom:50,}}>
       <ImageBackground source={image} style={styles.image}>
         <Text style={styles.reviewT}>실시간 리뷰</Text>
         <ScrollView
