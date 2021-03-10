@@ -266,7 +266,7 @@ const InfoChange = ({route}) => {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => changeData()}>
-                <View style={{ backgroundColor: "rgb(125,50,184)", width: 70, height: 35, }}>
+                <View style={{ backgroundColor: "rgb(157,109,192)", width: 70, height: 35, }}>
                   <Text style={{ color: 'white', alignSelf: 'center', marginTop: 10,fontWeight:"bold" }}>정보수정</Text>
                 </View>
               </TouchableOpacity>

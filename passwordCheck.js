@@ -130,7 +130,7 @@ const PasswordCheck = () => {
                 secureTextEntry={true}
               />
               <TouchableOpacity onPress={() => pwCheck()}>
-                <View style={{ margin: 15, width: chartWidth - 50, backgroundColor: 'rgb(125,50,184)' }}>
+                <View style={{ margin: 15, width: chartWidth - 50, backgroundColor: 'rgb(157,109,192)' }}>
                   <Text style={{ color: "white", margin: 15, alignSelf: 'center', fontWeight: 'bold', fontSize: 18 }}>확인하기</Text>
                 </View>
               </TouchableOpacity>

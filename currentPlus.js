@@ -798,7 +798,7 @@ const CurrentPlus = ({ route }) => {
           {(prop.state == '시공완료' && lapay == true) && 
           <View>
             <TouchableOpacity onPress={()=>setReview(true)}>
-            <View style={{width:chartWidth-60,height:40,backgroundColor:'#c61aff',justifyContent:"center",alignItems:"center",borderRadius:10}}>
+            <View style={{width:chartWidth-60,height:40,backgroundColor:'rgb(157,109,192)',justifyContent:"center",alignItems:"center",borderRadius:10}}>
              <Text style={{color:'white',fontSize:18,fontWeight:'bold'}}>리뷰 쓰기</Text>
              </View></TouchableOpacity>
              </View>}

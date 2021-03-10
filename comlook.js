@@ -252,7 +252,14 @@ const ComLook = ({ route }) => {
       <HeadHeder></HeadHeder>
       <View style={{ position: "absolute", bottom: 100, }}>
         <TouchableWithoutFeedback onPress={() => logtest()}>
-          <View style={{ marginLeft: 10, marginRight: 10, width: chartWidth - 20, height: 50, justifyContent: 'center', alignItems: 'center', backgroundColor: 'black', borderRadius: 10, marginTop: 20 }}>
+          <View style={{shadowColor: "#000",
+    shadowOffset: {
+      width:5,
+      height: 10,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5, marginLeft: 10, marginRight: 10, width: chartWidth - 20, height: 50, justifyContent: 'center', alignItems: 'center', backgroundColor: 'black', borderRadius: 10, marginTop: 20 }}>
             <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }}>견적의뢰하기</Text>
           </View>
         </TouchableWithoutFeedback>
