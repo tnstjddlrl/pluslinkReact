@@ -277,13 +277,11 @@ const Item = (prop) => {
           <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + prop.id.substring(0, 2) + '/' + prop.id + '.gif' }} style={{ marginLeft: 15, marginTop: 15, borderRadius: 28, width: 55, height: 55, backgroundColor: 'gray' }}></Image>
-              <Text style={{ fontWeight: 'bold', fontSize: 15, marginLeft: 15, marginTop: 15 }}>{prop.name}</Text>
-            </View>
-            <View style={{ margin: 15, borderWidth: 0.5, borderRadius: 10, maxHeight: 30, justifyContent: "center", alignItems: "center" }}>
-              <Text style={{ margin: 3 }}>시공사례 {nc}건</Text>
+              <Text style={{ fontWeight: 'bold', fontSize: 17, marginLeft: 15, marginTop: 15 }}>{prop.name}</Text>
             </View>
           </View>
-          <Text style={{ margin: 15, fontWeight: '200' }} numberOfLines={3}>{prop.content}</Text>
+          <Text style={{ margin: 5,marginLeft:15,fontSize:13 }}>시공사례 {nc}건</Text>
+          <Text style={{ margin: 15,fontSize:16 }} numberOfLines={3}>{prop.content}</Text>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15 }}>
 
             <View style={{ flexDirection: "row", alignItems: "center" }}>

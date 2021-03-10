@@ -18,7 +18,7 @@ import { useNavigation } from '@react-navigation/native';
 import { DrawerActions } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 
 const logo = { uri: "https://pluslink.kr/img/pluslink/logo.png" };
@@ -208,7 +208,7 @@ const HeadHeder = () => {
           <View style={{ width: 75, marginBottom: 15 }}>
             <Image
               source={logo2}
-              style={{ width: 25, height: 20 }}
+              style={{ width: 23, height: 18 }}
             />
           </View>
         </TouchableOpacity>
@@ -239,9 +239,9 @@ const HeadHeder = () => {
 
 
       <Modal transparent={false} visible={viewmenu}>
-        <TouchableOpacity onPress={()=>setViewmenu(false)}>
+        <TouchableWithoutFeedback onPress={()=>setViewmenu(false)}>
         <View style={{width:chartWidth,height:chartHeight,backgroundColor:'black'}}></View>
-        </TouchableOpacity>
+        </TouchableWithoutFeedback>
         <View style={{ width: chartWidth / 1.45, height: chartHeight, position: 'absolute', backgroundColor: 'white' }}>
           <View>
             <ImageBackground source={graBox} style={{ width: chartWidth / 1.45, masHeight: 220 }}>

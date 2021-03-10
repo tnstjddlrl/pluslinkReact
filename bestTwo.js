@@ -63,7 +63,7 @@ const BestTwo = () =>{
   return(
     <View style={{marginTop:0,marginBottom:250}}>
       <View>
-        <ImageBackground source={bg_1} style={{width:chartWidth,height:250,}}>
+        <ImageBackground source={bg_1} style={{width:chartWidth,height:250}}>
           <Text style={{alignSelf:'center',top:160,fontSize:20,fontWeight:'bold'}}>우수시공사례</Text>
         </ImageBackground>
         {/* 스크롤뷰의 horizontal 옵션은 가로 스크롤을 할수있도록 만들어준다. */}
@@ -92,14 +92,14 @@ const ListItem = (prop) =>{
   const navigation = useNavigation()
   return(
     <TouchableOpacity onPress={()=>navigation.navigate('베스트보기',{id:prop.id})}>
-          <View style={{width:chartWidth/2.3,height:268,borderWidth:0.6,marginLeft:18,borderColor:'gray',marginBottom:20,}}>
+          <View style={{width:chartWidth/2.3,height:268,borderWidth:0.6,marginLeft:18,borderColor:'gray',marginBottom:20,marginTop:10}}>
             <Image source={{uri : prop.thumb}} style={{width:chartWidth/2.3,height:150}}></Image>
             <Text style={{width:chartWidth/2.5,margin:10,fontWeight:'bold'}} numberOfLines={1}>{prop.title}</Text>
             <View style={{flexDirection:'row',alignItems:'center'}}>
               <Image source={{uri:'https://pluslink.kr/data/member_image/'+prop.wrid.substring(0,2) +'/'+prop.wrid+'.gif'}} style={{width:30,height:30,borderRadius:28,marginLeft:10}}></Image>
               <Text style={{marginLeft:10,fontWeight:'200'}}>{prop.name}</Text>
             </View>
-            <Text numberOfLines={2} style={{margin:5,fontWeight:'100',color:'gray'}}>{prop.content}</Text>
+            <Text numberOfLines={2} style={{margin:5,color:'#888',fontSize:12}}>{prop.content}</Text>
           </View>
       </TouchableOpacity>
   )
