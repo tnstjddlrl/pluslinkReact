@@ -95,16 +95,16 @@ const Register = () => {
               </View>
               <View style={{ borderColor: '#cccccc', borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}></View>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>아이디</Text>
-              <TextInput scrollEnabled={false} onChangeText={(text) => setId(text)} value={id} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
+              <TextInput onChangeText={(text) => setId(text)} value={id} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
               <Text style={{ marginLeft: 10, color: 'gray' }}>영문자,숫자,_만 입력가능,최소 3자이상 입력하세요</Text>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>비밀번호</Text>
-              <TextInput scrollEnabled={false} onChangeText={(text) => setPwd(text)} value={pwd} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
+              <TextInput onChangeText={(text) => setPwd(text)} value={pwd} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>비밀번호 확인</Text>
-              <TextInput scrollEnabled={false} onChangeText={(text) => setRepwd(text)} value={repwd} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
+              <TextInput onChangeText={(text) => setRepwd(text)} value={repwd} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>E-mail</Text>
-              <TextInput scrollEnabled={false} onChangeText={(text) => setEmail(text)} value={email} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, marginBottom: 20 }}></TextInput>
+              <TextInput onChangeText={(text) => setEmail(text)} value={email} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, marginBottom: 20 }}></TextInput>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>추천업체코드</Text>
-              <TextInput scrollEnabled={false} onChangeText={(text) => setEmail(text)} value={recommend} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, marginBottom: 20 }}></TextInput>
+              <TextInput onChangeText={(text) => setEmail(text)} value={recommend} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, marginBottom: 20 }}></TextInput>
 
             </View>
 
@@ -114,9 +114,9 @@ const Register = () => {
               </View>
               <View style={{ borderColor: '#cccccc', borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}></View>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>이름</Text>
-              <TextInput scrollEnabled={false} onChangeText={(text) => setName(text)} value={name} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, marginBottom: 15 }}></TextInput>
+              <TextInput onChangeText={(text) => setName(text)} value={name} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, marginBottom: 15 }}></TextInput>
               <Text style={{ marginLeft: 10, marginTop: 5, fontWeight: 'bold' }}>휴대폰번호</Text>
-              <TextInput scrollEnabled={false} onChangeText={(text) => setHp(text)} value={hp} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, marginBottom: 15 }}></TextInput>
+              <TextInput onChangeText={(text) => setHp(text)} value={hp} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, marginBottom: 15 }}></TextInput>
 
             </View>
 

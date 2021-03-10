@@ -202,13 +202,13 @@ const HeadHeder = () => {
 
   return (
     <View>
-      <View style={{ justifyContent: 'space-between', alignItems: "flex-end", borderWidth: 1, position: 'absolute', width: chartWidth + 15, left: -2, bottom: (chartHeight - nnee), height: 120, flexDirection: 'row', backgroundColor: 'white' }}>
+      <View style={{ justifyContent: 'space-between', alignItems: "flex-end",borderWidth: 0.3, position: 'absolute', width: chartWidth + 15, left: -2, bottom: (chartHeight - nnee), height: 120, flexDirection: 'row', backgroundColor: 'white' }}>
 
         <TouchableOpacity activeOpacity={0.5} onPress={() => { setViewmenu(true) }} style={{ left: 10 }}>
           <View style={{ width: 75, marginBottom: 15 }}>
             <Image
               source={logo2}
-              style={{ width: 31, height: 23 }}
+              style={{ width: 25, height: 20 }}
             />
           </View>
         </TouchableOpacity>
@@ -221,7 +221,7 @@ const HeadHeder = () => {
 
         <TouchableOpacity onPress={() => { Linking.openURL('https://pluslink.kr/shop/') }}>
           <View style={{
-            width: 75, height: 35, backgroundColor: 'rgb(125,50,184)',
+            width: 75, height: 35, backgroundColor: '#863bc2',
             borderTopLeftRadius: 17,
             borderTopRightRadius: 17,
             borderBottomLeftRadius: 17,

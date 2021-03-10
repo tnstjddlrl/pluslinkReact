@@ -20,6 +20,7 @@ const chartWidth = Dimensions.get('window').width;
 import styles from './styles.js'
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios'
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 const Eimg =require('./img/e_banner01.jpg')
 const Eimg2 =require('./img/e_banner02.jpg')
@@ -58,10 +59,10 @@ const EEvent =({}) =>{
 
   return (
     <View style={styles.cardview}>
-      <TouchableOpacity onPress={()=>navigation.navigate('이벤트목록')}>
+      <TouchableWithoutFeedback onPress={()=>navigation.navigate('이벤트목록')}>
       <Text style={styles.etitle}>이벤트</Text>
       <Text style={styles.etitle2}>진행중인 이벤트를 확인해보세요!</Text>
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
       <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
@@ -84,11 +85,11 @@ const EEvent =({}) =>{
 const Listitem = (prop) => {
   const navigation = useNavigation()
   return(
-           <View style={styles.eventList}>
-              <TouchableOpacity onPress={()=>navigation.navigate('이벤트자세히보기',{id:prop.id})}>
-                <Image source={{uri:prop.thumb}} style={styles.imagetest}></Image>
-                </TouchableOpacity>
-                <Text numberOfLines={1} ellipsizeMode='tail' style={{width:180}}>{prop.title}</Text>
+           <View style={{marginLeft:10,marginRight:8,}}>
+              <TouchableWithoutFeedback onPress={()=>navigation.navigate('이벤트자세히보기',{id:prop.id})}>
+                <Image source={{uri:prop.thumb}} style={{width:chartWidth/2-18,borderTopLeftRadius: 1,borderTopRightRadius: 20,borderBottomLeftRadius:20,borderBottomRightRadius:1,height:100,}}></Image>
+                </TouchableWithoutFeedback>
+                <Text numberOfLines={1} ellipsizeMode='tail' style={{width:180,marginTop:10}}>{prop.title}</Text>
               </View>
   )
 }

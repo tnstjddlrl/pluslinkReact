@@ -22,7 +22,7 @@ import Company from "./Company";
 
 const Mmenu = () =>{
   const [whoclicked,setWhoclicked] = useState('전기&조명');
-  const puple = "rgba(164, 108, 209, 255)"
+  const puple = "#863bc2"
   const gray = "rgba(234, 234, 234, 255)"
 
   const [color1,setColor1] = useState(puple)

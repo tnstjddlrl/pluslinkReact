@@ -51,14 +51,14 @@ const styles = StyleSheet.create({
   
   },
   etitle:{
-    fontSize: 25,
+    fontSize: 20,
     marginTop: 30,
     marginBottom: 5,
     fontWeight: 'bold',
     textAlign: 'center',
   },
   etitle2:{
-    fontSize: 17,
+    fontSize: 15,
     marginTop: 1,
     marginBottom: 30,
     fontWeight: '300',

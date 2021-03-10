@@ -91,7 +91,7 @@ const REview = (prop) => {
 
 
 
-            <Text numberOfLines={4} ellipsizeMode='tail' style={{ margin: 5, height: 70, textAlign: 'center', fontSize: 12 }}>{prop.content}</Text>
+            <Text numberOfLines={4} ellipsizeMode='tail' style={{ margin: 5, height: 70, textAlign: 'center', fontSize: 12,color:'#888',marginTop:10 }}>{prop.content}</Text>
           </View>
         </View>
       </View>

@@ -67,11 +67,11 @@ const FootTer = () => {
   return (
 
     <View style={{ flex: 1 }}>
-      <View style={{ borderWidth: 1, position: 'absolute', bottom: 0, marginLeft: -5,width:chartWidth+10,backgroundColor:'white' }}>
+      <View style={{ borderWidth: 0.3, position: 'absolute', bottom: 0, marginLeft: -5,width:chartWidth+10,backgroundColor:'white' }}>
         <View style={{justifyContent:'space-between', flexDirection: 'row'}}>
           <TouchableWithoutFeedback onPress={() => { refresh(), navigation.navigate('홈') }}>
             <View style={{ backgroundColor: 'white' }}>
-              <ImageBackground source={ffimg} style={{ width: 65, height: 65, marginBottom: 15,marginLeft:10 }}>
+              <ImageBackground source={ffimg} style={{ width: 65, height: 65, marginBottom: 15,marginLeft:20 }}>
               </ImageBackground>
             </View>
           </TouchableWithoutFeedback>
@@ -89,7 +89,7 @@ const FootTer = () => {
           </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={() => { refresh(), logCheck('마이페이지') }}>
             <View style={{ backgroundColor: 'white' }}>
-              <ImageBackground source={ffimg4} style={{ width: 65, height: 65, marginLeft: 20, marginBottom: 15,marginRight:10 }}>
+              <ImageBackground source={ffimg4} style={{ width: 65, height: 65, marginLeft: 20, marginBottom: 15,marginRight:20 }}>
               </ImageBackground>
             </View>
           </TouchableWithoutFeedback>

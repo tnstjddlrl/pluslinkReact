@@ -174,11 +174,11 @@ const InfoChange = ({route}) => {
                 <Text style={{ margin: 10, fontWeight: '100' }}>{newid}</Text>
               </View>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>비밀번호</Text>
-              <TextInput scrollEnabled={false} onChangeText={(text) => setPwd(text)} value={pwd} secureTextEntry={true} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
+              <TextInput onChangeText={(text) => setPwd(text)} value={pwd} secureTextEntry={true} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>비밀번호 확인</Text>
-              <TextInput scrollEnabled={false} onChangeText={(text) => setCpwd(text)} value={cpwd} secureTextEntry={true} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
+              <TextInput onChangeText={(text) => setCpwd(text)} value={cpwd} secureTextEntry={true} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, }}></TextInput>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>E-mail</Text>
-              <TextInput scrollEnabled={false} onChangeText={(text) => setEmail(text)} value={email} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, marginBottom: 20 }}></TextInput>
+              <TextInput onChangeText={(text) => setEmail(text)} value={email} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, marginBottom: 20 }}></TextInput>
             </View>
 
             <View style={{ margin: 15, borderWidth: 1, width: chartWidth - 30, borderColor: '#cccccc' }}>
@@ -191,7 +191,7 @@ const InfoChange = ({route}) => {
                 <Text style={{ margin: 10, fontWeight: '100' }}>{name}</Text>
               </View>
               <Text style={{ marginLeft: 10, marginTop: 15, fontWeight: 'bold' }}>휴대폰번호</Text>
-              <TextInput scrollEnabled={false} onChangeText={(text) => setHp(text)} value={hp} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, marginBottom: 15 }}></TextInput>
+              <TextInput onChangeText={(text) => setHp(text)} value={hp} style={{ borderWidth: 1, borderColor: '#cccccc', width: chartWidth - 50, height: 35, marginLeft: 10, marginTop: 5, marginBottom: 15 }}></TextInput>
 
             </View>
 
