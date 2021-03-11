@@ -282,7 +282,7 @@ const Item = (prop) => {
             </View>
           </View>
           <Text style={{ margin: 5,marginLeft:15,fontSize:13 }}>시공사례 {nc}건</Text>
-          <Text style={{ margin: 15,fontSize:16 }} numberOfLines={3}>{prop.content}</Text>
+          <Text style={{ margin: 15,fontSize:13 }} numberOfLines={3}>{prop.content}</Text>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', margin: 15 }}>
 
             <View style={{ flexDirection: "row", alignItems: "center" }}>

@@ -63,7 +63,7 @@ const REview = (prop) => {
     var ss = []
 
     for (var i = 0; i < prop.star; i++) {
-      ss.push(<Image source={starimg} style={{ width: 20, height: 20 }}></Image>)
+      ss.push(<Image source={starimg} style={{ width: 15, height: 15 }}></Image>)
     }
 
     return ss
@@ -81,7 +81,7 @@ const REview = (prop) => {
             </View>
 
             <Text style={{ textAlign: 'center', marginTop: 10 }}>{prop.name}</Text>
-            <View style={{ justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
+            <View style={{ justifyContent: "center", alignItems: "center", flexDirection: "row",marginTop:10 }}>
               <StarPush star={prop.star}></StarPush>
               {/* <Image source={starimg} style={{width:20,height:20}}></Image>
             <Image source={starimg} style={{width:20,height:20}}></Image>s
@@ -92,7 +92,7 @@ const REview = (prop) => {
 
 
 
-            <Text numberOfLines={4} ellipsizeMode='tail' style={{ margin: 5, height: 70, textAlign: 'center', fontSize: 12,color:'#888',marginTop:10 }}>{prop.content}</Text>
+            <Text numberOfLines={3} ellipsizeMode='tail' style={{ margin: 5, height: 70, textAlign: 'center', fontSize: 12,color:'#888',marginTop:10 }}>{prop.content}</Text>
           </View>
         </View>
       </View>
@@ -109,7 +109,6 @@ const REview = (prop) => {
       <ImageBackground source={image} style={styles.image}>
         <Text style={styles.reviewT}>실시간 리뷰</Text>
         <ScrollView
-          // pagingEnabled={true}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           onMomentumScrollEnd={

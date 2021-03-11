@@ -157,9 +157,9 @@ const HeadHeder = () => {
 
       for (var i = 0; i < cateList.length; i++) {
         if (cateList[i].category == prop.title) {
-          if(cateList[i].subcategory == ''){
+          if (cateList[i].subcategory == '') {
             subll.push("전체")
-          }else{
+          } else {
             subll.push(cateList[i].subcategory)
           }
         }
@@ -182,7 +182,7 @@ const HeadHeder = () => {
         <TouchableOpacity onPress={() => { view(), colcol() }}>
           <View style={{ width: chartWidth / 1.45, height: 50, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ margin: 15, fontWeight: 'bold', fontSize: 15, color: tcolor }}>{prop.title}</Text>
-            <Image source={arrow} style={{ position: 'absolute', right: 10, }}></Image>
+            <Image source={arrow} style={{ position: 'absolute', right: 20, width: 5, height: 10 }}></Image>
           </View>
         </TouchableOpacity>
         {test && <View style={{ backgroundColor: '#e6e6e6' }}><List></List></View>}
@@ -190,7 +190,7 @@ const HeadHeder = () => {
     )
   }
 
-  const [ispng,setIspng] = useState(false)
+  const [ispng, setIspng] = useState(false)
 
   const unsubscribe = navigation.addListener('focus', () => {
     setIspng(false)
@@ -202,7 +202,7 @@ const HeadHeder = () => {
 
   return (
     <View>
-      <View style={{ justifyContent: 'space-between', alignItems: "flex-end",borderWidth: 0.3, position: 'absolute', width: chartWidth + 15, left: -2, bottom: (chartHeight - nnee), height: 120, flexDirection: 'row', backgroundColor: 'white' }}>
+      <View style={{ justifyContent: 'space-between', alignItems: "flex-end", borderWidth: 0.3, position: 'absolute', width: chartWidth + 15, left: -2, bottom: (chartHeight - nnee), height: 120, flexDirection: 'row', backgroundColor: 'white' }}>
 
         <TouchableOpacity activeOpacity={0.5} onPress={() => { setViewmenu(true) }} style={{ left: 10 }}>
           <View style={{ width: 75, marginBottom: 15 }}>
@@ -239,8 +239,8 @@ const HeadHeder = () => {
 
 
       <Modal transparent={false} visible={viewmenu}>
-        <TouchableWithoutFeedback onPress={()=>setViewmenu(false)}>
-        <View style={{width:chartWidth,height:chartHeight,backgroundColor:'black'}}></View>
+        <TouchableWithoutFeedback onPress={() => setViewmenu(false)}>
+          <View style={{ width: chartWidth, height: chartHeight, backgroundColor: 'black' }}></View>
         </TouchableWithoutFeedback>
         <View style={{ width: chartWidth / 1.45, height: chartHeight, position: 'absolute', backgroundColor: 'white' }}>
           <View>
@@ -248,20 +248,17 @@ const HeadHeder = () => {
               <View style={{ marginTop: mata }}>
 
                 <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 10, alignItems: 'center' }}>
-                  <View style={{ backgroundColor: 'white', width: 50, height: 50, borderRadius: 28,justifyContent:"center",alignItems:"center" }}>
+                  <View style={{ backgroundColor: 'white', width: 50, height: 50, borderRadius: 28, justifyContent: "center", alignItems: "center" }}>
                     
-                    
-                    {ispng ?<Image source={userplus} style={{ width: 35, height: 40, borderRadius: 0,justifyContent:"center",alignItems:"center" }}></Image> :
-                    <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + newid.substr(0, 2) + '/' + newid + '.gif' }} onError={()=>setIspng(true)} style={{ width: 50, height: 50, borderRadius: 28,backgroundColor:'white' }}></Image>
+                    {ispng ? <Image source={userplus} style={{ width: 35, height: 40, borderRadius: 0, justifyContent: "center", alignItems: "center" }}></Image> :
+                      <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + newid.substr(0, 2) + '/' + newid + '.gif' }} onError={() => setIspng(true)} style={{ width: 50, height: 50, borderRadius: 28, backgroundColor: 'white' }}></Image>
                     }
-
-                    
                   </View>
                   <Text style={{ fontWeight: 'bold', marginLeft: 10, color: 'white', fontSize: 18 }}>{name}</Text>
 
                   <TouchableOpacity onPress={() => setViewmenu(false)} style={{ width: 50, height: 50, backgroundColor: 'white', borderRadius: 27, right: 10, top: -10, position: 'absolute' }}>
-                    <View style={{ width: 50, height: 50, left: 0 ,justifyContent:"center",alignItems:"center"}}>
-                      <Image style={{width:20,height:20}} source={axe}></Image>
+                    <View style={{ width: 50, height: 50, left: 0, justifyContent: "center", alignItems: "center" }}>
+                      <Image style={{ width: 20, height: 20 }} source={axe}></Image>
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -326,7 +323,7 @@ const HeadHeder = () => {
               </View>
             </ImageBackground>
 
-            <ScrollView style={{maxHeight:chartHeight/1.5}} showsVerticalScrollIndicator={false}>
+            <ScrollView style={{ maxHeight: chartHeight / 1.5 }} showsVerticalScrollIndicator={false}>
               <LeftMenu title={'전기&조명'} ></LeftMenu>
               <LeftMenu title={'수도'} ></LeftMenu>
               <LeftMenu title={'도배&장판'} ></LeftMenu>

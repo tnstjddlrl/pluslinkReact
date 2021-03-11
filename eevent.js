@@ -22,9 +22,7 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios'
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
-const Eimg = require('./img/e_banner01.jpg')
-const Eimg2 = require('./img/e_banner02.jpg')
-const Eimg3 = require('./img/e_banner03.jpg')
+
 const EEvent = ({ }) => {
   const navigation = useNavigation();
 
