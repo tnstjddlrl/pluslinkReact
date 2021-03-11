@@ -374,9 +374,25 @@ const BannerTest = () =>{
   return(
     <View>
       <View style={{width:chartWidth,height:chartHeight/5}}>
-        <ImageBackground style={{width:chartWidth,height:chartHeight/5}} source={ba1}>
-          <Text style={{color:'white',fontFamily:'ajh'}} >당장 시공이 필요할 때, 프링으로 손 쉽게 신청하세요!</Text>
-          <Text style={{color:'white'}} >당장 시공이 필요할 때, 프링으로 손 쉽게 신청하세요!</Text>
+        <ImageBackground style={{width:chartWidth,height:chartHeight/4.5}} source={ba1}>
+          <View style={{width:chartWidth,height:chartHeight/4,top:"20%",left:'3%'}}>
+            <Text style={{color:'white',fontFamily:'ajh',fontSize:18}} >당장 시공이 필요할 때, 프링으로 손 쉽게 신청하세요!</Text>
+            <Text style={{color:'white',fontFamily:'regular',fontSize:12}} >당장 시공이 필요할 때, 프링으로 손 쉽게 신청하세요!</Text>
+          </View>
+        </ImageBackground>
+
+        <ImageBackground style={{width:chartWidth,height:chartHeight/4.5}} source={ba2}>
+          <View style={{width:chartWidth,height:chartHeight/4,top:"20%",left:'3%'}}>
+          <Text style={{color:'white',fontFamily:'ajh',fontSize:18}} >후기로 증명된 프링의 간편함, 지금 체험하세요!</Text>
+          <Text style={{color:'white',fontFamily:'regular',fontSize:12}} >지금 당장 내 주변 시공견적을 비교해보세요</Text>
+          </View>
+        </ImageBackground>
+
+        <ImageBackground style={{width:chartWidth,height:chartHeight/4.5}} source={ba3}>
+          <View style={{width:chartWidth,height:chartHeight/4,top:"20%",left:'3%'}}>
+          <Text style={{color:'white',fontFamily:'ajh',fontSize:18}} >이사 후, 프링으로 인테리어를 한번에 해결하세요</Text>
+          <Text style={{color:'white',fontFamily:'regular',fontSize:12}} >프링몰에서 패키지 구매 후 시공까지 한번에!</Text>
+          </View>
         </ImageBackground>
       </View>
     </View>
@@ -385,4 +401,4 @@ const BannerTest = () =>{
 
 
 
-export default BannerTest;//App2
+export default App2;//App2

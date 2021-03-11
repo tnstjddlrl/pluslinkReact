@@ -134,7 +134,6 @@
 				DD1937C8BD96F169224C941B /* Pods-pltest2-tvOSTests.debug.xcconfig */,
 				3826BAC3FEF5610334425C50 /* Pods-pltest2-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
