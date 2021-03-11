@@ -4,7 +4,9 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
-  Text
+  Text,
+  Image,
+  ImageBackground
 } from "react-native";
 
 import AsyncStorage from '@react-native-community/async-storage'; //로그인한 아이디값 저장하기 위한 앱 내부 저장소
@@ -364,6 +366,23 @@ function App2() {
 
 //----------------------------------------------------------
 
+const BannerTest = () =>{
+  const ba1 = require('./img/ba1.jpg')
+  const ba2 = require('./img/ba2.jpg')
+  const ba3 = require('./img/ba3.jpg')
+  
+  return(
+    <View>
+      <View style={{width:chartWidth,height:chartHeight/5}}>
+        <ImageBackground style={{width:chartWidth,height:chartHeight/5}} source={ba1}>
+          <Text style={{color:'white',fontFamily:'ajh'}} >당장 시공이 필요할 때, 프링으로 손 쉽게 신청하세요!</Text>
+          <Text style={{color:'white'}} >당장 시공이 필요할 때, 프링으로 손 쉽게 신청하세요!</Text>
+        </ImageBackground>
+      </View>
+    </View>
+  )
+}
 
 
-export default App2;//App2
+
+export default BannerTest;//App2
