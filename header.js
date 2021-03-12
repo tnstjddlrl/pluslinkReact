@@ -265,28 +265,28 @@ const HeadHeder = () => {
 
 
 
-                {newid == '로그인해주세요' ? <View style={{ flexDirection: 'row', marginTop: 25, marginLeft: 10 }}>
+                {newid == '로그인해주세요' ? <View style={{ flexDirection: 'row', marginTop: 25,justifyContent:"center",alignItems:"center"}}>
                   <TouchableOpacity onPress={() => { navigation.navigate('로그인'), setViewmenu(false) }}>
-                    <View style={{ backgroundColor: 'white', width: chartWidth / 3.5, height: 40, borderRadius: 5 }}>
-                      <Text style={{ alignSelf: 'center', marginTop: 10, fontSize: 15 }}>로그인</Text>
+                    <View style={{ backgroundColor: 'white', width: chartWidth / 3.2, height: 40, borderRadius: 5,justifyContent:"center",alignItems:"center" }}>
+                      <Text style={{ fontSize: 15 }}>로그인</Text>
                     </View>
                   </TouchableOpacity>
 
                   <TouchableOpacity onPress={() => { navigation.navigate('회원가입'), setViewmenu(false) }}>
-                    <View style={{ backgroundColor: 'white', width: chartWidth / 3.5, height: 40, borderRadius: 5, marginLeft: 10 }}>
-                      <Text style={{ alignSelf: 'center', marginTop: 10, fontSize: 15 }}>회원가입</Text>
+                    <View style={{ backgroundColor: 'white', width: chartWidth / 3.2, height: 40, borderRadius: 5, marginLeft: 10,justifyContent:"center",alignItems:"center" }}>
+                      <Text style={{ fontSize: 15 }}>회원가입</Text>
                     </View>
                   </TouchableOpacity>
-                </View> : <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 10 }}>
+                </View> : <View style={{ flexDirection: 'row', marginTop: 10,justifyContent:"center",alignItems:"center" }}>
                     <TouchableOpacity onPress={() => { navigation.navigate('정보변경'), setViewmenu(false) }}>
-                      <View style={{ backgroundColor: 'white', width: chartWidth / 3.5, height: 40, borderRadius: 5 }}>
-                        <Text style={{ alignSelf: 'center', marginTop: 10, fontSize: 15 }}>정보변경</Text>
+                      <View style={{ backgroundColor: 'white', width: chartWidth / 3.2, height: 40, borderRadius: 5,justifyContent:"center",alignItems:"center" }}>
+                        <Text style={{ fontSize: 15 }}>정보변경</Text>
                       </View>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => { fetchUser('로그인해주세요'), setViewmenu(false), navigation.navigate('홈'), setName('로그인해주세요') }}>
-                      <View style={{ backgroundColor: 'white', width: chartWidth / 3.5, height: 40, borderRadius: 5, marginLeft: 10 }}>
-                        <Text style={{ alignSelf: 'center', marginTop: 10, fontSize: 15 }}>로그아웃</Text>
+                      <View style={{ backgroundColor: 'white', width: chartWidth / 3.2, height: 40, borderRadius: 5, marginLeft: 10,justifyContent:"center",alignItems:"center" }}>
+                        <Text style={{ fontSize: 15 }}>로그아웃</Text>
                       </View>
                     </TouchableOpacity>
                   </View>

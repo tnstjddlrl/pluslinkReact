@@ -49,7 +49,9 @@ const Banner = ()=>{
   
   return(
     // 스와이퍼 오픈소스를 활용하여 메인 배너 구성, 구성 요소는 ImageBackground로 구성한다.
-    <Swiper style={{marginTop:20,height:chartHeight/3.8,}} showsButtons={false} autoplay={true} autoplayTimeout={4}>
+    <Swiper style={{marginTop:20,height:chartHeight/3.8,}} showsButtons={false} autoplay={true} autoplayTimeout={4}
+      activeDotColor={'rgb(125,50,184)'}
+    >
         
         <ImageBackground style={{width:chartWidth,height:chartHeight/3.8}} source={ba1}>
           <View style={{width:chartWidth,height:chartHeight/4,top:"20%",left:'3%'}}>
@@ -58,8 +60,8 @@ const Banner = ()=>{
             <Text style={{color:'white',fontFamily:'ajh',fontSize:18}} >당장 시공이 필요할 때,</Text>
             <Text style={{color:'white',fontFamily:'ajh',fontSize:18,marginTop:5}} >프링으로 손 쉽게 신청하세요!</Text>
             <Text style={{color:'white',fontFamily:'regular',fontSize:12}} >프링 어플로 손 쉽게 견적신청하세요</Text>
-            <View style={{backgroundColor:'white',borderRadius:20,width:120,height:28,justifyContent:"center",alignItems:"center",top:'10%' , flexDirection:"row"}}>
-              <Text style={{fontSize:11,fontFamily:'regular',letterSpacing:-1,fontWeight:'bold'}}>견적신청 바로가기</Text>
+            <View style={{backgroundColor:'white',borderRadius:20,width:105,height:28,justifyContent:"center",alignItems:"center",top:'5%' , flexDirection:"row"}}>
+              <Text style={{fontSize:11,fontFamily:'regular',letterSpacing:-0.5,fontWeight:'bold',color:'#737373'}}>견적신청 바로가기</Text>
             </View>
             </View>
             :
@@ -77,8 +79,8 @@ const Banner = ()=>{
             <View style={{marginLeft:10}}>
             <Text style={{color:'white',fontFamily:'ajh',fontSize:18}} >후기로 증명된 프링의 간편함, 지금 체험하세요!</Text>
             <Text style={{color:'white',fontFamily:'regular',fontSize:12}} >지금 당장 내 주변 시공견적을 비교해보세요</Text> 
-            <View style={{backgroundColor:'white',borderRadius:20,width:120,height:28,justifyContent:"center",alignItems:"center",top:'15%' , flexDirection:"row"}}>
-              <Text style={{fontSize:11,fontFamily:'regular',letterSpacing:-1,fontWeight:'bold'}}>회원가입 바로가기</Text>
+            <View style={{backgroundColor:'white',borderRadius:20,width:105,height:28,justifyContent:"center",alignItems:"center",top:'10%' , flexDirection:"row"}}>
+              <Text style={{fontSize:11,fontFamily:'regular',letterSpacing:-0.5,fontWeight:'bold',color:'#737373'}}>회원가입 바로가기</Text>
             </View>
             </View>
             :
@@ -97,8 +99,8 @@ const Banner = ()=>{
             <Text style={{color:'white',fontFamily:'ajh',fontSize:18}} >이사 후, 프링으로 </Text>
             <Text style={{color:'white',fontFamily:'ajh',fontSize:18,marginTop:5}} >인테리어를 한번에 해결하세요</Text>
             <Text style={{color:'white',fontFamily:'regular',fontSize:12}} >프링몰에서 패키지 구매 후 시공까지 한번에!</Text> 
-            <View style={{backgroundColor:'white',borderRadius:20,width:110,height:28,justifyContent:"center",alignItems:"center",top:'10%' , flexDirection:"row"}}>
-              <Text style={{fontSize:11,fontFamily:'regular',letterSpacing:-1,fontWeight:'bold'}}>프링몰 바로가기</Text>
+            <View style={{backgroundColor:'white',borderRadius:20,width:95,height:28,justifyContent:"center",alignItems:"center",top:'5%' , flexDirection:"row"}}>
+              <Text style={{fontSize:11,fontFamily:'regular',letterSpacing:-0.5,fontWeight:'bold',color:'#737373'}}>프링몰 바로가기</Text>
             </View>
             </View>
             :

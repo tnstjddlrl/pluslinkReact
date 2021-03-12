@@ -292,7 +292,7 @@ const Item = (prop) => {
             </View>
 
             <View style={{ flexDirection: "row",alignItems:"center" }}>
-              <Image source={starimg} style={{ width: 20, height: 20 }}></Image>
+              <Image source={starimg} style={{ width: 20, height: 20,marginRight:5 }}></Image>
               <Text>{prop.star}</Text>
             </View>
           </View>
