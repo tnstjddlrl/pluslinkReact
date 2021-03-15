@@ -142,58 +142,58 @@ const CurGyeon = ({route}) => {
                             <TouchableOpacity onPress={()=>navigation.navigate('견적테이블',{name:'전체'})}>
                             <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
                                 <Text style={{fontSize:15}}>전체({all})</Text>
-                                <Image source={arrow} style={{position:'absolute',right:20}}></Image>
+                                <Image source={arrow} style={{position:'absolute',right:20,width:8,height:15}}></Image>
                             </View>
-                            <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
+                            <View style={{width:chartWidth-30,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={()=>navigation.navigate('견적테이블',{name:'입찰대기'})}>
                             <View style={{marginLeft:10,marginTop:40,flexDirection:"row",alignItems:"center"}}>
                                 <Text style={{fontSize:15}}>입찰대기({wait})</Text>
-                                <Image source={arrow} style={{position:'absolute',right:20}}></Image>
+                                <Image source={arrow} style={{position:'absolute',right:20,width:8,height:15}}></Image>
                             </View>
-                            <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
+                            <View style={{width:chartWidth-30,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={()=>navigation.navigate('견적테이블',{name:'입찰진행중'})}>
                             <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
                                 <Text style={{fontSize:15}}>입찰진행중({ipload})</Text>
-                                <Image source={arrow} style={{position:'absolute',right:20}}></Image>
+                                <Image source={arrow} style={{position:'absolute',right:20,width:8,height:15}}></Image>
                             </View>
-                            <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
+                            <View style={{width:chartWidth-30,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
                             </TouchableOpacity>
 
 
                             <TouchableOpacity onPress={()=>navigation.navigate('견적테이블',{name:'시공진행중'})}>
                             <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
                                 <Text style={{fontSize:15}}>시공진행중({siload})</Text>
-                                <Image source={arrow} style={{position:'absolute',right:20}}></Image>
+                                <Image source={arrow} style={{position:'absolute',right:20,width:8,height:15}}></Image>
                             </View>
-                            <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
+                            <View style={{width:chartWidth-30,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={()=>navigation.navigate('견적테이블',{name:'시공완료'})}>
                             <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
                                 <Text style={{fontSize:15}}>시공완료({complete})</Text>
-                                <Image source={arrow} style={{position:'absolute',right:20}}></Image>
+                                <Image source={arrow} style={{position:'absolute',right:20,width:8,height:15}}></Image>
                             </View>
-                            <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
+                            <View style={{width:chartWidth-30,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={()=>navigation.navigate('견적테이블',{name:'시공취소'})}>
                             <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
                                 <Text style={{fontSize:15}}>시공취소({sicancel})</Text>
-                                <Image source={arrow} style={{position:'absolute',right:20}}></Image>
+                                <Image source={arrow} style={{position:'absolute',right:20,width:8,height:15}}></Image>
                             </View>
-                            <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
+                            <View style={{width:chartWidth-30,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
                             </TouchableOpacity>
 
                             <TouchableOpacity onPress={()=>navigation.navigate('견적테이블',{name:'견적취소'})}>
                             <View style={{marginLeft:10,marginTop:10,flexDirection:"row",alignItems:"center"}}>
                                 <Text style={{fontSize:15}}>견적취소({gyoncancel})</Text>
-                                <Image source={arrow} style={{position:'absolute',right:20}}></Image>
+                                <Image source={arrow} style={{position:'absolute',right:20,width:8,height:15}}></Image>
                             </View>
-                            <View style={{width:chartWidth-40,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
+                            <View style={{width:chartWidth-30,borderWidth:0.3,marginBottom:5,marginTop:10,borderColor:'#DBDBDB'}}></View>
                             </TouchableOpacity>
                             
 

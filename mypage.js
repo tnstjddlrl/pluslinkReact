@@ -149,7 +149,7 @@ const Mypage = () => {
             <View style={{ marginLeft: 20, marginRight: 20, marginTop: 10, backgroundColor: 'white', height: chartHeight }}>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <TouchableOpacity onPress={() => navigation.navigate('마이포토')}>
-                  <View style={{ borderWidth: 1, height: 60, width: 60, borderRadius: 27, backgroundColor: 'white', justifyContent: "center", alignItems: "center" }}>
+                  <View style={{ borderWidth: 1, height: 60, width: 60, borderRadius: 27, backgroundColor: 'rgb(216,216,216)', justifyContent: "center", alignItems: "center" }}>
                     {ispng ? <Image source={userplus} style={{ width: 35, height: 40, borderRadius: 0, justifyContent: "center", alignItems: "center" }}></Image> :
                       <Image style={{ height: 60, width: 60, borderRadius: 27, }} source={{ uri: 'https://pluslink.kr/data/member_image/' + newid.substr(0, 2) + '/' + newid + '.gif' }} onError={() => setIspng(true)}></Image>
                     }
@@ -169,6 +169,7 @@ const Mypage = () => {
 
 
                   <View>
+                    <View style={{height:10,}}></View>
                     <TouchableOpacity onPress={() => navigation.navigate('취약계층인증',{name:name})}>
                       <Text>취약계층인증</Text>
                     </TouchableOpacity> 
@@ -190,7 +191,7 @@ const Mypage = () => {
                 <TouchableOpacity onPress={() => navigation.navigate('견적현황')}>
                   <View style={{ marginLeft: 10, marginTop: 10, flexDirection: "row", alignItems: "center" }}>
                     <Text style={{ fontSize: 20 }}>견적현황</Text>
-                    <Image source={arrow} style={{ position: 'absolute', right: 20 }}></Image>
+                    <Image source={arrow} style={{ position: 'absolute', right: 20,width:8,height:15 }}></Image>
                   </View>
                   <View style={{ width: chartWidth - 40, borderWidth: 0.3, marginBottom: 5, marginTop: 10, borderColor: '#DBDBDB' }}></View>
                 </TouchableOpacity>
@@ -198,7 +199,7 @@ const Mypage = () => {
                 <TouchableOpacity onPress={() => navigation.navigate('결제관리')}>
                   <View style={{ marginLeft: 10, marginTop: 10, flexDirection: "row", alignItems: "center" }}>
                     <Text style={{ fontSize: 20 }}>결제관리</Text>
-                    <Image source={arrow} style={{ position: 'absolute', right: 20 }}></Image>
+                    <Image source={arrow} style={{ position: 'absolute', right: 20,width:8,height:15 }}></Image>
                   </View>
                   <View style={{ width: chartWidth - 40, borderWidth: 0.3, marginBottom: 5, marginTop: 10, borderColor: '#DBDBDB' }}></View>
                 </TouchableOpacity>
@@ -206,7 +207,7 @@ const Mypage = () => {
                 <TouchableOpacity onPress={() => navigation.navigate('리뷰관리')}>
                   <View style={{ marginLeft: 10, marginTop: 10, flexDirection: "row", alignItems: "center" }}>
                     <Text style={{ fontSize: 20 }}>리뷰관리</Text>
-                    <Image source={arrow} style={{ position: 'absolute', right: 20 }}></Image>
+                    <Image source={arrow} style={{ position: 'absolute', right: 20,width:8,height:15 }}></Image>
                   </View>
                   <View style={{ width: chartWidth - 40, borderWidth: 0.3, marginBottom: 5, marginTop: 10, borderColor: '#DBDBDB' }}></View>
                 </TouchableOpacity>
@@ -215,7 +216,7 @@ const Mypage = () => {
                 <TouchableOpacity onPress={() => navigation.navigate('공지사항')}>
                   <View style={{ marginLeft: 10, marginTop: 30, flexDirection: "row", alignItems: "center" }}>
                     <Text style={{ fontSize: 20 }}>공지사항</Text>
-                    <Image source={arrow} style={{ position: 'absolute', right: 20 }}></Image>
+                    <Image source={arrow} style={{ position: 'absolute', right: 20,width:8,height:15 }}></Image>
                   </View>
                   <View style={{ width: chartWidth - 40, borderWidth: 0.3, marginBottom: 5, marginTop: 10, borderColor: '#DBDBDB' }}></View>
                 </TouchableOpacity>
@@ -223,7 +224,7 @@ const Mypage = () => {
                 <TouchableOpacity onPress={() => navigation.navigate('이벤트목록')}>
                   <View style={{ marginLeft: 10, marginTop: 10, flexDirection: "row", alignItems: "center" }}>
                     <Text style={{ fontSize: 20 }}>이벤트</Text>
-                    <Image source={arrow} style={{ position: 'absolute', right: 20 }}></Image>
+                    <Image source={arrow} style={{ position: 'absolute', right: 20,width:8,height:15 }}></Image>
                   </View>
                   <View style={{ width: chartWidth - 40, borderWidth: 0.3, marginBottom: 5, marginTop: 10, borderColor: '#DBDBDB' }}></View>
                 </TouchableOpacity>
@@ -231,7 +232,7 @@ const Mypage = () => {
                 <TouchableOpacity onPress={() => navigation.navigate('1대1문의')}>
                   <View style={{ marginLeft: 10, marginTop: 10, flexDirection: "row", alignItems: "center" }}>
                     <Text style={{ fontSize: 20 }}>1:1문의</Text>
-                    <Image source={arrow} style={{ position: 'absolute', right: 20 }}></Image>
+                    <Image source={arrow} style={{ position: 'absolute', right: 20,width:8,height:15 }}></Image>
                   </View>
                   <View style={{ width: chartWidth - 40, borderWidth: 0.3, marginBottom: 5, marginTop: 10, borderColor: '#DBDBDB' }}></View>
                 </TouchableOpacity>
@@ -239,7 +240,7 @@ const Mypage = () => {
                 <TouchableOpacity onPress={() => navigation.navigate('자주묻는질문')}>
                   <View style={{ marginLeft: 10, marginTop: 10, flexDirection: "row", alignItems: "center" }}>
                     <Text style={{ fontSize: 20 }}>자주묻는질문</Text>
-                    <Image source={arrow} style={{ position: 'absolute', right: 20 }}></Image>
+                    <Image source={arrow} style={{ position: 'absolute', right: 20,width:8,height:15 }}></Image>
                   </View>
                   <View style={{ width: chartWidth - 40, borderWidth: 0.3, marginBottom: 5, marginTop: 10, borderColor: '#DBDBDB' }}></View>
                 </TouchableOpacity>

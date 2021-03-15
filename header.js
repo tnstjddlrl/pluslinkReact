@@ -270,7 +270,7 @@ const HeadHeder = () => {
                 <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 15, alignItems: 'center' }}>
                   {
                     newid != '로그인해주세요' && <View style={{ flexDirection: "row", alignItems: 'center' }}>
-                      <View style={{ backgroundColor: 'white', width: 50, height: 50, borderRadius: 28, justifyContent: "center", alignItems: "center" }}>
+                      <View style={{ backgroundColor: 'rgb(216,216,216)', width: 50, height: 50, borderRadius: 28, justifyContent: "center", alignItems: "center" }}>
                         {ispng ? <Image source={userplus} style={{ width: 35, height: 40, borderRadius: 0, justifyContent: "center", alignItems: "center" }}></Image> :
                           <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + newid.substr(0, 2) + '/' + newid + '.gif' }} onError={() => setIspng(true)} style={{ width: 50, height: 50, borderRadius: 28, backgroundColor: 'white' }}></Image>
                         }
