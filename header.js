@@ -152,10 +152,10 @@ const HeadHeder = () => {
   const MenuChild = (prop) => {
     return (
       <View>
-      <View style={{width:chartWidth/1.45,borderWidth:0.5,borderColor:'#999999'}}></View>
-      <TouchableOpacity onPress={() => { navigation.navigate('업체목록', { cate: prop.title, subcate: prop.text }), setViewmenu(false) }}>
-        <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 5, fontSize: 15,color:'#888' }}>{prop.text}</Text>
-      </TouchableOpacity>
+        <View style={{ width: chartWidth / 1.45, borderWidth: 0.5, borderColor: '#999999' }}></View>
+        <TouchableOpacity onPress={() => { navigation.navigate('업체목록', { cate: prop.title, subcate: prop.text }), setViewmenu(false) }}>
+          <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 5, fontSize: 15, color: '#888' }}>{prop.text}</Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -178,12 +178,12 @@ const HeadHeder = () => {
         }
       }
       for (var i = 0; i < subll.length; i++) {
-        if(i+1==subll.length){
-          ll.push(<View><MenuChild key={i} text={subll[i]} title={prop.title}></MenuChild><View style={{width:chartWidth/1.45,borderWidth:0.5,borderColor:'#999999'}}></View></View>)
-        }else{
+        if (i + 1 == subll.length) {
+          ll.push(<View><MenuChild key={i} text={subll[i]} title={prop.title}></MenuChild><View style={{ width: chartWidth / 1.45, borderWidth: 0.5, borderColor: '#999999', marginBottom: 1 }}></View></View>)
+        } else {
           ll.push(<MenuChild key={i} text={subll[i]} title={prop.title}></MenuChild>)
         }
-        
+
       }
       return ll
     }
@@ -200,8 +200,8 @@ const HeadHeder = () => {
         <TouchableOpacity onPress={() => { view(), colcol() }}>
           <View style={{ width: chartWidth / 1.45, height: 50, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ margin: 15, fontSize: 15, color: tcolor }}>{prop.title}</Text>
-            {test ? <Image source={arrup} style={{ position: 'absolute', right: 20, width: 10, height: 6.5 }}></Image> : 
-            <Image source={arrdown} style={{ position: 'absolute', right: 20, width: 10, height: 6.5 }}></Image>
+            {test ? <Image source={arrup} style={{ position: 'absolute', right: 20, width: 10, height: 6.5 }}></Image> :
+              <Image source={arrdown} style={{ position: 'absolute', right: 20, width: 10, height: 6.5 }}></Image>
             }
           </View>
         </TouchableOpacity>
@@ -258,29 +258,25 @@ const HeadHeder = () => {
 
 
       <Modal transparent={false} visible={viewmenu}>
-        <TouchableWithoutFeedback onPress={() => setViewmenu(false)}>
+        <TouchableOpacity onPress={() => setViewmenu(false)}>
           <View style={{ width: chartWidth, height: chartHeight, backgroundColor: 'black' }}></View>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
         <View style={{ width: chartWidth / 1.45, height: chartHeight, position: 'absolute', backgroundColor: 'white' }}>
           <View>
             <ImageBackground source={graBox} style={{ width: chartWidth / 1.45, masHeight: 220 }}>
               <View style={{ marginTop: mata }}>
 
                 <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 15, alignItems: 'center' }}>
-                  
-                    {
-                      newid != '로그인해주세요' && <View style={{flexDirection:"row", alignItems: 'center' }}>
-                        <View style={{ backgroundColor: 'white', width: 50, height: 50, borderRadius: 28, justifyContent: "center", alignItems: "center" }}>
+                  {
+                    newid != '로그인해주세요' && <View style={{ flexDirection: "row", alignItems: 'center' }}>
+                      <View style={{ backgroundColor: 'white', width: 50, height: 50, borderRadius: 28, justifyContent: "center", alignItems: "center" }}>
                         {ispng ? <Image source={userplus} style={{ width: 35, height: 40, borderRadius: 0, justifyContent: "center", alignItems: "center" }}></Image> :
                           <Image source={{ uri: 'https://pluslink.kr/data/member_image/' + newid.substr(0, 2) + '/' + newid + '.gif' }} onError={() => setIspng(true)} style={{ width: 50, height: 50, borderRadius: 28, backgroundColor: 'white' }}></Image>
                         }
-                        </View>
-                        <Text style={{ fontWeight: 'bold', marginLeft: 10, color: 'white', fontSize: 18 }}>{name}</Text>
                       </View>
-                    }
-
-                  
-
+                      <Text style={{ fontWeight: 'bold', marginLeft: 10, color: 'white', fontSize: 18 }}>{name}</Text>
+                    </View>
+                  }
                   <TouchableOpacity onPress={() => setViewmenu(false)} style={{ width: 40, height: 40, backgroundColor: 'white', borderRadius: 27, right: 15, top: 0, position: 'absolute' }}>
                     <View style={{ width: 40, height: 40, left: 0, justifyContent: "center", alignItems: "center" }}>
                       <Image style={{ width: 12, height: 12 }} source={close2}></Image>

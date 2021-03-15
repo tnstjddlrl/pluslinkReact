@@ -696,8 +696,10 @@ const ListItem = (prop) => {
             <Text style={{ fontSize: 18, marginLeft: 15 }}>{prop.score}</Text>
           </View>
 
-          <Text style={{ marginTop: 10 }}>업체소개</Text>
-          <View style={{ width: 30, borderWidth: 0.5, marginTop: 3 }}></View>
+          <View>
+            <Text style={{ marginTop: 10 }}>업체소개</Text>
+            <View style={{ width: 55, borderWidth: 0.4, marginTop: 3 }}></View>
+          </View>
           <Text numberOfLines={1} style={{ marginTop: 10 }}>{prop.content}</Text>
 
           <TouchableOpacity onPress={() => { if(ttView==false){setTTview(true)}else{setTTview(false)}  }}>
