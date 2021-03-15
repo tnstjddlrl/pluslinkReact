@@ -152,9 +152,9 @@ const HeadHeder = () => {
   const MenuChild = (prop) => {
     return (
       <View>
-        <View style={{ width: chartWidth / 1.45, borderWidth: 0.5, borderColor: '#999999' }}></View>
+        {/* <View style={{ width: chartWidth / 1.45, borderWidth: 0.5, borderColor: '#999999' }}></View> */}
         <TouchableOpacity onPress={() => { navigation.navigate('업체목록', { cate: prop.title, subcate: prop.text }), setViewmenu(false) }}>
-          <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 5, fontSize: 15, color: '#888' }}>{prop.text}</Text>
+          <Text style={{ marginLeft: 20, marginTop: 10, marginBottom: 5, fontSize: 13, color: '#888' }}>{prop.text}</Text>
         </TouchableOpacity>
       </View>
     )
@@ -179,7 +179,7 @@ const HeadHeder = () => {
       }
       for (var i = 0; i < subll.length; i++) {
         if (i + 1 == subll.length) {
-          ll.push(<View><MenuChild key={i} text={subll[i]} title={prop.title}></MenuChild><View style={{ width: chartWidth / 1.45, borderWidth: 0.5, borderColor: '#999999', marginBottom: 1 }}></View></View>)
+          ll.push(<View><MenuChild key={i} text={subll[i]} title={prop.title}></MenuChild><View style={{marginTop:10, width: chartWidth / 1.45, borderWidth: 0.7, borderColor: '#eeeeee', marginBottom: 3 }}></View></View>)
         } else {
           ll.push(<MenuChild key={i} text={subll[i]} title={prop.title}></MenuChild>)
         }
@@ -197,7 +197,7 @@ const HeadHeder = () => {
 
     return (
       <View>
-        <TouchableOpacity onPress={() => { view(), colcol() }}>
+        <TouchableOpacity onPress={() => { view() }}>
           <View style={{ width: chartWidth / 1.45, height: 50, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center' }}>
             <Text style={{ margin: 15, fontSize: 15, color: tcolor }}>{prop.title}</Text>
             {test ? <Image source={arrup} style={{ position: 'absolute', right: 20, width: 10, height: 6.5 }}></Image> :
@@ -205,7 +205,8 @@ const HeadHeder = () => {
             }
           </View>
         </TouchableOpacity>
-        {test && <View style={{ backgroundColor: 'white' }}><List></List></View>}
+        
+        {test && <View style={{ backgroundColor: 'white' }}><View style={{ width: chartWidth / 1.45, borderWidth: 0.7, borderColor: '#eeeeee', marginBottom: 1 }}></View><List></List></View>}
       </View>
     )
   }
@@ -318,7 +319,7 @@ const HeadHeder = () => {
               <View style={{ bottom: 0, flexDirection: 'row', justifyContent: "space-between", alignItems: "center", width: chartWidth / 1.45 - 40, marginLeft: 20, marginTop: 35, marginBottom: 30 }}>
                 <TouchableOpacity onPress={() => { navigation.navigate('홈'), setViewmenu(false) }}>
                   <View style={{ alignItems: "center" }}>
-                    <Image source={mm1} style={{ width: 22, height: 24 }}></Image>
+                    <Image source={mm1} style={{ width: 22, height: 24,marginBottom:-3 }}></Image>
                     <Text style={{ color: 'white', fontSize: 12, letterSpacing: -0.5, marginTop: 5 }}>홈</Text>
                   </View>
                 </TouchableOpacity>
@@ -330,7 +331,7 @@ const HeadHeder = () => {
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => { logCheck('견적현황'), setViewmenu(false) }}>
                   <View style={{ alignItems: "center" }}>
-                    <Image source={mm3} style={{ width: 27, height: 23 }}></Image>
+                    <Image source={mm3} style={{ width: 27, height: 23,marginRight:-1 }}></Image>
                     <Text style={{ color: 'white', fontSize: 12, letterSpacing: -0.5, marginTop: 6 }}>견적현황</Text>
                   </View>
                 </TouchableOpacity>
